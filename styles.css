@@ -62,7 +62,7 @@ h1 { margin-bottom: 0; font-size: 26px; letter-spacing: -.03em; }
 .check-row input { width: 24px; height: 24px; accent-color: var(--accent); }
 .progress { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; }
 .progress > span { display: block; height: 100%; background: var(--accent); border-radius: inherit; }
-.bottom-nav { position: fixed; z-index: 20; left: 50%; bottom: 0; transform: translateX(-50%); width: min(100%, 760px); display: grid; grid-template-columns: repeat(6, 1fr); padding: 8px 8px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--line); backdrop-filter: blur(16px); }
+.bottom-nav { position: fixed; z-index: 20; left: 50%; bottom: 0; transform: translateX(-50%); width: min(100%, 760px); display: grid; grid-template-columns: repeat(5, 1fr); padding: 8px 8px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--line); backdrop-filter: blur(16px); }
 .nav-item { border: 0; background: none; color: var(--muted); padding: 6px 2px; border-radius: 12px; }
 .nav-item span { display: block; font-size: 21px; line-height: 1.1; }
 .nav-item small { display: block; font-size: 10px; margin-top: 4px; }
@@ -114,3 +114,68 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .empty-state.compact .empty-icon { font-size: 42px; }
 .schedule-delete { margin-top: 10px; }
 @media (max-width: 390px) { .nav-item small { font-size: 9px; } .nav-item span { font-size: 19px; } }
+
+
+/* MFL v1.2 - simple fishing plan calendar */
+.home-tools { display: flex; align-items: center; gap: 14px; width: 100%; padding: 14px; border-radius: var(--radius); background: white; box-shadow: var(--shadow); border: 1px solid rgba(223,233,233,.7); cursor: pointer; }
+.date-icon-button { width: 62px; height: 66px; flex: 0 0 auto; padding: 0; overflow: hidden; border: 2px solid var(--accent); border-radius: 15px; background: white; color: var(--ink); box-shadow: none; }
+.date-icon-month { display: block; padding: 4px 0; background: var(--accent); color: white; font-size: 11px; font-weight: 900; }
+.date-icon-button strong { display: grid; place-items: center; height: 42px; font-size: 27px; }
+.home-tool-copy { flex: 1; min-width: 0; }
+.home-tool-copy h2 { margin: 0 0 5px; font-size: 18px; }
+.home-tool-copy p { margin: 0; color: var(--muted); font-size: 12px; }
+.home-tool-arrow { color: var(--muted); font-size: 28px; }
+.calendar-back { border: 0; background: none; color: var(--accent); font-weight: 800; padding: 4px 4px 14px; }
+.calendar-day.planned { background: var(--soft); color: var(--accent-dark); font-weight: 900; box-shadow: inset 0 0 0 2px var(--accent); }
+.calendar-day.planned.today span { color: var(--accent-dark); }
+.calendar-day i { position: absolute; bottom: 1px; width: auto; height: auto; background: none; font-size: 10px; }
+.calendar-guide { margin-top: 14px; padding: 14px 16px; border-radius: 17px; background: var(--soft); color: var(--accent-dark); }
+.calendar-guide strong { display: block; margin-bottom: 4px; }
+.calendar-guide p { margin: 0; font-size: 12px; }
+.plan-date-list { display: grid; grid-template-columns: repeat(4,1fr); gap: 9px; }
+.plan-date-list button { border: 0; border-radius: 16px; background: white; box-shadow: var(--shadow); padding: 12px 6px; color: var(--ink); }
+.plan-date-list strong, .plan-date-list span { display: block; }
+.plan-date-list strong { color: var(--accent); font-size: 23px; }
+.plan-date-list span { margin-top: 2px; color: var(--muted); font-size: 10px; }
+
+
+/* MFL v1.3 - centered brand header */
+.brand-topbar {
+  justify-content: center;
+  min-height: 104px;
+  padding-top: calc(18px + env(safe-area-inset-top));
+  padding-bottom: 16px;
+  text-align: center;
+}
+.brand-lockup {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.brand-my {
+  margin-bottom: 5px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .52em;
+  padding-left: .52em;
+}
+.brand-lockup h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(27px, 8vw, 38px);
+  font-weight: 950;
+  letter-spacing: -.045em;
+  text-shadow: 0 5px 16px rgba(11,114,133,.10);
+}
+.brand-line {
+  display: block;
+  width: 70%;
+  height: 4px;
+  margin-top: 9px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}

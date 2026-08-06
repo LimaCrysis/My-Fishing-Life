@@ -1,3 +1,8 @@
+My Fishing Life (MFL) Version 1.2
+
+ホームの日付アイコンから開く、シンプルな釣行予定カレンダーを追加。
+日付をタップするだけで「釣りに行く／行かない」を切り替えられます。
+
 My Fishing Life Version 1.0
 
 ファイル内容

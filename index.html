@@ -13,19 +13,18 @@
 </head>
 <body>
   <div class="app-shell">
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">MY FISHING LIFE</p>
-        <h1 id="pageTitle">ホーム</h1>
+    <header class="topbar brand-topbar">
+      <div class="brand-lockup" aria-label="My Fishing Life">
+        <span class="brand-my">MY</span>
+        <h1>FISHING LIFE</h1>
+        <span class="brand-line" aria-hidden="true"></span>
       </div>
-      <button id="quickAddBtn" class="icon-button" aria-label="釣果を追加">＋</button>
     </header>
 
     <main id="app" class="content" aria-live="polite"></main>
 
     <nav class="bottom-nav" aria-label="メインメニュー">
       <button data-view="home" class="nav-item active"><span>⌂</span><small>ホーム</small></button>
-      <button data-view="calendar" class="nav-item"><span>▦</span><small>予定</small></button>
       <button data-view="trips" class="nav-item"><span>🎣</span><small>釣行</small></button>
       <button data-view="encyclopedia" class="nav-item"><span>🐟</span><small>図鑑</small></button>
       <button data-view="gear" class="nav-item"><span>✓</span><small>持ち物</small></button>
@@ -82,31 +81,6 @@
     </form>
   </dialog>
 
-  <dialog id="scheduleDialog" class="sheet-dialog">
-    <form id="scheduleForm" method="dialog" class="sheet">
-      <div class="sheet-handle"></div>
-      <div class="sheet-header">
-        <div><p class="eyebrow">FISHING PLAN</p><h2 id="scheduleDialogTitle">釣りの予定を追加</h2></div>
-        <button type="button" class="close-button" data-close>×</button>
-      </div>
-      <input id="scheduleId" type="hidden" />
-      <label>日付<input id="scheduleDate" type="date" required /></label>
-      <div class="two-cols">
-        <label>開始予定<input id="scheduleStart" type="time" /></label>
-        <label>終了予定<input id="scheduleEnd" type="time" /></label>
-      </div>
-      <label>釣り場<input id="schedulePlace" type="text" placeholder="例：大洗港" required /></label>
-      <label>狙う魚<input id="scheduleTarget" type="text" placeholder="例：シロギス、カサゴ" /></label>
-      <label>釣り方
-        <select id="scheduleMethod">
-          <option>ちょい投げ</option><option>ジグヘッド</option><option>サビキ</option><option>ルアー</option><option>エサ釣り</option><option>未定</option>
-        </select>
-      </label>
-      <label>メモ<textarea id="scheduleNote" rows="3" placeholder="集合時間、持っていく物、試したい仕掛けなど"></textarea></label>
-      <button class="primary-button" value="save">予定を保存</button>
-      <button type="button" class="danger-button schedule-delete" id="deleteScheduleBtn" hidden>この予定を削除</button>
-    </form>
-  </dialog>
 
   <dialog id="tripDialog" class="sheet-dialog">
     <form id="tripForm" method="dialog" class="sheet">
