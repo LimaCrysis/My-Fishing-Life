@@ -64,17 +64,17 @@ function renderHome() {
       <p>${state.activeTrip ? `${formatDate(state.activeTrip.date)} ${escapeHtml(state.activeTrip.weather)}／${escapeHtml(state.activeTrip.start)}開始` : '釣行を始めて、思い出を一匹ずつ残そう。'}</p>
       <button class="primary-button" id="heroAction">${state.activeTrip ? '釣果を記録する' : '釣行を始める'}</button>
     </section>
-    <section class="section home-tools">
-      <button class="date-icon-button" id="openCalendar" aria-label="釣行予定カレンダーを開く">
+    <button class="section home-tools" id="openCalendar" type="button" aria-label="釣行予定カレンダーを開く">
+      <span class="date-icon-button" aria-hidden="true">
         <span class="date-icon-month">${now.getMonth()+1}月</span>
         <strong>${now.getDate()}</strong>
-      </button>
-      <div class="home-tool-copy">
-        <h2>釣行予定</h2>
-        <p>${nextDay ? `次の予定：${formatDate(nextDay)}（${weekdayLabel(nextDay)}）` : '日付を選ぶだけのシンプルな予定表'}</p>
-      </div>
-      <span class="home-tool-arrow">›</span>
-    </section>
+      </span>
+      <span class="home-tool-copy">
+        <strong class="home-tool-title">釣行予定</strong>
+        <span class="home-tool-description">${nextDay ? `次の予定：${formatDate(nextDay)}（${weekdayLabel(nextDay)}）` : '日付を選ぶだけのシンプルな予定表'}</span>
+      </span>
+      <span class="home-tool-arrow" aria-hidden="true">›</span>
+    </button>
     <section class="section">
       <div class="stats-grid">
         <div class="stat-card"><strong>${state.trips.length}</strong><span>釣行回数</span></div>
@@ -86,8 +86,8 @@ function renderHome() {
       <div class="section-heading"><h2>最近の釣果</h2><button class="text-button" data-view-link="trips">すべて見る</button></div>
       ${recent.length ? recent.map(catchCard).join('') : `<section class="empty-state"><div class="empty-icon">🐟</div><h2>まだ釣果がありません</h2><p>最初の一匹を記録すると、ここに表示されます。</p></section>`}
     </section>`;
-  document.getElementById('heroAction').onclick = () => state.activeTrip ? openCatch() : openTrip();
-  document.getElementById('openCalendar').onclick = () => { state.view = 'calendar'; render(); };
+  // Home actions are handled by the delegated click listener below.
+
 }
 function catchCard(c) {
   const f = getFish(c.fishName);
@@ -213,6 +213,20 @@ function openCatch() {
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => b.closest('dialog').close());
 const quickAddBtn = document.getElementById('quickAddBtn');
 if (quickAddBtn) quickAddBtn.onclick = openCatch;
+document.addEventListener('click', e => {
+  const hero = e.target.closest('#heroAction');
+  if (hero) {
+    e.preventDefault();
+    state.activeTrip ? openCatch() : openTrip();
+    return;
+  }
+  const calendar = e.target.closest('#openCalendar');
+  if (calendar) {
+    e.preventDefault();
+    state.view = 'calendar';
+    render();
+  }
+});
 document.querySelectorAll('.nav-item').forEach(b => b.onclick = () => { state.view = b.dataset.view; render(); });
 document.addEventListener('click', e => { const b=e.target.closest('[data-view-link]'); if (b) { state.view=b.dataset.viewLink; render(); } });
 

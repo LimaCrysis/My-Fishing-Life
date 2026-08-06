@@ -179,3 +179,26 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
   border-radius: 999px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
+
+
+/* MFL v1.4 - reliable home actions */
+.home-tools {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid rgba(223,233,233,.7);
+  color: var(--ink);
+  text-align: left;
+  font: inherit;
+  min-height: 92px;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.home-tools:active { transform: scale(.985); }
+.home-tools:focus-visible { outline: 3px solid rgba(11,114,133,.28); outline-offset: 3px; }
+.home-tools .date-icon-button { display: block; pointer-events: none; }
+.home-tool-copy { display: flex; flex-direction: column; gap: 5px; pointer-events: none; }
+.home-tool-title { font-size: 18px; line-height: 1.25; }
+.home-tool-description { color: var(--muted); font-size: 12px; line-height: 1.45; }
+.home-tool-arrow { pointer-events: none; }
+#heroAction { position: relative; z-index: 2; cursor: pointer; touch-action: manipulation; }
+#heroAction:active { transform: scale(.985); }
