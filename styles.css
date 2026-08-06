@@ -261,3 +261,55 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .catch-toast strong { font-size:15px; }
 .catch-toast span { margin-top:4px; color:rgba(255,255,255,.78); font-size:12px; }
 .catch-toast b { margin-top:7px; color:#ffd97a; font-size:13px; }
+
+
+/* MFL v1.6.1 - larger touch targets */
+.sheet {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.sheet label {
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 800;
+}
+.sheet input,
+.sheet select,
+.sheet textarea {
+  min-height: 56px;
+  padding: 14px 15px;
+  border-radius: 15px;
+  font-size: 16px;
+}
+.sheet textarea {
+  min-height: 96px;
+}
+.sheet .primary-button {
+  min-height: 58px;
+  font-size: 17px;
+}
+.sheet button,
+.quick-fish-button,
+.count-stepper button {
+  min-width: 48px;
+  min-height: 48px;
+}
+.count-stepper {
+  min-height: 58px;
+}
+
+.settings-home-card {
+  display:flex;
+  align-items:center;
+  gap:14px;
+  width:100%;
+  min-height:82px;
+  padding:14px;
+  border:1px solid rgba(223,233,233,.7);
+  border-radius:var(--radius);
+  background:white;
+  color:var(--ink);
+  text-align:left;
+  box-shadow:var(--shadow);
+}
+.settings-home-card:active { transform:scale(.985); }

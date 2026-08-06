@@ -91,6 +91,14 @@ function renderHome() {
       </span>
       <span class="home-tool-arrow" aria-hidden="true">›</span>
     </button>
+    <button class="section settings-home-card" type="button" data-view-link="settings">
+      <span class="tackle-home-icon">⚙️</span>
+      <span class="home-tool-copy">
+        <strong class="home-tool-title">設定</strong>
+        <span class="home-tool-description">魚種・持ち物などMFLの設定</span>
+      </span>
+      <span class="home-tool-arrow" aria-hidden="true">›</span>
+    </button>
     <section class="section">
       <div class="stats-grid">
         <div class="stat-card"><strong>${state.trips.length}</strong><span>釣行回数</span></div>
