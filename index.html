@@ -28,7 +28,7 @@
       <button data-view="trips" class="nav-item"><span>🎣</span><small>釣行</small></button>
       <button data-view="encyclopedia" class="nav-item"><span>🐟</span><small>図鑑</small></button>
       <button data-view="gear" class="nav-item"><span>✓</span><small>持ち物</small></button>
-      <button data-view="settings" class="nav-item"><span>⚙</span><small>設定</small></button>
+      <button data-view="tackle" class="nav-item"><span>🎣</span><small>タックル</small></button>
     </nav>
   </div>
 
@@ -43,6 +43,9 @@
         <button type="button" class="close-button" data-close>×</button>
       </div>
 
+      <label>使用タックル
+        <select id="catchTackle"><option value="">未選択</option></select>
+      </label>
       <label>魚種
         <select id="fishName" required></select>
       </label>
@@ -99,6 +102,29 @@
       </label>
       <label>メモ<textarea id="tripNote" rows="3" placeholder="狙う魚や今日試したいこと"></textarea></label>
       <button class="primary-button" value="save">釣行を開始</button>
+    </form>
+  </dialog>
+
+  <dialog id="tackleDialog" class="sheet-dialog">
+    <form id="tackleForm" method="dialog" class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div><p class="eyebrow">MY TACKLE</p><h2>タックルを登録</h2></div>
+        <button type="button" class="close-button" data-close>×</button>
+      </div>
+      <label>タックル名
+        <input id="tackleName" type="text" placeholder="例：相棒" required />
+      </label>
+      <label>ロッド
+        <input id="tackleRod" type="text" placeholder="例：スカイハイ100MH" required />
+      </label>
+      <label>リール
+        <input id="tackleReel" type="text" placeholder="例：フリームス LT3000-CXH" />
+      </label>
+      <label>ライン
+        <input id="tackleLine" type="text" placeholder="例：カーボナイロン3号" />
+      </label>
+      <button class="primary-button" value="save">このタックルを登録</button>
     </form>
   </dialog>
 

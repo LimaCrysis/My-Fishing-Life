@@ -19,6 +19,7 @@ const state = {
   catches: JSON.parse(localStorage.getItem('mfl_catches') || '[]'),
   gear: JSON.parse(localStorage.getItem('mfl_gear') || 'null') || defaultGear.map(name => ({ name, checked: false })),
   activeTrip: JSON.parse(localStorage.getItem('mfl_activeTrip') || 'null'),
+  tackles: JSON.parse(localStorage.getItem('mfl_tackles') || '[]'),
   fishingDays: JSON.parse(localStorage.getItem('mfl_fishingDays') || 'null') || [...new Set(JSON.parse(localStorage.getItem('mfl_schedules') || '[]').map(s => s.date).filter(Boolean))],
   calendarMonth: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
   selectedDate: todayString()
@@ -30,12 +31,15 @@ const catchDialog = document.getElementById('catchDialog');
 const tripDialog = document.getElementById('tripDialog');
 const catchForm = document.getElementById('catchForm');
 const tripForm = document.getElementById('tripForm');
+const tackleDialog = document.getElementById('tackleDialog');
+const tackleForm = document.getElementById('tackleForm');
 
 function save() {
   localStorage.setItem('mfl_trips', JSON.stringify(state.trips));
   localStorage.setItem('mfl_catches', JSON.stringify(state.catches));
   localStorage.setItem('mfl_gear', JSON.stringify(state.gear));
   localStorage.setItem('mfl_activeTrip', JSON.stringify(state.activeTrip));
+  localStorage.setItem('mfl_tackles', JSON.stringify(state.tackles));
   localStorage.setItem('mfl_fishingDays', JSON.stringify(state.fishingDays));
 }
 function escapeHtml(value='') { return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
@@ -46,9 +50,9 @@ function getFish(name) { return fishMaster.find(f => f.name === name) || fishMas
 
 function render() {
   document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === state.view));
-  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', gear:'持ち物', settings:'設定' };
+  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', gear:'持ち物', tackle:'My Tackle', settings:'設定' };
   if (pageTitle) pageTitle.textContent = titles[state.view];
-  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, gear: renderGear, settings: renderSettings })[state.view]();
+  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, gear: renderGear, tackle: renderTackle, settings: renderSettings })[state.view]();
 }
 
 function renderHome() {
@@ -72,6 +76,14 @@ function renderHome() {
       <span class="home-tool-copy">
         <strong class="home-tool-title">釣行予定</strong>
         <span class="home-tool-description">${nextDay ? `次の予定：${formatDate(nextDay)}（${weekdayLabel(nextDay)}）` : '日付を選ぶだけのシンプルな予定表'}</span>
+      </span>
+      <span class="home-tool-arrow" aria-hidden="true">›</span>
+    </button>
+    <button class="section tackle-home-card" type="button" data-view-link="tackle">
+      <span class="tackle-home-icon">${state.tackles.length ? oceanRankFor(tackleFishCount(state.tackles[0].id)).icon : '🐚'}</span>
+      <span class="home-tool-copy">
+        <strong class="home-tool-title">My Tackle</strong>
+        <span class="home-tool-description">${state.tackles.length ? `${escapeHtml(state.tackles[0].name)}・${oceanRankFor(tackleFishCount(state.tackles[0].id)).name}` : '相棒を登録して、釣果と一緒に育てよう'}</span>
       </span>
       <span class="home-tool-arrow" aria-hidden="true">›</span>
     </button>
@@ -174,6 +186,69 @@ function renderTrips() {
   document.getElementById('startTripBtn').onclick = () => state.activeTrip ? openCatch() : openTrip();
 }
 
+
+const oceanRanks = [
+  { min: 0, name: 'はじまりの石', icon: '🪨' },
+  { min: 1, name: '貝殻', icon: '🐚' },
+  { min: 50, name: 'サンゴ', icon: '🪸' },
+  { min: 100, name: 'ヒトデ', icon: '⭐' },
+  { min: 300, name: 'ヤドカリ', icon: '🦀' },
+  { min: 500, name: '海の仲間', icon: '🐠' },
+  { min: 1000, name: 'イルカ', icon: '🐬' },
+  { min: 3000, name: 'ウミガメ', icon: '🐢' },
+  { min: 5000, name: 'クジラ', icon: '🐋' },
+  { min: 10000, name: '海王', icon: '👑' }
+];
+function tackleFishCount(id) {
+  return state.catches.filter(c => c.tackleId === id).reduce((n,c) => n + Number(c.count || 0), 0);
+}
+function oceanRankFor(count) {
+  return [...oceanRanks].reverse().find(r => count >= r.min) || oceanRanks[0];
+}
+function nextOceanRank(count) {
+  return oceanRanks.find(r => r.min > count) || null;
+}
+function renderTackle() {
+  app.innerHTML = `
+    <section class="tackle-intro">
+      <p class="eyebrow">MY TACKLE</p>
+      <h2>相棒と、海へ。</h2>
+      <p>このタックルで釣った魚の数だけ、Ocean Rankが育ちます。</p>
+      <button class="primary-button" id="addTackleBtn">＋ タックルを登録</button>
+    </section>
+    <section class="section">
+      ${state.tackles.length ? state.tackles.map(t => {
+        const count = tackleFishCount(t.id);
+        const rank = oceanRankFor(count);
+        const next = nextOceanRank(count);
+        const progress = next ? Math.max(0, Math.min(100, ((count-rank.min)/(next.min-rank.min))*100)) : 100;
+        return `<article class="tackle-card">
+          <div class="tackle-rank-icon">${rank.icon}</div>
+          <div class="tackle-card-main">
+            <div class="tackle-card-top"><div><small>OCEAN RANK</small><h3>${escapeHtml(t.name)}</h3></div><strong>${rank.name}</strong></div>
+            <p>🎣 ${escapeHtml(t.rod)}${t.reel ? `　🌀 ${escapeHtml(t.reel)}` : ''}</p>
+            ${t.line ? `<p>🧵 ${escapeHtml(t.line)}</p>` : ''}
+            <div class="tackle-count"><strong>${count}</strong><span>匹の思い出</span></div>
+            <div class="ocean-progress"><span style="width:${progress}%"></span></div>
+            <small class="rank-next">${next ? `次の「${next.name}」まで ${next.min-count}匹` : '最高ランク到達！'}</small>
+            <button class="tackle-delete" data-delete-tackle="${t.id}">このタックルを削除</button>
+          </div>
+        </article>`;
+      }).join('') : `<section class="empty-state compact"><div class="empty-icon">🎣</div><h2>まだ相棒がいません</h2><p>最初のタックルを登録しよう。最初は「はじまりの石」からスタートします。</p></section>`}
+    </section>
+    <section class="ocean-rank-guide">
+      <h3>Ocean Rank</h3>
+      <div class="rank-strip">${oceanRanks.map(r => `<span title="${r.min}匹〜"><b>${r.icon}</b><small>${r.min}</small></span>`).join('')}</div>
+    </section>`;
+  document.getElementById('addTackleBtn').onclick = openTackle;
+  document.querySelectorAll('[data-delete-tackle]').forEach(btn => btn.onclick = () => {
+    const id = btn.dataset.deleteTackle;
+    if (!confirm('このタックルを削除しますか？\\n釣果記録そのものは残ります。')) return;
+    state.tackles = state.tackles.filter(t => t.id !== id);
+    save(); renderTackle();
+  });
+}
+
 function renderEncyclopedia() {
   const caught = new Set(state.catches.map(c => c.fishName));
   app.innerHTML = `<p class="note">危険魚や見分けに自信がない魚は、素手で触らず現地のルールを確認してください。</p><section class="section fish-grid">${fishMaster.filter(f=>f.name!=='その他').map(f => `<button class="fish-card" data-fish="${escapeHtml(f.name)}"><div class="fish-emoji">${f.emoji}</div><h3>${escapeHtml(f.name)} ${caught.has(f.name)?'✓':''}</h3><p>${escapeHtml(f.edible)}</p></button>`).join('')}</section>`;
@@ -205,7 +280,16 @@ function openTrip() {
   document.getElementById('tripStart').value = timeString();
   tripDialog.showModal();
 }
+function openTackle() {
+  tackleForm.reset();
+  tackleDialog.showModal();
+}
+
 function openCatch() {
+  const catchTackle = document.getElementById('catchTackle');
+  if (catchTackle) {
+    catchTackle.innerHTML = '<option value="">未選択</option>' + state.tackles.map(t => `<option value="${t.id}">${escapeHtml(t.name)}｜${escapeHtml(t.rod)}</option>`).join('');
+  }
   if (!state.activeTrip) { openTrip(); return; }
   catchDialog.showModal();
 }
@@ -231,6 +315,26 @@ document.querySelectorAll('.nav-item').forEach(b => b.onclick = () => { state.vi
 document.addEventListener('click', e => { const b=e.target.closest('[data-view-link]'); if (b) { state.view=b.dataset.viewLink; render(); } });
 
 
+
+tackleForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const name = document.getElementById('tackleName').value.trim();
+  const rod = document.getElementById('tackleRod').value.trim();
+  if (!name || !rod) return;
+  state.tackles.unshift({
+    id: crypto.randomUUID ? crypto.randomUUID() : `tackle-${Date.now()}`,
+    name,
+    rod,
+    reel: document.getElementById('tackleReel').value.trim(),
+    line: document.getElementById('tackleLine').value.trim(),
+    createdAt: new Date().toISOString()
+  });
+  save();
+  tackleDialog.close();
+  state.view = 'tackle';
+  render();
+});
+
 tripForm.addEventListener('submit', e => {
   e.preventDefault();
   const trip = { id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), place: tripPlace.value.trim(), date: tripDate.value, start: tripStart.value, weather: tripWeather.value, note: tripNote.value.trim(), ended: false };
@@ -246,6 +350,7 @@ catchForm.addEventListener('submit', async e => {
   state.catches.unshift({
     id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), tripId: state.activeTrip.id,
     place: state.activeTrip.place, date: state.activeTrip.date, fishName: fishName.value,
+    tackleId: document.getElementById('catchTackle')?.value || '',
     size: fishSize.value, count: fishCount.value, method: method.value, rig: rig.value.trim(), result,
     note: catchNote.value.trim(), photo, createdAt: new Date().toISOString()
   });
