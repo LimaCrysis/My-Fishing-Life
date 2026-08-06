@@ -18,7 +18,10 @@ const state = {
   trips: JSON.parse(localStorage.getItem('mfl_trips') || '[]'),
   catches: JSON.parse(localStorage.getItem('mfl_catches') || '[]'),
   gear: JSON.parse(localStorage.getItem('mfl_gear') || 'null') || defaultGear.map(name => ({ name, checked: false })),
-  activeTrip: JSON.parse(localStorage.getItem('mfl_activeTrip') || 'null')
+  activeTrip: JSON.parse(localStorage.getItem('mfl_activeTrip') || 'null'),
+  schedules: JSON.parse(localStorage.getItem('mfl_schedules') || '[]'),
+  calendarMonth: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+  selectedDate: todayString()
 };
 
 const app = document.getElementById('app');
@@ -27,12 +30,15 @@ const catchDialog = document.getElementById('catchDialog');
 const tripDialog = document.getElementById('tripDialog');
 const catchForm = document.getElementById('catchForm');
 const tripForm = document.getElementById('tripForm');
+const scheduleDialog = document.getElementById('scheduleDialog');
+const scheduleForm = document.getElementById('scheduleForm');
 
 function save() {
   localStorage.setItem('mfl_trips', JSON.stringify(state.trips));
   localStorage.setItem('mfl_catches', JSON.stringify(state.catches));
   localStorage.setItem('mfl_gear', JSON.stringify(state.gear));
   localStorage.setItem('mfl_activeTrip', JSON.stringify(state.activeTrip));
+  localStorage.setItem('mfl_schedules', JSON.stringify(state.schedules));
 }
 function escapeHtml(value='') { return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 function formatDate(s) { if (!s) return ''; const d = new Date(`${s}T00:00:00`); return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`; }
@@ -42,9 +48,9 @@ function getFish(name) { return fishMaster.find(f => f.name === name) || fishMas
 
 function render() {
   document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === state.view));
-  const titles = { home:'ホーム', trips:'釣行記録', encyclopedia:'魚図鑑', gear:'持ち物', settings:'設定' };
+  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', gear:'持ち物', settings:'設定' };
   pageTitle.textContent = titles[state.view];
-  ({ home: renderHome, trips: renderTrips, encyclopedia: renderEncyclopedia, gear: renderGear, settings: renderSettings })[state.view]();
+  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, gear: renderGear, settings: renderSettings })[state.view]();
 }
 
 function renderHome() {
@@ -81,6 +87,82 @@ function catchCard(c) {
       <span class="badge">${escapeHtml(c.result)}</span>
     </div>
   </article>`;
+}
+
+function dateKey(year, monthIndex, day) {
+  return `${year}-${String(monthIndex + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+}
+function weekdayLabel(dateString) {
+  if (!dateString) return '';
+  const d = new Date(`${dateString}T00:00:00`);
+  return ['日','月','火','水','木','金','土'][d.getDay()];
+}
+function renderCalendar() {
+  const base = state.calendarMonth;
+  const year = base.getFullYear(), month = base.getMonth();
+  const firstDay = new Date(year, month, 1).getDay();
+  const days = new Date(year, month + 1, 0).getDate();
+  const prevDays = new Date(year, month, 0).getDate();
+  const cells = [];
+  for (let i=0; i<42; i++) {
+    let d, cellMonth = month, muted = false;
+    if (i < firstDay) { d = prevDays - firstDay + i + 1; cellMonth = month - 1; muted = true; }
+    else if (i >= firstDay + days) { d = i - firstDay - days + 1; cellMonth = month + 1; muted = true; }
+    else d = i - firstDay + 1;
+    const dt = new Date(year, cellMonth, d);
+    const key = dateKey(dt.getFullYear(), dt.getMonth(), dt.getDate());
+    const has = state.schedules.some(s => s.date === key);
+    const count = state.schedules.filter(s => s.date === key).length;
+    const today = key === todayString();
+    const selected = key === state.selectedDate;
+    cells.push(`<button class="calendar-day ${muted?'muted':''} ${today?'today':''} ${selected?'selected':''}" data-date="${key}"><span>${dt.getDate()}</span>${has?`<i>${count>1?count:''}</i>`:''}</button>`);
+  }
+  const selectedSchedules = state.schedules.filter(s => s.date === state.selectedDate).sort((a,b)=>(a.start||'99:99').localeCompare(b.start||'99:99'));
+  app.innerHTML = `
+    <section class="calendar-card">
+      <div class="calendar-header">
+        <button class="calendar-arrow" id="prevMonth" aria-label="前の月">‹</button>
+        <button class="calendar-title" id="todayMonth">${year}年${month+1}月</button>
+        <button class="calendar-arrow" id="nextMonth" aria-label="次の月">›</button>
+      </div>
+      <div class="calendar-week"><span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span></div>
+      <div class="calendar-grid">${cells.join('')}</div>
+    </section>
+    <section class="section">
+      <div class="section-heading"><h2>${formatDate(state.selectedDate)}（${weekdayLabel(state.selectedDate)}）</h2><button class="text-button" id="addScheduleBtn">＋ 予定追加</button></div>
+      ${selectedSchedules.length ? selectedSchedules.map(scheduleCard).join('') : `<section class="empty-state compact"><div class="empty-icon">🗓️</div><h2>予定はありません</h2><p>この日に釣りの予定を入れてみよう。</p></section>`}
+    </section>`;
+  document.getElementById('prevMonth').onclick = () => { state.calendarMonth = new Date(year, month-1, 1); renderCalendar(); };
+  document.getElementById('nextMonth').onclick = () => { state.calendarMonth = new Date(year, month+1, 1); renderCalendar(); };
+  document.getElementById('todayMonth').onclick = () => { const n=new Date(); state.calendarMonth=new Date(n.getFullYear(),n.getMonth(),1); state.selectedDate=todayString(); renderCalendar(); };
+  document.getElementById('addScheduleBtn').onclick = () => openSchedule(state.selectedDate);
+  document.querySelectorAll('[data-date]').forEach(btn => btn.onclick = () => {
+    state.selectedDate = btn.dataset.date;
+    const d = new Date(`${state.selectedDate}T00:00:00`);
+    state.calendarMonth = new Date(d.getFullYear(), d.getMonth(), 1);
+    renderCalendar();
+  });
+  document.querySelectorAll('[data-schedule-id]').forEach(btn => btn.onclick = () => openSchedule('', btn.dataset.scheduleId));
+}
+function scheduleCard(s) {
+  const time = s.start ? `${escapeHtml(s.start)}${s.end?`〜${escapeHtml(s.end)}`:''}` : '時間未定';
+  return `<button class="schedule-card" data-schedule-id="${s.id}"><span class="schedule-time">${time}</span><span class="schedule-main"><strong>${escapeHtml(s.place)}</strong><small>${escapeHtml(s.target || '狙う魚は未定')}・${escapeHtml(s.method || '未定')}</small></span><span class="schedule-chevron">›</span></button>`;
+}
+function openSchedule(date='', id='') {
+  scheduleForm.reset();
+  scheduleId.value = '';
+  scheduleDialogTitle.textContent = '釣りの予定を追加';
+  deleteScheduleBtn.hidden = true;
+  scheduleDate.value = date || state.selectedDate || todayString();
+  scheduleMethod.value = 'ちょい投げ';
+  if (id) {
+    const s = state.schedules.find(x => x.id === id);
+    if (!s) return;
+    scheduleId.value = s.id; scheduleDate.value = s.date; scheduleStart.value = s.start || ''; scheduleEnd.value = s.end || '';
+    schedulePlace.value = s.place || ''; scheduleTarget.value = s.target || ''; scheduleMethod.value = s.method || '未定'; scheduleNote.value = s.note || '';
+    scheduleDialogTitle.textContent = '釣りの予定を編集'; deleteScheduleBtn.hidden = false;
+  }
+  scheduleDialog.showModal();
 }
 
 function renderTrips() {
@@ -134,9 +216,22 @@ function openCatch() {
 }
 
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => b.closest('dialog').close());
-document.getElementById('quickAddBtn').onclick = openCatch;
+document.getElementById('quickAddBtn').onclick = () => state.view === 'calendar' ? openSchedule(state.selectedDate) : openCatch;
 document.querySelectorAll('.nav-item').forEach(b => b.onclick = () => { state.view = b.dataset.view; render(); });
 document.addEventListener('click', e => { const b=e.target.closest('[data-view-link]'); if (b) { state.view=b.dataset.viewLink; render(); } });
+
+scheduleForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const existingId = scheduleId.value;
+  const item = { id: existingId || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())), date: scheduleDate.value, start: scheduleStart.value, end: scheduleEnd.value, place: schedulePlace.value.trim(), target: scheduleTarget.value.trim(), method: scheduleMethod.value, note: scheduleNote.value.trim(), updatedAt: new Date().toISOString() };
+  if (existingId) state.schedules = state.schedules.map(s => s.id === existingId ? item : s); else state.schedules.push(item);
+  state.selectedDate = item.date; const d = new Date(`${item.date}T00:00:00`); state.calendarMonth = new Date(d.getFullYear(), d.getMonth(), 1);
+  save(); scheduleDialog.close(); render();
+});
+document.getElementById('deleteScheduleBtn').onclick = () => {
+  const id = scheduleId.value;
+  if (id && confirm('この予定を削除しますか？')) { state.schedules = state.schedules.filter(s => s.id !== id); save(); scheduleDialog.close(); render(); }
+};
 
 tripForm.addEventListener('submit', e => {
   e.preventDefault();

@@ -62,7 +62,7 @@ h1 { margin-bottom: 0; font-size: 26px; letter-spacing: -.03em; }
 .check-row input { width: 24px; height: 24px; accent-color: var(--accent); }
 .progress { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; }
 .progress > span { display: block; height: 100%; background: var(--accent); border-radius: inherit; }
-.bottom-nav { position: fixed; z-index: 20; left: 50%; bottom: 0; transform: translateX(-50%); width: min(100%, 760px); display: grid; grid-template-columns: repeat(5, 1fr); padding: 8px 8px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--line); backdrop-filter: blur(16px); }
+.bottom-nav { position: fixed; z-index: 20; left: 50%; bottom: 0; transform: translateX(-50%); width: min(100%, 760px); display: grid; grid-template-columns: repeat(6, 1fr); padding: 8px 8px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--line); backdrop-filter: blur(16px); }
 .nav-item { border: 0; background: none; color: var(--muted); padding: 6px 2px; border-radius: 12px; }
 .nav-item span { display: block; font-size: 21px; line-height: 1.1; }
 .nav-item small { display: block; font-size: 10px; margin-top: 4px; }
@@ -85,3 +85,32 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .empty-icon { font-size: 56px; margin-bottom: 12px; }
 .note { padding: 14px; border-radius: 16px; background: #fff8dc; color: #725b12; font-size: 13px; }
 @media (max-width: 360px) { .content { padding: 14px; } .stats-grid { gap: 7px; } .stat-card { padding: 13px 8px; } }
+
+.calendar-card { background: var(--card); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); border: 1px solid rgba(223,233,233,.7); }
+.calendar-header { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; margin-bottom: 8px; }
+.calendar-title, .calendar-arrow { border: 0; background: none; color: var(--ink); font-weight: 800; }
+.calendar-title { font-size: 19px; padding: 10px; }
+.calendar-arrow { font-size: 34px; line-height: 1; height: 44px; border-radius: 13px; color: var(--accent); }
+.calendar-arrow:active { background: var(--soft); }
+.calendar-week, .calendar-grid { display: grid; grid-template-columns: repeat(7,1fr); }
+.calendar-week span { text-align: center; padding: 7px 0; color: var(--muted); font-size: 11px; font-weight: 800; }
+.calendar-week span:first-child { color: #c24141; }
+.calendar-week span:last-child { color: #346aa0; }
+.calendar-day { position: relative; border: 0; background: none; color: var(--ink); aspect-ratio: 1; min-width: 0; border-radius: 50%; display: grid; place-items: center; font-size: 14px; }
+.calendar-day.muted { color: #b5c2c5; }
+.calendar-day.today span { color: var(--accent); font-weight: 900; }
+.calendar-day.selected { background: var(--accent); color: white; font-weight: 900; }
+.calendar-day.selected.today span { color: white; }
+.calendar-day i { position: absolute; bottom: 4px; width: 6px; height: 6px; border-radius: 50%; background: #e8a23a; color: white; font-size: 7px; font-style: normal; display: grid; place-items:center; }
+.calendar-day.selected i { background: white; color: var(--accent); }
+.schedule-card { width: 100%; border: 0; background: white; border-radius: 18px; box-shadow: var(--shadow); padding: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; color: var(--ink); text-align: left; }
+.schedule-time { min-width: 64px; color: var(--accent); font-size: 12px; font-weight: 800; }
+.schedule-main { flex: 1; min-width: 0; }
+.schedule-main strong, .schedule-main small { display: block; }
+.schedule-main strong { font-size: 16px; margin-bottom: 4px; }
+.schedule-main small { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.schedule-chevron { font-size: 24px; color: var(--muted); }
+.empty-state.compact { padding: 34px 20px; background: white; border-radius: var(--radius); box-shadow: var(--shadow); }
+.empty-state.compact .empty-icon { font-size: 42px; }
+.schedule-delete { margin-top: 10px; }
+@media (max-width: 390px) { .nav-item small { font-size: 9px; } .nav-item span { font-size: 19px; } }
