@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#0b7285" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="My Fishing Life" />
+  <title>My Fishing Life</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">MY FISHING LIFE</p>
+        <h1 id="pageTitle">ホーム</h1>
+      </div>
+      <button id="quickAddBtn" class="icon-button" aria-label="釣果を追加">＋</button>
+    </header>
+
+    <main id="app" class="content" aria-live="polite"></main>
+
+    <nav class="bottom-nav" aria-label="メインメニュー">
+      <button data-view="home" class="nav-item active"><span>⌂</span><small>ホーム</small></button>
+      <button data-view="trips" class="nav-item"><span>🎣</span><small>釣行</small></button>
+      <button data-view="encyclopedia" class="nav-item"><span>🐟</span><small>図鑑</small></button>
+      <button data-view="gear" class="nav-item"><span>✓</span><small>持ち物</small></button>
+      <button data-view="settings" class="nav-item"><span>⚙</span><small>設定</small></button>
+    </nav>
+  </div>
+
+  <dialog id="catchDialog" class="sheet-dialog">
+    <form id="catchForm" method="dialog" class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div>
+          <p class="eyebrow">QUICK RECORD</p>
+          <h2>釣果を追加</h2>
+        </div>
+        <button type="button" class="close-button" data-close>×</button>
+      </div>
+
+      <label>魚種
+        <select id="fishName" required></select>
+      </label>
+      <div class="two-cols">
+        <label>サイズ（cm）
+          <input id="fishSize" type="number" min="0" max="300" step="0.1" inputmode="decimal" placeholder="例 18.5" />
+        </label>
+        <label>匹数
+          <input id="fishCount" type="number" min="1" max="999" value="1" inputmode="numeric" required />
+        </label>
+      </div>
+      <label>釣り方
+        <select id="method">
+          <option>ちょい投げ</option>
+          <option>ジグヘッド</option>
+          <option>サビキ</option>
+          <option>ルアー</option>
+          <option>エサ釣り</option>
+          <option>その他</option>
+        </select>
+      </label>
+      <label>仕掛け・エサ・ルアー
+        <input id="rig" type="text" placeholder="例：10号オモリ＋イソメ" />
+      </label>
+      <div class="segmented" role="group" aria-label="持ち帰り区分">
+        <input type="radio" id="keep" name="result" value="持ち帰り" checked><label for="keep">持ち帰り</label>
+        <input type="radio" id="release" name="result" value="リリース"><label for="release">リリース</label>
+      </div>
+      <label>写真
+        <input id="fishPhoto" type="file" accept="image/*" capture="environment" />
+      </label>
+      <label>メモ
+        <textarea id="catchNote" rows="3" placeholder="潮、反応、料理の予定など"></textarea>
+      </label>
+      <button class="primary-button" value="save">この釣果を保存</button>
+    </form>
+  </dialog>
+
+  <dialog id="tripDialog" class="sheet-dialog">
+    <form id="tripForm" method="dialog" class="sheet">
+      <div class="sheet-handle"></div>
+      <div class="sheet-header">
+        <div><p class="eyebrow">NEW TRIP</p><h2>釣行を始める</h2></div>
+        <button type="button" class="close-button" data-close>×</button>
+      </div>
+      <label>釣り場<input id="tripPlace" type="text" placeholder="例：大洗港" required /></label>
+      <div class="two-cols">
+        <label>日付<input id="tripDate" type="date" required /></label>
+        <label>開始時刻<input id="tripStart" type="time" required /></label>
+      </div>
+      <label>天気
+        <select id="tripWeather"><option>晴れ</option><option>くもり</option><option>雨</option><option>風が強い</option></select>
+      </label>
+      <label>メモ<textarea id="tripNote" rows="3" placeholder="狙う魚や今日試したいこと"></textarea></label>
+      <button class="primary-button" value="save">釣行を開始</button>
+    </form>
+  </dialog>
+
+  <template id="emptyTemplate">
+    <section class="empty-state"><div class="empty-icon">🎣</div><h2></h2><p></p></section>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
