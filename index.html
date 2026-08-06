@@ -37,24 +37,26 @@
       <div class="sheet-handle"></div>
       <div class="sheet-header">
         <div>
-          <p class="eyebrow">QUICK RECORD</p>
-          <h2>釣果を追加</h2>
+          <p class="eyebrow">CATCH RECORD</p>
+          <h2>釣れた！を記録</h2>
         </div>
         <button type="button" class="close-button" data-close>×</button>
       </div>
 
+      <div class="quick-record-hint">よく使う項目を上から選ぶだけ。写真やメモは後からでもOK。</div>
       <label>使用タックル
         <select id="catchTackle"><option value="">未選択</option></select>
       </label>
       <label>魚種
         <select id="fishName" required></select>
       </label>
+      <div id="quickFish" class="quick-fish" aria-label="最近釣った魚"></div>
       <div class="two-cols">
         <label>サイズ（cm）
           <input id="fishSize" type="number" min="0" max="300" step="0.1" inputmode="decimal" placeholder="例 18.5" />
         </label>
         <label>匹数
-          <input id="fishCount" type="number" min="1" max="999" value="1" inputmode="numeric" required />
+          <span class="count-stepper"><button type="button" id="countMinus" aria-label="匹数を減らす">−</button><input id="fishCount" type="number" min="1" max="999" value="1" inputmode="numeric" required /><button type="button" id="countPlus" aria-label="匹数を増やす">＋</button></span>
         </label>
       </div>
       <label>釣り方
@@ -67,9 +69,11 @@
           <option>その他</option>
         </select>
       </label>
-      <label>仕掛け・エサ・ルアー
-        <input id="rig" type="text" placeholder="例：10号オモリ＋イソメ" />
-      </label>
+      <details class="optional-fields">
+        <summary>仕掛け・写真・メモを追加</summary>
+        <label>仕掛け・エサ・ルアー
+          <input id="rig" type="text" placeholder="例：10号オモリ＋イソメ" />
+        </label>
       <div class="segmented" role="group" aria-label="持ち帰り区分">
         <input type="radio" id="keep" name="result" value="持ち帰り" checked><label for="keep">持ち帰り</label>
         <input type="radio" id="release" name="result" value="リリース"><label for="release">リリース</label>
@@ -80,7 +84,8 @@
       <label>メモ
         <textarea id="catchNote" rows="3" placeholder="潮、反応、料理の予定など"></textarea>
       </label>
-      <button class="primary-button" value="save">この釣果を保存</button>
+      </details>
+      <button class="primary-button catch-save-button" value="save">釣果を記録する</button>
     </form>
   </dialog>
 
@@ -127,6 +132,8 @@
       <button class="primary-button" value="save">このタックルを登録</button>
     </form>
   </dialog>
+
+  <div id="catchToast" class="catch-toast" role="status" aria-live="assertive"></div>
 
   <template id="emptyTemplate">
     <section class="empty-state"><div class="empty-icon">🎣</div><h2></h2><p></p></section>

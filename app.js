@@ -22,7 +22,9 @@ const state = {
   tackles: JSON.parse(localStorage.getItem('mfl_tackles') || '[]'),
   fishingDays: JSON.parse(localStorage.getItem('mfl_fishingDays') || 'null') || [...new Set(JSON.parse(localStorage.getItem('mfl_schedules') || '[]').map(s => s.date).filter(Boolean))],
   calendarMonth: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-  selectedDate: todayString()
+  selectedDate: todayString(),
+  lastTackleId: localStorage.getItem('mfl_lastTackleId') || '',
+  lastMethod: localStorage.getItem('mfl_lastMethod') || 'ちょい投げ'
 };
 
 const app = document.getElementById('app');
@@ -41,6 +43,8 @@ function save() {
   localStorage.setItem('mfl_activeTrip', JSON.stringify(state.activeTrip));
   localStorage.setItem('mfl_tackles', JSON.stringify(state.tackles));
   localStorage.setItem('mfl_fishingDays', JSON.stringify(state.fishingDays));
+  localStorage.setItem('mfl_lastTackleId', state.lastTackleId || '');
+  localStorage.setItem('mfl_lastMethod', state.lastMethod || 'ちょい投げ');
 }
 function escapeHtml(value='') { return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 function formatDate(s) { if (!s) return ''; const d = new Date(`${s}T00:00:00`); return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`; }
@@ -175,7 +179,7 @@ function renderCalendar() {
 function renderTrips() {
   const trips = state.trips;
   app.innerHTML = `
-    <button class="primary-button" id="startTripBtn">${state.activeTrip ? '現在の釣行に釣果を追加' : '新しい釣行を始める'}</button>
+    ${state.activeTrip ? `<section class="active-trip-card"><div><p class="eyebrow">NOW FISHING</p><h2>${escapeHtml(state.activeTrip.place)}</h2><span>${formatDate(state.activeTrip.date)}・${escapeHtml(state.activeTrip.start)}開始</span></div><button class="primary-button" id="startTripBtn">＋ 魚を追加</button><button class="secondary-button" id="endTripBtn">釣行を終了</button></section>` : `<button class="primary-button" id="startTripBtn">新しい釣行を始める</button>`}
     <section class="section">
       ${trips.length ? trips.map(t => {
         const catches = state.catches.filter(c => c.tripId === t.id);
@@ -184,6 +188,8 @@ function renderTrips() {
       }).join('') : `<section class="empty-state"><div class="empty-icon">🧭</div><h2>釣行記録はまだありません</h2><p>最初の釣行を始めてみよう。</p></section>`}
     </section>`;
   document.getElementById('startTripBtn').onclick = () => state.activeTrip ? openCatch() : openTrip();
+  const endTripBtn = document.getElementById('endTripBtn');
+  if (endTripBtn) endTripBtn.onclick = endTrip;
 }
 
 
@@ -275,6 +281,41 @@ function renderSettings() {
   };
 }
 
+function recentFishNames() {
+  const names = [];
+  for (const c of state.catches) if (!names.includes(c.fishName)) names.push(c.fishName);
+  return [...names.slice(0,4), ...['シロギス','カサゴ','アジ','その他'].filter(n => !names.includes(n))].slice(0,6);
+}
+function renderQuickFish() {
+  const box = document.getElementById('quickFish');
+  if (!box) return;
+  box.innerHTML = recentFishNames().map(name => `<button type="button" data-quick-fish="${escapeHtml(name)}">${getFish(name).emoji} ${escapeHtml(name)}</button>`).join('');
+  box.querySelectorAll('[data-quick-fish]').forEach(btn => btn.onclick = () => {
+    document.getElementById('fishName').value = btn.dataset.quickFish;
+    box.querySelectorAll('button').forEach(b => b.classList.toggle('selected', b === btn));
+  });
+}
+function showCatchToast(catchItem, oldRank, newRank) {
+  const toast = document.getElementById('catchToast');
+  if (!toast) return;
+  const tackle = state.tackles.find(t => t.id === catchItem.tackleId);
+  const rankUp = tackle && oldRank && newRank && oldRank.name !== newRank.name;
+  toast.innerHTML = `<strong>🎣 ${escapeHtml(catchItem.fishName)} ${catchItem.count}匹を記録！</strong>${tackle ? `<span>${escapeHtml(tackle.name)}：累計${tackleFishCount(tackle.id)}匹</span>` : ''}${rankUp ? `<b>🎉 ${newRank.icon} ${newRank.name}へ進化！</b>` : ''}`;
+  toast.classList.add('show');
+  clearTimeout(showCatchToast.timer);
+  showCatchToast.timer = setTimeout(() => toast.classList.remove('show'), 4200);
+}
+function endTrip() {
+  if (!state.activeTrip) return;
+  const trip = state.trips.find(t => t.id === state.activeTrip.id);
+  const catches = state.catches.filter(c => c.tripId === state.activeTrip.id);
+  const count = catches.reduce((n,c) => n + Number(c.count || 0), 0);
+  if (!confirm(`${state.activeTrip.place}の釣行を終了しますか？\\n今日の釣果：${count}匹`)) return;
+  if (trip) { trip.ended = true; trip.end = timeString(); }
+  state.activeTrip = null;
+  save(); render();
+}
+
 function openTrip() {
   document.getElementById('tripDate').value = todayString();
   document.getElementById('tripStart').value = timeString();
@@ -286,17 +327,27 @@ function openTackle() {
 }
 
 function openCatch() {
+  if (!state.activeTrip) { openTrip(); return; }
   const catchTackle = document.getElementById('catchTackle');
   if (catchTackle) {
     catchTackle.innerHTML = '<option value="">未選択</option>' + state.tackles.map(t => `<option value="${t.id}">${escapeHtml(t.name)}｜${escapeHtml(t.rod)}</option>`).join('');
+    const preferred = state.tackles.some(t => t.id === state.lastTackleId) ? state.lastTackleId : (state.tackles[0]?.id || '');
+    catchTackle.value = preferred;
   }
-  if (!state.activeTrip) { openTrip(); return; }
+  document.getElementById('method').value = state.lastMethod;
+  document.getElementById('fishCount').value = 1;
+  document.getElementById('keep').checked = true;
+  renderQuickFish();
   catchDialog.showModal();
 }
 
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => b.closest('dialog').close());
 const quickAddBtn = document.getElementById('quickAddBtn');
 if (quickAddBtn) quickAddBtn.onclick = openCatch;
+const countMinus = document.getElementById('countMinus');
+const countPlus = document.getElementById('countPlus');
+if (countMinus) countMinus.onclick = () => fishCount.value = Math.max(1, Number(fishCount.value || 1) - 1);
+if (countPlus) countPlus.onclick = () => fishCount.value = Math.min(999, Number(fishCount.value || 1) + 1);
 document.addEventListener('click', e => {
   const hero = e.target.closest('#heroAction');
   if (hero) {
@@ -343,18 +394,35 @@ tripForm.addEventListener('submit', e => {
 
 catchForm.addEventListener('submit', async e => {
   e.preventDefault();
-  let photo = '';
-  const file = fishPhoto.files[0];
-  if (file) photo = await compressImage(file);
-  const result = new FormData(catchForm).get('result');
-  state.catches.unshift({
-    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), tripId: state.activeTrip.id,
-    place: state.activeTrip.place, date: state.activeTrip.date, fishName: fishName.value,
-    tackleId: document.getElementById('catchTackle')?.value || '',
-    size: fishSize.value, count: fishCount.value, method: method.value, rig: rig.value.trim(), result,
-    note: catchNote.value.trim(), photo, createdAt: new Date().toISOString()
-  });
-  save(); catchDialog.close(); catchForm.reset(); fishCount.value = 1; keep.checked = true; render();
+  const tackleId = document.getElementById('catchTackle')?.value || '';
+  const beforeCount = tackleId ? tackleFishCount(tackleId) : 0;
+  const beforeRank = tackleId ? oceanRankFor(beforeCount) : null;
+  const saveButton = catchForm.querySelector('.catch-save-button');
+  saveButton.disabled = true;
+  saveButton.textContent = '保存中…';
+  try {
+    let photo = '';
+    const file = fishPhoto.files[0];
+    if (file) photo = await compressImage(file);
+    const result = new FormData(catchForm).get('result');
+    const catchItem = {
+      id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), tripId: state.activeTrip.id,
+      place: state.activeTrip.place, date: state.activeTrip.date, fishName: fishName.value,
+      tackleId, size: fishSize.value, count: fishCount.value, method: method.value, rig: rig.value.trim(), result,
+      note: catchNote.value.trim(), photo, createdAt: new Date().toISOString()
+    };
+    state.catches.unshift(catchItem);
+    state.lastTackleId = tackleId;
+    state.lastMethod = method.value;
+    save();
+    const afterRank = tackleId ? oceanRankFor(tackleFishCount(tackleId)) : null;
+    catchDialog.close(); catchForm.reset(); fishCount.value = 1; keep.checked = true;
+    render();
+    showCatchToast(catchItem, beforeRank, afterRank);
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = '釣果を記録する';
+  }
 });
 
 function compressImage(file) {
