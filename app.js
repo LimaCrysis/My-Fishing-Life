@@ -1,15 +1,16 @@
 const fishMaster = [
-  { name: 'シロギス', emoji: '🐟', edible: '天ぷら・塩焼き', guide: '15cm以上を持ち帰り目安に', danger: 'なし' },
-  { name: 'カサゴ', emoji: '🐠', edible: '煮付け・唐揚げ', guide: '15cm以上を目安に', danger: '背びれのトゲに注意' },
-  { name: 'アジ', emoji: '🐟', edible: '刺身・フライ・なめろう', guide: '15cm以上を目安に', danger: 'ぜいごに注意' },
-  { name: 'マハゼ', emoji: '🐡', edible: '天ぷら・唐揚げ', guide: '12cm以上を目安に', danger: 'なし' },
-  { name: 'メゴチ', emoji: '🐟', edible: '天ぷら', guide: '12cm以上を目安に', danger: 'エラぶたのトゲに注意' },
-  { name: 'ヒラメ', emoji: '🐟', edible: '刺身・ムニエル', guide: '茨城県では30cm未満は採捕禁止', danger: '歯に注意' },
-  { name: 'シーバス', emoji: '🐟', edible: '洗い・塩焼き', guide: '小型はリリース推奨', danger: 'エラぶたに注意' },
-  { name: 'アイゴ', emoji: '⚠️', edible: '処理できれば食用可', guide: '初心者はリリース推奨', danger: '各ひれに毒棘' },
-  { name: 'ゴンズイ', emoji: '⚠️', edible: '食用可だが扱い注意', guide: '初心者はリリース推奨', danger: '背びれ・胸びれに毒棘' },
-  { name: 'ハオコゼ', emoji: '⚠️', edible: '食用可だが小型', guide: 'リリース推奨', danger: '背びれに毒棘' },
-  { name: 'その他', emoji: '🐟', edible: '魚種を確認', guide: '不明魚は持ち帰らない', danger: '素手で触らない' }
+  { name:'シロギス', emoji:'🐟', photo:'./kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 },
+  { name:'カサゴ', emoji:'🐠', photo:'./kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' },
+  { name:'アジ', emoji:'🐟', photo:'./aji.jpg', edible:'刺身・フライ・なめろう', guide:'15cm以上を目安に', danger:'尾の近くのゼイゴが鋭いので注意', dangerLevel:1 },
+  { name:'マハゼ', emoji:'🐡', edible:'天ぷら・唐揚げ', guide:'12cm以上を目安に', danger:'特別な危険は少ない', dangerLevel:0 },
+  { name:'メゴチ', emoji:'🐟', edible:'天ぷら', guide:'12cm以上を目安に', danger:'エラぶた周辺のトゲに注意', dangerLevel:1 },
+  { name:'ヒラメ', emoji:'🐟', edible:'刺身・ムニエル', guide:'茨城県では30cm未満は採捕禁止', danger:'鋭い歯に注意', dangerLevel:1, dangerAction:'口の中に指を入れない。' },
+  { name:'シーバス', emoji:'🐟', photo:'./seabass.jpg', edible:'洗い・塩焼き', guide:'小型はリリース推奨', danger:'エラぶた・背びれ・歯に注意', dangerLevel:1 },
+  { name:'サバ', emoji:'🐟', photo:'./saba.jpg', edible:'塩焼き・味噌煮', guide:'食べる分だけ持ち帰る', danger:'暴れて針が刺さる事故に注意', dangerLevel:1 },
+  { name:'アイゴ', emoji:'⚠️', photo:'./aigo.jpg', edible:'適切に処理すれば食用可', guide:'初心者は無理に触らない', danger:'背びれ・腹びれ・尻びれに毒棘', dangerLevel:3, dangerTitle:'毒棘あり・素手で触らない', dangerAction:'魚体を直接握らず、プライヤー等で針を外す。ヒレに触れない。' },
+  { name:'ゴンズイ', emoji:'☠️', photo:'./gonzui.jpg', edible:'食用例はあるが初心者は扱わない', guide:'初心者はリリース推奨', danger:'背びれ・胸びれの毒棘に注意', dangerLevel:3, dangerTitle:'毒棘あり・絶対に素手で握らない', dangerAction:'死んだ個体でも棘に注意。フィッシュグリップだけを過信せず、棘から距離を取る。' },
+  { name:'ハオコゼ', emoji:'☠️', photo:'./haokoze.jpg', edible:'食用例はあるが小型', guide:'初心者はリリース推奨', danger:'背びれの毒棘', dangerLevel:3, dangerTitle:'小さくても危険・毒棘あり', dangerAction:'小さいから安全と思わず、素手でつかまない。' },
+  { name:'その他', emoji:'❓', edible:'魚種を確認', guide:'不明魚は持ち帰らない', danger:'種類が分かるまで素手で触らない', dangerLevel:2, dangerTitle:'魚種不明＝触らない', dangerAction:'写真を撮り、魚種を確認してから扱う。' }
 ];
 
 const defaultGear = ['ロッド', 'リール', '仕掛け', 'オモリ・ジグヘッド', 'エサ・ワーム', 'ハサミ・プライヤー', 'フィッシュグリップ', 'ライフジャケット', 'クーラーボックス', '氷・保冷剤', 'タオル', '飲み物'];
@@ -467,13 +468,59 @@ function renderTackle() {
   });
 }
 
+function dangerLabel(f){
+  if(f.dangerLevel >= 3) return '☠️ 危険';
+  if(f.dangerLevel === 2) return '⚠️ 要注意';
+  if(f.dangerLevel === 1) return '⚠️ 注意';
+  return '';
+}
 function renderEncyclopedia() {
   const caught = new Set(state.catches.map(c => c.fishName));
-  app.innerHTML = `<p class="note">危険魚や見分けに自信がない魚は、素手で触らず現地のルールを確認してください。</p><section class="section fish-grid">${fishMaster.filter(f=>f.name!=='その他').map(f => `<button class="fish-card" data-fish="${escapeHtml(f.name)}"><div class="fish-emoji">${f.emoji}</div><h3>${escapeHtml(f.name)} ${caught.has(f.name)?'✓':''}</h3><p>${escapeHtml(f.edible)}</p></button>`).join('')}</section>`;
-  document.querySelectorAll('[data-fish]').forEach(btn => btn.onclick = () => {
-    const f = getFish(btn.dataset.fish);
-    alert(`${f.name}\n\n料理：${f.edible}\n持ち帰り目安：${f.guide}\n注意：${f.danger}`);
-  });
+  app.innerHTML = `
+    <section class="fish-safety-banner">
+      <strong>⚠️ 分からない魚は素手で触らない</strong>
+      <p>危険魚は赤いカードで表示します。小さい魚でも毒棘を持つ種類があります。</p>
+    </section>
+    <section class="section fish-photo-grid">
+      ${fishMaster.filter(f=>f.name!=='その他').map(f => `
+        <button class="fish-photo-card danger-${f.dangerLevel||0}" data-fish="${escapeHtml(f.name)}">
+          <div class="fish-photo-wrap">
+            ${f.photo ? `<img src="${f.photo}" alt="${escapeHtml(f.name)}の写真" loading="lazy">` : `<div class="fish-photo-fallback">${f.emoji}</div>`}
+            ${f.dangerLevel ? `<span class="fish-danger-badge">${dangerLabel(f)}</span>` : ''}
+            ${caught.has(f.name) ? `<span class="fish-caught-badge">釣った ✓</span>` : ''}
+          </div>
+          <div class="fish-photo-copy">
+            <h3>${escapeHtml(f.name)}</h3>
+            <p>${f.dangerLevel >= 3 ? escapeHtml(f.dangerTitle||f.danger) : escapeHtml(f.edible)}</p>
+          </div>
+        </button>`).join('')}
+    </section>
+    <div id="fishDetailOverlay"></div>`;
+  document.querySelectorAll('[data-fish]').forEach(btn => btn.onclick = () => showFishDetail(getFish(btn.dataset.fish)));
+}
+function showFishDetail(f){
+  const root=document.getElementById('fishDetailOverlay');
+  if(!root) return;
+  root.innerHTML=`<div class="fish-detail-backdrop" id="fishDetailClose">
+    <article class="fish-detail-sheet danger-${f.dangerLevel||0}" onclick="event.stopPropagation()">
+      <button class="fish-detail-x" id="fishDetailX">×</button>
+      <div class="fish-detail-photo">
+        ${f.photo?`<img src="${f.photo}" alt="${escapeHtml(f.name)}">`:`<div>${f.emoji}</div>`}
+        ${f.dangerLevel>=2?`<div class="fish-detail-danger">${f.dangerLevel>=3?'☠️':'⚠️'} ${escapeHtml(f.dangerTitle||f.danger)}</div>`:''}
+      </div>
+      <div class="fish-detail-body">
+        <h2>${escapeHtml(f.name)}</h2>
+        ${f.dangerLevel>=3?`<section class="danger-stop"><strong>素手で触らない</strong><p>${escapeHtml(f.danger)}</p>${f.dangerAction?`<p>${escapeHtml(f.dangerAction)}</p>`:''}</section>`:''}
+        <dl>
+          <div><dt>食べ方</dt><dd>${escapeHtml(f.edible)}</dd></div>
+          <div><dt>持ち帰り目安</dt><dd>${escapeHtml(f.guide)}</dd></div>
+          <div><dt>注意</dt><dd>${escapeHtml(f.danger)}</dd></div>
+        </dl>
+      </div>
+    </article>
+  </div>`;
+  document.getElementById('fishDetailClose').onclick=()=>root.innerHTML='';
+  document.getElementById('fishDetailX').onclick=()=>root.innerHTML='';
 }
 
 function renderGear() {

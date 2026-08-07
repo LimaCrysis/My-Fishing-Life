@@ -366,3 +366,28 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .target-first{margin-top:12px;padding:12px 14px;border-radius:14px;background:#e9f6f2}.target-first small,.target-first strong{display:block}.target-first small{font-size:9px;color:#247346;font-weight:900}.target-first strong{margin-top:3px;font-size:20px}
 .target-result>p{color:var(--muted);font-size:11px;line-height:1.55}.target-hints{margin-top:10px;padding-top:4px;border-top:1px solid var(--line)}.target-hints p{margin:8px 0 0;font-size:10px;line-height:1.55;color:var(--muted)}
 @media(max-width:380px){.target-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* MFL v2.2.0 - Photo Fish Book & Danger Alert */
+.fish-safety-banner{padding:16px 18px;border-radius:20px;background:#fff2f0;border:2px solid #ef8e83;color:#842d27;box-shadow:var(--shadow)}
+.fish-safety-banner strong{display:block;font-size:16px}.fish-safety-banner p{margin:5px 0 0;font-size:11px;line-height:1.55}
+.fish-photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.fish-photo-card{overflow:hidden;border:1px solid var(--line);border-radius:19px;background:white;padding:0;text-align:left;color:var(--ink);box-shadow:var(--shadow)}
+.fish-photo-card.danger-3{border:3px solid #d63c32;background:#fff6f5;box-shadow:0 10px 28px rgba(173,45,35,.18)}
+.fish-photo-card.danger-2{border:2px solid #e38a35}
+.fish-photo-wrap{position:relative;height:128px;background:#e8eeee;overflow:hidden}
+.fish-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.fish-photo-fallback{height:100%;display:grid;place-items:center;font-size:48px;background:linear-gradient(145deg,#eef6f6,#dceced)}
+.fish-danger-badge{position:absolute;left:7px;top:7px;padding:5px 7px;border-radius:9px;background:#b92720;color:white;font-size:9px;font-weight:900;letter-spacing:.02em;box-shadow:0 3px 9px rgba(0,0,0,.2)}
+.danger-1 .fish-danger-badge{background:#df9238}.fish-caught-badge{position:absolute;right:7px;top:7px;padding:5px 7px;border-radius:9px;background:rgba(255,255,255,.94);color:var(--accent-dark);font-size:9px;font-weight:900}
+.fish-photo-copy{padding:12px}.fish-photo-copy h3{margin:0 0 4px;font-size:16px}.fish-photo-copy p{margin:0;color:var(--muted);font-size:10px;line-height:1.4}
+.danger-3 .fish-photo-copy h3,.danger-3 .fish-photo-copy p{color:#8b2721}.danger-3 .fish-photo-copy h3{font-size:18px}
+.fish-detail-backdrop{position:fixed;z-index:100;inset:0;background:rgba(7,25,29,.6);display:flex;align-items:flex-end;justify-content:center}
+.fish-detail-sheet{position:relative;width:min(100%,760px);max-height:92dvh;overflow:auto;border-radius:28px 28px 0 0;background:white}
+.fish-detail-sheet.danger-3{border-top:6px solid #c52f27}
+.fish-detail-x{position:absolute;z-index:2;right:14px;top:14px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.92);font-size:27px}
+.fish-detail-photo{position:relative;height:260px;background:#e6eded}.fish-detail-photo img{width:100%;height:100%;object-fit:cover}.fish-detail-photo>div:not(.fish-detail-danger){height:100%;display:grid;place-items:center;font-size:70px}
+.fish-detail-danger{position:absolute;left:14px;right:14px;bottom:14px;padding:12px 14px;border-radius:15px;background:#b92720;color:white;font-size:16px;font-weight:900;box-shadow:0 5px 18px rgba(0,0,0,.28)}
+.fish-detail-body{padding:18px 18px calc(28px + env(safe-area-inset-bottom))}.fish-detail-body h2{font-size:28px;margin-bottom:13px}
+.danger-stop{padding:15px;border-radius:17px;background:#fff0ee;border:2px solid #dd5148;color:#842d27}.danger-stop strong{display:block;font-size:20px}.danger-stop p{margin:6px 0 0;font-size:12px;line-height:1.6}
+.fish-detail-body dl{margin:14px 0 0}.fish-detail-body dl div{padding:12px 0;border-bottom:1px solid var(--line)}.fish-detail-body dt{font-size:10px;color:var(--muted);font-weight:900}.fish-detail-body dd{margin:4px 0 0;font-size:14px;font-weight:700}
+@media(max-width:380px){.fish-photo-wrap{height:112px}.fish-photo-grid{gap:9px}.fish-detail-photo{height:220px}}

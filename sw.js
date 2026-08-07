@@ -1,5 +1,5 @@
-const CACHE = 'my-fishing-life-v2.1.0';
-const ASSETS = ['./','./index.html','./styles.css','./app.js','./manifest.webmanifest'];
+const CACHE = 'my-fishing-life-v2.2.1';
+const ASSETS = ['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./kisu.jpg','./seabass.jpg','./aji.jpg','./saba.jpg','./kasago.jpg','./aigo.jpg','./haokoze.jpg','./gonzui.jpg'];
 
 self.addEventListener('install', event => {
   self.skipWaiting();
