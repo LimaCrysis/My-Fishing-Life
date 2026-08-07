@@ -194,49 +194,58 @@ function renderCalendar() {
 }
 
 function renderTrips() {
-  const trips = [...state.trips].sort((a,b) => (b.date||'').localeCompare(a.date||''));
+  const groups = new Map();
+  [...state.catches]
+    .sort((a,b) => (b.date||'').localeCompare(a.date||''))
+    .forEach(c => {
+      const key = `${c.date || ''}__${c.place || '釣り場未設定'}`;
+      if (!groups.has(key)) groups.set(key, {
+        key,
+        date:c.date || '',
+        place:c.place || '釣り場未設定',
+        weather:c.weather || '',
+        catches:[]
+      });
+      groups.get(key).catches.push(c);
+    });
+  const trips=[...groups.values()];
+
   app.innerHTML = `
     <button class="primary-button" id="startTripBtn">${state.activeTrip ? '現在の釣行に釣果を追加' : '新しい釣行を始める'}</button>
     <section class="section trip-accordion-list">
       ${trips.length ? trips.map((t, idx) => {
-        const catches = state.catches.filter(c => c.tripId === t.id);
-        const count = catches.reduce((n,c)=>n+Number(c.count||0),0);
-        const speciesCount = new Set(catches.map(c=>c.fishName)).size;
-        const key = `${t.date || ''}__${t.place || ''}`;
-        const summary = `${formatDate(t.date)}・${escapeHtml(t.place || '釣り場未設定')}`;
-        return `<details class="trip-accordion" ${idx===0?'open':''} data-trip-key="${escapeHtml(key)}">
+        const count=t.catches.reduce((n,c)=>n+Number(c.count||1),0);
+        const speciesCount=new Set(t.catches.map(c=>c.fishName)).size;
+        return `<details class="trip-accordion" ${idx===0?'open':''}>
           <summary>
             <span class="trip-summary-icon">🎣</span>
             <span class="trip-summary-main">
-              <strong>${escapeHtml(t.place || '釣り場未設定')}</strong>
-              <small>${formatDate(t.date)}・${escapeHtml(t.weather || '天気未設定')}</small>
+              <strong>${escapeHtml(t.place)}</strong>
+              <small>${formatDate(t.date)}${t.weather ? `・${escapeHtml(t.weather)}` : ''}</small>
             </span>
-            <span class="trip-summary-stats">
-              <b>${count}匹</b>
-              <small>${speciesCount}魚種</small>
-            </span>
+            <span class="trip-summary-stats"><b>${count}匹</b><small>${speciesCount}魚種</small></span>
             <span class="trip-summary-arrow">›</span>
           </summary>
           <div class="trip-accordion-body">
-            ${catches.length
-              ? catches.map(c => catchCard(c, true)).join('')
-              : '<p class="note">この釣行にはまだ釣果がありません。</p>'}
+            ${t.catches.map(c=>catchCard(c,true)).join('')}
           </div>
         </details>`;
       }).join('') : `<section class="empty-state"><div class="empty-icon">🧭</div><h2>釣行記録はまだありません</h2><p>最初の釣行を始めてみよう。</p></section>`}
     </section>`;
-  document.getElementById('startTripBtn').onclick = () => state.activeTrip ? openCatch() : openTrip();
+
+  const startTripBtn=document.getElementById('startTripBtn');
+  if(startTripBtn) startTripBtn.onclick=()=>state.activeTrip ? openCatch() : openTrip();
 
   document.querySelectorAll('[data-delete-catch]').forEach(btn => btn.onclick = () => {
-    const id = btn.dataset.deleteCatch;
-    const item = state.catches.find(c => c.id === id);
-    if (!item) return;
-    const label = `${item.fishName}${item.size ? ` ${item.size}cm` : ''}・${item.count || 1}匹`;
-    if (!confirmDestructiveAction(
+    const id=btn.dataset.deleteCatch;
+    const item=state.catches.find(c=>c.id===id);
+    if(!item) return;
+    const label=`${item.fishName}${item.size ? ` ${item.size}cm` : ''}・${item.count || 1}匹`;
+    if(!confirmDestructiveAction(
       `「${label}」の記録だけ削除しますか？`,
       'この1件だけが削除されます。他の魚・写真・釣行・予定・My Tackleは残ります。'
     )) return;
-    state.catches = state.catches.filter(c => c.id !== id);
+    state.catches=state.catches.filter(c=>c.id!==id);
     save();
     renderTrips();
   });
