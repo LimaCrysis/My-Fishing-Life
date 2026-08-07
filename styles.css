@@ -344,3 +344,13 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .assist-start{padding:12px 14px;border-radius:14px;background:var(--soft)}.assist-start small,.assist-start strong{display:block}.assist-start small{font-size:9px;color:var(--accent);font-weight:900;letter-spacing:.08em}.assist-start strong{margin-top:3px;font-size:19px;color:var(--ink)}
 .assist-range{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.assist-range span{padding:10px 12px;border:1px solid var(--line);border-radius:13px}.assist-range small,.assist-range b{display:block}.assist-range small{font-size:9px;color:var(--muted)}.assist-range b{margin-top:2px;font-size:13px}
 .assist-reel-note{font-size:10px!important;opacity:.8}
+
+.line-sim-card{padding:18px;border-radius:22px;background:white;box-shadow:var(--shadow)}
+.line-sim-lead{margin:-2px 0 14px;color:var(--muted);font-size:12px;line-height:1.55}
+.line-sim-card select{min-height:56px;font-size:16px}
+.line-sim-result{margin-top:12px;padding:14px;border-radius:18px;background:#f7fbfb;border:1px solid var(--line)}
+.line-sim-head{display:flex;gap:12px;align-items:center}.line-sim-head small,.line-sim-head strong,.line-sim-head p{display:block}.line-sim-head small{color:var(--accent);font-size:9px;font-weight:900}.line-sim-head strong{margin:3px 0;font-size:18px}.line-sim-head p{margin:0;color:var(--muted);font-size:10px}
+.line-effect-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}.line-effect-grid span{padding:10px 6px;border-radius:12px;background:white;text-align:center;border:1px solid var(--line)}.line-effect-grid small,.line-effect-grid b{display:block}.line-effect-grid small{font-size:8px;color:var(--muted)}.line-effect-grid b{margin-top:2px;font-size:17px}
+.line-effect-text{margin:12px 0;color:var(--muted);font-size:11px;line-height:1.55}
+.line-compare{display:grid;grid-template-columns:auto 1fr auto auto 1fr;gap:6px;align-items:center;padding:10px 12px;margin-bottom:10px;border-radius:13px;background:white;border:1px solid var(--line)}.line-compare small{font-size:9px;color:var(--muted)}.line-compare strong{font-size:11px}
+@media(max-width:390px){.line-effect-grid{grid-template-columns:repeat(2,1fr)}}
