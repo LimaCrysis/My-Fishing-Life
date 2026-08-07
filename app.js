@@ -59,6 +59,11 @@ function render() {
   ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, gear: renderGear, tackle: renderTackle, settings: renderSettings })[state.view]();
 }
 
+
+function confirmDestructiveAction(message, detail = 'この操作は元に戻せません。') {
+  return window.confirm(`${message}\n\n${detail}`);
+}
+
 function renderHome() {
   const totalFish = state.catches.reduce((n,c) => n + Number(c.count || 0), 0);
   const species = new Set(state.catches.map(c => c.fishName)).size;
@@ -257,7 +262,7 @@ function renderTackle() {
   document.getElementById('addTackleBtn').onclick = openTackle;
   document.querySelectorAll('[data-delete-tackle]').forEach(btn => btn.onclick = () => {
     const id = btn.dataset.deleteTackle;
-    if (!confirm('このタックルを削除しますか？\\n釣果記録そのものは残ります。')) return;
+    if (!confirmDestructiveAction('本当にすべてのMFLデータを削除しますか？', '釣行記録・釣果・写真・タックル・Ocean Rank・予定・設定がすべて消えます。')) return;
     state.tackles = state.tackles.filter(t => t.id !== id);
     save(); renderTackle();
   });
@@ -284,7 +289,8 @@ function renderSettings() {
   app.innerHTML = `<section class="card"><h2>My Fishing Life</h2><p>釣りに行く前、釣りの最中、帰宅後まで使える自分専用の釣り手帳です。</p></section><section class="card"><h3>データ保存</h3><p>記録はこの端末のブラウザ内に保存されます。ブラウザのデータを削除すると記録も消えるため、今後バックアップ機能を追加予定です。</p></section><button class="danger-button" id="deleteAll">すべての記録を削除</button>`;
   document.getElementById('deleteAll').onclick = () => {
     if (confirm('すべての釣行・釣果・持ち物チェックを削除しますか？')) {
-      localStorage.clear(); location.reload();
+      if (!confirmDestructiveAction('本当にすべてのMFLデータを削除しますか？', '釣行記録・釣果・写真・タックル・Ocean Rank・予定・設定がすべて消えます。')) return;
+  localStorage.clear(); location.reload();
     }
   };
 }

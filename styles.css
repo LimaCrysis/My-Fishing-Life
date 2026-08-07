@@ -313,3 +313,20 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
   box-shadow:var(--shadow);
 }
 .settings-home-card:active { transform:scale(.985); }
+
+
+/* MFL v1.6.2 - destructive action safety */
+.danger-button,
+[data-danger],
+.tackle-delete {
+  touch-action: manipulation;
+}
+.danger-button::before {
+  content: "⚠️ ";
+}
+.settings-warning {
+  margin-top: 10px;
+  color: #9b3f3f;
+  font-size: 12px;
+  line-height: 1.5;
+}
