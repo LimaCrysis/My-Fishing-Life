@@ -6,7 +6,7 @@ const fishMaster = [
   { name:'メゴチ', emoji:'🐟', edible:'天ぷら', guide:'12cm以上を目安に', danger:'エラぶた周辺のトゲに注意', dangerLevel:1 },
   { name:'ヒラメ', emoji:'🐟', edible:'刺身・ムニエル', guide:'茨城県では30cm未満は採捕禁止', danger:'鋭い歯に注意', dangerLevel:1, dangerAction:'口の中に指を入れない。' },
   { name:'シーバス', emoji:'🐟', photo:'./seabass.jpg', edible:'洗い・塩焼き', guide:'小型はリリース推奨', danger:'エラぶた・背びれ・歯に注意', dangerLevel:1 },
-  { name:'サバ', emoji:'🐟', photo:'./saba.jpg', edible:'塩焼き・味噌煮', guide:'食べる分だけ持ち帰る', danger:'暴れて針が刺さる事故に注意', dangerLevel:1 },
+  { name:'サバ', emoji:'🐟', photo:'./saba.jpg', photoType:'real', edible:'塩焼き・味噌煮', guide:'食べる分だけ持ち帰る', danger:'暴れて針が刺さる事故に注意', dangerLevel:1 },
   { name:'アイゴ', emoji:'⚠️', photo:'./aigo.jpg', edible:'適切に処理すれば食用可', guide:'初心者は無理に触らない', danger:'背びれ・腹びれ・尻びれに毒棘', dangerLevel:3, dangerTitle:'毒棘あり・素手で触らない', dangerAction:'魚体を直接握らず、プライヤー等で針を外す。ヒレに触れない。' },
   { name:'ゴンズイ', emoji:'☠️', photo:'./gonzui.jpg', edible:'食用例はあるが初心者は扱わない', guide:'初心者はリリース推奨', danger:'背びれ・胸びれの毒棘に注意', dangerLevel:3, dangerTitle:'毒棘あり・絶対に素手で握らない', dangerAction:'死んだ個体でも棘に注意。フィッシュグリップだけを過信せず、棘から距離を取る。' },
   { name:'ハオコゼ', emoji:'☠️', photo:'./haokoze.jpg', edible:'食用例はあるが小型', guide:'初心者はリリース推奨', danger:'背びれの毒棘', dangerLevel:3, dangerTitle:'小さくても危険・毒棘あり', dangerAction:'小さいから安全と思わず、素手でつかまない。' },
@@ -485,7 +485,7 @@ function renderEncyclopedia() {
       ${fishMaster.filter(f=>f.name!=='その他').map(f => `
         <button class="fish-photo-card danger-${f.dangerLevel||0}" data-fish="${escapeHtml(f.name)}">
           <div class="fish-photo-wrap">
-            ${f.photo ? `<img src="${f.photo}" alt="${escapeHtml(f.name)}の写真" loading="lazy">` : `<div class="fish-photo-fallback">${f.emoji}</div>`}
+            ${f.photo ? `<img src="${f.photo}" alt="${escapeHtml(f.name)}の写真" loading="lazy">` : `<div class="fish-photo-fallback"><span>${f.emoji}</span><small>実写写真 準備中</small></div>`}
             ${f.dangerLevel ? `<span class="fish-danger-badge">${dangerLabel(f)}</span>` : ''}
             ${caught.has(f.name) ? `<span class="fish-caught-badge">釣った ✓</span>` : ''}
           </div>

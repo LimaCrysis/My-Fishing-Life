@@ -391,3 +391,12 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .danger-stop{padding:15px;border-radius:17px;background:#fff0ee;border:2px solid #dd5148;color:#842d27}.danger-stop strong{display:block;font-size:20px}.danger-stop p{margin:6px 0 0;font-size:12px;line-height:1.6}
 .fish-detail-body dl{margin:14px 0 0}.fish-detail-body dl div{padding:12px 0;border-bottom:1px solid var(--line)}.fish-detail-body dt{font-size:10px;color:var(--muted);font-weight:900}.fish-detail-body dd{margin:4px 0 0;font-size:14px;font-weight:700}
 @media(max-width:380px){.fish-photo-wrap{height:112px}.fish-photo-grid{gap:9px}.fish-detail-photo{height:220px}}
+
+/* v2.2.2 fish photo visibility fix */
+.fish-photo-wrap{background:#edf3f3}
+.fish-photo-wrap img{object-fit:contain!important;object-position:center center!important;background:#edf3f3}
+.fish-detail-photo img{object-fit:contain!important;object-position:center center!important;background:#edf3f3}
+.fish-photo-card[data-fish="アイゴ"] .fish-photo-wrap img{object-position:center center!important}
+
+.fish-photo-fallback{display:flex!important;flex-direction:column;gap:4px;align-items:center;justify-content:center}
+.fish-photo-fallback span{font-size:42px}.fish-photo-fallback small{font-size:9px;color:var(--muted);font-weight:800}
