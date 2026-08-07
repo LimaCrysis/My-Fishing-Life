@@ -262,7 +262,7 @@ function renderTackle() {
   document.getElementById('addTackleBtn').onclick = openTackle;
   document.querySelectorAll('[data-delete-tackle]').forEach(btn => btn.onclick = () => {
     const id = btn.dataset.deleteTackle;
-    if (!confirmDestructiveAction('本当にすべてのMFLデータを削除しますか？', '釣行記録・釣果・写真・タックル・Ocean Rank・予定・設定がすべて消えます。')) return;
+    if (!confirmDestructiveAction('このタックルを削除しますか？', '削除されるのはこのタックル登録だけです。釣行・釣果・写真・予定・設定は残ります。')) return;
     state.tackles = state.tackles.filter(t => t.id !== id);
     save(); renderTackle();
   });
