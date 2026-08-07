@@ -54,9 +54,9 @@ function getFish(name) { return fishMaster.find(f => f.name === name) || fishMas
 
 function render() {
   document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === state.view));
-  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', gear:'持ち物', tackle:'My Tackle', settings:'設定' };
+  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', gear:'持ち物', tackle:'My Tackle', assist:'MFL Assist', settings:'設定' };
   if (pageTitle) pageTitle.textContent = titles[state.view];
-  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, gear: renderGear, tackle: renderTackle, settings: renderSettings })[state.view]();
+  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, gear: renderGear, tackle: renderTackle, assist: renderAssist, settings: renderSettings })[state.view]();
 }
 
 
@@ -88,6 +88,7 @@ function renderHome() {
       </span>
       <span class="home-tool-arrow" aria-hidden="true">›</span>
     </button>
+    <button class="section assist-home-card" type="button" data-view-link="assist"><span class="assist-home-icon">🧭</span><span class="home-tool-copy"><strong class="home-tool-title">MFL Assist</strong><span class="home-tool-description">タックルから、できる釣りと重さの目安を診断</span></span><span class="home-tool-arrow">›</span></button>
     <button class="section tackle-home-card" type="button" data-view-link="tackle">
       <span class="tackle-home-icon">${state.tackles.length ? oceanRankFor(tackleFishCount(state.tackles[0].id)).icon : '🐚'}</span>
       <span class="home-tool-copy">
@@ -227,6 +228,19 @@ function oceanRankFor(count) {
 function nextOceanRank(count) {
   return oceanRanks.find(r => r.min > count) || null;
 }
+
+const assistProfiles=[
+{match:/スカイハイ.*100\s*MH|SKYHIGH.*100\s*MH/i,name:'DAIWA SKYHIGH 100MH',official:'ルアー 12–60g / ナイロン 12–25lb / PE 1.0–2.5号',tips:[['ジグヘッド＋ワーム','◎','14–35g','荷重を乗せやすく堤防で広く探りやすい。'],['ルアー','◎','12–50g','ミノー、バイブレーション等を幅広く扱える。'],['メタルジグ','○','20–50g','遠投向き。上限付近の無理なフルキャストは避ける。'],['ちょい投げ','○','5–10号目安','ルアー負荷から余裕を持たせたMFL目安。投げ竿の保証値ではない。'],['サビキ','△','軽～中量級','カゴ・コマセを含む総重量に注意。']]},
+{match:/ルアーマチック.*S?90\s*ML|LUREMATIC.*S?90\s*ML/i,name:'SHIMANO 23 LUREMATIC S90ML',official:'ルアー 6–32g / ジグ MAX38g / ナイロン・フロロ 8–16lb / PE 0.6–1.5号',tips:[['ジグヘッド＋ワーム','◎','7–21g','初心者でもキャスト感をつかみやすい。'],['ルアー','◎','6–28g','公式範囲内で余裕を残したMFL推奨域。'],['メタルジグ','○','10–30g','公式ジグ上限38g。最初は軽めから。'],['ちょい投げ','○','3–6号目安','仕掛け総重量に注意し軽めから。'],['サビキ','○','軽量カゴ中心','カゴ＋コマセ＋仕掛けの総重量に注意。']]}];
+function findAssistProfile(t){if(!t)return null;let x=`${t.rod||''} ${t.name||''}`;return assistProfiles.find(p=>p.match.test(x))||null}
+function renderAssist(){
+ let id=localStorage.getItem('mfl_assistTackle')||state.tackles[0]?.id||'',t=state.tackles.find(x=>x.id===id)||state.tackles[0],p=findAssistProfile(t);
+ app.innerHTML=`<section class="assist-hero"><p class="eyebrow">MFL ASSIST α</p><h2>その相棒で、何ができる？</h2><p>商品カテゴリではなく、公式スペックを基準に釣り方を考えます。</p></section>
+ <section class="section assist-select"><label>診断するMy Tackle<select id="assistTackleSelect">${state.tackles.length?state.tackles.map(x=>`<option value="${x.id}" ${x.id===t?.id?'selected':''}>${escapeHtml(x.name)}｜${escapeHtml(x.rod)}</option>`).join(''):'<option>先にMy Tackleを登録してください</option>'}</select></label></section>
+ ${!t?'<section class="empty-state compact"><div class="empty-icon">🎣</div><h2>タックルを登録しよう</h2></section>':p?`<section class="assist-spec"><span class="assist-badge">公式スペック確認済み</span><h3>${p.name}</h3><p>${p.official}</p></section><section class="section"><h3>できる釣り</h3><div class="assist-list">${p.tips.map(a=>`<details class="assist-item"><summary><span class="assist-grade">${a[1]}</span><span><strong>${a[0]}</strong><small>${a[2]}</small></span><b>›</b></summary><p>${a[3]}</p></details>`).join('')}</div></section><section class="assist-note"><strong>🔰 MFLの考え方</strong><p>「シーバスロッドだからシーバスだけ」とは判断しません。ただしメーカー公称負荷を超える使い方はおすすめしません。オモリ号数はMFL目安です。</p></section>`:'<section class="empty-state compact"><div class="empty-icon">🧭</div><h2>このロッドはまだ学習前です</h2><p>公式スペックを登録するまで、MFLは推測で判定しません。</p></section>'}`;
+ let s=document.getElementById('assistTackleSelect');if(s)s.onchange=()=>{localStorage.setItem('mfl_assistTackle',s.value);renderAssist()}
+}
+
 function renderTackle() {
   app.innerHTML = `
     <section class="tackle-intro">

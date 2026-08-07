@@ -1,6 +1,2 @@
-MY FISHING LIFE v1.6.3 - Tackle Delete Fix
-
-- タックル削除では、そのタックル登録だけ削除
-- 釣行・釣果・写真・予定・設定は残る
-- 全データ削除は設定内の全データ削除だけ
-- キャッシュをv1.6.3へ更新
+MY FISHING LIFE v1.7.0 - MFL Assist α
+公式スペック基準の初期Assist。SKYHIGH 100MH / 23 LUREMATIC S90ML対応。未学習ロッドは推測判定しません。
