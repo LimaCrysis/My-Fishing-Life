@@ -233,11 +233,88 @@ const assistProfiles=[
 {match:/スカイハイ.*100\s*MH|SKYHIGH.*100\s*MH/i,name:'DAIWA SKYHIGH 100MH',official:'ルアー 12–60g / ナイロン 12–25lb / PE 1.0–2.5号',tips:[['ジグヘッド＋ワーム','◎','14–35g','荷重を乗せやすく堤防で広く探りやすい。'],['ルアー','◎','12–50g','ミノー、バイブレーション等を幅広く扱える。'],['メタルジグ','○','20–50g','遠投向き。上限付近の無理なフルキャストは避ける。'],['ちょい投げ','○','5–10号目安','ルアー負荷から余裕を持たせたMFL目安。投げ竿の保証値ではない。'],['サビキ','△','軽～中量級','カゴ・コマセを含む総重量に注意。']]},
 {match:/ルアーマチック.*S?90\s*ML|LUREMATIC.*S?90\s*ML/i,name:'SHIMANO 23 LUREMATIC S90ML',official:'ルアー 6–32g / ジグ MAX38g / ナイロン・フロロ 8–16lb / PE 0.6–1.5号',tips:[['ジグヘッド＋ワーム','◎','7–21g','初心者でもキャスト感をつかみやすい。'],['ルアー','◎','6–28g','公式範囲内で余裕を残したMFL推奨域。'],['メタルジグ','○','10–30g','公式ジグ上限38g。最初は軽めから。'],['ちょい投げ','○','3–6号目安','仕掛け総重量に注意し軽めから。'],['サビキ','○','軽量カゴ中心','カゴ＋コマセ＋仕掛けの総重量に注意。']]}];
 function findAssistProfile(t){if(!t)return null;let x=`${t.rod||''} ${t.name||''}`;return assistProfiles.find(p=>p.match.test(x))||null}
+const reelProfiles = [
+  {
+    match:/フリームス.*LT3000-?CXH|FREAMS.*LT3000-?CXH/i,
+    name:'DAIWA FREAMS LT3000-CXH',
+    official:'PE1号-200mクラス / ベイエリアのシーバスなどに対応するユーティリティモデル',
+    grade:'◎',
+    note:'3000番クラスのハイギアで、S100MHとの組み合わせは堤防のルアー・ワーム・軽めのエサ釣りまで扱いやすい。'
+  },
+  {
+    match:/ネクサーブ.*C3000HG|NEXAVE.*C3000HG/i,
+    name:'SHIMANO 26 NEXAVE C3000HG',
+    official:'ナイロン3号-150m / PE1.5号-270m / 最大ドラグ9kg / 巻上長91cm',
+    grade:'◎',
+    note:'C3000のバーサタイルハイギア。メーカーも幅広い釣りに使える万能モデルとして案内。'
+  }
+];
+
+function findReelProfile(tackle){
+  if(!tackle) return null;
+  return reelProfiles.find(p=>p.match.test(tackle.reel||'')) || null;
+}
+function parseLineProfile(line=''){
+  const text = String(line);
+  const m = text.match(/(\d+(?:\.\d+)?)\s*号/);
+  const size = m ? Number(m[1]) : null;
+  const isCarbon = /カーボナイロン|カーボンナイロン/i.test(text);
+  const isPE = /\bPE\b|ＰＥ/i.test(text);
+  const isFluoro = /フロロ/i.test(text);
+  const isNylon = /ナイロン/i.test(text) && !isCarbon;
+  let grade='○', note='ライン種類・太さを確認して判定します。';
+  if(isCarbon && size===3){ grade='○'; note='3号カーボナイロンは扱いやすく根ズレにも強め。飛距離と感度はPEより控えめなので、ルアー中心なら将来PEへの変更余地あり。'; }
+  else if(isPE){ grade='○'; note='PEは飛距離と感度に優れる一方、リーダー結束が必要。ロッドの適合PE範囲内か確認します。'; }
+  else if(isFluoro){ grade='○'; note='フロロは根ズレに強く沈みやすい。太さとロッド適合ラインを確認します。'; }
+  else if(isNylon){ grade='○'; note='ナイロンは扱いやすく初心者向け。太さとロッド適合ラインを確認します。'; }
+  return {size,isCarbon,isPE,isFluoro,isNylon,grade,note,label:text||'未登録'};
+}
+function gradeScore(g){ return g==='◎'?4:g==='○'?3:g==='△'?2:g==='×'?1:0; }
+function scoreGrade(n){ return n>=4?'◎':n>=3?'○':n>=2?'△':'×'; }
+
+function calculateTackleDiagnosis(tackle){
+  const rod = findAssistProfile(tackle);
+  const reel = findReelProfile(tackle);
+  const line = parseLineProfile(tackle?.line||'');
+  let scores=[];
+  if(rod) scores.push(4);
+  if(reel) scores.push(gradeScore(reel.grade));
+  if(tackle?.line) scores.push(gradeScore(line.grade));
+  const overall = scores.length ? scoreGrade(Math.min(...scores)) : '△';
+
+  let comments=[];
+  if(!rod) comments.push('ロッドは未学習のため、重量判定を保留します。');
+  if(!reel) comments.push('リールは未学習のため、番手・糸巻量の確認が必要です。');
+  if(!tackle?.line) comments.push('ラインが未登録です。');
+  if(rod && reel && tackle?.line) comments.push('ロッド・リール・ラインの3要素をまとめて診断しています。');
+
+  let lineAdjustment = '';
+  if(line.isCarbon && line.size===3){
+    if(rod?.name.includes('LUREMATIC')) lineAdjustment='3号はロッドのナイロン/フロロ適合8–16lbに対して太め寄り。使用は可能でも、軽い仕掛けの飛距離・操作感では不利になりやすい。';
+    else if(rod?.name.includes('SKYHIGH')) lineAdjustment='3号はS100MHのナイロン適合12–25lbの下限寄りに収まりやすく、扱いやすい組み合わせ。';
+  }
+  return {rod,reel,line,overall,comments,lineAdjustment};
+}
+
+
 function renderAssist(){
- let id=localStorage.getItem('mfl_assistTackle')||state.tackles[0]?.id||'',t=state.tackles.find(x=>x.id===id)||state.tackles[0],p=findAssistProfile(t);
- app.innerHTML=`<section class="assist-hero"><p class="eyebrow">MFL ASSIST α</p><h2>その相棒で、何ができる？</h2><p>商品カテゴリではなく、公式スペックを基準に釣り方を考えます。</p></section>
+ let id=localStorage.getItem('mfl_assistTackle')||state.tackles[0]?.id||'',t=state.tackles.find(x=>x.id===id)||state.tackles[0],d=calculateTackleDiagnosis(t),p=d.rod;
+ app.innerHTML=`<section class="assist-hero"><p class="eyebrow">MFL ASSIST β</p><h2>My Tackleを、まとめて診断。</h2><p>ロッド・リール・ラインを読み取り、釣り方と重量の目安を考えます。</p></section>
  <section class="section assist-select"><label>診断するMy Tackle<select id="assistTackleSelect">${state.tackles.length?state.tackles.map(x=>`<option value="${x.id}" ${x.id===t?.id?'selected':''}>${escapeHtml(x.name)}｜${escapeHtml(x.rod)}</option>`).join(''):'<option>先にMy Tackleを登録してください</option>'}</select></label></section>
- ${!t?'<section class="empty-state compact"><div class="empty-icon">🎣</div><h2>タックルを登録しよう</h2></section>':p?`<section class="assist-spec"><span class="assist-badge">公式スペック確認済み</span><h3>${p.name}</h3><p>${p.official}</p></section><section class="section"><h3>できる釣り</h3><div class="assist-list">${p.tips.map(a=>`<details class="assist-item"><summary><span class="assist-grade">${a[1]}</span><span><strong>${a[0]}</strong><small>${a[2]}</small></span><b>›</b></summary><p>${a[3]}</p></details>`).join('')}</div></section><section class="assist-note"><strong>🔰 MFLの考え方</strong><p>「シーバスロッドだからシーバスだけ」とは判断しません。ただしメーカー公称負荷を超える使い方はおすすめしません。オモリ号数はMFL目安です。</p></section>`:'<section class="empty-state compact"><div class="empty-icon">🧭</div><h2>このロッドはまだ学習前です</h2><p>公式スペックを登録するまで、MFLは推測で判定しません。</p></section>'}`;
+ ${!t?'<section class="empty-state compact"><div class="empty-icon">🎣</div><h2>タックルを登録しよう</h2></section>':
+ `<section class="assist-overall">
+   <div class="assist-overall-grade">${d.overall}</div>
+   <div><small>TACKLE BALANCE</small><h3>${escapeHtml(t.name)}</h3><p>${d.comments.join(' ')}</p></div>
+ </section>
+ <section class="assist-parts">
+   <article><span>🎣</span><div><small>ROD</small><strong>${p?escapeHtml(p.name):escapeHtml(t.rod||'未登録')}</strong><em>${p?'公式確認済み':'学習前'}</em></div></article>
+   <article><span>🌀</span><div><small>REEL</small><strong>${d.reel?escapeHtml(d.reel.name):escapeHtml(t.reel||'未登録')}</strong><em>${d.reel?d.reel.official:'学習前'}</em></div></article>
+   <article><span>🧵</span><div><small>LINE</small><strong>${escapeHtml(d.line.label)}</strong><em>${escapeHtml(d.line.note)}</em></div></article>
+ </section>
+ ${d.lineAdjustment?`<section class="assist-warning"><strong>ラインとのバランス</strong><p>${d.lineAdjustment}</p></section>`:''}
+ ${p?`<section class="section"><h3>このタックルでできる釣り</h3><div class="assist-list">${p.tips.map(a=>`<details class="assist-item"><summary><span class="assist-grade">${a[1]}</span><span><strong>${a[0]}</strong><small>${a[2]}</small></span><b>›</b></summary><p>${a[3]} ${d.reel?d.reel.note:''}</p></details>`).join('')}</div></section>`:
+ '<section class="empty-state compact"><div class="empty-icon">🧭</div><h2>ロッドはまだ学習前です</h2><p>公式スペックを登録するまで重量は推測しません。</p></section>'}
+ <section class="assist-note"><strong>🔰 MFLの考え方</strong><p>製品ジャンルではなく、公式スペックとMy Tackleの組み合わせで判断します。ラインの銘柄・実強度が不明な場合は安全側の目安を出します。</p></section>`}`;
  let s=document.getElementById('assistTackleSelect');if(s)s.onchange=()=>{localStorage.setItem('mfl_assistTackle',s.value);renderAssist()}
 }
 
@@ -264,6 +341,7 @@ function renderTackle() {
             <div class="tackle-count"><strong>${count}</strong><span>匹の思い出</span></div>
             <div class="ocean-progress"><span style="width:${progress}%"></span></div>
             <small class="rank-next">${next ? `次の「${next.name}」まで ${next.min-count}匹` : '最高ランク到達！'}</small>
+            <button class="secondary-button tackle-assist-button" data-assist-tackle="${t.id}">🧭 このタックルを診断</button>
             <button class="tackle-delete" data-delete-tackle="${t.id}">このタックルを削除</button>
           </div>
         </article>`;
@@ -274,6 +352,11 @@ function renderTackle() {
       <div class="rank-strip">${oceanRanks.map(r => `<span title="${r.min}匹〜"><b>${r.icon}</b><small>${r.min}</small></span>`).join('')}</div>
     </section>`;
   document.getElementById('addTackleBtn').onclick = openTackle;
+  document.querySelectorAll('[data-assist-tackle]').forEach(btn => btn.onclick = () => {
+    localStorage.setItem('mfl_assistTackle', btn.dataset.assistTackle);
+    state.view = 'assist';
+    render();
+  });
   document.querySelectorAll('[data-delete-tackle]').forEach(btn => btn.onclick = () => {
     const id = btn.dataset.deleteTackle;
     if (!confirmDestructiveAction('このタックルを削除しますか？', '削除されるのはこのタックル登録だけです。釣行・釣果・写真・予定・設定は残ります。')) return;
