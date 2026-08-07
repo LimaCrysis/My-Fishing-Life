@@ -400,3 +400,20 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 
 .fish-photo-fallback{display:flex!important;flex-direction:column;gap:4px;align-items:center;justify-content:center}
 .fish-photo-fallback span{font-size:42px}.fish-photo-fallback small{font-size:9px;color:var(--muted);font-weight:800}
+
+/* MFL v2.3.0 - single catch delete */
+.catch-record-card{position:relative}
+.catch-delete-button{
+  display:block;
+  width:100%;
+  min-height:44px;
+  margin-top:12px;
+  border:1px solid #efc8c5;
+  border-radius:13px;
+  background:#fff8f7;
+  color:#a33a34;
+  font-size:12px;
+  font-weight:800;
+  touch-action:manipulation;
+}
+.catch-delete-button:active{background:#ffefed}

@@ -120,14 +120,15 @@ function renderHome() {
   // Home actions are handled by the delegated click listener below.
 
 }
-function catchCard(c) {
+function catchCard(c, deletable = false) {
   const f = getFish(c.fishName);
-  return `<article class="card">
+  return `<article class="card catch-record-card">
     <div class="card-row">
       ${c.photo ? `<img class="catch-photo" src="${c.photo}" alt="${escapeHtml(c.fishName)}">` : `<div class="card-icon">${f.emoji}</div>`}
       <div class="card-main"><h3>${escapeHtml(c.fishName)} ${c.size ? `${escapeHtml(c.size)}cm` : ''}</h3><p>${formatDate(c.date)}・${escapeHtml(c.place || '釣り場未設定')}・${escapeHtml(c.method)}</p></div>
       <span class="badge">${escapeHtml(c.result)}</span>
     </div>
+    ${deletable ? `<button class="catch-delete-button" data-delete-catch="${c.id}" type="button">この魚記録だけ削除</button>` : ''}
   </article>`;
 }
 
@@ -199,12 +200,26 @@ function renderTrips() {
       ${trips.length ? trips.map(t => {
         const catches = state.catches.filter(c => c.tripId === t.id);
         const count = catches.reduce((n,c)=>n+Number(c.count||0),0);
-        return `<article class="card"><div class="card-row"><div class="card-icon">🎣</div><div class="card-main"><h3>${escapeHtml(t.place)}</h3><p>${formatDate(t.date)}・${escapeHtml(t.weather)}・${count}匹</p></div></div>${catches.map(catchCard).join('') || '<p class="note" style="margin-top:12px">この釣行にはまだ釣果がありません。</p>'}</article>`;
+        return `<article class="card"><div class="card-row"><div class="card-icon">🎣</div><div class="card-main"><h3>${escapeHtml(t.place)}</h3><p>${formatDate(t.date)}・${escapeHtml(t.weather)}・${count}匹</p></div></div>${catches.map(c => catchCard(c, true)).join('') || '<p class="note" style="margin-top:12px">この釣行にはまだ釣果がありません。</p>'}</article>`;
       }).join('') : `<section class="empty-state"><div class="empty-icon">🧭</div><h2>釣行記録はまだありません</h2><p>最初の釣行を始めてみよう。</p></section>`}
     </section>`;
   document.getElementById('startTripBtn').onclick = () => state.activeTrip ? openCatch() : openTrip();
   const endTripBtn = document.getElementById('endTripBtn');
   if (endTripBtn) endTripBtn.onclick = endTrip;
+
+  document.querySelectorAll('[data-delete-catch]').forEach(btn => btn.onclick = () => {
+    const id = btn.dataset.deleteCatch;
+    const item = state.catches.find(c => c.id === id);
+    if (!item) return;
+    const label = `${item.fishName}${item.size ? ` ${item.size}cm` : ''}・${item.count || 1}匹`;
+    if (!confirmDestructiveAction(
+      `「${label}」の記録だけ削除しますか？`,
+      'この1件だけが削除されます。他の魚・写真・釣行・予定・My Tackleは残ります。'
+    )) return;
+    state.catches = state.catches.filter(c => c.id !== id);
+    save();
+    renderTrips();
+  });
 }
 
 
