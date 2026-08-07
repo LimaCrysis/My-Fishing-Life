@@ -192,65 +192,376 @@ function renderCalendar() {
     save(); renderCalendar();
   });
 }
-
 function renderTrips() {
-  const groups = new Map();
-  [...state.catches]
-    .sort((a,b) => (b.date||'').localeCompare(a.date||''))
-    .forEach(c => {
-      const key = `${c.date || ''}__${c.place || '釣り場未設定'}`;
-      if (!groups.has(key)) groups.set(key, {
+  const grouped = [];
+  const byKey = {};
+
+  state.trips.forEach(t => {
+    const key = `${t.date || ''}__${t.place || '釣り場未設定'}`;
+    if (!byKey[key]) {
+      byKey[key] = {
         key,
-        date:c.date || '',
-        place:c.place || '釣り場未設定',
-        weather:c.weather || '',
-        catches:[]
-      });
-      groups.get(key).catches.push(c);
-    });
-  const trips=[...groups.values()];
+        date: t.date || '',
+        place: t.place || '釣り場未設定',
+        weather: t.weather || '',
+        tripIds: [],
+        catches: []
+      };
+      grouped.push(byKey[key]);
+    }
+    byKey[key].tripIds.push(t.id);
+  });
+
+  state.catches.forEach(c => {
+    const group = grouped.find(g => g.tripIds.includes(c.tripId));
+    if (group) group.catches.push(c);
+  });
+
+  grouped.sort((a,b) => (b.date || '').localeCompare(a.date || ''));
 
   app.innerHTML = `
-    <button class="primary-button" id="startTripBtn">${state.activeTrip ? '現在の釣行に釣果を追加' : '新しい釣行を始める'}</button>
-    <section class="section trip-accordion-list">
-      ${trips.length ? trips.map((t, idx) => {
-        const count=t.catches.reduce((n,c)=>n+Number(c.count||1),0);
-        const speciesCount=new Set(t.catches.map(c=>c.fishName)).size;
-        return `<details class="trip-accordion" ${idx===0?'open':''}>
-          <summary>
-            <span class="trip-summary-icon">🎣</span>
-            <span class="trip-summary-main">
-              <strong>${escapeHtml(t.place)}</strong>
-              <small>${formatDate(t.date)}${t.weather ? `・${escapeHtml(t.weather)}` : ''}</small>
-            </span>
-            <span class="trip-summary-stats"><b>${count}匹</b><small>${speciesCount}魚種</small></span>
-            <span class="trip-summary-arrow">›</span>
-          </summary>
-          <div class="trip-accordion-body">
-            ${t.catches.map(c=>catchCard(c,true)).join('')}
-          </div>
-        </details>`;
-      }).join('') : `<section class="empty-state"><div class="empty-icon">🧭</div><h2>釣行記録はまだありません</h2><p>最初の釣行を始めてみよう。</p></section>`}
+    ${state.activeTrip ? `
+      <section class="active-trip-card">
+        <div>
+          <p class="eyebrow">NOW FISHING</p>
+          <h2>${escapeHtml(state.activeTrip.place)}</h2>
+          <span>${formatDate(state.activeTrip.date)}・${escapeHtml(state.activeTrip.start)}開始</span>
+        </div>
+        <button class="primary-button" id="startTripBtn">＋ 魚を追加</button>
+        <button class="secondary-button" id="endTripBtn">釣行を終了</button>
+      </section>` :
+      `<button class="primary-button" id="startTripBtn">新しい釣行を始める</button>`}
+
+    <section class="section trip-fold-list">
+      ${grouped.length ? grouped.map((g, index) => {
+        const count = g.catches.reduce((n,c)=>n+Number(c.count||0),0);
+        const species = new Set(g.catches.map(c=>c.fishName)).size;
+        return `
+          <article class="trip-fold-card">
+            <button class="trip-fold-button" type="button" data-trip-fold="${index}">
+              <span class="trip-fold-icon">🎣</span>
+              <span class="trip-fold-main">
+                <strong>${escapeHtml(g.place)}</strong>
+                <small>${formatDate(g.date)}${g.weather ? `・${escapeHtml(g.weather)}` : ''}</small>
+              </span>
+              <span class="trip-fold-count">
+                <b>${count}匹</b>
+                <small>${species}魚種</small>
+              </span>
+              <span class="trip-fold-arrow">›</span>
+            </button>
+            <div class="trip-fold-content ${index === 0 ? 'is-open' : ''}" data-trip-content="${index}">
+              ${g.catches.length
+                ? g.catches.map(c=>catchCard(c,true)).join('')
+                : `<p class="note">この釣行にはまだ釣果がありません。</p>`}
+            </div>
+          </article>`;
+      }).join('') :
+      `<section class="empty-state">
+        <div class="empty-icon">🧭</div>
+        <h2>釣行記録はまだありません</h2>
+        <p>最初の釣行を始めてみよう。</p>
+      </section>`}
     </section>`;
 
-  const startTripBtn=document.getElementById('startTripBtn');
-  if(startTripBtn) startTripBtn.onclick=()=>state.activeTrip ? openCatch() : openTrip();
+  const startTripBtn = document.getElementById('startTripBtn');
+  if (startTripBtn) startTripBtn.onclick = () => state.activeTrip ? openCatch() : openTrip();
+
+  const endTripBtn = document.getElementById('endTripBtn');
+  if (endTripBtn) endTripBtn.onclick = endTrip;
+
+  document.querySelectorAll('[data-trip-fold]').forEach(btn => {
+    const idx = btn.dataset.tripFold;
+    const content = document.querySelector(`[data-trip-content="${idx}"]`);
+    if (idx === '0') btn.classList.add('is-open');
+    btn.onclick = () => {
+      const open = content.classList.toggle('is-open');
+      btn.classList.toggle('is-open', open);
+    };
+  });
 
   document.querySelectorAll('[data-delete-catch]').forEach(btn => btn.onclick = () => {
-    const id=btn.dataset.deleteCatch;
-    const item=state.catches.find(c=>c.id===id);
-    if(!item) return;
-    const label=`${item.fishName}${item.size ? ` ${item.size}cm` : ''}・${item.count || 1}匹`;
-    if(!confirmDestructiveAction(
+    const id = btn.dataset.deleteCatch;
+    const item = state.catches.find(c => c.id === id);
+    if (!item) return;
+    const label = `${item.fishName}${item.size ? ` ${item.size}cm` : ''}・${item.count || 1}匹`;
+    if (!confirmDestructiveAction(
       `「${label}」の記録だけ削除しますか？`,
       'この1件だけが削除されます。他の魚・写真・釣行・予定・My Tackleは残ります。'
     )) return;
-    state.catches=state.catches.filter(c=>c.id!==id);
+    state.catches = state.catches.filter(c => c.id !== id);
     save();
     renderTrips();
   });
 }
 
+
+const oceanRanks = [
+  { min: 0, name: 'はじまりの石', icon: '🪨' },
+  { min: 1, name: '貝殻', icon: '🐚' },
+  { min: 50, name: 'サンゴ', icon: '🪸' },
+  { min: 100, name: 'ヒトデ', icon: '⭐' },
+  { min: 300, name: 'ヤドカリ', icon: '🦀' },
+  { min: 500, name: '海の仲間', icon: '🐠' },
+  { min: 1000, name: 'イルカ', icon: '🐬' },
+  { min: 3000, name: 'ウミガメ', icon: '🐢' },
+  { min: 5000, name: 'クジラ', icon: '🐋' },
+  { min: 10000, name: '海王', icon: '👑' }
+];
+function tackleFishCount(id) {
+  return state.catches.filter(c => c.tackleId === id).reduce((n,c) => n + Number(c.count || 0), 0);
+}
+function oceanRankFor(count) {
+  return [...oceanRanks].reverse().find(r => count >= r.min) || oceanRanks[0];
+}
+function nextOceanRank(count) {
+  return oceanRanks.find(r => r.min > count) || null;
+}
+
+const assistProfiles=[
+{match:/スカイハイ.*100\s*MH|SKYHIGH.*100\s*MH/i,name:'DAIWA SKYHIGH 100MH',official:'ルアー 12–60g / ナイロン 12–25lb / PE 1.0–2.5号',lineSpec:{pe:[1.0,2.5],monoLb:[12,25]},tips:[['ジグヘッド＋ワーム','◎','14–35g','荷重を乗せやすく堤防で広く探りやすい。','まずは14〜18g','14〜25g','30〜35g','底を取りたい時だけ少し重く。最初から上限寄りにしない。'],['ルアー','◎','12–50g','ミノー、バイブレーション等を幅広く扱える。','まずは15〜20g','12〜35g','40〜50g','投げやすい15〜20gから。風が強い時は少し重くする。'],['メタルジグ','○','20–50g','遠投向き。上限付近の無理なフルキャストは避ける。','まずは20〜30g','20〜40g','45〜50g','30g前後なら飛距離と扱いやすさのバランスを取りやすい。'],['ちょい投げ','○','5–10号目安','ルアー負荷から余裕を持たせたMFL目安。投げ竿の保証値ではない。','まずは5〜6号','5〜8号','10号','初心者は5〜6号から。10号は上限寄りなのでフルキャストせず様子を見る。'],['サビキ','△','軽～中量級','カゴ・コマセを含む総重量に注意。','軽いカゴから','仕掛け総重量を軽めに','重いカゴ','カゴ単体ではなくコマセを入れた総重量で判断する。']]},
+{match:/ルアーマチック.*S?90\s*ML|LUREMATIC.*S?90\s*ML/i,name:'SHIMANO 23 LUREMATIC S90ML',official:'ルアー 6–32g / ジグ MAX38g / ナイロン・フロロ 8–16lb / PE 0.6–1.5号',lineSpec:{pe:[0.6,1.5],monoLb:[8,16]},tips:[['ジグヘッド＋ワーム','◎','7–21g','初心者でもキャスト感をつかみやすい。','まずは7〜10g','7〜14g','18〜21g','最初は7〜10g。底が取りづらい時だけ少しずつ重くする。'],['ルアー','◎','6–28g','公式範囲内で余裕を残したMFL推奨域。','まずは8〜12g','8〜20g','24〜28g','軽快さを活かして8〜12gから始める。'],['メタルジグ','○','10–30g','公式ジグ上限38g。最初は軽めから。','まずは10〜15g','10〜25g','30g前後','初心者は10〜15g。慣れてから20g以上へ。'],['ちょい投げ','○','3–6号目安','仕掛け総重量に注意し軽めから。','まずは3〜4号','3〜5号','6号','初心者は3〜4号から。竿にゆっくり重さを乗せて投げる。'],['サビキ','○','軽量カゴ中心','カゴ＋コマセ＋仕掛けの総重量に注意。','小さめのカゴから','軽量仕掛け','重いカゴ','初心者は軽いカゴで足元〜近距離から始める。']]}];
+function findAssistProfile(t){if(!t)return null;let x=`${t.rod||''} ${t.name||''}`;return assistProfiles.find(p=>p.match.test(x))||null}
+const reelProfiles = [
+  {
+    match:/フリームス.*LT3000-?CXH|FREAMS.*LT3000-?CXH/i,
+    name:'DAIWA FREAMS LT3000-CXH',
+    official:'PE1号-200mクラス / ベイエリアのシーバスなどに対応するユーティリティモデル',
+    grade:'◎',
+    note:'3000番クラスのハイギアで、S100MHとの組み合わせは堤防のルアー・ワーム・軽めのエサ釣りまで扱いやすい。'
+  },
+  {
+    match:/ネクサーブ.*C3000HG|NEXAVE.*C3000HG/i,
+    name:'SHIMANO 26 NEXAVE C3000HG',
+    official:'ナイロン3号-150m / PE1.5号-270m / 最大ドラグ9kg / 巻上長91cm',
+    grade:'◎',
+    note:'C3000のバーサタイルハイギア。メーカーも幅広い釣りに使える万能モデルとして案内。'
+  }
+];
+
+function findReelProfile(tackle){
+  if(!tackle) return null;
+  return reelProfiles.find(p=>p.match.test(tackle.reel||'')) || null;
+}
+function parseLineProfile(line=''){
+  const text = String(line);
+  const m = text.match(/(\d+(?:\.\d+)?)\s*号/);
+  const size = m ? Number(m[1]) : null;
+  const isCarbon = /カーボナイロン|カーボンナイロン/i.test(text);
+  const isPE = /\bPE\b|ＰＥ/i.test(text);
+  const isFluoro = /フロロ/i.test(text);
+  const isNylon = /ナイロン/i.test(text) && !isCarbon;
+  let grade='○', note='ライン種類・太さを確認して判定します。';
+  if(isCarbon && size===3){ grade='○'; note='3号カーボナイロンは扱いやすく根ズレにも強め。飛距離と感度はPEより控えめなので、ルアー中心なら将来PEへの変更余地あり。'; }
+  else if(isPE){ grade='○'; note='PEは飛距離と感度に優れる一方、リーダー結束が必要。ロッドの適合PE範囲内か確認します。'; }
+  else if(isFluoro){ grade='○'; note='フロロは根ズレに強く沈みやすい。太さとロッド適合ラインを確認します。'; }
+  else if(isNylon){ grade='○'; note='ナイロンは扱いやすく初心者向け。太さとロッド適合ラインを確認します。'; }
+  return {size,isCarbon,isPE,isFluoro,isNylon,grade,note,label:text||'未登録'};
+}
+function gradeScore(g){ return g==='◎'?4:g==='○'?3:g==='△'?2:g==='×'?1:0; }
+function scoreGrade(n){ return n>=4?'◎':n>=3?'○':n>=2?'△':'×'; }
+
+
+const lineCatalog=[
+{id:'carbon-2',type:'carbon',label:'カーボナイロン2号',size:2,approxLb:8},
+{id:'carbon-2.5',type:'carbon',label:'カーボナイロン2.5号',size:2.5,approxLb:10},
+{id:'carbon-3',type:'carbon',label:'カーボナイロン3号',size:3,approxLb:12},
+{id:'carbon-4',type:'carbon',label:'カーボナイロン4号',size:4,approxLb:16},
+{id:'nylon-2',type:'nylon',label:'ナイロン2号',size:2,approxLb:8},
+{id:'nylon-2.5',type:'nylon',label:'ナイロン2.5号',size:2.5,approxLb:10},
+{id:'nylon-3',type:'nylon',label:'ナイロン3号',size:3,approxLb:12},
+{id:'nylon-4',type:'nylon',label:'ナイロン4号',size:4,approxLb:16},
+{id:'fluoro-2',type:'fluoro',label:'フロロ2号',size:2,approxLb:8},
+{id:'fluoro-2.5',type:'fluoro',label:'フロロ2.5号',size:2.5,approxLb:10},
+{id:'fluoro-3',type:'fluoro',label:'フロロ3号',size:3,approxLb:12},
+{id:'pe-0.6',type:'pe',label:'PE0.6号',size:0.6},
+{id:'pe-0.8',type:'pe',label:'PE0.8号',size:0.8},
+{id:'pe-1.0',type:'pe',label:'PE1.0号',size:1.0},
+{id:'pe-1.2',type:'pe',label:'PE1.2号',size:1.2},
+{id:'pe-1.5',type:'pe',label:'PE1.5号',size:1.5},
+{id:'pe-2.0',type:'pe',label:'PE2.0号',size:2.0},
+{id:'pe-2.5',type:'pe',label:'PE2.5号',size:2.5}
+];
+
+function lineCandidateCompatibility(tackle,c){
+ const rod=findAssistProfile(tackle), reel=findReelProfile(tackle);
+ if(!rod||!c)return{ok:false,grade:'△',reason:'公式ライン範囲が未登録です。'};
+ let rodOk=true,reelOk=true,reasons=[];
+ if(c.type==='pe'){
+   const r=rod.lineSpec?.pe;if(r){rodOk=c.size>=r[0]&&c.size<=r[1];if(!rodOk)reasons.push(`ロッド適合PE ${r[0]}〜${r[1]}号の範囲外`);}
+   const rr=reel?.lineCapacity?.pe;if(rr){reelOk=c.size>=rr[0]&&c.size<=rr[1];if(!reelOk)reasons.push(`リール側のMFL想定PE ${rr[0]}〜${rr[1]}号の範囲外`);}
+ }else{
+   const r=rod.lineSpec?.monoLb;if(r){rodOk=c.approxLb>=r[0]&&c.approxLb<=r[1];if(!rodOk)reasons.push(`ロッド適合 ${r[0]}〜${r[1]}lb の範囲外`);}
+   const rr=reel?.lineCapacity?.mono;if(rr){reelOk=c.size>=rr[0]&&c.size<=rr[1];if(!reelOk)reasons.push(`リール側のMFL想定 ${rr[0]}〜${rr[1]}号の範囲外`);}
+ }
+ const ok=rodOk&&reelOk;return{ok,grade:ok?'◎':(rodOk||reelOk?'△':'×'),reason:ok?'ロッドとリールの範囲に収まります。':reasons.join(' / ')};
+}
+function lineEffects(c){
+ if(c.type==='pe')return{cast:'◎',sense:'◎',rub:'△',easy:'△',text:'飛距離と感度を伸ばしやすい。リーダー結束が必要で、根ズレ対策はリーダー側で行う。'};
+ if(c.type==='carbon')return{cast:'○',sense:'○',rub:'◎',easy:'◎',text:'扱いやすさと根ズレ耐性のバランス型。PEより飛距離・感度は控えめ。'};
+ if(c.type==='fluoro')return{cast:'△',sense:'○',rub:'◎',easy:'○',text:'沈みやすく根ズレに強い。道糸では太くなるほど巻きグセと飛距離に注意。'};
+ return{cast:'○',sense:'△',rub:'○',easy:'◎',text:'しなやかで扱いやすい。初心者向きだが感度はPEより控えめ。'};
+}
+function recommendedLineCandidates(tackle){
+ return lineCatalog.map(c=>({...c,compat:lineCandidateCompatibility(tackle,c)})).filter(c=>c.compat.ok);
+}
+
+function calculateTackleDiagnosis(tackle){
+  const rod = findAssistProfile(tackle);
+  const reel = findReelProfile(tackle);
+  const line = parseLineProfile(tackle?.line||'');
+  let scores=[];
+  if(rod) scores.push(4);
+  if(reel) scores.push(gradeScore(reel.grade));
+  if(tackle?.line) scores.push(gradeScore(line.grade));
+  const overall = scores.length ? scoreGrade(Math.min(...scores)) : '△';
+
+  let comments=[];
+  if(!rod) comments.push('ロッドは未学習のため、重量判定を保留します。');
+  if(!reel) comments.push('リールは未学習のため、番手・糸巻量の確認が必要です。');
+  if(!tackle?.line) comments.push('ラインが未登録です。');
+  if(rod && reel && tackle?.line) comments.push('ロッド・リール・ラインの3要素をまとめて診断しています。');
+
+  let lineAdjustment = '';
+  if(line.isCarbon && line.size===3){
+    if(rod?.name.includes('LUREMATIC')) lineAdjustment='3号はロッドのナイロン/フロロ適合8–16lbに対して太め寄り。使用は可能でも、軽い仕掛けの飛距離・操作感では不利になりやすい。';
+    else if(rod?.name.includes('SKYHIGH')) lineAdjustment='3号はS100MHのナイロン適合12–25lbの下限寄りに収まりやすく、扱いやすい組み合わせ。';
+  }
+  return {rod,reel,line,overall,comments,lineAdjustment};
+}
+
+
+
+const targetFishProfiles=[
+ {id:'kisu',name:'キス',icon:'🐟',methods:['ちょい投げ'],start:'まずは軽めのオモリから',lineHint:'細めのラインほど飛距離を出しやすい。根や障害物が少ない場所向き。',beginner:'底をゆっくり探り、アタリがあった場所をもう一度通してみよう。'},
+ {id:'seabass',name:'シーバス',icon:'🌊',methods:['ルアー','ジグヘッド＋ワーム'],start:'まずは投げやすい中間重量から',lineHint:'PEは飛距離と感度を出しやすい。リーダーを組み合わせる。',beginner:'最初は一定速度で巻くだけでOK。流れや明暗の境目を狙ってみよう。'},
+ {id:'aji',name:'アジ',icon:'🐟',methods:['ジグヘッド＋ワーム','サビキ'],start:'軽い仕掛けから',lineHint:'軽量仕掛けでは細いラインが有利。現在のタックルで無理に細くしすぎない。',beginner:'サビキなら足元から。ワームなら表層・中層・底を順番に探ろう。'},
+ {id:'saba',name:'サバ',icon:'🐟',methods:['サビキ','メタルジグ'],start:'反応のある層を探す',lineHint:'回遊魚なので飛距離が欲しい場面ではPEが有利。',beginner:'群れが来たら手返し重視。周囲と仕掛けが絡まないよう注意。'},
+ {id:'kasago',name:'カサゴ',icon:'🪨',methods:['ジグヘッド＋ワーム'],start:'底を取れる重さから',lineHint:'根ズレが多い場所では耐摩耗性を重視。',beginner:'堤防際や岩の隙間をゆっくり。根掛かりしそうなら少し浮かせよう。'}
+];
+
+function targetAdvice(tackle,target){
+ const d=calculateTackleDiagnosis(tackle), rod=d.rod;
+ if(!rod)return{grade:'△',method:null,tip:'ロッドが未学習なので具体的な重量は出しません。'};
+ const available=rod.tips.filter(x=>target.methods.includes(x[0]));
+ if(!available.length)return{grade:'△',method:null,tip:'このタックルではMFLの推奨釣法データがまだありません。'};
+ const best=available.sort((a,b)=>gradeScore(b[1])-gradeScore(a[1]))[0];
+ return{grade:best[1],method:best[0],range:best[2],first:best[4]||best[2],comfort:best[5]||best[2],upper:best[6]||'—',tip:best[7]||best[3]};
+}
+
+function renderAssist(){
+ let id=localStorage.getItem('mfl_assistTackle')||state.tackles[0]?.id||'',t=state.tackles.find(x=>x.id===id)||state.tackles[0],d=calculateTackleDiagnosis(t),p=d.rod;
+ app.innerHTML=`<section class="assist-hero"><p class="eyebrow">MFL ASSIST β</p><h2>My Tackleを、まとめて診断。</h2><p>ロッド・リール・ラインを読み取り、釣り方と重量の目安を考えます。</p></section>
+ <section class="section assist-select"><label>診断するMy Tackle<select id="assistTackleSelect">${state.tackles.length?state.tackles.map(x=>`<option value="${x.id}" ${x.id===t?.id?'selected':''}>${escapeHtml(x.name)}｜${escapeHtml(x.rod)}</option>`).join(''):'<option>先にMy Tackleを登録してください</option>'}</select></label></section>
+ ${!t?'<section class="empty-state compact"><div class="empty-icon">🎣</div><h2>タックルを登録しよう</h2></section>':
+ `<section class="assist-overall">
+   <div class="assist-overall-grade">${d.overall}</div>
+   <div><small>TACKLE BALANCE</small><h3>${escapeHtml(t.name)}</h3><p>${d.comments.join(' ')}</p></div>
+ </section>
+ <section class="assist-parts">
+   <article><span>🎣</span><div><small>ROD</small><strong>${p?escapeHtml(p.name):escapeHtml(t.rod||'未登録')}</strong><em>${p?'公式確認済み':'学習前'}</em></div></article>
+   <article><span>🌀</span><div><small>REEL</small><strong>${d.reel?escapeHtml(d.reel.name):escapeHtml(t.reel||'未登録')}</strong><em>${d.reel?d.reel.official:'学習前'}</em></div></article>
+   <article><span>🧵</span><div><small>LINE</small><strong>${escapeHtml(d.line.label)}</strong><em>${escapeHtml(d.line.note)}</em></div></article>
+ </section>
+ ${d.lineAdjustment?`<section class="assist-warning"><strong>ラインとのバランス</strong><p>${d.lineAdjustment}</p></section>`:''}
+ ${p?`<section class="section"><h3>このタックルでできる釣り</h3><div class="assist-list">${p.tips.map(a=>`<details class="assist-item"><summary><span class="assist-grade">${a[1]}</span><span><strong>${a[0]}</strong><small>${a[2]}</small></span><b>›</b></summary><div class="assist-detail"><div class="assist-start"><small>最初に付けるなら</small><strong>${a[4]||a[2]}</strong></div><div class="assist-range"><span><small>快適</small><b>${a[5]||a[2]}</b></span><span><small>上限寄り</small><b>${a[6]||'—'}</b></span></div><p>${a[7]||a[3]}</p><p class="assist-reel-note">${d.reel?d.reel.note:''}</p></div></details>`).join('')}</div></section>`:
+ '<section class="empty-state compact"><div class="empty-icon">🧭</div><h2>ロッドはまだ学習前です</h2><p>公式スペックを登録するまで重量は推測しません。</p></section>'}
+ <section class="section target-assist-card">
+<div class="section-heading"><h3>🎯 何を釣りたい？</h3><span class="assist-badge">TARGET ASSIST</span></div>
+<p class="line-sim-lead">魚を選ぶと、今のMy Tackleから釣り方を逆算します。</p>
+<div class="target-grid">${targetFishProfiles.map(f=>`<button class="target-fish-button" data-target-fish="${f.id}"><span>${f.icon}</span><strong>${f.name}</strong></button>`).join('')}</div>
+<div id="targetAssistResult"></div>
+</section><section class="section line-sim-card">
+<div class="section-heading"><h3>🧵 ラインを変えて試す</h3><span class="assist-badge">SIMULATION</span></div>
+<p class="line-sim-lead">竿とリールはそのまま。ラインだけ変えた場合をその場で再診断します。</p>
+<label>候補ライン<select id="assistLineSelect"><option value="">候補を選択</option>${recommendedLineCandidates(t).map(c=>`<option value="${c.id}">${c.label}</option>`).join('')}</select></label>
+<div id="lineSimResult"></div>
+</section><section class="assist-note"><strong>🔰 MFLの考え方</strong><p>製品ジャンルではなく、公式スペックとMy Tackleの組み合わせで判断します。ラインの銘柄・実強度が不明な場合は安全側の目安を出します。</p></section>`}`;
+ let s=document.getElementById('assistTackleSelect');if(s)s.onchange=()=>{localStorage.setItem('mfl_assistTackle',s.value);renderAssist()}
+ 
+ document.querySelectorAll('[data-target-fish]').forEach(btn=>btn.onclick=()=>{
+   const f=targetFishProfiles.find(x=>x.id===btn.dataset.targetFish),a=targetAdvice(t,f),box=document.getElementById('targetAssistResult');
+   document.querySelectorAll('[data-target-fish]').forEach(x=>x.classList.toggle('active',x===btn));
+   box.innerHTML=`<div class="target-result">
+     <div class="target-result-head"><span class="assist-overall-grade">${a.grade}</span><div><small>${f.name}を狙うなら</small><strong>${a.method||'判定保留'}</strong></div></div>
+     ${a.method?`<div class="target-first"><small>🔰 最初はこれ</small><strong>${a.first}</strong></div>
+     <div class="assist-range"><span><small>快適</small><b>${a.comfort}</b></span><span><small>上限寄り</small><b>${a.upper}</b></span></div>`:''}
+     <p>${a.tip}</p><div class="target-hints"><p><b>🧵 ライン：</b>${f.lineHint}</p><p><b>🎣 初心者：</b>${f.beginner}</p></div>
+   </div>`;
+ });
+
+ let lineSel=document.getElementById('assistLineSelect');
+ if(lineSel)lineSel.onchange=()=>{
+   const c=lineCatalog.find(x=>x.id===lineSel.value),box=document.getElementById('lineSimResult');
+   if(!c){box.innerHTML='';return;}
+   const comp=lineCandidateCompatibility(t,c),fx=lineEffects(c);
+   box.innerHTML=`<div class="line-sim-result">
+   <div class="line-sim-head"><span class="assist-overall-grade">${comp.grade}</span><div><small>仮想セッティング</small><strong>${c.label}</strong><p>${comp.reason}</p></div></div>
+   <div class="line-effect-grid"><span><small>飛距離</small><b>${fx.cast}</b></span><span><small>感度</small><b>${fx.sense}</b></span><span><small>根ズレ</small><b>${fx.rub}</b></span><span><small>扱いやすさ</small><b>${fx.easy}</b></span></div>
+   <p class="line-effect-text">${fx.text}</p>
+   <div class="line-compare"><small>現在</small><strong>${escapeHtml(t.line||'未登録')}</strong><span>→</span><small>候補</small><strong>${c.label}</strong></div>
+   <button class="primary-button" id="applyLineBtn">このラインをMy Tackleに設定</button></div>`;
+   document.getElementById('applyLineBtn').onclick=()=>{
+     if(!confirm(`My Tackleのラインを「${c.label}」に変更しますか？`))return;
+     state.tackles=state.tackles.map(x=>x.id===t.id?{...x,line:c.label}:x);save();renderAssist();
+   };
+ };
+
+}
+
+function renderTackle() {
+  app.innerHTML = `
+    <section class="tackle-intro">
+      <p class="eyebrow">MY TACKLE</p>
+      <h2>相棒と、海へ。</h2>
+      <p>このタックルで釣った魚の数だけ、Ocean Rankが育ちます。</p>
+      <button class="primary-button" id="addTackleBtn">＋ タックルを登録</button>
+    </section>
+    <section class="section">
+      ${state.tackles.length ? state.tackles.map(t => {
+        const count = tackleFishCount(t.id);
+        const rank = oceanRankFor(count);
+        const next = nextOceanRank(count);
+        const progress = next ? Math.max(0, Math.min(100, ((count-rank.min)/(next.min-rank.min))*100)) : 100;
+        return `<article class="tackle-card">
+          <div class="tackle-rank-icon">${rank.icon}</div>
+          <div class="tackle-card-main">
+            <div class="tackle-card-top"><div><small>OCEAN RANK</small><h3>${escapeHtml(t.name)}</h3></div><strong>${rank.name}</strong></div>
+            <p>🎣 ${escapeHtml(t.rod)}${t.reel ? `　🌀 ${escapeHtml(t.reel)}` : ''}</p>
+            ${t.line ? `<p>🧵 ${escapeHtml(t.line)}</p>` : ''}
+            <div class="tackle-count"><strong>${count}</strong><span>匹の思い出</span></div>
+            <div class="ocean-progress"><span style="width:${progress}%"></span></div>
+            <small class="rank-next">${next ? `次の「${next.name}」まで ${next.min-count}匹` : '最高ランク到達！'}</small>
+            <button class="secondary-button tackle-assist-button" data-assist-tackle="${t.id}">🧭 このタックルを診断</button>
+            <button class="tackle-delete" data-delete-tackle="${t.id}">このタックルを削除</button>
+          </div>
+        </article>`;
+      }).join('') : `<section class="empty-state compact"><div class="empty-icon">🎣</div><h2>まだ相棒がいません</h2><p>最初のタックルを登録しよう。最初は「はじまりの石」からスタートします。</p></section>`}
+    </section>
+    <section class="ocean-rank-guide">
+      <h3>Ocean Rank</h3>
+      <div class="rank-strip">${oceanRanks.map(r => `<span title="${r.min}匹〜"><b>${r.icon}</b><small>${r.min}</small></span>`).join('')}</div>
+    </section>`;
+  document.getElementById('addTackleBtn').onclick = openTackle;
+  document.querySelectorAll('[data-assist-tackle]').forEach(btn => btn.onclick = () => {
+    localStorage.setItem('mfl_assistTackle', btn.dataset.assistTackle);
+    state.view = 'assist';
+    render();
+  });
+  document.querySelectorAll('[data-delete-tackle]').forEach(btn => btn.onclick = () => {
+    const id = btn.dataset.deleteTackle;
+    if (!confirmDestructiveAction('このタックルを削除しますか？', '削除されるのはこのタックル登録だけです。釣行・釣果・写真・予定・設定は残ります。')) return;
+    state.tackles = state.tackles.filter(t => t.id !== id);
+    save(); renderTackle();
+  });
+}
+
+function dangerLabel(f){
+  if(f.dangerLevel >= 3) return '☠️ 危険';
+  if(f.dangerLevel === 2) return '⚠️ 要注意';
+  if(f.dangerLevel === 1) return '⚠️ 注意';
+  return '';
+}
 function renderEncyclopedia() {
   const caught = new Set(state.catches.map(c => c.fishName));
   app.innerHTML = `

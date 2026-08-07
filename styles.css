@@ -418,93 +418,43 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 }
 .catch-delete-button:active{background:#ffefed}
 
-/* MFL v2.4.0 - Trip accordion */
-.trip-accordion-list{display:grid;gap:12px}
-.trip-accordion{
+/* MFL v2.4.2 - stable fold cards */
+.trip-fold-list{display:grid;gap:12px}
+.trip-fold-card{
   overflow:hidden;
-  border:1px solid rgba(223,233,233,.9);
+  border:1px solid var(--line);
   border-radius:22px;
-  background:white;
+  background:#fff;
   box-shadow:var(--shadow);
 }
-.trip-accordion summary{
+.trip-fold-button{
+  width:100%;
+  min-height:82px;
   display:flex;
   align-items:center;
   gap:12px;
-  min-height:82px;
   padding:14px 16px;
-  list-style:none;
-  cursor:pointer;
-  touch-action:manipulation;
+  border:0;
+  background:#fff;
+  color:var(--ink);
+  text-align:left;
 }
-.trip-accordion summary::-webkit-details-marker{display:none}
-.trip-summary-icon{
-  width:50px;
-  height:50px;
-  display:grid;
-  place-items:center;
-  flex:0 0 auto;
-  border-radius:16px;
-  background:var(--soft);
-  font-size:25px;
+.trip-fold-button.is-open{background:#fbfdfd;border-bottom:1px solid var(--line)}
+.trip-fold-icon{
+  width:50px;height:50px;display:grid;place-items:center;
+  flex:0 0 auto;border-radius:16px;background:var(--soft);font-size:25px;
 }
-.trip-summary-main{
-  flex:1;
-  min-width:0;
-}
-.trip-summary-main strong,
-.trip-summary-main small,
-.trip-summary-stats b,
-.trip-summary-stats small{
-  display:block;
-}
-.trip-summary-main strong{
-  font-size:18px;
-  margin-bottom:3px;
-}
-.trip-summary-main small{
-  color:var(--muted);
-  font-size:11px;
-}
-.trip-summary-stats{
-  text-align:right;
-  flex:0 0 auto;
-}
-.trip-summary-stats b{
-  color:var(--accent-dark);
-  font-size:15px;
-}
-.trip-summary-stats small{
-  margin-top:2px;
-  color:var(--muted);
-  font-size:9px;
-}
-.trip-summary-arrow{
-  flex:0 0 auto;
-  color:var(--muted);
-  font-size:26px;
-  transition:transform .18s ease;
-}
-.trip-accordion[open] .trip-summary-arrow{
-  transform:rotate(90deg);
-}
-.trip-accordion[open] summary{
-  border-bottom:1px solid var(--line);
-  background:#fbfdfd;
-}
-.trip-accordion-body{
-  padding:12px;
-}
-.trip-accordion-body .catch-record-card{
-  margin-bottom:10px;
-  box-shadow:none;
-  border:1px solid var(--line);
-}
-.trip-accordion-body .catch-record-card:last-child{
-  margin-bottom:0;
-}
-@media(max-width:390px){
-  .trip-accordion summary{padding:12px}
-  .trip-summary-icon{width:44px;height:44px}
-  .trip-summary-main strong{font-size:16px}
-}
+.trip-fold-main{flex:1;min-width:0}
+.trip-fold-main strong,.trip-fold-main small,
+.trip-fold-count b,.trip-fold-count small{display:block}
+.trip-fold-main strong{font-size:18px;margin-bottom:3px}
+.trip-fold-main small{font-size:11px;color:var(--muted)}
+.trip-fold-count{text-align:right;flex:0 0 auto}
+.trip-fold-count b{font-size:15px;color:var(--accent-dark)}
+.trip-fold-count small{font-size:9px;color:var(--muted);margin-top:2px}
+.trip-fold-arrow{font-size:26px;color:var(--muted);transition:transform .15s ease}
+.trip-fold-button.is-open .trip-fold-arrow{transform:rotate(90deg)}
+.trip-fold-content{display:none;padding:12px}
+.trip-fold-content.is-open{display:block}
+.trip-fold-content .catch-record-card{margin-bottom:10px;box-shadow:none;border:1px solid var(--line)}
+.trip-fold-content .catch-record-card:last-child{margin-bottom:0}
