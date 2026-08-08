@@ -947,7 +947,7 @@ function renderGuideSection(section) {
 
       <details class="guide-step" open>
         <summary><strong>ユニノット</strong><small>ルアー・スナップ・サルカンに</small><b>›</b></summary>
-        <div class="knot-art-guide">${['金具の輪に糸を通し、先端を折り返して大きな輪を作る。','先端を輪の中へ通す。','本線と折り返した糸をまとめて4〜6回巻く。','先端側をゆっくり引いて結び目を作る。','糸を湿らせ、本線を引いて結び目を金具側へ寄せる。','余り糸を少し残して切って完成。'].map((text,i)=>`<div class="knot-art-step"><div class="knot-step-head"><span>STEP ${i+1}</span><strong>${text}</strong></div><img src="assets/knots/uni-0${i+1}.png" alt="ユニノット STEP ${i+1}" loading="lazy"></div>`).join('')}</div>
+        <div class="knot-art-guide">${['金具の輪に糸を通し、先端を折り返して大きな輪を作る。','先端を輪の中へ通す。','本線と折り返した糸をまとめて4〜6回巻く。','先端側をゆっくり引いて結び目を作る。','糸を湿らせ、本線を引いて結び目を金具側へ寄せる。','余り糸を少し残して切って完成。'].map((text,i)=>`<div class="knot-art-step"><div class="knot-step-head"><span class="knot-step-number">${i+1}</span><em class="knot-step-word">STEP ${i+1}</em><strong>${text}</strong></div><img src="assets/knots/uni-0${i+1}.png" alt="ユニノット STEP ${i+1}" loading="lazy"></div>`).join('')}</div>
       </details>
 
       <details class="guide-step">
@@ -957,7 +957,7 @@ function renderGuideSection(section) {
 
       <details class="guide-step">
         <summary><strong>電車結び</strong><small>ナイロン・フロロ同士の接続に</small><b>›</b></summary>
-        <div class="knot-art-guide">${['2本の糸を互い違いに重ねる。','片方の糸で輪を作り、相手の糸へ4〜5回巻く。','反対側も同じように結び目を作る。','両方の本線をゆっくり引き、2つの結び目を寄せる。','結び目同士を密着させて完成。余り糸は適度に残して切る。'].map((text,i)=>`<div class="knot-art-step"><div class="knot-step-head"><span>STEP ${i+1}</span><strong>${text}</strong></div><img src="assets/knots/train-0${i+1}.png" alt="電車結び STEP ${i+1}" loading="lazy"></div>`).join('')}</div>
+        <div class="knot-art-guide">${['2本の糸を互い違いに重ねる。','片方の糸で輪を作り、相手の糸へ4〜5回巻く。','反対側も同じように結び目を作る。','両方の本線をゆっくり引き、2つの結び目を寄せる。','結び目同士を密着させて完成。余り糸は適度に残して切る。'].map((text,i)=>`<div class="knot-art-step"><div class="knot-step-head"><span class="knot-step-number">${i+1}</span><em class="knot-step-word">STEP ${i+1}</em><strong>${text}</strong></div><img src="assets/knots/train-0${i+1}.png" alt="電車結び STEP ${i+1}" loading="lazy"></div>`).join('')}</div>
       </details>
 
       <div class="guide-warning"><strong>結び終わったら</strong><p>必ず手で引っ張って強度確認。滑る・ほどけるなら使わず結び直す。</p></div>

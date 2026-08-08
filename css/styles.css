@@ -618,3 +618,34 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .knot-step-number{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:14px;font-weight:900}
 
 .keep-badge{margin-top:10px;padding:10px 11px;border-radius:13px}.keep-badge strong{font-size:10px}.keep-badge p{margin:4px 0 0;font-size:8px;line-height:1.5}.keep-badge span{display:block;margin-top:5px;font-size:8px;font-weight:900}.keep-ok{background:#edf8f0;color:#2f6b45}.keep-check{background:#fff8e7;color:#72571e}.keep-ng{background:#fff0ef;color:#833a34}.keep-unknown{background:#f1f4f5;color:#5e686b}.kisarazu-focus-note{margin:12px 0;padding:12px 13px;border-radius:15px;background:#fff7eb;border:1px solid #efd9b7;color:#6d542b}.kisarazu-focus-note strong{font-size:11px}.kisarazu-focus-note p{margin:4px 0 0;font-size:9px;line-height:1.55}.knot-art-step img{width:100%;height:auto;display:block;border-radius:14px;background:#fff}
+
+/* MFL v5.0.1 - Knot step sequence visibility */
+.knot-step-head{
+  display:grid!important;
+  grid-template-columns:36px auto 1fr;
+  align-items:center;
+  gap:8px;
+}
+.knot-step-number{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  font-size:17px;
+  font-weight:900;
+  line-height:1;
+}
+.knot-step-word{
+  font-size:9px;
+  font-style:normal;
+  font-weight:900;
+  color:var(--accent);
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
+.knot-step-head strong{
+  min-width:0;
+}
