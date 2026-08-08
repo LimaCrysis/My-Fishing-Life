@@ -916,24 +916,21 @@ function renderGuideSection(section) {
   if(section==='knots') root.innerHTML=`
     <article class="guide-article">
       <div class="guide-article-title"><span>🧵</span><div><small>KNOTS</small><h3>糸の結び方</h3></div></div>
-      <div class="wife-art-notice"><span>🎨</span><div><strong>手描き挿絵を組み込む準備ができています</strong><p>今までの仮図は表示せず、正確な挿絵が完成したらSTEPごとにそのまま差し替えます。</p></div></div>
+      <div class="wife-art-notice"><span>🎨</span><div><strong>MFLオリジナル図解</strong><p>ユニノットと電車結びは手描き挿絵で、糸の動きをSTEPごとに追えるようになりました。</p></div></div>
 
       <details class="guide-step" open>
         <summary><strong>ユニノット</strong><small>ルアー・スナップ・サルカンに</small><b>›</b></summary>
-        <div class="knot-art-slots">${[1,2,3,4,5].map(n=>`<div class="knot-art-slot"><span>STEP ${n}</span><div>奥さんの挿絵をここへ</div></div>`).join('')}</div>
-        <ol><li>金具の輪に糸を通す。</li><li>先端を折り返して輪を作る。</li><li>輪の中へ4〜6回巻く。</li><li>糸を湿らせて、ゆっくり締める。</li><li>余り糸を少し残して切る。</li></ol>
+        <div class="knot-art-guide">${['金具の輪に糸を通し、先端を折り返して大きな輪を作る。','先端を輪の中へ通す。','本線と折り返した糸をまとめて4〜6回巻く。','先端側をゆっくり引いて結び目を作る。','糸を湿らせ、本線を引いて結び目を金具側へ寄せる。','余り糸を少し残して切って完成。'].map((text,i)=>`<div class="knot-art-step"><div class="knot-step-head"><span>STEP ${i+1}</span><strong>${text}</strong></div><img src="knot-art/uni-0${i+1}.png" alt="ユニノット STEP ${i+1}" loading="lazy"></div>`).join('')}</div>
       </details>
 
       <details class="guide-step">
         <summary><strong>クリンチノット</strong><small>小型の金具・針・スナップに</small><b>›</b></summary>
-        <div class="knot-art-slots">${[1,2,3,4].map(n=>`<div class="knot-art-slot"><span>STEP ${n}</span><div>奥さんの挿絵をここへ</div></div>`).join('')}</div>
-        <ol><li>糸を金具の輪に通す。</li><li>道糸へ5〜7回巻き付ける。</li><li>根元の小さな輪へ先端を通す。</li><li>湿らせてゆっくり締める。</li></ol>
+        <div class="knot-coming"><span>🎨</span><div><strong>挿絵作成中</strong><p>クリンチノットは完成した手描き図解に差し替え予定です。</p></div></div>
       </details>
 
       <details class="guide-step">
         <summary><strong>電車結び</strong><small>ナイロン・フロロ同士の接続に</small><b>›</b></summary>
-        <div class="knot-art-slots">${[1,2,3,4].map(n=>`<div class="knot-art-slot"><span>STEP ${n}</span><div>奥さんの挿絵をここへ</div></div>`).join('')}</div>
-        <ol><li>2本の糸を平行に重ねる。</li><li>片方の糸で相手へユニノットを作る。</li><li>反対側も同じように結ぶ。</li><li>左右へ引いて結び目同士を寄せる。</li></ol>
+        <div class="knot-art-guide">${['2本の糸を互い違いに重ねる。','片方の糸で輪を作り、相手の糸へ4〜5回巻く。','反対側も同じように結び目を作る。','両方の本線をゆっくり引き、2つの結び目を寄せる。','結び目同士を密着させて完成。余り糸は適度に残して切る。'].map((text,i)=>`<div class="knot-art-step"><div class="knot-step-head"><span>STEP ${i+1}</span><strong>${text}</strong></div><img src="knot-art/train-0${i+1}.png" alt="電車結び STEP ${i+1}" loading="lazy"></div>`).join('')}</div>
       </details>
 
       <div class="guide-warning"><strong>結び終わったら</strong><p>必ず手で引っ張って強度確認。滑る・ほどけるなら使わず結び直す。</p></div>
