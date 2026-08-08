@@ -513,3 +513,12 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .bay-wakasu{left:7%;top:20%}.bay-ichihara{right:4%;top:29%}.bay-honmoku{left:5%;top:60%}.bay-isogo{left:13%;top:78%}
 .map-guide-note{margin-top:12px;padding:11px;border-radius:14px;background:#f5f8f8}
 @media(max-width:390px){.bay-map{height:360px}.bay-spot{min-width:96px;min-height:52px}.bay-honmoku{top:59%}.bay-isogo{top:78%}}
+
+.mfl-area-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.area-select-card{min-height:98px;padding:13px;border:1px solid var(--line);border-radius:18px;background:#f9fcfc;color:var(--ink);display:flex;align-items:center;gap:10px;text-align:left}
+.area-select-card.wide{grid-column:1/-1}.area-select-card>span{font-size:26px}.area-select-card small,.area-select-card strong,.area-select-card em{display:block}.area-select-card small{font-size:8px;color:var(--accent);font-weight:900}.area-select-card strong{font-size:14px;margin-top:2px}.area-select-card em{font-size:9px;color:var(--muted);font-style:normal;margin-top:4px}
+.spot-area-panel{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:20px;background:#fbfdfd}.spot-area-panel[hidden]{display:none!important}
+.area-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.area-panel-head h4{margin:0}.area-panel-head button{padding:8px 10px;border:0;border-radius:10px;background:#edf2f2}
+.area-spot-list{display:grid;gap:8px}.area-spot-button{width:100%;min-height:64px;display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);text-align:left}
+.area-spot-pin{font-size:22px}.area-spot-copy{flex:1}.area-spot-copy strong,.area-spot-copy small{display:block}.area-spot-copy strong{font-size:13px}.area-spot-copy small{font-size:8px;color:var(--muted);margin-top:3px}.area-spot-button>b{font-size:22px;color:var(--muted)}
+@media(max-width:390px){.mfl-area-grid{grid-template-columns:1fr}.area-select-card.wide{grid-column:auto}.area-select-card{min-height:76px}}
