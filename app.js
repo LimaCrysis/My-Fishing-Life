@@ -683,12 +683,55 @@ const kantoFishingSpots=[
 {id:'wakasu',name:'若洲海浜公園 海釣り施設',short:'若洲',pref:'東京',beginner:4,tackle:'△',x:52,y:57,address:'東京都江東区若洲三丁目1番2号',fish:'スズキ・カサゴ・メバル・ハゼ・イワシなど',styles:['サビキ ○','足元狙い ○','投げ釣り ×','ルアーキャスト ×'],facilities:['海釣り施設','護岸','駐車場'],note:'振りかぶる投げ釣り・横投げ・ルアーのキャスティングは禁止。売店は2025年8月末で営業終了。',gear:'ロッドの性能を全部試す場所ではない。ルールを守って足元中心の釣りを楽しむ候補。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/03_10/fishing'}
 ];
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
-function renderKantoMap(){return `<article class="guide-article kanto-guide"><div class="guide-article-title"><span>🗺️</span><div><small>KANTO FISHING MAP</small><h3>初心者向け5か所</h3></div></div><p class="kanto-intro">ランキングではありません。安全設備・公式情報・2人のタックルとの相性を見ながら、自分たちで行き先を選ぶためのマップです。</p><div class="kanto-map"><div class="map-sea-label">太平洋</div><div class="map-pref map-ibaraki">茨城</div><div class="map-pref map-chiba">千葉</div><div class="map-pref map-tokyo">東京</div><div class="map-pref map-kanagawa">神奈川</div>${kantoFishingSpots.map(s=>`<button class="fishing-pin pin-${s.id}" style="left:${s.x}%;top:${s.y}%" data-fishing-spot="${s.id}"><span>${s.tackle}</span><small>${s.short}</small></button>`).join('')}</div><div class="map-legend"><span><b>◎</b> 2人のタックルと好相性</span><span><b>○</b> 向いている</span><span><b>△</b> ルール・釣り方に制限あり</span></div><div id="fishingSpotDetail" class="spot-detail"><div class="guide-welcome compact"><span>📍</span><h3>地図のピンをタップ</h3><p>場所ごとの特徴と注意点を表示します。</p></div></div></article>`}
+function renderKantoMap(){return `<article class="guide-article kanto-guide">
+<div class="guide-article-title"><span>🗺️</span><div><small>KANTO FISHING MAP</small><h3>初心者向け5か所</h3></div></div>
+<p class="kanto-intro">まずエリアを選びます。鹿島はそのまま、東京湾は拡大して4か所から選べます。</p>
+
+<div class="mfl-region-map">
+  <button class="region-card region-kashima" data-fishing-spot="kashima">
+    <span class="region-icon">📍</span>
+    <span><small>茨城</small><strong>鹿島港魚釣園</strong><em>直接見る</em></span>
+  </button>
+  <button class="region-card region-tokyobay" id="openTokyoBay">
+    <span class="region-icon">🔎</span>
+    <span><small>東京・千葉・神奈川</small><strong>東京湾エリア</strong><em>4か所を拡大して見る</em></span>
+  </button>
+</div>
+
+<div id="tokyoBayPanel" class="tokyo-bay-panel" hidden>
+  <div class="bay-head"><div><small>TOKYO BAY</small><h4>東京湾を拡大</h4></div><button id="closeTokyoBay">閉じる ×</button></div>
+  <p>場所名そのものをタップできます。近い本牧・磯子も押し分けやすくしました。</p>
+  <div class="bay-map">
+    <div class="bay-water">東京湾</div>
+    <div class="bay-land bay-west"><span>東京・神奈川</span></div>
+    <div class="bay-land bay-east"><span>千葉</span></div>
+    <button class="bay-spot bay-wakasu" data-fishing-spot="wakasu"><b>📍</b><span>若洲</span><small>東京</small></button>
+    <button class="bay-spot bay-ichihara" data-fishing-spot="ichihara"><b>📍</b><span>市原</span><small>千葉</small></button>
+    <button class="bay-spot bay-honmoku" data-fishing-spot="honmoku"><b>📍</b><span>本牧</span><small>横浜</small></button>
+    <button class="bay-spot bay-isogo" data-fishing-spot="isogo"><b>📍</b><span>磯子</span><small>横浜</small></button>
+  </div>
+</div>
+
+<div class="map-legend map-guide-note">
+  <span>📍 場所名まで含めて大きなボタンにしました</span>
+  <span>⚠️ 詳細カードで現地ルールを確認できます</span>
+</div>
+
+<div id="fishingSpotDetail" class="spot-detail">
+  <div class="guide-welcome compact"><span>📍</span><h3>エリアから釣り場を選択</h3><p>選んだ場所の特徴と注意点をここに表示します。</p></div>
+</div>
+</article>`} 
+function setupKantoMap(){
+  const open=document.getElementById('openTokyoBay'), panel=document.getElementById('tokyoBayPanel'), close=document.getElementById('closeTokyoBay');
+  if(open&&panel) open.onclick=()=>{panel.hidden=false;panel.scrollIntoView({behavior:'smooth',block:'nearest'});};
+  if(close&&panel) close.onclick=()=>{panel.hidden=true;};
+  document.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
+}
 function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div><div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`}
 
 function renderGuideSection(section) {
   const root=document.getElementById('guideContent'); if(!root) return;
-  if(section==='kanto'){root.innerHTML=renderKantoMap();document.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));}
+  if(section==='kanto'){root.innerHTML=renderKantoMap();setupKantoMap();}
   if(section==='pier') root.innerHTML=`
     <article class="guide-article"><div class="guide-article-title"><span>🗺️</span><div><small>PIER BASICS</small><h3>堤防の見方</h3></div></div>
     <div class="pier-map"><div class="pier-land">陸側</div><div class="pier-wall">堤防</div><div class="pier-water"><span class="pier-point p1">① 足元</span><span class="pier-point p2">② 船道</span><span class="pier-point p3">③ 潮の流れ</span><span class="pier-point p4">④ 明暗・影</span></div></div>
