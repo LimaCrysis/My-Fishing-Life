@@ -532,3 +532,12 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .accuracy-note{margin-top:14px;padding:13px 14px;border-radius:16px;background:#f4f8f8;border:1px solid var(--line)}
 .accuracy-note strong{font-size:11px;color:var(--accent-dark)}
 .accuracy-note p{margin:5px 0 0;font-size:10px;line-height:1.55;color:var(--muted)}
+.map-progress{margin:14px 0;padding:14px;border:1px solid var(--line);border-radius:18px;background:#fbfdfd}.map-progress-head{display:flex;gap:10px;align-items:center;margin-bottom:10px}.map-progress-head>span{font-size:25px}.map-progress-head small,.map-progress-head strong{display:block}.map-progress-head small{font-size:8px;font-weight:900;color:var(--accent)}.map-progress-head strong{font-size:12px}.progress-row{display:grid;grid-template-columns:48px 1fr auto;gap:7px;padding:8px 0;border-top:1px solid var(--line);align-items:center}.progress-row span,.progress-row b{font-size:10px}.progress-row em{padding:4px 6px;border-radius:999px;background:#e7f5ec;color:#347252;font-size:8px;font-style:normal;font-weight:900}.map-progress p{margin:9px 0 0;font-size:9px;line-height:1.55;color:var(--muted)}
+/* MFL v2.8.0 - Chiba expansion */
+.spot-type{display:inline-block;margin-bottom:3px;padding:3px 6px;border-radius:999px;background:#edf6f5;color:#397168;font-size:8px;font-weight:900}
+.focus-card[data-area-open="chiba"]{background:linear-gradient(145deg,#f5fbff,#e5f4f7);border-color:#9bcfd7}
+
+/* MFL v2.9.0 - beginner practice spots */
+.spot-card:has(.spot-type){position:relative}
+.practice-note{margin-top:12px;padding:12px 13px;border-radius:14px;background:#eef5fb;color:#355d76}
+.practice-note strong{font-size:11px}.practice-note p{margin:5px 0 0;font-size:10px;line-height:1.55}

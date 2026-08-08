@@ -689,11 +689,15 @@ const kantoFishingSpots=[
 
 ,
 {id:'jonanjima',area:'tokyo',name:'城南島海浜公園 みなと広場',short:'城南島',pref:'東京',beginner:4,tackle:'○',address:'東京都大田区城南島4丁目2番2号',fish:'東京湾の岸壁魚種',styles:['足元狙い ○','軽い仕掛け ○','みなと広場のみ釣り可'],facilities:['公園','駐車場','トイレ','管理事務所'],note:'園内の魚釣りは原則禁止だが、第一航路側のみなと広場では魚釣り可能。立入禁止の護岸・防波堤には入らない。',gear:'S90MLが扱いやすい。100MHは軽い釣りではやや強め。釣り可能範囲が限られるため、現地表示を優先。',checked:'2026年8月',official:'https://tokyo-south-seaside-parks.com/jonanjima/'}
-];
+,
+{id:'urayasu_chidori',area:'chiba',name:'浦安海岸 千鳥地区',short:'浦安千鳥',pref:'千葉',beginner:4,tackle:'◎',address:'千葉県浦安市千鳥地区前面護岸',fish:'スズキ・クロダイ・タコ・カレイなど',styles:['ルアー ○','ジグヘッド ○','足元狙い ○','軽い投げ ○'],facilities:['転落防止柵','開放護岸','公共駐車場'],note:'2025年4月から千鳥地区前面護岸は全区間開放。転落防止柵が整備されています。港湾施設や立入禁止区域には入らず、現地掲示を優先。',gear:'S90MLは軽めのルアーやジグヘッドと好相性。100MHもシーバス系や少し重めの仕掛けで使いやすい。',checked:'2026年8月',official:'https://www.city.urayasu.lg.jp/todokede/machi/1034984/1042285.html'},
+{id:'futtsu_area',area:'chiba',name:'富津地区（市公式案内エリア）',short:'富津',pref:'千葉',beginner:4,tackle:'◎',address:'千葉県富津市 富津地区',fish:'キス・カサゴ・スズキ・メバル・イシモチ・タコなど',styles:['ちょい投げ ◎','ルアー ○','ジグヘッド ○','足元狙い ○'],facilities:['周辺観光施設','問い合わせ窓口'],note:'富津市が釣りエリアとして案内している地区。特定の港や防波堤すべてが自由に入れる意味ではありません。立入禁止・漁港・港湾施設は現地掲示を優先し、富津新港など閉鎖区域へは入らない。',gear:'S90MLでキスなど軽めの釣り、100MHで少し重いルアーや遠投寄りの釣りと使い分けやすい。',checked:'2026年8月',official:'https://www.city.futtsu.lg.jp/0000000689.html'},
+{id:'edogawa_hosuiro',area:'chiba',name:'江戸川放水路（妙典周辺）',short:'江戸川放水路',pref:'千葉',beginner:5,tackle:'○',address:'千葉県市川市 妙典周辺・江戸川放水路',fish:'マハゼ・スズキ幼魚・ボラ・コノシロなど',styles:['ハゼ釣り ◎','軽いちょい投げ ◎','足元狙い ○'],facilities:['河川敷','周辺駅','周辺店舗'],note:'市川市がハゼ釣りで知られる場所として案内。波が小さく家族連れにも向くと紹介されています。水面利用ルールや漁業・河川利用者に配慮し、現地掲示を優先。',gear:'S90MLなら軽いハゼ仕掛けを扱いやすい。100MHはかなり強めなので、軽い仕掛けでは無理に使わず別の釣り方を楽しむ候補。',checked:'2026年8月',official:'https://www.city.ichikawa.lg.jp/site/edogawa/1238.html'},
+{id:'shinsakon',area:'tokyo',name:'新左近川親水公園',short:'新左近川',pref:'東京',beginner:5,tackle:'△',address:'東京都江戸川区臨海町二・三丁目地先',fish:'水辺の小物釣り中心',styles:['小物釣り ◎','足元狙い ◎','大型ルアー ×'],facilities:['親水公園','トイレ','周辺施設','カヌー場'],note:'江戸川区の地域計画で「釣りが楽しめる」と明記された親水公園。カヌー利用者など他の水面利用者を優先し、投げ釣りや大きな仕掛けは避ける。',gear:'S90MLでも軽い仕掛けなら使えるが、100MHはオーバーパワー。夫婦のロッド性能を試す場所ではなく、初心者が糸・アタリ・魚の扱いに慣れる練習枠。',checked:'2026年8月',official:'https://www.city.edogawa.tokyo.jp/e066/kuseijoho/gaiyo/shisetsuguide/bunya/koendobutsuen/shinsakon.html'}];
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
 function renderKantoMap(){return `<article class="guide-article kanto-guide">
 <div class="guide-article-title"><span>🗺️</span><div><small>KANTO FISHING MAP</small><h3>千葉・東京重点版</h3></div></div>
-<p class="kanto-intro">まず千葉・東京を優先表示。数より正確性を優先し、公式情報で確認できた場所だけ掲載します。</p>
+<p class="kanto-intro">まず千葉・東京を優先表示。釣り可否を公式情報で確認できた場所だけ掲載。堤防・海づり施設に加え、初心者が練習しやすい水辺も別枠で載せます。</p>
 
 <div class="focus-badge">⭐ PRIORITY AREA</div>
 <div class="mfl-area-grid focus-grid">
@@ -701,7 +705,7 @@ function renderKantoMap(){return `<article class="guide-article kanto-guide">
   <button class="area-select-card focus-card" data-area-open="tokyo"><span>🏙️</span><div><small>重点</small><strong>東京</strong><em>若洲・城南島</em></div></button>
 </div>
 
-<div class="secondary-area-label">その他の候補</div>
+<div class="map-progress"><div class="map-progress-head"><span>🧭</span><div><small>CHIBA / TOKYO DEVELOPMENT</small><strong>重点エリアの精度を上げています</strong></div></div><div class="progress-row"><span>千葉</span><b>市原・浦安千鳥・富津・江戸川放水路</b><em>公式確認済み</em></div><div class="progress-row"><span>東京</span><b>若洲・城南島・新左近川</b><em>公式確認済み</em></div><p>港や防波堤は立入制限が変わることがあります。MFLでは「釣れそう」より「初心者に勧めてよいか」を優先します。</p></div><div class="secondary-area-label">その他の候補</div>
 <div class="mfl-area-grid secondary-grid">
   <button class="area-select-card" data-area-open="ibaraki"><span>🌊</span><div><small>茨城</small><strong>鹿島</strong><em>1か所</em></div></button>
   <button class="area-select-card" data-area-open="bay-south"><span>⚓</span><div><small>横浜・川崎</small><strong>東京湾南西</strong><em>本牧・磯子・大黒・東扇島</em></div></button>
@@ -727,7 +731,28 @@ function renderAreaSpots(area){
  root.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function setupKantoMap(){document.querySelectorAll('[data-area-open]').forEach(btn=>btn.onclick=()=>renderAreaSpots(btn.dataset.areaOpen));}
-function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div><div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`}
+
+function spotTypeLabel(id){
+  const types={
+    ichihara:'管理釣り施設',
+    urayasu_chidori:'開放護岸',
+    futtsu_area:'海岸・地区案内',
+    edogawa_hosuiro:'河口・放水路',
+    shinsakon:'親水公園',
+    wakasu:'海釣り施設',
+    jonanjima:'公園内釣り可区画',
+    kashima:'管理釣り施設',
+    honmoku:'管理釣り施設',
+    isogo:'管理釣り施設',
+    daikoku:'管理釣り施設',
+    higashiogishima:'公園釣り施設',
+    umibetsuri:'海辺公園',
+    umikaze:'平日のみ釣り可'
+  };
+  return types[id]||'釣り場';
+}
+
+function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><small class="spot-type">${spotTypeLabel(s.id)}</small><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div><div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`}
 
 function renderGuideSection(section) {
   const root=document.getElementById('guideContent'); if(!root) return;
