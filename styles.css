@@ -471,3 +471,16 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .guide-warning{margin-top:12px;padding:13px 14px;border-radius:15px;background:#fff3dc;color:#725713}.guide-warning strong{font-size:12px}.guide-warning p{margin:5px 0 0;font-size:10px;line-height:1.55}
 .guide-step{margin-top:9px;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff}.guide-step summary{min-height:58px;padding:12px 14px;display:flex;gap:8px;align-items:center;list-style:none}.guide-step summary::-webkit-details-marker{display:none}.guide-step summary strong{flex:1;font-size:13px}.guide-step summary small{font-size:9px;color:var(--muted)}.guide-step summary b{font-size:20px;color:var(--muted)}.guide-step[open] summary b{transform:rotate(90deg)}.guide-step ol{margin:0;padding:0 18px 14px 35px}.guide-step li,.guide-step>p{font-size:11px;line-height:1.6;color:var(--muted)}.guide-step>p{padding:0 14px 14px;margin:0}.guide-mini-note{margin-top:0!important;padding-top:0!important}
 @media(max-width:390px){.guide-grid{grid-template-columns:1fr}.guide-menu-card{min-height:76px}}
+
+/* MFL v2.5.1 - Knot visual guide */
+.knot-diagram-list{display:grid;gap:12px;padding:0 12px 14px}
+.knot-diagram-step{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#fbfdfd}
+.knot-step-head{display:flex;align-items:center;gap:9px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.knot-step-head span{flex:0 0 auto;padding:4px 7px;border-radius:8px;background:var(--accent);color:#fff;font-size:9px;font-weight:900}
+.knot-step-head strong{font-size:11px}
+.knot-svg{display:block;width:100%;height:auto;color:#e67d3f}
+.knot-bg{fill:#f4f8f8}.knot-line,.knot-tag{fill:none;stroke:#154d59;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.knot-tag{stroke:#e67d3f}.knot-wrap{fill:none;stroke:#e67d3f;stroke-width:5;stroke-linecap:round}
+.knot-metal{fill:#d8dfe0;stroke:#718084;stroke-width:4}.knot-hole{fill:#f4f8f8;stroke:#718084;stroke-width:2}
+.knot-arrow{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;marker-end:url(#arrow-uni-1)}
+.knot-finish{fill:#fff;stroke:#e67d3f;stroke-width:5}.knot-label{font-size:11px;font-weight:800;fill:#61767b}

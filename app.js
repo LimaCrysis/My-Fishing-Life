@@ -635,6 +635,44 @@ function renderGuide() {
     };
   });
 }
+
+function knotDiagram(type, step) {
+  const commonStart = `<svg class="knot-svg" viewBox="0 0 320 150" role="img" aria-label="結び方 STEP ${step}">
+    <defs><marker id="arrow-${type}-${step}" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="currentColor"/></marker></defs>
+    <rect x="0" y="0" width="320" height="150" rx="16" class="knot-bg"/>`;
+  const end=`</svg>`;
+  const eye=`<circle cx="255" cy="75" r="19" class="knot-metal"/><circle cx="255" cy="75" r="10" class="knot-hole"/>`;
+
+  if(type==='uni'){
+    const drawings={
+      1:`${eye}<path d="M30 75 C90 75 165 75 245 75" class="knot-line"/><path d="M245 75 C205 115 155 118 120 100" class="knot-tag"/><path d="M210 106 C226 102 238 93 245 83" class="knot-arrow"/>`,
+      2:`${eye}<path d="M30 65 C95 65 175 65 245 75" class="knot-line"/><path d="M245 75 C205 120 135 120 105 88 C135 67 176 69 205 87" class="knot-tag"/><path d="M124 91 C145 80 173 80 195 89" class="knot-arrow"/>`,
+      3:`${eye}<path d="M30 65 C105 65 185 65 245 75" class="knot-line"/><path d="M205 88 C185 76 171 104 190 111 C207 117 218 94 199 87 C181 80 168 101 185 110" class="knot-tag"/><path d="M162 119 C185 128 211 117 218 99" class="knot-arrow"/>`,
+      4:`${eye}<path d="M30 75 C115 75 205 75 245 75" class="knot-line"/><path d="M205 69 C215 62 225 65 233 72 M205 81 C216 88 226 85 234 78" class="knot-wrap"/><path d="M72 45 L42 68" class="knot-arrow"/>`
+    }; return commonStart+drawings[step]+end;
+  }
+  if(type==='clinch'){
+    const drawings={
+      1:`${eye}<path d="M30 75 C100 75 185 75 245 75" class="knot-line"/><path d="M245 75 C220 110 185 112 160 95" class="knot-tag"/>`,
+      2:`${eye}<path d="M30 70 C105 70 190 70 245 75" class="knot-line"/><path d="M238 83 C215 108 190 95 210 81 C226 69 207 58 190 70 C174 82 194 95 211 83" class="knot-tag"/><path d="M180 110 C205 118 229 102 236 88" class="knot-arrow"/>`,
+      3:`${eye}<path d="M30 75 C115 75 205 75 245 75" class="knot-line"/><path d="M205 69 L235 73 M205 81 L235 77" class="knot-wrap"/><path d="M70 45 L43 68" class="knot-arrow"/>`
+    }; return commonStart+drawings[step]+end;
+  }
+  const drawings={
+    1:`<path d="M20 58 C100 58 220 58 300 58" class="knot-line"/><path d="M20 92 C100 92 220 92 300 92" class="knot-tag"/><text x="24" y="45" class="knot-label">糸 A</text><text x="24" y="120" class="knot-label">糸 B</text>`,
+    2:`<path d="M20 58 C100 58 220 58 300 58" class="knot-line"/><path d="M20 92 C80 92 110 110 135 91 C155 75 137 53 120 65 C103 77 119 98 139 88" class="knot-tag"/><path d="M155 108 C136 119 111 113 101 99" class="knot-arrow"/>`,
+    3:`<path d="M20 58 C80 58 110 40 135 59 C155 75 137 97 120 85 C103 73 119 52 139 62" class="knot-line"/><path d="M20 92 C80 92 110 110 135 91 C155 75 137 53 120 65 C103 77 119 98 139 88 M145 92 C200 92 250 92 300 92" class="knot-tag"/><path d="M165 43 C145 34 120 39 108 52" class="knot-arrow"/>`,
+    4:`<path d="M20 75 C100 75 122 75 145 75" class="knot-line"/><path d="M300 75 C220 75 198 75 175 75" class="knot-tag"/><ellipse cx="160" cy="75" rx="20" ry="11" class="knot-finish"/><path d="M72 45 L38 68 M248 105 L282 82" class="knot-arrow"/>`
+  }; return commonStart+drawings[step]+end;
+}
+function knotSteps(type, steps) {
+  return `<div class="knot-diagram-list">${steps.map((s,i)=>`
+    <div class="knot-diagram-step">
+      <div class="knot-step-head"><span>STEP ${i+1}</span><strong>${s}</strong></div>
+      ${knotDiagram(type,i+1)}
+    </div>`).join('')}</div>`;
+}
+
 function renderGuideSection(section) {
   const root=document.getElementById('guideContent'); if(!root) return;
   if(section==='pier') root.innerHTML=`
@@ -644,9 +682,9 @@ function renderGuideSection(section) {
     <div class="guide-warning"><strong>⚠️ 安全優先</strong><p>立入禁止・作業区域・船の出入りを最優先で避ける。濡れた足場やテトラへ無理に入らない。</p></div></article>`;
   if(section==='knots') root.innerHTML=`
     <article class="guide-article"><div class="guide-article-title"><span>🧵</span><div><small>KNOTS</small><h3>糸の結び方</h3></div></div>
-    <details class="guide-step" open><summary><strong>ユニノット</strong><small>ルアー・スナップ・サルカンに</small><b>›</b></summary><ol><li>糸を金具の輪に通す。</li><li>先端を折り返して輪を作る。</li><li>輪の中へ先端を4〜6回巻き付ける。</li><li>糸を湿らせ、ゆっくり締める。</li><li>余った糸を少し残して切る。</li></ol><p class="guide-mini-note">まず覚えるならこれ。結び終わったら必ず強く引いて確認。</p></details>
-    <details class="guide-step"><summary><strong>クリンチノット</strong><small>小型の金具・針・スナップに</small><b>›</b></summary><ol><li>糸を輪に通し、道糸へ5〜7回巻き付ける。</li><li>輪の根元にできた小さな穴へ先端を通す。</li><li>糸を湿らせてゆっくり締め込む。</li></ol></details>
-    <details class="guide-step"><summary><strong>電車結び</strong><small>ナイロン・フロロ同士の接続に</small><b>›</b></summary><ol><li>2本の糸を平行に重ねる。</li><li>片方ずつ相手の糸へユニノットを作る。</li><li>両方の結び目を締める。</li><li>本線を左右へ引き、結び目同士を寄せる。</li></ol><p class="guide-mini-note">PEとリーダーの本格接続はFGノットなど別の結びが向く。</p></details>
+    <details class="guide-step" open><summary><strong>ユニノット</strong><small>ルアー・スナップ・サルカンに</small><b>›</b></summary>${knotSteps('uni',['金具の輪に糸を通す','先端を折り返して輪を作る','輪の中へ4〜6回巻く','湿らせてゆっくり締める'])}<ol><li>余った糸を少し残して切る。</li></ol><p class="guide-mini-note">まず覚えるならこれ。結び終わったら必ず強く引いて確認。</p></details>
+    <details class="guide-step"><summary><strong>クリンチノット</strong><small>小型の金具・針・スナップに</small><b>›</b></summary>${knotSteps('clinch',['金具の輪へ糸を通す','道糸へ5〜7回巻き、根元の穴へ通す','湿らせてゆっくり締める'])}</details>
+    <details class="guide-step"><summary><strong>電車結び</strong><small>ナイロン・フロロ同士の接続に</small><b>›</b></summary>${knotSteps('train',['2本の糸を平行に重ねる','糸Bで糸Aへユニノットを作る','反対側も同じように結ぶ','左右へ引いて結び目を寄せる'])}<p class="guide-mini-note">PEとリーダーの本格接続はFGノットなど別の結びが向く。</p></details>
     <div class="guide-warning"><strong>結び終わったら</strong><p>必ず手で引っ張って強度確認。滑る・ほどけるなら使わず結び直す。</p></div></article>`;
   if(section==='rigs') root.innerHTML=`
     <article class="guide-article"><div class="guide-article-title"><span>🎣</span><div><small>RIG BASICS</small><h3>仕掛けの基本</h3></div></div>
