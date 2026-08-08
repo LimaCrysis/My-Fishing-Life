@@ -522,3 +522,13 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .area-spot-list{display:grid;gap:8px}.area-spot-button{width:100%;min-height:64px;display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);text-align:left}
 .area-spot-pin{font-size:22px}.area-spot-copy{flex:1}.area-spot-copy strong,.area-spot-copy small{display:block}.area-spot-copy strong{font-size:13px}.area-spot-copy small{font-size:8px;color:var(--muted);margin-top:3px}.area-spot-button>b{font-size:22px;color:var(--muted)}
 @media(max-width:390px){.mfl-area-grid{grid-template-columns:1fr}.area-select-card.wide{grid-column:auto}.area-select-card{min-height:76px}}
+
+/* v2.7.1 - Chiba/Tokyo focus */
+.focus-badge{display:inline-block;margin-top:8px;padding:5px 9px;border-radius:999px;background:#e4f4ec;color:#277052;font-size:9px;font-weight:900;letter-spacing:.1em}
+.focus-grid{margin-top:9px}
+.focus-card{border:2px solid #a9d8d6;background:linear-gradient(145deg,#f6fcfc,#eaf8f7);box-shadow:0 7px 18px rgba(24,94,96,.08)}
+.focus-card strong{font-size:18px}
+.secondary-area-label{margin:18px 2px 8px;font-size:10px;font-weight:900;color:var(--muted);letter-spacing:.08em}
+.accuracy-note{margin-top:14px;padding:13px 14px;border-radius:16px;background:#f4f8f8;border:1px solid var(--line)}
+.accuracy-note strong{font-size:11px;color:var(--accent-dark)}
+.accuracy-note p{margin:5px 0 0;font-size:10px;line-height:1.55;color:var(--muted)}
