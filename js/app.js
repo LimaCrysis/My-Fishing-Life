@@ -943,7 +943,7 @@ function renderGuideSection(section) {
   if(section==='knots') root.innerHTML=`
     <article class="guide-article">
       <div class="guide-article-title"><span>🧵</span><div><small>KNOTS</small><h3>糸の結び方</h3></div></div>
-      <div class="wife-art-notice"><span>🎨</span><div><strong>MFLオリジナル図解</strong><p>ユニノットと電車結びは手描き挿絵で、糸の動きをSTEPごとに追えるようになりました。</p></div></div>
+      <div class="wife-art-notice"><span>🎨</span><div><strong>MFLオリジナル図解</strong><p>ユニノット・クリンチノット・電車結びを、手描き挿絵でSTEPごとに追えるようになりました。</p></div></div>
 
       <details class="guide-step" open>
         <summary><strong>ユニノット</strong><small>ルアー・スナップ・サルカンに</small><b>›</b></summary>
@@ -952,7 +952,13 @@ function renderGuideSection(section) {
 
       <details class="guide-step">
         <summary><strong>クリンチノット</strong><small>小型の金具・針・スナップに</small><b>›</b></summary>
-        <div class="knot-coming"><span>🎨</span><div><strong>挿絵作成中</strong><p>クリンチノットは完成した手描き図解に差し替え予定です。</p></div></div>
+        <div class="knot-art-guide">${[
+          '金具の輪に糸を通し、本線へ4〜6回ほど巻き付ける。',
+          '先端を金具側にできた小さな輪へ戻す。',
+          'さらにできた大きな輪へ先端を通す。',
+          '糸を湿らせ、本線と先端側をゆっくり引いて締める。',
+          '結び目を金具側まで寄せ、余り糸を少し残して切って完成。'
+        ].map((text,i)=>`<div class="knot-art-step"><div class="knot-step-head"><span class="knot-step-number">${i+1}</span><em class="knot-step-word">STEP ${i+1}</em><strong>${text}</strong></div><img src="assets/knots/clinch-0${i+1}.png" alt="クリンチノット STEP ${i+1}" loading="lazy"></div>`).join('')}</div>
       </details>
 
       <details class="guide-step">

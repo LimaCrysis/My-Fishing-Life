@@ -649,3 +649,11 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .knot-step-head strong{
   min-width:0;
 }
+
+/* MFL v5.1.0 - Knot Guide Complete */
+.knot-art-guide .knot-art-step{
+  scroll-margin-top:120px;
+}
+.knot-art-guide .knot-art-step + .knot-art-step{
+  margin-top:14px;
+}
