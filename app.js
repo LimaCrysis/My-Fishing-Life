@@ -710,7 +710,7 @@ const kantoFishingSpots=[
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
 function renderKantoMap(){return `<article class="guide-article kanto-guide">
 <div class="guide-article-title"><span>🗺️</span><div><small>KANTO FISHING GUIDE</small><h3>釣り場を自分で選ぶ</h3></div></div>
-<p class="kanto-intro">「ここへ行け」と決めるランキングではありません。エリアか条件から候補を絞って、自分たちに合う場所を選びます。</p>
+<p class="kanto-intro">まずエリアを選ぶ。条件検索やルールは必要な時だけ開く、MFLのシンプル表示にしました。</p>
 
 <div class="map-mode-label"><span>①</span><strong>エリアから探す</strong></div>
 <div class="focus-badge">⭐ PRIORITY AREA</div>
@@ -724,27 +724,37 @@ function renderKantoMap(){return `<article class="guide-article kanto-guide">
   <button class="area-select-card wide" data-area-open="yokosuka"><span>🏞️</span><div><small>三浦半島</small><strong>横須賀</strong><em>海辺つり公園・うみかぜ</em></div></button>
 </div>
 
-<div class="map-mode-label filter-title"><span>②</span><strong>条件から探す</strong></div>
-<div class="spot-filter-bar">
-  <button class="spot-filter active" data-spot-filter="all">すべて</button>
-  <button class="spot-filter" data-spot-filter="beginner">初心者★★★★★</button>
-  <button class="spot-filter" data-spot-filter="tackle">タックル◎</button>
-  <button class="spot-filter" data-spot-filter="sabiki">サビキ</button>
-  <button class="spot-filter" data-spot-filter="cast">ちょい投げ</button>
-  <button class="spot-filter" data-spot-filter="lure">ルアー</button>
-  <button class="spot-filter" data-spot-filter="foot">足元</button>
+<div id="spotAreaPanel" class="spot-area-panel smart-area-panel" hidden></div>
+<div id="fishingSpotDetail" class="spot-detail smart-spot-detail"></div>
+
+<div class="smart-tool-row">
+  <button class="smart-tool-toggle" id="filterToggle" aria-expanded="false">
+    <span class="smart-tool-icon">🔎</span><span><strong>条件から探す</strong><small>初心者・釣り方・タックルで絞る</small></span><b>›</b>
+  </button>
+  <div id="filterPanel" class="smart-collapsible" hidden>
+    <div class="spot-filter-bar">
+      <button class="spot-filter active" data-spot-filter="all">すべて</button>
+      <button class="spot-filter" data-spot-filter="beginner">初心者★★★★★</button>
+      <button class="spot-filter" data-spot-filter="tackle">タックル◎</button>
+      <button class="spot-filter" data-spot-filter="sabiki">サビキ</button>
+      <button class="spot-filter" data-spot-filter="cast">ちょい投げ</button>
+      <button class="spot-filter" data-spot-filter="lure">ルアー</button>
+      <button class="spot-filter" data-spot-filter="foot">足元</button>
+    </div>
+    <div id="filteredSpotList" class="filtered-spot-list"></div>
+  </div>
+
+  <button class="smart-tool-toggle" id="rulesToggle" aria-expanded="false">
+    <span class="smart-tool-icon">🛟</span><span><strong>安全・掲載ルール</strong><small>禁止場所とMFLの掲載基準</small></span><b>›</b>
+  </button>
+  <div id="rulesPanel" class="smart-collapsible" hidden>
+    <div class="ibaraki-ban-note">
+      <strong>⚠️ 茨城港の港内は釣り禁止</strong>
+      <p>大洗港区・日立港区・常陸那珂港区の岸壁や防波堤など、港湾施設での魚釣りは禁止です。</p>
+    </div>
+    <div class="accuracy-note"><strong>🔎 MFL掲載ルール</strong><p>「昔は釣れた」「ネットで有名」だけでは追加しません。現在の釣り可否と公式ルールを確認できた場所だけ載せます。</p></div>
+  </div>
 </div>
-<div id="filteredSpotList" class="filtered-spot-list"></div>
-
-<div class="ibaraki-ban-note">
-  <strong>⚠️ 茨城港の港内は釣り禁止</strong>
-  <p>大洗港区・日立港区・常陸那珂港区の岸壁や防波堤など、港湾施設での魚釣りは禁止です。</p>
-</div>
-
-<div class="accuracy-note"><strong>🔎 MFL掲載ルール</strong><p>「昔は釣れた」「ネットで有名」だけでは追加しません。現在の釣り可否と公式ルールを確認できた場所だけ載せます。</p></div>
-
-<div id="spotAreaPanel" class="spot-area-panel" hidden></div>
-<div id="fishingSpotDetail" class="spot-detail"><div class="guide-welcome compact"><span>📍</span><h3>候補を選択</h3><p>釣り場の特徴・タックル相性・現地ルールを表示します。</p></div></div>
 </article>`}
 
 function filterSpotMatch(s, filter){
@@ -788,12 +798,35 @@ function renderAreaSpots(area){
  root.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 function setupKantoMap(){
-  document.querySelectorAll('[data-area-open]').forEach(btn=>btn.onclick=()=>renderAreaSpots(btn.dataset.areaOpen));
+  const togglePanel=(buttonId,panelId)=>{
+    const btn=document.getElementById(buttonId), panel=document.getElementById(panelId);
+    if(!btn||!panel)return;
+    btn.onclick=()=>{
+      const opening=panel.hidden;
+      panel.hidden=!opening;
+      btn.setAttribute('aria-expanded',String(opening));
+      btn.classList.toggle('open',opening);
+      if(opening && panelId==='filterPanel' && !panel.dataset.loaded){
+        renderFilteredSpots('all'); panel.dataset.loaded='1';
+      }
+    };
+  };
+  togglePanel('filterToggle','filterPanel');
+  togglePanel('rulesToggle','rulesPanel');
+
+  document.querySelectorAll('[data-area-open]').forEach(btn=>btn.onclick=()=>{
+    renderAreaSpots(btn.dataset.areaOpen);
+    document.querySelectorAll('[data-area-open]').forEach(b=>b.classList.toggle('selected',b===btn));
+    requestAnimationFrame(()=>{
+      const panel=document.getElementById('spotAreaPanel');
+      if(panel) panel.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
+
   document.querySelectorAll('[data-spot-filter]').forEach(btn=>btn.onclick=()=>{
     document.querySelectorAll('[data-spot-filter]').forEach(b=>b.classList.toggle('active',b===btn));
     renderFilteredSpots(btn.dataset.spotFilter);
   });
-  renderFilteredSpots('all');
 }
 
 
@@ -823,7 +856,12 @@ function spotTypeLabel(id){
   return types[id]||'釣り場';
 }
 
-function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><small class="spot-type">${spotTypeLabel(s.id)}</small><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div><div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`}
+function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><small class="spot-type">${spotTypeLabel(s.id)}</small><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div><div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`
+  requestAnimationFrame(()=>{
+    const detail=document.getElementById('fishingSpotDetail');
+    if(detail) detail.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
 
 function renderGuideSection(section) {
   const root=document.getElementById('guideContent'); if(!root) return;
