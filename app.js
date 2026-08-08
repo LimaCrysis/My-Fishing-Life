@@ -617,17 +617,24 @@ function renderGuide() {
     <section class="guide-hero">
       <p class="eyebrow">MFL FIELD GUIDE</p>
       <h2>釣行手引き</h2>
-      <p>「これ、どうするんだっけ？」を釣り場ですぐ確認できる簡単ガイド。</p>
+      <p>釣り場で困った時に、必要なところだけ確認するための手引き。</p>
     </section>
+
+    <div class="guide-group-label"><span>📍</span><div><small>FIELD</small><strong>釣り場で使う</strong></div></div>
+    <section class="guide-grid guide-grid-field">
+      <button class="guide-menu-card guide-map-menu" data-guide-section="kanto"><span class="guide-menu-icon">🗺️</span><span><strong>関東釣り場ガイド</strong><small>千葉・東京を中心に探す</small></span><b>›</b></button>
+      <button class="guide-menu-card" data-guide-section="trouble"><span class="guide-menu-icon">🛟</span><span><strong>困ったとき</strong><small>根掛かり・糸絡み・知らない魚</small></span><b>›</b></button>
+    </section>
+
+    <div class="guide-group-label"><span>🎣</span><div><small>BASICS</small><strong>基本を確認する</strong></div></div>
     <section class="guide-grid">
-      <button class="guide-menu-card" data-guide-section="pier"><span class="guide-menu-icon">🗺️</span><span><strong>堤防の見方</strong><small>どこを狙う？ どこに注意する？</small></span><b>›</b></button>
-      <button class="guide-menu-card" data-guide-section="knots"><span class="guide-menu-icon">🧵</span><span><strong>糸の結び方</strong><small>ルアー・仕掛け・ライン同士</small></span><b>›</b></button>
-      <button class="guide-menu-card" data-guide-section="rigs"><span class="guide-menu-icon">🎣</span><span><strong>仕掛けの基本</strong><small>ちょい投げ・サビキ・ジグヘッド</small></span><b>›</b></button>
-      <button class="guide-menu-card" data-guide-section="trouble"><span class="guide-menu-icon">🛟</span><span><strong>困ったとき</strong><small>根掛かり・糸絡み・飛ばない</small></span><b>›</b></button>
-      <button class="guide-menu-card guide-map-menu" data-guide-section="kanto"><span class="guide-menu-icon">🗺️</span><span><strong>関東おすすめマップ</strong><small>初心者向け5か所から選ぶ</small></span><b>›</b></button>
+      <button class="guide-menu-card" data-guide-section="pier"><span class="guide-menu-icon">🌊</span><span><strong>堤防の見方</strong><small>足元・流れ・明暗を見る</small></span><b>›</b></button>
+      <button class="guide-menu-card" data-guide-section="rigs"><span class="guide-menu-icon">🪝</span><span><strong>仕掛けの基本</strong><small>ちょい投げ・サビキ・ワーム</small></span><b>›</b></button>
+      <button class="guide-menu-card guide-knot-menu" data-guide-section="knots"><span class="guide-menu-icon">🧵</span><span><strong>糸の結び方</strong><small>手描き挿絵対応準備済み</small></span><b>›</b></button>
     </section>
+
     <section id="guideContent" class="guide-content">
-      <div class="guide-welcome"><span>📖</span><h3>見たい項目を選んでね</h3><p>釣り方を決めるためではなく、困った時の確認用ガイドです。</p></div>
+      <div class="guide-welcome"><span>📖</span><h3>見たい項目を選んでね</h3><p>MFLは釣り方を決めません。分からない所だけ確認して、あとは自分で楽しもう。</p></div>
     </section>`;
   document.querySelectorAll('[data-guide-section]').forEach(btn => {
     btn.onclick = () => {
@@ -693,30 +700,80 @@ const kantoFishingSpots=[
 {id:'urayasu_chidori',area:'chiba',name:'浦安海岸 千鳥地区',short:'浦安千鳥',pref:'千葉',beginner:4,tackle:'◎',address:'千葉県浦安市千鳥地区前面護岸',fish:'スズキ・クロダイ・タコ・カレイなど',styles:['ルアー ○','ジグヘッド ○','足元狙い ○','軽い投げ ○'],facilities:['転落防止柵','開放護岸','公共駐車場'],note:'2025年4月から千鳥地区前面護岸は全区間開放。転落防止柵が整備されています。港湾施設や立入禁止区域には入らず、現地掲示を優先。',gear:'S90MLは軽めのルアーやジグヘッドと好相性。100MHもシーバス系や少し重めの仕掛けで使いやすい。',checked:'2026年8月',official:'https://www.city.urayasu.lg.jp/todokede/machi/1034984/1042285.html'},
 {id:'futtsu_area',area:'chiba',name:'富津地区（市公式案内エリア）',short:'富津',pref:'千葉',beginner:4,tackle:'◎',address:'千葉県富津市 富津地区',fish:'キス・カサゴ・スズキ・メバル・イシモチ・タコなど',styles:['ちょい投げ ◎','ルアー ○','ジグヘッド ○','足元狙い ○'],facilities:['周辺観光施設','問い合わせ窓口'],note:'富津市が釣りエリアとして案内している地区。特定の港や防波堤すべてが自由に入れる意味ではありません。立入禁止・漁港・港湾施設は現地掲示を優先し、富津新港など閉鎖区域へは入らない。',gear:'S90MLでキスなど軽めの釣り、100MHで少し重いルアーや遠投寄りの釣りと使い分けやすい。',checked:'2026年8月',official:'https://www.city.futtsu.lg.jp/0000000689.html'},
 {id:'edogawa_hosuiro',area:'chiba',name:'江戸川放水路（妙典周辺）',short:'江戸川放水路',pref:'千葉',beginner:5,tackle:'○',address:'千葉県市川市 妙典周辺・江戸川放水路',fish:'マハゼ・スズキ幼魚・ボラ・コノシロなど',styles:['ハゼ釣り ◎','軽いちょい投げ ◎','足元狙い ○'],facilities:['河川敷','周辺駅','周辺店舗'],note:'市川市がハゼ釣りで知られる場所として案内。波が小さく家族連れにも向くと紹介されています。水面利用ルールや漁業・河川利用者に配慮し、現地掲示を優先。',gear:'S90MLなら軽いハゼ仕掛けを扱いやすい。100MHはかなり強めなので、軽い仕掛けでは無理に使わず別の釣り方を楽しむ候補。',checked:'2026年8月',official:'https://www.city.ichikawa.lg.jp/site/edogawa/1238.html'},
-{id:'shinsakon',area:'tokyo',name:'新左近川親水公園',short:'新左近川',pref:'東京',beginner:5,tackle:'△',address:'東京都江戸川区臨海町二・三丁目地先',fish:'水辺の小物釣り中心',styles:['小物釣り ◎','足元狙い ◎','大型ルアー ×'],facilities:['親水公園','トイレ','周辺施設','カヌー場'],note:'江戸川区の地域計画で「釣りが楽しめる」と明記された親水公園。カヌー利用者など他の水面利用者を優先し、投げ釣りや大きな仕掛けは避ける。',gear:'S90MLでも軽い仕掛けなら使えるが、100MHはオーバーパワー。夫婦のロッド性能を試す場所ではなく、初心者が糸・アタリ・魚の扱いに慣れる練習枠。',checked:'2026年8月',official:'https://www.city.edogawa.tokyo.jp/e066/kuseijoho/gaiyo/shisetsuguide/bunya/koendobutsuen/shinsakon.html'}];
+{id:'shinsakon',area:'tokyo',name:'新左近川親水公園',short:'新左近川',pref:'東京',beginner:5,tackle:'△',address:'東京都江戸川区臨海町二・三丁目地先',fish:'水辺の小物釣り中心',styles:['小物釣り ◎','足元狙い ◎','大型ルアー ×'],facilities:['親水公園','トイレ','周辺施設','カヌー場'],note:'江戸川区の地域計画で「釣りが楽しめる」と明記された親水公園。カヌー利用者など他の水面利用者を優先し、投げ釣りや大きな仕掛けは避ける。',gear:'S90MLでも軽い仕掛けなら使えるが、100MHはオーバーパワー。夫婦のロッド性能を試す場所ではなく、初心者が糸・アタリ・魚の扱いに慣れる練習枠。',checked:'2026年8月',official:'https://www.city.edogawa.tokyo.jp/e066/kuseijoho/gaiyo/shisetsuguide/bunya/koendobutsuen/shinsakon.html'},
+{id:'kawarago',area:'ibaraki',name:'河原子海岸',short:'河原子',pref:'茨城',beginner:4,tackle:'○',address:'茨城県日立市河原子町',fish:'海岸から狙える沿岸魚種',styles:['投げ釣り ○','軽いルアー ○','サーフ ○'],facilities:['海岸','周辺駐車場','周辺公園'],note:'日立市公式が、河原子海岸を釣り人も利用する海岸として紹介。海水浴期間・遊泳者・サーファー・漁業者を最優先し、混雑時は釣りを控える。',gear:'S90MLは軽いルアーや軽めの投げ、100MHは少し重めの仕掛けやサーフ寄りで使い分けやすい。',checked:'2026年8月',official:'https://www.city.hitachi.lg.jp/citypromotion/hitachi_donnamachi/1007306/1005129.html'},
+{id:'hiraiso',area:'ibaraki',name:'平磯周辺の岩場',short:'平磯',pref:'茨城',beginner:3,tackle:'○',address:'茨城県ひたちなか市平磯町周辺',fish:'根魚・沿岸魚など',styles:['磯釣り ○','足元狙い ○','軽いルアー ○'],facilities:['周辺宿泊施設','周辺駐車場'],note:'観光いばらき公式で、平磯周辺の岩場では釣りが楽しめると案内。岩場は滑りやすく波をかぶる危険があるため、初心者は凪の日・明るい時間帯・ライフジャケット前提。',gear:'S90MLで軽い仕掛けを扱いやすい。100MHも根周りや少し重めに使えるが、安全優先で無理な立ち位置を取らない。',checked:'2026年8月',official:'https://www.ibarakiguide.jp/spot.php?code=1085&mode=detail'},
+{id:'odaiba',area:'tokyo',name:'お台場海浜公園 釣り可能エリア',short:'お台場',pref:'東京',beginner:5,tackle:'○',address:'東京都港区台場1丁目周辺',fish:'マハゼ・セイゴ・フッコなど',styles:['足元狙い ◎','軽い仕掛け ◎','小物釣り ◎'],facilities:['手洗い場','トイレ','公園','釣り可能エリア表示'],note:'釣りは指定された磯浜の釣り可能エリアのみ。公園マップと現地表示を確認し、釣り禁止エリアには入らない。通年・無料。',gear:'S90MLで軽い仕掛けを扱いやすい。100MHはかなり強めなので、ロッド性能を試す場所というより初心者練習向け。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/01_02/fishing'},
+{id:'harumibashi',area:'tokyo',name:'春海橋公園',short:'春海橋',pref:'東京',beginner:5,tackle:'○',address:'東京都江東区豊洲2丁目周辺',fish:'マハゼ・セイゴ・フッコなど',styles:['足元狙い ◎','小物釣り ◎','軽い仕掛け ○'],facilities:['公園','手洗い場','トイレ','釣り可能エリア'],note:'公式に通年・無料で釣り可能。釣り可能エリアと釣り禁止エリアが分かれているため、公園マップと現地掲示を確認。',gear:'S90ML向き。100MHは軽い釣りではオーバーパワー気味。結び方や魚の扱いを覚える練習場所として使いやすい。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/02_02'},
+{id:'akatsuki',area:'tokyo',name:'暁ふ頭公園 釣り可能エリア',short:'暁ふ頭',pref:'東京',beginner:4,tackle:'○',address:'東京都江東区青海4丁目',fish:'マハゼ・セイゴ・フッコなど',styles:['足元狙い ◎','軽い仕掛け ○','投げ釣り ×'],facilities:['公園','駐車場','トイレ','釣り可能エリア'],note:'指定エリアで通年・無料で釣り可能。公式案内では投げ釣りは他の利用者の迷惑となるため禁止。ゴミは必ず持ち帰る。',gear:'S90MLで足元や軽い仕掛け向き。100MHは性能を活かしにくい。投げる釣りをしたい場合は別の釣り場を選ぶ。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/01_10'},
+{id:'ariake_west',area:'tokyo',name:'有明西ふ頭公園',short:'有明西',pref:'東京',beginner:5,tackle:'○',address:'東京都江東区有明3丁目周辺',fish:'マハゼ・セイゴ・フッコなど',styles:['足元狙い ◎','小物釣り ◎','軽い仕掛け ○'],facilities:['公園','釣り可能エリア','周辺施設'],note:'公園の運河沿いで通年・無料で釣り可能。公式マップで釣り可能エリアを確認し、他の公園利用者と譲り合う。',gear:'S90MLで扱いやすい都市型の練習候補。100MHは軽い釣りには強すぎる場面が多い。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/02_05'}];
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
 function renderKantoMap(){return `<article class="guide-article kanto-guide">
-<div class="guide-article-title"><span>🗺️</span><div><small>KANTO FISHING MAP</small><h3>千葉・東京重点版</h3></div></div>
-<p class="kanto-intro">まず千葉・東京を優先表示。釣り可否を公式情報で確認できた場所だけ掲載。堤防・海づり施設に加え、初心者が練習しやすい水辺も別枠で載せます。</p>
+<div class="guide-article-title"><span>🗺️</span><div><small>KANTO FISHING GUIDE</small><h3>釣り場を自分で選ぶ</h3></div></div>
+<p class="kanto-intro">「ここへ行け」と決めるランキングではありません。エリアか条件から候補を絞って、自分たちに合う場所を選びます。</p>
 
+<div class="map-mode-label"><span>①</span><strong>エリアから探す</strong></div>
 <div class="focus-badge">⭐ PRIORITY AREA</div>
 <div class="mfl-area-grid focus-grid">
-  <button class="area-select-card focus-card" data-area-open="chiba"><span>🌉</span><div><small>最優先</small><strong>千葉</strong><em>市原を中心に拡張中</em></div></button>
-  <button class="area-select-card focus-card" data-area-open="tokyo"><span>🏙️</span><div><small>重点</small><strong>東京</strong><em>若洲・城南島</em></div></button>
+  <button class="area-select-card focus-card" data-area-open="chiba"><span>🌉</span><div><small>最優先</small><strong>千葉</strong><em>市原・浦安・富津・市川</em></div></button>
+  <button class="area-select-card focus-card" data-area-open="tokyo"><span>🏙️</span><div><small>重点</small><strong>東京</strong><em>公式確認済み7か所</em></div></button>
 </div>
-
-<div class="map-progress"><div class="map-progress-head"><span>🧭</span><div><small>CHIBA / TOKYO DEVELOPMENT</small><strong>重点エリアの精度を上げています</strong></div></div><div class="progress-row"><span>千葉</span><b>市原・浦安千鳥・富津・江戸川放水路</b><em>公式確認済み</em></div><div class="progress-row"><span>東京</span><b>若洲・城南島・新左近川</b><em>公式確認済み</em></div><p>港や防波堤は立入制限が変わることがあります。MFLでは「釣れそう」より「初心者に勧めてよいか」を優先します。</p></div><div class="secondary-area-label">その他の候補</div>
 <div class="mfl-area-grid secondary-grid">
-  <button class="area-select-card" data-area-open="ibaraki"><span>🌊</span><div><small>茨城</small><strong>鹿島</strong><em>1か所</em></div></button>
-  <button class="area-select-card" data-area-open="bay-south"><span>⚓</span><div><small>横浜・川崎</small><strong>東京湾南西</strong><em>本牧・磯子・大黒・東扇島</em></div></button>
+  <button class="area-select-card" data-area-open="ibaraki"><span>🌊</span><div><small>茨城</small><strong>茨城沿岸</strong><em>鹿島・河原子・平磯</em></div></button>
+  <button class="area-select-card" data-area-open="bay-south"><span>⚓</span><div><small>横浜・川崎</small><strong>東京湾南西</strong><em>管理施設中心</em></div></button>
   <button class="area-select-card wide" data-area-open="yokosuka"><span>🏞️</span><div><small>三浦半島</small><strong>横須賀</strong><em>海辺つり公園・うみかぜ</em></div></button>
 </div>
 
-<div class="accuracy-note"><strong>🔎 MFL掲載ルール</strong><p>「昔は釣れた」「ネットで有名」だけでは追加しません。現在の釣り可否・立入範囲・公式ルールを確認できた場所から増やします。</p></div>
+<div class="map-mode-label filter-title"><span>②</span><strong>条件から探す</strong></div>
+<div class="spot-filter-bar">
+  <button class="spot-filter active" data-spot-filter="all">すべて</button>
+  <button class="spot-filter" data-spot-filter="beginner">初心者★★★★★</button>
+  <button class="spot-filter" data-spot-filter="tackle">タックル◎</button>
+  <button class="spot-filter" data-spot-filter="sabiki">サビキ</button>
+  <button class="spot-filter" data-spot-filter="cast">ちょい投げ</button>
+  <button class="spot-filter" data-spot-filter="lure">ルアー</button>
+  <button class="spot-filter" data-spot-filter="foot">足元</button>
+</div>
+<div id="filteredSpotList" class="filtered-spot-list"></div>
+
+<div class="ibaraki-ban-note">
+  <strong>⚠️ 茨城港の港内は釣り禁止</strong>
+  <p>大洗港区・日立港区・常陸那珂港区の岸壁や防波堤など、港湾施設での魚釣りは禁止です。</p>
+</div>
+
+<div class="accuracy-note"><strong>🔎 MFL掲載ルール</strong><p>「昔は釣れた」「ネットで有名」だけでは追加しません。現在の釣り可否と公式ルールを確認できた場所だけ載せます。</p></div>
 
 <div id="spotAreaPanel" class="spot-area-panel" hidden></div>
-<div id="fishingSpotDetail" class="spot-detail"><div class="guide-welcome compact"><span>📍</span><h3>エリアを選択</h3><p>釣り場の特徴と注意点を表示します。</p></div></div>
+<div id="fishingSpotDetail" class="spot-detail"><div class="guide-welcome compact"><span>📍</span><h3>候補を選択</h3><p>釣り場の特徴・タックル相性・現地ルールを表示します。</p></div></div>
 </article>`}
+
+function filterSpotMatch(s, filter){
+  if(filter==='all') return true;
+  if(filter==='beginner') return s.beginner===5;
+  if(filter==='tackle') return s.tackle==='◎';
+  const text=(s.styles||[]).join(' ');
+  if(filter==='sabiki') return /サビキ/.test(text) && !/サビキ ×/.test(text);
+  if(filter==='cast') return /ちょい投げ|投げ釣り/.test(text) && !/投げ釣り ×/.test(text);
+  if(filter==='lure') return /ルアー/.test(text) && !/ルアー.*×/.test(text);
+  if(filter==='foot') return /足元/.test(text);
+  return true;
+}
+
+function styleMiniTags(s){
+  return (s.styles||[]).filter(x=>!/×/.test(x)).slice(0,3).map(x=>`<span>${x.replace(/[◎○△]/g,'').trim()}</span>`).join('');
+}
+
+function renderFilteredSpots(filter='all'){
+  const root=document.getElementById('filteredSpotList'); if(!root)return;
+  const spots=kantoFishingSpots.filter(s=>filterSpotMatch(s,filter));
+  root.innerHTML=`<div class="filter-count"><strong>${spots.length}か所</strong><span>条件に合う候補</span></div>
+  <div class="filter-results">${spots.map(s=>`<button class="filter-spot-card" data-fishing-spot="${s.id}">
+    <div class="filter-spot-top"><span class="spot-pref">${s.pref}</span><strong>${s.name}</strong><b>${s.tackle}</b></div>
+    <div class="filter-spot-meta"><span>初心者 ${stars(s.beginner)}</span><span>${spotTypeLabel(s.id)}</span></div>
+    <div class="filter-mini-tags">${styleMiniTags(s)}</div>
+  </button>`).join('')||'<p class="note">この条件に合う掲載スポットはまだありません。</p>'}</div>`;
+  root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
+}
 function renderAreaSpots(area){
  const root=document.getElementById('spotAreaPanel');if(!root)return;
  const labels={chiba:'千葉',tokyo:'東京',ibaraki:'茨城','bay-south':'横浜・川崎',yokosuka:'横須賀'};
@@ -725,12 +782,20 @@ function renderAreaSpots(area){
    : kantoFishingSpots.filter(s=>s.area===area);
  root.hidden=false;
  root.innerHTML=`<div class="area-panel-head"><div><small>AREA</small><h4>${labels[area]}</h4></div><button id="closeAreaPanel">閉じる ×</button></div>
- <div class="area-spot-list">${spots.map(s=>`<button class="area-spot-button" data-fishing-spot="${s.id}"><span class="area-spot-pin">📍</span><span class="area-spot-copy"><strong>${s.name}</strong><small>${s.pref}・初心者 ${stars(s.beginner)}・タックル ${s.tackle}</small></span><b>›</b></button>`).join('')}</div>`;
+ <div class="area-spot-list">${spots.map(s=>`<button class="area-spot-button" data-fishing-spot="${s.id}"><span class="area-spot-pin">📍</span><span class="area-spot-copy"><strong>${s.name}</strong><small>初心者 ${stars(s.beginner)}　タックル ${s.tackle}</small><span class="area-style-mini">${styleMiniTags(s)}</span></span><b>›</b></button>`).join('')}</div>`;
  document.getElementById('closeAreaPanel').onclick=()=>root.hidden=true;
  root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
  root.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-function setupKantoMap(){document.querySelectorAll('[data-area-open]').forEach(btn=>btn.onclick=()=>renderAreaSpots(btn.dataset.areaOpen));}
+function setupKantoMap(){
+  document.querySelectorAll('[data-area-open]').forEach(btn=>btn.onclick=()=>renderAreaSpots(btn.dataset.areaOpen));
+  document.querySelectorAll('[data-spot-filter]').forEach(btn=>btn.onclick=()=>{
+    document.querySelectorAll('[data-spot-filter]').forEach(b=>b.classList.toggle('active',b===btn));
+    renderFilteredSpots(btn.dataset.spotFilter);
+  });
+  renderFilteredSpots('all');
+}
+
 
 function spotTypeLabel(id){
   const types={
@@ -741,7 +806,13 @@ function spotTypeLabel(id){
     shinsakon:'親水公園',
     wakasu:'海釣り施設',
     jonanjima:'公園内釣り可区画',
+    odaiba:'公園内釣り可区画',
+    harumibashi:'公園内釣り可区画',
+    akatsuki:'公園内釣り可区画',
+    ariake_west:'運河沿い公園',
     kashima:'管理釣り施設',
+    kawarago:'海岸・サーフ',
+    hiraiso:'岩場・磯',
     honmoku:'管理釣り施設',
     isogo:'管理釣り施設',
     daikoku:'管理釣り施設',
@@ -763,11 +834,30 @@ function renderGuideSection(section) {
     <div class="guide-tip-list"><div><b>① 足元</b><p>カサゴなど根魚が着きやすい。壁際をゆっくり探る。</p></div><div><b>② 船道</b><p>少し深くなっていることが多い。遠投前に周囲を確認。</p></div><div><b>③ 潮が動く場所</b><p>魚が回ってくることがある。水面の流れやゴミの動きを観察。</p></div><div><b>④ 明暗・影</b><p>橋脚や常夜灯の影など、光の境目に魚が付くことがある。</p></div></div>
     <div class="guide-warning"><strong>⚠️ 安全優先</strong><p>立入禁止・作業区域・船の出入りを最優先で避ける。濡れた足場やテトラへ無理に入らない。</p></div></article>`;
   if(section==='knots') root.innerHTML=`
-    <article class="guide-article"><div class="guide-article-title"><span>🧵</span><div><small>KNOTS</small><h3>糸の結び方</h3></div></div>
-    <details class="guide-step" open><summary><strong>ユニノット</strong><small>ルアー・スナップ・サルカンに</small><b>›</b></summary>${knotSteps('uni',['金具の輪に糸を通す','先端を折り返して輪を作る','輪の中へ4〜6回巻く','湿らせてゆっくり締める'])}<ol><li>余った糸を少し残して切る。</li></ol><p class="guide-mini-note">まず覚えるならこれ。結び終わったら必ず強く引いて確認。</p></details>
-    <details class="guide-step"><summary><strong>クリンチノット</strong><small>小型の金具・針・スナップに</small><b>›</b></summary>${knotSteps('clinch',['金具の輪へ糸を通す','道糸へ5〜7回巻き、根元の穴へ通す','湿らせてゆっくり締める'])}</details>
-    <details class="guide-step"><summary><strong>電車結び</strong><small>ナイロン・フロロ同士の接続に</small><b>›</b></summary>${knotSteps('train',['2本の糸を平行に重ねる','糸Bで糸Aへユニノットを作る','反対側も同じように結ぶ','左右へ引いて結び目を寄せる'])}<p class="guide-mini-note">PEとリーダーの本格接続はFGノットなど別の結びが向く。</p></details>
-    <div class="guide-warning"><strong>結び終わったら</strong><p>必ず手で引っ張って強度確認。滑る・ほどけるなら使わず結び直す。</p></div></article>`;
+    <article class="guide-article">
+      <div class="guide-article-title"><span>🧵</span><div><small>KNOTS</small><h3>糸の結び方</h3></div></div>
+      <div class="wife-art-notice"><span>🎨</span><div><strong>手描き挿絵を組み込む準備ができています</strong><p>今までの仮図は表示せず、正確な挿絵が完成したらSTEPごとにそのまま差し替えます。</p></div></div>
+
+      <details class="guide-step" open>
+        <summary><strong>ユニノット</strong><small>ルアー・スナップ・サルカンに</small><b>›</b></summary>
+        <div class="knot-art-slots">${[1,2,3,4,5].map(n=>`<div class="knot-art-slot"><span>STEP ${n}</span><div>挿絵待ち</div></div>`).join('')}</div>
+        <ol><li>金具の輪に糸を通す。</li><li>先端を折り返して輪を作る。</li><li>輪の中へ4〜6回巻く。</li><li>糸を湿らせて、ゆっくり締める。</li><li>余り糸を少し残して切る。</li></ol>
+      </details>
+
+      <details class="guide-step">
+        <summary><strong>クリンチノット</strong><small>小型の金具・針・スナップに</small><b>›</b></summary>
+        <div class="knot-art-slots">${[1,2,3,4].map(n=>`<div class="knot-art-slot"><span>STEP ${n}</span><div>挿絵待ち</div></div>`).join('')}</div>
+        <ol><li>糸を金具の輪に通す。</li><li>道糸へ5〜7回巻き付ける。</li><li>根元の小さな輪へ先端を通す。</li><li>湿らせてゆっくり締める。</li></ol>
+      </details>
+
+      <details class="guide-step">
+        <summary><strong>電車結び</strong><small>ナイロン・フロロ同士の接続に</small><b>›</b></summary>
+        <div class="knot-art-slots">${[1,2,3,4].map(n=>`<div class="knot-art-slot"><span>STEP ${n}</span><div>挿絵待ち</div></div>`).join('')}</div>
+        <ol><li>2本の糸を平行に重ねる。</li><li>片方の糸で相手へユニノットを作る。</li><li>反対側も同じように結ぶ。</li><li>左右へ引いて結び目同士を寄せる。</li></ol>
+      </details>
+
+      <div class="guide-warning"><strong>結び終わったら</strong><p>必ず手で引っ張って強度確認。滑る・ほどけるなら使わず結び直す。</p></div>
+    </article>`;
   if(section==='rigs') root.innerHTML=`
     <article class="guide-article"><div class="guide-article-title"><span>🎣</span><div><small>RIG BASICS</small><h3>仕掛けの基本</h3></div></div>
     <div class="rig-card"><strong>ちょい投げ</strong><p>道糸 → 天秤・オモリ → 仕掛け → エサ</p><small>底にいるキスやハゼなどを狙いやすい。</small></div>

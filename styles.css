@@ -541,3 +541,35 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .spot-card:has(.spot-type){position:relative}
 .practice-note{margin-top:12px;padding:12px 13px;border-radius:14px;background:#eef5fb;color:#355d76}
 .practice-note strong{font-size:11px}.practice-note p{margin:5px 0 0;font-size:10px;line-height:1.55}
+
+/* MFL v3.0.0 - Ibaraki expansion */
+.ibaraki-ban-note{margin:14px 0;padding:14px;border:2px solid #e7a09a;border-radius:17px;background:#fff4f2;color:#7c302a}
+.ibaraki-ban-note strong{display:block;font-size:12px}.ibaraki-ban-note p{margin:5px 0 0;font-size:9px;line-height:1.6}
+.area-select-card[data-area-open="ibaraki"]{background:linear-gradient(145deg,#f5fbff,#e8f4fb);border:2px solid #a7cfe0}
+
+/* MFL v3.1.0 - Big Field Guide Update */
+.guide-group-label{display:flex;align-items:center;gap:9px;margin:18px 4px 8px}
+.guide-group-label>span{font-size:20px}.guide-group-label small,.guide-group-label strong{display:block}
+.guide-group-label small{font-size:8px;color:var(--accent);font-weight:900;letter-spacing:.12em}
+.guide-group-label strong{font-size:13px}
+.guide-grid-field .guide-map-menu{grid-column:1/-1}
+.map-mode-label{display:flex;align-items:center;gap:8px;margin:15px 2px 8px}
+.map-mode-label>span{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--accent);color:#fff;font-size:10px;font-weight:900}
+.map-mode-label strong{font-size:12px}.filter-title{margin-top:20px}
+.spot-filter-bar{display:flex;gap:7px;overflow-x:auto;padding:2px 1px 8px;-webkit-overflow-scrolling:touch}
+.spot-filter{flex:0 0 auto;min-height:38px;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--muted);font-size:10px;font-weight:900}
+.spot-filter.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.filtered-spot-list{margin-top:8px}.filter-count{display:flex;align-items:baseline;gap:7px;margin:0 3px 8px}.filter-count strong{font-size:14px}.filter-count span{font-size:9px;color:var(--muted)}
+.filter-results{display:grid;gap:8px;max-height:420px;overflow:auto;padding-right:2px}
+.filter-spot-card{width:100%;padding:12px;border:1px solid var(--line);border-radius:15px;background:#fff;color:var(--ink);text-align:left}
+.filter-spot-top{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center}.filter-spot-top strong{font-size:12px}.filter-spot-top>b{font-size:16px;color:var(--accent-dark)}
+.filter-spot-meta{display:flex;gap:8px;margin-top:6px;font-size:8px;color:var(--muted)}
+.filter-mini-tags,.area-style-mini{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.filter-mini-tags span,.area-style-mini span{padding:3px 6px;border-radius:999px;background:var(--soft);font-size:8px;color:var(--accent-dark);font-weight:800}
+.area-style-mini{margin-top:5px}
+.wife-art-notice{display:flex;gap:11px;align-items:flex-start;padding:13px;border-radius:16px;background:#f3eef9;color:#65447a;margin-bottom:12px}
+.wife-art-notice>span{font-size:25px}.wife-art-notice strong{font-size:11px}.wife-art-notice p{margin:4px 0 0;font-size:9px;line-height:1.55}
+.knot-art-slots{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:0 12px 12px}
+.knot-art-slot{min-height:100px;border:2px dashed #c9d7d8;border-radius:14px;background:#f8fbfb;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted)}
+.knot-art-slot span{font-size:9px;font-weight:900;color:var(--accent)}.knot-art-slot div{margin-top:4px;font-size:11px;font-weight:800}
+@media(max-width:390px){.knot-art-slots{grid-template-columns:1fr}.filter-results{max-height:360px}}
