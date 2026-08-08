@@ -1,4 +1,4 @@
-const CACHE = 'my-fishing-life-v4.0.0';
+const CACHE = 'my-fishing-life-v4.1.0';
 const ASSETS = ['./','./index.html','./styles.css','./app.js','./manifest.webmanifest','./kisu.jpg','./seabass.jpg','./aji.jpg','./saba.jpg','./kasago.jpg','./aigo.jpg','./haokoze.jpg','./gonzui.jpg'];
 
 self.addEventListener('install', event => {

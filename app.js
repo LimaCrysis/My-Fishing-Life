@@ -120,7 +120,33 @@ function renderHome() {
   // Home actions are handled by the delegated click listener below.
 
 }
+
+const mflKeepRules={chiba:{protected:['アワビ','サザエ','イセエビ','ハマグリ','アサリ'],special:{'ガザミ':'木更津地先などでは委員会指示による採捕制限があります。場所・時期・方法を公式情報で確認。'}},dangerous:['アイゴ','ゴンズイ','ハオコゼ']};
+function fishingJurisdiction(place){
+ const p=place||'';
+ if(/市原|浦安|富津|江戸川放水路|木更津|千葉/.test(p))return'chiba';
+ if(/若洲|城南島|新左近川|お台場|春海橋|暁ふ頭|有明|水の広場|新木場|夢の島|東京/.test(p))return'tokyo';
+ if(/鹿島|河原子|平磯|茨城/.test(p))return'ibaraki';
+ if(/本牧|磯子|大黒|東扇島|海辺つり|うみかぜ|横浜|川崎|横須賀|神奈川/.test(p))return'kanagawa';
+ return'unknown';
+}
+function keepDecision(fish,place){
+ const name=(fish||'').trim(),j=fishingJurisdiction(place),dangerous=mflKeepRules.dangerous.includes(name);
+ if(j==='chiba'){
+  if(mflKeepRules.chiba.protected.includes(name))return{status:'ng',label:'持ち帰りNG',detail:'千葉県では漁業権が設定された海で、遊漁者がアワビ・サザエ・イセエビ・ハマグリ・アサリなど漁業権対象種を採捕することはできません。',dangerous};
+  if(mflKeepRules.chiba.special[name])return{status:'check',label:'要確認',detail:mflKeepRules.chiba.special[name],dangerous};
+  return{status:'check',label:'要確認',detail:'MFLで一律禁止は確認していません。ただし漁業権・サイズ・時期・採捕方法・現地ルールが優先です。',dangerous};
+ }
+ if(j==='tokyo'||j==='ibaraki'||j==='kanagawa')return{status:'check',label:'要確認',detail:'魚種・サイズ・時期・方法・場所でルールが変わります。MFLは未確認の魚を自動でOKにしません。',dangerous};
+ return{status:'unknown',label:'情報不足',detail:'場所を特定できないため判定できません。',dangerous};
+}
+function keepBadgeHTML(fish,place){
+ const d=keepDecision(fish,place),icon=d.status==='ng'?'🔴':d.status==='check'?'🟡':'⚪';
+ return `<div class="keep-badge keep-${d.status}"><strong>${icon} ${d.label}</strong><p>${d.detail}</p>${d.dangerous?'<span>⚠️ 危険魚：素手で触らない</span>':''}</div>`;
+}
+
 function catchCard(c, deletable = false) {
+  const trip=state.trips.find(t=>t.id===c.tripId); const keepPlace=trip?.place||'';
   const f = getFish(c.fishName);
   return `<article class="card catch-record-card">
     <div class="card-row">
@@ -232,7 +258,7 @@ function renderTrips() {
       </section>` :
       `<button class="primary-button" id="startTripBtn">新しい釣行を始める</button>`}
 
-    <section class="section trip-fold-list">
+    <div class="keep-system-intro"><strong>🐟 持ち帰り判定 β</strong><span>記録した場所×魚で判定。確証がない魚を勝手に「OK」にはしません。</span></div><section class="section trip-fold-list">
       ${grouped.length ? grouped.map((g, index) => {
         const count = g.catches.reduce((n,c)=>n+Number(c.count||0),0);
         const species = new Set(g.catches.map(c=>c.fishName)).size;
@@ -737,7 +763,7 @@ function renderKantoMap(){return `<article class="guide-article kanto-guide">
   </div>
   <p>チェックは保存しません。出発前に「忘れてないか」を見るだけの簡易確認です。</p>
 </div>
-<div id="spotAreaPanel" class="spot-area-panel smart-area-panel" hidden></div>
+<div class="kisarazu-research"><div class="kisarazu-head"><span>🌅</span><div><small>KISARAZU</small><strong>木更津方面・重点調査</strong></div></div><p>鳥居崎海浜公園・内港公園・潮浜公園などを調査中。公園の存在だけで「釣り可」とは判断せず、公式に釣り可能範囲を確認できた場所から正式掲載します。</p><div class="kisarazu-alert"><b>🦀 木更津地先の採捕ルール</b><span>ガザミ類は千葉県の委員会指示による採捕制限があります。現行の期間・場所・方法を公式情報で確認してください。</span></div></div><div id="spotAreaPanel" class="spot-area-panel smart-area-panel" hidden></div>
 <div id="fishingSpotDetail" class="spot-detail smart-spot-detail"></div>
 
 <div class="smart-tool-row">
