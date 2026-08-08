@@ -55,9 +55,9 @@ function getFish(name) { return fishMaster.find(f => f.name === name) || fishMas
 
 function render() {
   document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === state.view));
-  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', gear:'持ち物', tackle:'My Tackle', assist:'MFL Assist', settings:'設定' };
+  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', guide:'釣行手引き', gear:'持ち物', tackle:'My Tackle', assist:'MFL Assist', settings:'設定' };
   if (pageTitle) pageTitle.textContent = titles[state.view];
-  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, gear: renderGear, tackle: renderTackle, assist: renderAssist, settings: renderSettings })[state.view]();
+  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, guide: renderGuide, gear: renderGear, tackle: renderTackle, assist: renderAssist, settings: renderSettings })[state.view]();
 }
 
 
@@ -609,6 +609,57 @@ function showFishDetail(f){
   </div>`;
   document.getElementById('fishDetailClose').onclick=()=>root.innerHTML='';
   document.getElementById('fishDetailX').onclick=()=>root.innerHTML='';
+}
+
+
+function renderGuide() {
+  app.innerHTML = `
+    <section class="guide-hero">
+      <p class="eyebrow">MFL FIELD GUIDE</p>
+      <h2>釣行手引き</h2>
+      <p>「これ、どうするんだっけ？」を釣り場ですぐ確認できる簡単ガイド。</p>
+    </section>
+    <section class="guide-grid">
+      <button class="guide-menu-card" data-guide-section="pier"><span class="guide-menu-icon">🗺️</span><span><strong>堤防の見方</strong><small>どこを狙う？ どこに注意する？</small></span><b>›</b></button>
+      <button class="guide-menu-card" data-guide-section="knots"><span class="guide-menu-icon">🧵</span><span><strong>糸の結び方</strong><small>ルアー・仕掛け・ライン同士</small></span><b>›</b></button>
+      <button class="guide-menu-card" data-guide-section="rigs"><span class="guide-menu-icon">🎣</span><span><strong>仕掛けの基本</strong><small>ちょい投げ・サビキ・ジグヘッド</small></span><b>›</b></button>
+      <button class="guide-menu-card" data-guide-section="trouble"><span class="guide-menu-icon">🛟</span><span><strong>困ったとき</strong><small>根掛かり・糸絡み・飛ばない</small></span><b>›</b></button>
+    </section>
+    <section id="guideContent" class="guide-content">
+      <div class="guide-welcome"><span>📖</span><h3>見たい項目を選んでね</h3><p>釣り方を決めるためではなく、困った時の確認用ガイドです。</p></div>
+    </section>`;
+  document.querySelectorAll('[data-guide-section]').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('[data-guide-section]').forEach(b => b.classList.toggle('active', b===btn));
+      renderGuideSection(btn.dataset.guideSection);
+    };
+  });
+}
+function renderGuideSection(section) {
+  const root=document.getElementById('guideContent'); if(!root) return;
+  if(section==='pier') root.innerHTML=`
+    <article class="guide-article"><div class="guide-article-title"><span>🗺️</span><div><small>PIER BASICS</small><h3>堤防の見方</h3></div></div>
+    <div class="pier-map"><div class="pier-land">陸側</div><div class="pier-wall">堤防</div><div class="pier-water"><span class="pier-point p1">① 足元</span><span class="pier-point p2">② 船道</span><span class="pier-point p3">③ 潮の流れ</span><span class="pier-point p4">④ 明暗・影</span></div></div>
+    <div class="guide-tip-list"><div><b>① 足元</b><p>カサゴなど根魚が着きやすい。壁際をゆっくり探る。</p></div><div><b>② 船道</b><p>少し深くなっていることが多い。遠投前に周囲を確認。</p></div><div><b>③ 潮が動く場所</b><p>魚が回ってくることがある。水面の流れやゴミの動きを観察。</p></div><div><b>④ 明暗・影</b><p>橋脚や常夜灯の影など、光の境目に魚が付くことがある。</p></div></div>
+    <div class="guide-warning"><strong>⚠️ 安全優先</strong><p>立入禁止・作業区域・船の出入りを最優先で避ける。濡れた足場やテトラへ無理に入らない。</p></div></article>`;
+  if(section==='knots') root.innerHTML=`
+    <article class="guide-article"><div class="guide-article-title"><span>🧵</span><div><small>KNOTS</small><h3>糸の結び方</h3></div></div>
+    <details class="guide-step" open><summary><strong>ユニノット</strong><small>ルアー・スナップ・サルカンに</small><b>›</b></summary><ol><li>糸を金具の輪に通す。</li><li>先端を折り返して輪を作る。</li><li>輪の中へ先端を4〜6回巻き付ける。</li><li>糸を湿らせ、ゆっくり締める。</li><li>余った糸を少し残して切る。</li></ol><p class="guide-mini-note">まず覚えるならこれ。結び終わったら必ず強く引いて確認。</p></details>
+    <details class="guide-step"><summary><strong>クリンチノット</strong><small>小型の金具・針・スナップに</small><b>›</b></summary><ol><li>糸を輪に通し、道糸へ5〜7回巻き付ける。</li><li>輪の根元にできた小さな穴へ先端を通す。</li><li>糸を湿らせてゆっくり締め込む。</li></ol></details>
+    <details class="guide-step"><summary><strong>電車結び</strong><small>ナイロン・フロロ同士の接続に</small><b>›</b></summary><ol><li>2本の糸を平行に重ねる。</li><li>片方ずつ相手の糸へユニノットを作る。</li><li>両方の結び目を締める。</li><li>本線を左右へ引き、結び目同士を寄せる。</li></ol><p class="guide-mini-note">PEとリーダーの本格接続はFGノットなど別の結びが向く。</p></details>
+    <div class="guide-warning"><strong>結び終わったら</strong><p>必ず手で引っ張って強度確認。滑る・ほどけるなら使わず結び直す。</p></div></article>`;
+  if(section==='rigs') root.innerHTML=`
+    <article class="guide-article"><div class="guide-article-title"><span>🎣</span><div><small>RIG BASICS</small><h3>仕掛けの基本</h3></div></div>
+    <div class="rig-card"><strong>ちょい投げ</strong><p>道糸 → 天秤・オモリ → 仕掛け → エサ</p><small>底にいるキスやハゼなどを狙いやすい。</small></div>
+    <div class="rig-card"><strong>サビキ</strong><p>道糸 → サビキ仕掛け → カゴ</p><small>アジ・サバなどの回遊魚を足元〜近距離で狙う。</small></div>
+    <div class="rig-card"><strong>ジグヘッド＋ワーム</strong><p>道糸 → 必要ならリーダー → ジグヘッド → ワーム</p><small>投げて巻く・沈めるなど自由度が高い。</small></div>
+    <div class="guide-warning"><strong>⚠️ 重さに注意</strong><p>ロッドの適合負荷を超えない。迷ったらMFL Assistで安全な範囲だけ確認。</p></div></article>`;
+  if(section==='trouble') root.innerHTML=`
+    <article class="guide-article"><div class="guide-article-title"><span>🛟</span><div><small>TROUBLE</small><h3>困ったとき</h3></div></div>
+    <details class="guide-step" open><summary><strong>根掛かりした</strong><small>無理に竿をあおらない</small><b>›</b></summary><p>糸を少し緩め、引く方向を変えてみる。外れなければ竿を曲げ込まずラインを真っ直ぐ引いて切る。</p></details>
+    <details class="guide-step"><summary><strong>糸が絡んだ</strong><small>無理に引っ張らない</small><b>›</b></summary><p>テンションを抜いて、絡みの外側から少しずつほどく。</p></details>
+    <details class="guide-step"><summary><strong>仕掛けが飛ばない</strong><small>重さだけが原因とは限らない</small><b>›</b></summary><p>ラインが太すぎないか、ガイドに糸が絡んでいないか、仕掛けが重すぎないかを確認。</p></details>
+    <details class="guide-step"><summary><strong>知らない魚が釣れた</strong><small>触らない</small><b>›</b></summary><p>まず魚図鑑を確認。分からない魚は素手で触らず、毒棘や鋭い歯がある前提で扱う。</p></details></article>`;
 }
 
 function renderGear() {
