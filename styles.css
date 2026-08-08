@@ -596,3 +596,15 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
   .smart-tool-toggle{min-height:55px;padding:10px 11px}
   .smart-collapsible .filter-results{max-height:310px}
 }
+
+/* MFL v4.0.0 - Field Ready */
+.field-ready-card{margin:14px 0;padding:14px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#f7fbfb,#eef7f8)}
+.field-ready-head{display:flex;align-items:center;gap:10px}.field-ready-head>span{font-size:24px}
+.field-ready-head small,.field-ready-head strong{display:block}.field-ready-head small{font-size:8px;letter-spacing:.13em;color:var(--accent);font-weight:900}.field-ready-head strong{font-size:13px}
+.field-ready-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:11px}
+.field-ready-grid label{display:flex;align-items:center;gap:6px;min-height:38px;padding:8px;border-radius:11px;background:#fff;font-size:9px;font-weight:800}
+.field-ready-grid input{width:17px;height:17px;accent-color:var(--accent)}
+.field-ready-card>p{margin:8px 2px 0;font-size:8px;line-height:1.5;color:var(--muted)}
+.assist-safety-strip{margin:10px 0 0;padding:10px 12px;border-radius:13px;background:#eaf7f8}
+.assist-safety-strip strong,.assist-safety-strip span{display:block}.assist-safety-strip strong{font-size:8px;color:var(--accent);letter-spacing:.1em}.assist-safety-strip span{font-size:9px;margin-top:3px;line-height:1.45}
+@media(max-width:390px){.field-ready-grid{grid-template-columns:1fr}}
