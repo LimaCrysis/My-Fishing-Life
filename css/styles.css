@@ -657,3 +657,31 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .knot-art-guide .knot-art-step + .knot-art-step{
   margin-top:14px;
 }
+
+/* v6.0 VERIFIED MAP */
+.map-verification-banner{margin:12px 0 16px;padding:14px 15px;border:1px solid #cfe4e7;border-radius:16px;background:#f3fafb;display:grid;gap:5px}
+.map-verification-banner strong{font-size:13px;color:var(--accent);letter-spacing:.04em}
+.map-verification-banner span{font-size:11px;line-height:1.65;color:#61777d}
+
+/* MFL v6.1.0 - MAP DENSITY */
+.spot-verify-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:3px}
+.verified-badge{display:inline-flex;align-items:center;padding:3px 7px;border-radius:999px;background:#e8f7ee;color:#2d7650;font-size:8px;font-weight:900}
+.verified-mini{padding:2px 5px;border-radius:999px;background:#e8f7ee;color:#2d7650!important;font-weight:900}
+
+/* MFL v6.2.0 - CHIBA DENSE COAST */
+.chiba-density-panel{margin:12px 0 15px;padding:14px;border:1px solid #cfe2e5;border-radius:18px;background:#f7fbfb}
+.chiba-density-title{display:flex;align-items:center;gap:9px}
+.chiba-density-title>span{font-size:24px}.chiba-density-title small,.chiba-density-title strong{display:block}
+.chiba-density-title small{font-size:8px;font-weight:900;letter-spacing:.12em;color:var(--accent)}
+.chiba-density-title strong{font-size:13px;margin-top:1px}
+.chiba-density-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
+.chiba-density-grid button{padding:11px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);text-align:left}
+.chiba-density-grid b,.chiba-density-grid span{display:block}.chiba-density-grid b{font-size:11px}.chiba-density-grid span{font-size:8px;color:var(--muted);margin-top:2px}
+.chiba-zone-list{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.chiba-zone-list[hidden]{display:none!important}.zone-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.zone-head strong{font-size:11px}.zone-head span{font-size:8px;color:var(--muted)}
+.zone-list{display:grid;gap:7px}.zone-spot{width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:10px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);text-align:left}
+.zone-spot>span{font-size:18px}.zone-spot div strong,.zone-spot div small{display:block}.zone-spot div strong{font-size:10px}.zone-spot div small{font-size:8px;color:var(--muted);margin-top:2px}.zone-spot>b{font-size:18px;color:var(--muted)}
+.special-rules{margin-top:12px;padding:11px 12px;border-radius:14px;background:#eef7fa;color:#365e6d}
+.special-rules>strong{display:block;font-size:10px;margin-bottom:6px}.special-rules>div{display:grid;grid-template-columns:58px 1fr;gap:7px;padding:5px 0;border-top:1px solid rgba(54,94,109,.12)}
+.special-rules span{font-size:8px;color:#6c858e}.special-rules b{font-size:9px}
+@media(max-width:390px){.chiba-density-grid{grid-template-columns:1fr}}
