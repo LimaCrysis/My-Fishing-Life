@@ -712,3 +712,18 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .tide-actions{margin-top:9px}.tide-actions a{display:block;padding:10px;border-radius:12px;background:#0b7285;color:#fff;text-align:center;text-decoration:none;font-size:9px;font-weight:900}
 .tide-note{margin:8px 1px 0!important;font-size:8px!important;line-height:1.55!important;color:var(--muted)!important}
 @media(max-width:390px){.tide-events{grid-template-columns:1fr 1fr}.tide-head{align-items:center}}
+.research-master-summary{margin:14px 0;padding:14px;border:1px solid #cadfe3;border-radius:18px;background:#f3f9fa}.research-master-head{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center}.research-master-head>span{font-size:23px}.research-master-head small,.research-master-head strong{display:block}.research-master-head small{font-size:8px;font-weight:900;color:var(--accent)}.research-master-head strong{font-size:13px}.research-master-head>b{font-size:8px}.research-master-counts{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:10px}.research-master-counts span{padding:8px 4px;border-radius:11px;text-align:center;font-size:7px;font-weight:900}.research-master-counts b{display:block;font-size:15px}.r-verified{background:#e8f7ee;color:#327250}.r-hold{background:#fff5d9;color:#7b611f}.r-excluded{background:#fdebea;color:#893e39}.r-map{background:#e9f0fa;color:#3d6485}.research-master-toggle{width:100%;display:flex;justify-content:space-between;margin-top:9px;padding:10px;border:0;border-radius:12px;background:#fff;font-size:9px;font-weight:900}.research-master-panel{display:grid;gap:7px;margin-top:8px}.research-master-panel[hidden]{display:none!important}.research-rule,.research-excluded-list,.research-hold-list{padding:9px 10px;border-radius:11px;background:#fff}.research-rule.hold{background:#fff5d9}.research-rule.excluded{background:#fdebea}.research-rule p,.research-excluded-list span,.research-hold-list span{font-size:8px;line-height:1.45}.research-excluded-list,.research-hold-list{display:grid;gap:4px}
+/* v9.1 MANAGED PIER MAPS */
+.managed-map-note{font-size:8px;color:var(--muted)}
+
+/* v9.2 CHIBA RESEARCH HARDENING */
+.research-quality{display:inline-block;margin-top:3px;padding:3px 6px;border-radius:999px;background:#e7f2ea;color:#3b7250;font-size:7px;font-style:normal;font-weight:900}
+.research-new{border:1px dashed #d8c574}.research-new p{margin:5px 0 0;font-size:8px;line-height:1.5;color:var(--muted)}
+
+/* v9.3 VERIFIED MAP PROGRESS */
+.map-coverage-meter{margin-top:10px;padding:10px;border-radius:13px;background:#fff}
+.map-coverage-meter>div{display:flex;justify-content:space-between;align-items:center;font-size:8px;font-weight:900}
+.map-coverage-meter>div b{font-size:13px;color:var(--accent)}
+.map-coverage-meter>i{display:block;height:7px;margin-top:6px;border-radius:999px;background:#e5eef0;overflow:hidden}
+.map-coverage-meter>i>em{display:block;height:100%;border-radius:999px;background:var(--accent)}
+.map-coverage-meter>small{display:block;margin-top:4px;font-size:7px;color:var(--muted)}

@@ -1,0 +1,400 @@
+{
+  "version": "2026-08-10-v9.3",
+  "records": [
+    {
+      "id": "ichihara",
+      "area": "bay-east",
+      "name": "オリジナルメーカー海づり公園",
+      "pref": "千葉",
+      "official_url": "https://ichihara-umizuri.com/",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "kashima",
+      "area": "ibaraki",
+      "name": "鹿島港魚釣園",
+      "pref": "茨城",
+      "official_url": "https://kashima-fa.com/infomation/",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "honmoku",
+      "area": "bay-south",
+      "name": "本牧海づり施設",
+      "pref": "神奈川",
+      "official_url": "https://yokohama-fishingpiers.jp/honmoku/",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "isogo",
+      "area": "bay-south",
+      "name": "磯子海づり施設",
+      "pref": "神奈川",
+      "official_url": "https://yokohama-fishingpiers.jp/isogo/",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "wakasu",
+      "area": "tokyo",
+      "name": "若洲海浜公園 海釣り施設",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/03_10/fishing",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "daikoku",
+      "area": "bay-south",
+      "name": "大黒海づり施設",
+      "pref": "神奈川",
+      "official_url": "https://yokohama-fishingpiers.jp/daikoku/",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "umibetsuri",
+      "area": "yokosuka",
+      "name": "海辺つり公園",
+      "pref": "神奈川",
+      "official_url": "https://www.city.yokosuka.kanagawa.jp/5820/minato/amenity_kouen/umituri/index.html",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "higashiogishima",
+      "area": "bay-south",
+      "name": "東扇島西公園",
+      "pref": "神奈川",
+      "official_url": "https://www.city.kawasaki.jp/580/page/0000001336.html",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "umikaze",
+      "area": "yokosuka",
+      "name": "うみかぜ公園",
+      "pref": "神奈川",
+      "official_url": "https://www.city.yokosuka.kanagawa.jp/5820/minato/amenity_kouen/umikaze/index.html",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true,
+      "map_level": "orientation_schematic",
+      "map_note": "精密形状を断定しないVERIFIED位置関係模式図"
+    },
+    {
+      "id": "jonanjima",
+      "area": "tokyo",
+      "name": "城南島海浜公園 みなと広場",
+      "pref": "東京",
+      "official_url": "https://tokyo-south-seaside-parks.com/jonanjima/",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true,
+      "map_level": "orientation_schematic",
+      "map_note": "精密形状を断定しないVERIFIED位置関係模式図"
+    },
+    {
+      "id": "urayasu_chidori",
+      "area": "chiba",
+      "name": "浦安海岸 千鳥地区",
+      "pref": "千葉",
+      "official_url": "https://www.city.urayasu.lg.jp/todokede/machi/1034984/1042285.html",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "futtsu_area",
+      "area": "chiba",
+      "name": "富津地区（市公式案内エリア）",
+      "pref": "千葉",
+      "official_url": "https://www.city.futtsu.lg.jp/0000000689.html",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true,
+      "map_level": "orientation_schematic",
+      "map_note": "精密形状を断定しないVERIFIED位置関係模式図"
+    },
+    {
+      "id": "edogawa_hosuiro",
+      "area": "chiba",
+      "name": "江戸川放水路（妙典周辺）",
+      "pref": "千葉",
+      "official_url": "https://www.city.ichikawa.lg.jp/site/edogawa/1238.html",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true,
+      "map_level": "orientation_schematic",
+      "map_note": "精密形状を断定しないVERIFIED位置関係模式図"
+    },
+    {
+      "id": "shinsakon",
+      "area": "tokyo",
+      "name": "新左近川親水公園",
+      "pref": "東京",
+      "official_url": "https://www.city.edogawa.tokyo.jp/e066/kuseijoho/gaiyo/shisetsuguide/bunya/koendobutsuen/shinsakon.html",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true,
+      "map_level": "orientation_schematic",
+      "map_note": "精密形状を断定しないVERIFIED位置関係模式図"
+    },
+    {
+      "id": "kawarago",
+      "area": "ibaraki",
+      "name": "河原子海岸",
+      "pref": "茨城",
+      "official_url": "https://www.city.hitachi.lg.jp/citypromotion/hitachi_donnamachi/1007306/1005129.html",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true,
+      "map_level": "orientation_schematic",
+      "map_note": "精密形状を断定しないVERIFIED位置関係模式図"
+    },
+    {
+      "id": "hiraiso",
+      "area": "ibaraki",
+      "name": "平磯周辺の岩場",
+      "pref": "茨城",
+      "official_url": "https://www.ibarakiguide.jp/spot.php?code=1085&mode=detail",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "odaiba",
+      "area": "tokyo",
+      "name": "お台場海浜公園 釣り可能エリア",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/01_02/fishing",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "harumibashi",
+      "area": "tokyo",
+      "name": "春海橋公園",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/02_02",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "akatsuki",
+      "area": "tokyo",
+      "name": "暁ふ頭公園 釣り可能エリア",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/01_10",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "ariake_west",
+      "area": "tokyo",
+      "name": "有明西ふ頭公園",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/02_05",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "mizunohiroba",
+      "area": "tokyo",
+      "name": "水の広場公園 釣り可能エリア",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/search/01_04",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "shinkiba",
+      "area": "tokyo",
+      "name": "新木場公園 釣り可能エリア",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/search/01_04",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "yumenoshima",
+      "area": "tokyo",
+      "name": "夢の島緑道公園 釣り可能エリア",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/search/01_04",
+      "status": "verified",
+      "map_ready": false,
+      "tide_ready": true
+    },
+    {
+      "id": "kisarazu_uchiko",
+      "area": "chiba",
+      "name": "木更津内港公園",
+      "pref": "千葉",
+      "official_url": "https://www.city.kisarazu.lg.jp/soshiki/shobo/keibo/1/4060.html",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "aicle",
+      "area": "yokosuka",
+      "name": "アイクル海釣りコーナー",
+      "pref": "神奈川",
+      "official_url": "https://www.city.yokosuka.kanagawa.jp/4160/aicle/umizuri-corner.html",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "harumi_ryokudo",
+      "area": "tokyo",
+      "name": "晴海緑道公園",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/02_08",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "ariake_north",
+      "area": "tokyo",
+      "name": "有明北緑道公園",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/02_06",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "shiokaze",
+      "area": "tokyo",
+      "name": "潮風公園 南コーストデッキ",
+      "pref": "東京",
+      "official_url": "https://www.tptc.co.jp/park/01_03/point",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "tateyama_sunset",
+      "area": "chiba",
+      "name": "館山夕日桟橋",
+      "pref": "千葉",
+      "official_url": "https://www.city.tateyama.chiba.jp/minato/page100352.html",
+      "status": "verified",
+      "map_ready": true,
+      "tide_ready": true
+    },
+    {
+      "id": "aomi_south_wharf",
+      "name": "青海南ふ頭公園 隣接護岸",
+      "pref": "東京",
+      "status": "excluded",
+      "reason": "港湾施設用地で釣り禁止",
+      "official_url": "https://www.tptc.co.jp/park/01_09/news"
+    },
+    {
+      "id": "kurihama_outer",
+      "name": "久里浜外防波堤（東電防波堤）",
+      "pref": "神奈川",
+      "status": "excluded",
+      "reason": "横須賀市が一般立入禁止を明示",
+      "official_url": "https://www.city.yokosuka.kanagawa.jp/5820/sisetu/kurihamasotobouhatei-tatiiri.html"
+    },
+    {
+      "id": "higashiogishima_east",
+      "name": "東扇島東公園",
+      "pref": "神奈川",
+      "status": "excluded",
+      "reason": "川崎市が釣り禁止を明示",
+      "official_url": "https://www.city.kawasaki.jp/580/page/0000001282.html"
+    },
+    {
+      "id": "kawasaki_other",
+      "name": "川崎港内（東扇島西公園以外）",
+      "pref": "神奈川",
+      "status": "excluded",
+      "reason": "川崎港内は西公園以外釣り禁止",
+      "official_url": "https://www.city.kawasaki.jp/580/page/0000001315.html"
+    },
+    {
+      "id": "kashima_other",
+      "name": "鹿島港 港湾施設（魚釣園以外）",
+      "pref": "茨城",
+      "status": "excluded",
+      "reason": "港湾施設は関係者以外立入禁止",
+      "official_url": "https://www.pref.ibaraki.jp/doboku/kako/tsuri.html"
+    },
+    {
+      "id": "toriizaki_hold",
+      "name": "鳥居崎海浜公園周辺",
+      "pref": "千葉",
+      "status": "hold",
+      "reason": "公園は公式確認済みだが常設釣り可能範囲の根拠不足",
+      "official_url": "https://www.city.kisarazu.lg.jp/soshiki/keizai/kankoshinko/2/6/10394.html"
+    },
+    {
+      "id": "futtsu_minato_park",
+      "name": "富津みなと公園",
+      "pref": "千葉",
+      "status": "hold",
+      "reason": "千葉県公式で海沿いの港湾緑地として確認。常設の釣り可能範囲は公式根拠を追加確認するまで保留。",
+      "official_url": "https://www.pref.chiba.lg.jp/cs-kisarazu-k/shisetsu/kouen.html",
+      "map_ready": false
+    },
+    {
+      "id": "kazusaminato_port_park",
+      "name": "上総湊港海浜公園",
+      "pref": "千葉",
+      "status": "hold",
+      "reason": "千葉県公式で港湾緑地として確認。隣接海岸を含む釣り可否・範囲を断定せず保留。",
+      "official_url": "https://www.pref.chiba.lg.jp/cs-kisarazu-k/shisetsu/kouen.html",
+      "map_ready": false
+    },
+    {
+      "id": "sodegaura_seaside_park",
+      "name": "袖ケ浦海浜公園",
+      "pref": "千葉",
+      "status": "hold",
+      "reason": "千葉県の港湾緑地として現行管理対象を確認。釣り可能区画の公式根拠が取れるまで保留。",
+      "official_url": "https://www.pref.chiba.lg.jp/kouwan/shiteikanri/2026/kouwanryokuti/r8bosyu.html",
+      "map_ready": false
+    },
+    {
+      "id": "funabashi_port_waterfront",
+      "name": "船橋港親水公園",
+      "pref": "千葉",
+      "status": "hold",
+      "reason": "千葉県の港湾施設として確認。釣り利用の明確な公式根拠が取れるまで保留。",
+      "official_url": "https://www.pref.chiba.lg.jp/shisan/press/2026/koubojouhou-r8.html",
+      "map_ready": false
+    },
+    {
+      "id": "inage_pond",
+      "name": "稲毛海浜公園 園内の池",
+      "pref": "千葉",
+      "status": "excluded",
+      "reason": "千葉市公式ルールで公園内の池での釣りは禁止。",
+      "official_url": "https://www.city.chiba.jp/toshi/koenryokuchi/kanri/chuo-mihama/inagekaihinkouen_riyouhouhou.html",
+      "map_ready": false
+    }
+  ]
+}
