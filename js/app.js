@@ -773,7 +773,7 @@ const kantoFishingSpots=[
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
 function renderKantoMap(){return `<article class="guide-article kanto-guide">
 <div class="guide-article-title"><span>🗺️</span><div><small>KANTO FISHING GUIDE</small><h3>釣り場を自分で選ぶ</h3></div></div>
-<div class="map-verification-banner"><strong>🛟 MFL VERIFIED MAP</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
+<div class="map-verification-banner"><div class="map-coverage"><b>🗺️ 専用地図 12か所</b><span>場所ごとに描き分け中</span></div><strong>🛟 MFL VERIFIED MAP · TIDE DATA 2026</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
 <p class="kanto-intro">まずエリアを選ぶ。条件検索やルールは必要な時だけ開く、MFLのシンプル表示にしました。</p>
 
 <div class="map-mode-label"><span>①</span><strong>エリアから探す</strong></div>
@@ -857,13 +857,14 @@ function styleMiniTags(s){
   return (s.styles||[]).filter(x=>!/×/.test(x)).slice(0,3).map(x=>`<span>${x.replace(/[◎○△]/g,'').trim()}</span>`).join('');
 }
 
+function mapBadgeHTML(s){return seawallMapData[s.id]?'<span class="map-mini">🗺️地図</span>':'';}
 function renderFilteredSpots(filter='all'){
   const root=document.getElementById('filteredSpotList'); if(!root)return;
   const spots=kantoFishingSpots.filter(s=>filterSpotMatch(s,filter));
   root.innerHTML=`<div class="filter-count"><strong>${spots.length}か所</strong><span>条件に合う候補</span></div>
   <div class="filter-results">${spots.map(s=>`<button class="filter-spot-card" data-fishing-spot="${s.id}">
     <div class="filter-spot-top"><span class="spot-pref">${s.pref}</span><strong>${s.name}</strong><b>${s.tackle}</b></div>
-    <div class="filter-spot-meta"><span>初心者 ${stars(s.beginner)}</span><span>${spotTypeLabel(s.id)}</span><span class="verified-mini">✓公式</span></div>
+    <div class="filter-spot-meta"><span>初心者 ${stars(s.beginner)}</span><span>${spotTypeLabel(s.id)}</span><span class="verified-mini">✓公式</span>${mapBadgeHTML(s)}</div>
     <div class="filter-mini-tags">${styleMiniTags(s)}</div>
   </button>`).join('')||'<p class="note">この条件に合う掲載スポットはまだありません。</p>'}</div>`;
   root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
@@ -989,7 +990,32 @@ const seawallMapData={
   'ichihara':{title:'オリジナルメーカー海づり公園',confidence:'公式寸法を反映した桟橋型',facts:['渡り桟橋 約120m','釣り桟橋 約300m','岸と平行に伸びる桟橋'],note:'岸から沖へ渡り桟橋を約120m進み、その先で岸と平行に約300mの釣り桟橋が伸びる施設形状を反映しています。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d6edf2"/><rect x="35" y="35" width="180" height="290" rx="18" fill="#ddd7c4"/><rect x="58" y="72" width="128" height="90" rx="14" fill="#fff" stroke="#b9c8ca" stroke-width="3"/><text x="86" y="110">管理棟</text><text x="83" y="138">売店・食堂</text><path d="M210 182H350" stroke="#f8f8f5" stroke-width="42"/><path d="M210 182H350" stroke="#0b7285" stroke-width="6"/><path d="M350 82V284" stroke="#f8f8f5" stroke-width="68"/><path d="M350 82V284" stroke="#0b7285" stroke-width="7"/><path d="M350 82H760" stroke="#f8f8f5" stroke-width="68"/><path d="M350 284H760" stroke="#f8f8f5" stroke-width="68"/><path d="M350 82H760" stroke="#0b7285" stroke-width="7"/><path d="M350 284H760" stroke="#0b7285" stroke-width="7"/><text x="220" y="162">渡り桟橋 約120m</text><text x="465" y="55">釣り桟橋 約300m</text><circle cx="470" cy="82" r="16" fill="#0b7285"/><text x="462" y="89" fill="#fff">🎣</text><circle cx="610" cy="284" r="16" fill="#0b7285"/><text x="602" y="291" fill="#fff">🎣</text><text x="480" y="188">海</text></svg>`,legend:['陸側の管理棟から入場','渡り桟橋を沖へ約120m','岸と平行な釣り桟橋が約300m'],officialLabel:'市原市立施設公式'},
   'kisarazu_uchiko':{title:'木更津内港公園',confidence:'内港型の専用模式図',facts:['内港公園＋堤防で海釣り可','一年を通じて楽しめる','ライフジャケット推奨'],note:'内港を囲む公園側の水際と堤防を、港内型として描き分けました。港湾作業・工事・立入禁止区画は図より現地表示を優先してください。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V92H520V168H690V360H0Z" fill="#ddd7c4"/><path d="M520 92V168H690V338" fill="none" stroke="#0b7285" stroke-width="9"/><path d="M537 108V151H708V318" fill="none" stroke="#f4b942" stroke-width="12"/><rect x="75" y="50" width="220" height="90" rx="16" fill="#fff" stroke="#bdcbcd" stroke-width="3"/><text x="125" y="90">内港公園</text><text x="126" y="120">陸側・休憩エリア</text><text x="560" y="242">港内</text><circle cx="555" cy="137" r="17" fill="#0b7285"/><text x="547" y="144" fill="#fff">🎣</text><circle cx="690" cy="230" r="17" fill="#0b7285"/><text x="682" y="237" fill="#fff">🎣</text><path d="M690 338L760 338" stroke="#c94444" stroke-width="9" stroke-dasharray="14 10"/><text x="700" y="316">現地規制確認</text></svg>`,legend:['黄色＝公園側水際のイメージ','赤点線＝港湾規制を必ず現地確認','ライフジャケット推奨'],officialLabel:'木更津市公式'},
   'tateyama_sunset':{title:'館山夕日桟橋',confidence:'公式ルール＋約500m桟橋を反映',facts:['海岸通りから約500m','歩道側は釣り禁止','先端部は釣り禁止'],note:'長い一本道の桟橋形状と、釣り可能側／歩道側／先端部を分けて表示しています。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d7edf2"/><rect x="0" y="0" width="180" height="360" fill="#ddd7c4"/><rect x="75" y="92" width="100" height="170" rx="14" fill="#fff" stroke="#bdcbcd" stroke-width="3"/><text x="94" y="150">渚の駅</text><text x="92" y="178">たてやま</text><path d="M180 180H745" stroke="#fafaf7" stroke-width="76"/><path d="M180 180H745" stroke="#0b7285" stroke-width="7"/><path d="M215 135H670" stroke="#f4b942" stroke-width="12"/><path d="M215 225H670" stroke="#df5b5b" stroke-width="12" stroke-dasharray="18 12"/><rect x="670" y="126" width="75" height="108" rx="14" fill="#f5d9d9" stroke="#c94d4d" stroke-width="4"/><text x="336" y="112">釣り可能側</text><text x="330" y="264">歩道側：釣り禁止</text><text x="685" y="173">先端</text><text x="685" y="197">禁止</text><text x="355" y="320">桟橋 約500m</text></svg>`,legend:['黄色＝釣り可能側','赤点線＝歩道側・釣り禁止','先端部＝釣り禁止'],officialLabel:'館山市公式'},
-  'wakasu':{title:'若洲海浜公園',confidence:'防波堤570m＋人工磯480mを反映',facts:['海釣り施設 防波堤 約570m','人工磯 約480m','水深 約3〜9m（満潮時）'],note:'若洲公園側から防波堤が伸び、その脇に人工磯が続く構成を別々に描き分けています。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d7eef2"/><path d="M0 0H340V250H0Z" fill="#ddd7c4"/><rect x="55" y="45" width="190" height="110" rx="18" fill="#fff" stroke="#bdcbcd" stroke-width="3"/><text x="95" y="88">若洲公園</text><text x="92" y="118">駐車場・施設</text><path d="M315 95H760" stroke="#fafaf7" stroke-width="60"/><path d="M315 95H760" stroke="#0b7285" stroke-width="7"/><path d="M245 245Q430 205 645 260" fill="none" stroke="#75888d" stroke-width="38" stroke-dasharray="14 9"/><text x="420" y="66">海釣り施設 約570m</text><text x="360" y="312">人工磯 約480m</text><circle cx="440" cy="95" r="16" fill="#0b7285"/><text x="432" y="102" fill="#fff">🎣</text><circle cx="575" cy="95" r="16" fill="#0b7285"/><text x="567" y="102" fill="#fff">🎣</text><circle cx="415" cy="237" r="16" fill="#0b7285"/><text x="407" y="244" fill="#fff">🎣</text></svg>`,legend:['白い長線＝防波堤型海釣り施設','石模様＝人工磯','防波堤と人工磯は別エリア'],officialLabel:'東京港埠頭公式'}
+  'wakasu':{title:'若洲海浜公園',confidence:'防波堤570m＋人工磯480mを反映',facts:['海釣り施設 防波堤 約570m','人工磯 約480m','水深 約3〜9m（満潮時）'],note:'若洲公園側から防波堤が伸び、その脇に人工磯が続く構成を別々に描き分けています。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d7eef2"/><path d="M0 0H340V250H0Z" fill="#ddd7c4"/><rect x="55" y="45" width="190" height="110" rx="18" fill="#fff" stroke="#bdcbcd" stroke-width="3"/><text x="95" y="88">若洲公園</text><text x="92" y="118">駐車場・施設</text><path d="M315 95H760" stroke="#fafaf7" stroke-width="60"/><path d="M315 95H760" stroke="#0b7285" stroke-width="7"/><path d="M245 245Q430 205 645 260" fill="none" stroke="#75888d" stroke-width="38" stroke-dasharray="14 9"/><text x="420" y="66">海釣り施設 約570m</text><text x="360" y="312">人工磯 約480m</text><circle cx="440" cy="95" r="16" fill="#0b7285"/><text x="432" y="102" fill="#fff">🎣</text><circle cx="575" cy="95" r="16" fill="#0b7285"/><text x="567" y="102" fill="#fff">🎣</text><circle cx="415" cy="237" r="16" fill="#0b7285"/><text x="407" y="244" fill="#fff">🎣</text></svg>`,legend:['白い長線＝防波堤型海釣り施設','石模様＝人工磯','防波堤と人工磯は別エリア'],officialLabel:'東京港埠頭公式'},
+  'harumibashi':{
+    title:'春海橋公園',confidence:'運河沿い公園＋旧晴海鉄道橋を反映',
+    facts:['通年利用可能','無料','マハゼ・セイゴ・フッコ'],
+    note:'水辺の遊歩道と旧晴海鉄道橋を目印にした専用模式図。公園マップと現地案内板を確認。',
+    svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V95H0Z" fill="#ddd7c4"/><path d="M60 118H760" stroke="#e7dfc9" stroke-width="78"/><path d="M60 145H760" stroke="#0b7285" stroke-width="8"/><path d="M80 120H730" stroke="#f4b942" stroke-width="11"/><path d="M245 20L365 120" stroke="#8a9598" stroke-width="17"/><path d="M255 20L375 120" stroke="#c3c9ca" stroke-width="6"/><text x="180" y="44">旧晴海鉄道橋</text><text x="90" y="215">運河</text><text x="320" y="188">釣り可能な水辺</text><circle cx="330" cy="138" r="17" fill="#0b7285"/><text x="322" y="145" fill="#fff">🎣</text><circle cx="520" cy="138" r="17" fill="#0b7285"/><text x="512" y="145" fill="#fff">🎣</text></svg>`,
+    legend:['黄色＝水辺遊歩道のイメージ','旧晴海鉄道橋を目印に','現地表示を優先'],officialLabel:'東京港埠頭公式'
+  },
+  'ariake_west':{
+    title:'有明西ふ頭公園',confidence:'有明西運河沿いの釣り可能区画を反映',
+    facts:['指定エリアで釣り可能','通年・無料','投げ釣りは避ける'],
+    note:'有明西運河に沿う細長い公園形状を模式化。投げ釣りは他利用者への迷惑になるため控える。',
+    svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V100H0Z" fill="#ddd7c4"/><path d="M100 108H720" stroke="#e7dfc9" stroke-width="82"/><path d="M100 142H720" stroke="#0b7285" stroke-width="8"/><path d="M120 112H690" stroke="#f4b942" stroke-width="12"/><rect x="545" y="18" width="180" height="55" rx="12" fill="#fff" stroke="#b9c8ca" stroke-width="3"/><text x="572" y="51">東京ビッグサイト側</text><text x="90" y="232">有明西運河</text><circle cx="300" cy="136" r="17" fill="#0b7285"/><text x="292" y="143" fill="#fff">🎣</text><circle cx="500" cy="136" r="17" fill="#0b7285"/><text x="492" y="143" fill="#fff">🎣</text><path d="M145 260H675" stroke="#df5b5b" stroke-width="8" stroke-dasharray="18 12"/><text x="245" y="295">投げ釣りは避ける</text></svg>`,
+    legend:['黄色＝釣り可能側のイメージ','赤点線＝投げ釣り注意','大型船通過後の波に注意'],officialLabel:'東京港埠頭公式'
+  },
+  'harumi_ryokudo':{
+    title:'晴海緑道公園',confidence:'晴海4・5丁目の長い水辺緑道を反映',
+    facts:['通年利用可能','無料','専用駐車場なし'],
+    note:'長い緑道型の公園と水際を専用図に。公共交通向きで、釣り具・ゴミは必ず持ち帰る。',
+    svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d9eef2"/><path d="M0 0H820V95H0Z" fill="#ddd7c4"/><path d="M45 115C180 100 320 110 470 100C610 92 720 100 790 92" fill="none" stroke="#e7dfc9" stroke-width="76"/><path d="M45 142C180 127 320 137 470 127C610 119 720 127 790 119" fill="none" stroke="#0b7285" stroke-width="8"/><path d="M70 117C210 104 340 111 490 102C620 95 720 101 770 95" fill="none" stroke="#f4b942" stroke-width="12"/><text x="92" y="55">晴海4丁目</text><text x="620" y="55">晴海5丁目</text><text x="305" y="210">長い水辺緑道</text><circle cx="250" cy="135" r="17" fill="#0b7285"/><text x="242" y="142" fill="#fff">🎣</text><circle cx="480" cy="128" r="17" fill="#0b7285"/><text x="472" y="135" fill="#fff">🎣</text><circle cx="680" cy="122" r="17" fill="#0b7285"/><text x="672" y="129" fill="#fff">🎣</text></svg>`,
+    legend:['黄色＝緑道の水際イメージ','専用駐車場なし','長い水辺を歩いて探れる'],officialLabel:'東京港埠頭公式'
+  },
+  'akatsuki':{title:'暁ふ頭公園 釣り可能エリア',confidence:'場所別専用レイアウト',facts:['ふ頭公園型','水際エリア','現地掲示を優先'],note:'ふ頭先端側の公園と水際の関係を分かりやすくした専用模式図。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H500V155H660V0Z" fill="#ddd7c4"/><path d="M500 155H660V315H500Z" fill="#e7dfc9"/><path d="M515 165H645V295" fill="none" stroke="#f4b942" stroke-width="12"/><path d="M500 155H660V315" fill="none" stroke="#0b7285" stroke-width="8"/><text x="110" y="90">公園・陸側</text><text x="535" y="225">水際</text><circle cx="635" cy="195" r="16" fill="#0b7285"/><text x="627" y="202" fill="#fff">🎣</text></svg>`,legend:['黄色＝釣り可能側のイメージ','青線＝水際','現地掲示・最新情報を優先'],officialLabel:'公式確認'},
+  'aicle':{title:'アイクル海釣りコーナー',confidence:'場所別専用レイアウト',facts:['管理施設型','釣り可能区画','利用時間を確認'],note:'管理施設と釣り可能な水際を分けた専用模式図。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><rect x="40" y="55" width="230" height="220" rx="18" fill="#ddd7c4"/><rect x="80" y="90" width="150" height="80" rx="14" fill="#fff"/><text x="110" y="138">管理施設</text><path d="M270 180H720" stroke="#fafaf7" stroke-width="65"/><path d="M270 180H720" stroke="#0b7285" stroke-width="8"/><path d="M300 150H680" stroke="#f4b942" stroke-width="11"/><text x="420" y="260">釣り可能区画</text><circle cx="470" cy="174" r="16" fill="#0b7285"/><text x="462" y="181" fill="#fff">🎣</text></svg>`,legend:['黄色＝釣り可能側のイメージ','青線＝水際','現地掲示・最新情報を優先'],officialLabel:'公式確認'},
+  'ariake_north':{title:'有明北緑道公園',confidence:'場所別専用レイアウト',facts:['有明西運河沿い','長い緑道型','通年利用'],note:'有明西運河沿いの細長い緑道と水際を専用図化。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V90H0Z" fill="#ddd7c4"/><path d="M45 118C230 100 500 108 780 96" fill="none" stroke="#e8dfc9" stroke-width="72"/><path d="M45 143C230 125 500 133 780 121" fill="none" stroke="#0b7285" stroke-width="8"/><path d="M70 116C250 101 500 109 755 99" fill="none" stroke="#f4b942" stroke-width="11"/><text x="285" y="205">運河沿い緑道</text><circle cx="270" cy="137" r="16" fill="#0b7285"/><text x="262" y="144" fill="#fff">🎣</text><circle cx="540" cy="129" r="16" fill="#0b7285"/><text x="532" y="136" fill="#fff">🎣</text></svg>`,legend:['黄色＝釣り可能側のイメージ','青線＝水際','現地掲示・最新情報を優先'],officialLabel:'公式確認'},
+  'shiokaze':{title:'潮風公園 南コーストデッキ',confidence:'場所別専用レイアウト',facts:['南側に釣り可能エリア','公園型の水際','現地規制を優先'],note:'南側の釣り可能な水辺を中心に、公園側と海側の位置関係を専用図化。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V115H0Z" fill="#ddd7c4"/><path d="M65 130H755" stroke="#e7dfc9" stroke-width="75"/><path d="M65 157H755" stroke="#0b7285" stroke-width="8"/><path d="M390 132H730" stroke="#f4b942" stroke-width="12"/><path d="M90 132H350" stroke="#df5b5b" stroke-width="9" stroke-dasharray="16 10"/><text x="475" y="210">南側 釣り可能エリア</text><text x="125" y="210">規制確認</text><circle cx="525" cy="151" r="16" fill="#0b7285"/><text x="517" y="158" fill="#fff">🎣</text></svg>`,legend:['黄色＝釣り可能側のイメージ','青線＝水際','現地掲示・最新情報を優先'],officialLabel:'公式確認'}
 };
 
 function seawallMapFor(s){
@@ -1005,11 +1031,102 @@ function seawallMapFor(s){
   </section>`;
 }
 
-function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><div class="spot-verify-row"><small class="spot-type">${spotTypeLabel(s.id)}</small><span class="verified-badge">✓ 公式確認</span></div><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div>${seawallMapFor(s)}${specialSpotRules(s)}<div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`
+
+const tideStationMap={
+  TK:{name:'東京',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=TK'},
+  CB:{name:'千葉港',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=CB'},
+  TT:{name:'館山',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=TT'},
+  QS:{name:'横浜',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=QS'},
+  D2:{name:'鹿島',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=D2'},
+  D3:{name:'大洗',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=D3'}
+};
+let mflTideData=null;
+
+function tideStationForSpot(s){
+  if(s.pref==='東京') return 'TK';
+  if(s.pref==='千葉'){
+    if(/館山/.test(s.name)) return 'TT';
+    return 'CB';
+  }
+  if(s.pref==='神奈川') return 'QS';
+  if(s.pref==='茨城'){
+    if(/鹿島/.test(s.name)) return 'D2';
+    return 'D3';
+  }
+  return null;
+}
+function todayJst(){
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+  const o=Object.fromEntries(parts.map(x=>[x.type,x.value]));
+  return `${o.year}-${o.month}-${o.day}`;
+}
+function nowHourJst(){
+  return Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tokyo',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
+}
+function tideTrend(day,hour){
+  const h=day?.hourly||[];
+  if(h.length<24)return {label:'不明',symbol:'→'};
+  const a=h[Math.max(0,hour-1)],b=h[Math.min(23,hour+1)];
+  if(a==null||b==null)return {label:'不明',symbol:'→'};
+  const d=b-a;
+  if(d>5)return {label:'上げ潮',symbol:'↗'};
+  if(d<-5)return {label:'下げ潮',symbol:'↘'};
+  return {label:'潮止まり付近',symbol:'→'};
+}
+function tideSparkline(hourly){
+  const vals=hourly.filter(v=>v!=null); if(vals.length<2)return '';
+  const min=Math.min(...vals),max=Math.max(...vals),range=Math.max(1,max-min);
+  const pts=hourly.map((v,i)=>v==null?null:[10+i*(300/23),86-(v-min)/range*66]).filter(Boolean);
+  return `<svg viewBox="0 0 320 100" class="tide-chart" aria-label="24時間潮位グラフ">
+    <line x1="10" y1="86" x2="310" y2="86" stroke="#cfe0e3" stroke-width="1"/>
+    <polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#0b7285" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+    <text x="10" y="98">0時</text><text x="284" y="98">23時</text>
+  </svg>`;
+}
+function tideEventsHtml(events,kind){
+  if(!events?.length)return `<span class="tide-none">${kind}なし</span>`;
+  return events.slice(0,2).map(x=>`<div><b>${x.time}</b><span>${x.level}cm</span></div>`).join('');
+}
+async function ensureTideData(){
+  if(mflTideData)return mflTideData;
+  try{
+    const r=await fetch('./data/tides-2026.json',{cache:'force-cache'});
+    if(!r.ok)throw new Error('tide data');
+    mflTideData=await r.json(); return mflTideData;
+  }catch(e){return null}
+}
+function tideCardShell(s){
+  const st=tideStationForSpot(s); if(!st)return '';
+  return `<section class="tide-card" data-tide-card="${s.id}">
+    <div class="tide-head"><div><small>🌊 MFL TIDE ASSIST</small><h4>潮の状況</h4></div><span>基準地点：${tideStationMap[st].name}</span></div>
+    <div class="tide-loading">潮位データを読み込み中…</div>
+  </section>`;
+}
+async function hydrateTideCard(s){
+  const root=document.querySelector(`[data-tide-card="${s.id}"]`); if(!root)return;
+  const code=tideStationForSpot(s), data=await ensureTideData();
+  if(!data||!code){root.querySelector('.tide-loading').textContent='潮位データを読み込めませんでした。';return}
+  const date=todayJst(),day=data.stations?.[code]?.days?.[date];
+  if(!day){root.querySelector('.tide-loading').innerHTML=`2026年以外の日付はまだMFL内蔵データ対象外です。 <a href="${tideStationMap[code].jma}" target="_blank" rel="noopener">気象庁で確認</a>`;return}
+  const hour=nowHourJst(),trend=tideTrend(day,hour),nowLevel=day.hourly?.[hour];
+  root.innerHTML=`<div class="tide-head"><div><small>🌊 MFL TIDE ASSIST</small><h4>${date.replaceAll('-','/')} の潮</h4></div><span>基準：${tideStationMap[code].name}</span></div>
+    <div class="tide-now"><span class="tide-arrow">${trend.symbol}</span><div><small>現在の目安</small><strong>${trend.label}</strong><em>${nowLevel!=null?`${hour}:00予測 ${nowLevel}cm`:''}</em></div></div>
+    ${tideSparkline(day.hourly)}
+    <div class="tide-events">
+      <section><small>🔵 満潮</small>${tideEventsHtml(day.highs,'満潮')}</section>
+      <section><small>🔻 干潮</small>${tideEventsHtml(day.lows,'干潮')}</section>
+    </div>
+    <div class="tide-actions"><a href="${tideStationMap[code].jma}" target="_blank" rel="noopener">気象庁の潮位表を開く ↗</a></div>
+    <p class="tide-note">天文潮位の予測値です。実際の潮位は気圧・風などで変わります。「釣れる／釣れない」の断定には使いません。</p>`;
+}
+
+function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><div class="spot-verify-row"><small class="spot-type">${spotTypeLabel(s.id)}</small><span class="verified-badge">✓ 公式確認</span></div><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div>${tideCardShell(s)}${seawallMapFor(s)}${specialSpotRules(s)}<div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`
   requestAnimationFrame(()=>{
     const detail=document.getElementById('fishingSpotDetail');
     if(detail) detail.scrollIntoView({behavior:'smooth',block:'start'});
   });
+
+  hydrateTideCard(s);
 }
 
 function renderGuideSection(section) {
