@@ -744,7 +744,7 @@ function renderFishingMap(){
           <h2>関東 釣地図</h2>
           <p>場所を探すことに集中する、MFLの独立した釣り場マップ。</p>
         </div>
-        <span class="fishing-map-count">29 VERIFIED</span>
+        <span class="fishing-map-count">${kantoFishingSpots.length} SPOTS</span>
       </section>
       ${renderKantoMap()}
     </section>`;
@@ -856,21 +856,33 @@ const kantoFishingSpots=[
 ,{id:'shiokaze',area:'tokyo',name:'潮風公園 南コーストデッキ',short:'潮風公園',pref:'東京',beginner:4,tackle:'○',address:'東京都品川区東八潮',fish:'マハゼ・セイゴ・フッコなど',styles:['足元狙い ◎','軽い仕掛け ○','小物釣り ○'],facilities:['通年利用','無料','南側釣り可能エリア','公園'],note:'南コーストデッキが釣り可能エリア。北側護岸は工事等で閉鎖される場合があるため、当日の公式案内と現地表示を確認。',gear:'S90MLで軽い仕掛け向き。100MHは軽い釣りでは強め。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/01_03/point'}
 
 ,{id:'tateyama_sunset',area:'chiba',name:'館山夕日桟橋',short:'館山夕日桟橋',pref:'千葉',beginner:5,tackle:'◎',address:'千葉県館山市館山1564-1周辺',fish:'アジ・サバ・シロギス・クロダイ・スズキなど',styles:['サビキ ◎','ちょい投げ ◎','ヘチ釣り ○','ルアー ○'],facilities:['約500m桟橋','手すり','周辺トイレ','渚の駅たてやま'],note:'館山市公式が桟橋での釣りを案内。竿は1人2本まで。上投げ・横投げは禁止。コマセは「カゴ」に入れたもののみ使用可能。歩道側・先端部での釣りは禁止。工事・船舶利用等で臨時規制がある場合は当日の公式案内を優先。',gear:'S90MLでサビキ・ちょい投げ・軽いルアー、100MHで少し重めの仕掛けと使い分けしやすい。',checked:'2026年8月',official:'https://www.city.tateyama.chiba.jp/minato/page100352.html'}
+,{id:'choshi-marina-coast',area:'chiba-east',zone:'choshi',name:'銚子マリーナ・名洗港海浜公園周辺',short:'名洗',pref:'千葉',beginner:3,tackle:'○',address:'千葉県銚子市潮見町',fish:'回遊魚・シーバス等（周辺海域）',styles:['海岸からの釣り △','ルアー △'],facilities:['無料駐車場','常設トイレ','海浜公園'],note:'銚子市公式で銚子マリーナ海水浴場と隣接する名洗港海浜公園を確認。海水浴場開設期間は遊泳者最優先。マリーナ・港湾作業区域や立入規制は現地表示を必ず確認。MFLでは釣り専用施設ではなく周辺候補として掲載。',gear:'S90ML中心。外洋側は風・波が強い日は無理をしない。',checked:'2026年8月',official:'https://www.city.choshi.chiba.jp/kanko/page110015.html'}
+,{id:'choshi-nagasaki-coast',area:'chiba-east',zone:'choshi',name:'長崎海岸・犬吠埼南側',short:'長崎',pref:'千葉',beginner:2,tackle:'○',address:'千葉県銚子市長崎町',fish:'沿岸魚（状況次第）',styles:['海岸・磯 △'],facilities:['無料駐車場','夏季トイレ'],note:'銚子市公式で長崎海水浴場を確認。磯浜で外洋の波を受けやすい。海水浴場開設期間は遊泳区域で釣りをしない。荒天・高波時は候補から外す。',gear:'初心者は穏やかな日限定。滑りやすい岩場へ無理に入らない。',checked:'2026年8月',official:'https://www.city.choshi.chiba.jp/kanko/page110015.html'}
+,{id:'asahi-ioka-coast',area:'chiba-east',zone:'choshi',name:'飯岡・旭海岸周辺',short:'飯岡',pref:'千葉',beginner:2,tackle:'○',address:'千葉県旭市飯岡',fish:'ヒラメ・スズキ・回遊魚など（海況次第）',styles:['サーフ △','ルアー △'],facilities:['海岸','周辺駐車場は現地確認'],note:'九十九里・銚子海域をつなぐサーフ候補。千葉県管理海岸は原則自由使用で釣りも例示されているが、港湾・漁港区域は別扱い。遊泳者・サーファーを最優先し、離岸流・高波・工事規制を現地確認。',gear:'100MHを活かしやすい。初心者は波の低い日限定。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kakan/kaigan/kaigannriyou.html'}
+,{id:'sosa-kujukuri-coast',area:'chiba-east',zone:'kujukuri',name:'匝瑳・九十九里北部海岸',short:'匝瑳',pref:'千葉',beginner:2,tackle:'○',address:'千葉県匝瑳市 九十九里浜',fish:'ヒラメ・スズキなど（海況次第）',styles:['サーフ △'],facilities:['九十九里浜'],note:'九十九里北部のサーフ候補。県管理海岸の自由使用原則を前提に掲載。ヘッドランド周辺は流れが複雑になり得るため近づきすぎず、工事・立入表示を優先。',gear:'100MH向き。波打ち際に立ち込みすぎない。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kakan/kaigan/kaigannriyou.html'}
+,{id:'kujukuri-central-coast',area:'chiba-east',zone:'kujukuri',name:'九十九里町・中央海岸',short:'九十九里',pref:'千葉',beginner:2,tackle:'○',address:'千葉県山武郡九十九里町',fish:'ヒラメ・スズキなど（海況次第）',styles:['サーフ △'],facilities:['九十九里浜'],note:'長大な砂浜の中央部。県は九十九里浜全域で侵食対策を進めているため、工事区間・ヘッドランド・立入表示を必ず確認。海水浴期は遊泳区域を避ける。',gear:'100MH中心。7gより14g以上が扱いやすい場面が多い。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kasei/kaigan/kujukurihama-sinsyokutaisaku-keikaku.html'}
+,{id:'chosei-coast',area:'chiba-east',zone:'kujukuri',name:'長生・一松海岸周辺',short:'長生',pref:'千葉',beginner:2,tackle:'○',address:'千葉県長生郡長生村',fish:'ヒラメ・スズキなど（海況次第）',styles:['サーフ △'],facilities:['九十九里自然公園周辺'],note:'南九十九里のサーフ候補。サーフィン利用も盛んな地域なのでキャスト前後の安全確認を徹底。海水浴区域・イベント・現地規制を優先。',gear:'100MH向き。混雑時は釣りを見送る判断も必要。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kc-hkazusa/kankou/index.html'}
+,{id:'onjuku-coast',area:'chiba-east',zone:'sotobo',name:'御宿海岸周辺',short:'御宿',pref:'千葉',beginner:2,tackle:'○',address:'千葉県夷隅郡御宿町',fish:'ヒラメ・スズキなど（海況次第）',styles:['サーフ △'],facilities:['砂浜','観光海岸'],note:'外房の砂浜候補。県の外房地域区分にも含まれる海岸。海水浴・サーフィン利用者を最優先し、夏季や混雑時は釣り場所を慎重に選ぶ。',gear:'100MH中心。波と風が弱い日に。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/shousupo/press/2026/bososurfing2026.html'}
+,{id:'kamogawa-coast',area:'chiba-east',zone:'sotobo',name:'鴨川・前原海岸周辺',short:'鴨川',pref:'千葉',beginner:2,tackle:'○',address:'千葉県鴨川市',fish:'ヒラメ・スズキ・回遊魚など（海況次第）',styles:['サーフ △','ルアー △'],facilities:['海岸','市街地近接'],note:'外房南部の海岸候補。漁港内ではなく県管理海岸の考え方を基準に掲載。遊泳・サーフィン・イベント利用を優先し、港湾・漁港区域へ無断で入らない。',gear:'100MHを活かしやすい。S90MLは穏やかな近距離向け。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kakan/kaigan/kaigannriyou.html'}
+
 ];
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
 function renderKantoMap(){return `<article class="guide-article kanto-guide">
 <div class="guide-article-title fishing-map-title"><span>🗺️</span><div><small>KANTO FISHING MAP</small><h3>行きたい釣り場を探す</h3></div></div>
-<div class="map-verification-banner"><div class="map-coverage"><b>🗺️ 専用地図 29か所</b><span>場所ごとに描き分け中</span></div><strong>🛟 MFL VERIFIED MAP · TIDE DATA 2026</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
-<p class="kanto-intro">エリアを選んで、気になる場所を開く。細かな情報は必要な時だけ確認できます。</p>
+<div class="map-verification-banner"><div class="map-coverage"><b>🗺️ 千葉東岸 実釣候補を厳選</b><span>場所ごとに描き分け中</span></div><strong>🛟 MFL VERIFIED MAP · TIDE DATA 2026</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
+<p class="kanto-intro">エリアを選んで、気になる場所を開く。細かな情報は必要な時だけ確認できます。</p><div class="east-coast-safety"><strong>🌊 東岸サーフの見方</strong><span>千葉県管理海岸は原則自由使用で「釣り」も例示されています。ただし港湾・漁港区域は別。海水浴、サーフィン、工事、現地の立入規制を最優先にしてください。</span></div><div class="map-curation-note"><strong>🎯 MFL掲載基準</strong><span>「場所の目印」だけの地点は減らし、実際の釣行候補として役立つ場所を優先表示。候補が増えすぎたら、密度より見やすさを優先して整理します。</span></div>
 
 <div class="map-mode-label"><span>①</span><strong>エリアから探す</strong></div>
 <div class="chiba-density-panel">
-  <div class="chiba-density-title"><span>🌊</span><div><small>CHIBA COAST DENSITY</small><strong>千葉を4エリアで見る</strong></div></div>
+  <div class="chiba-density-title"><span>🌊</span><div><small>CHIBA COAST DENSITY</small><strong>千葉を7エリアで見る</strong></div></div>
   <div class="chiba-density-grid">
     <button data-chiba-zone="north"><b>湾奥</b><span>浦安・市川</span></button>
     <button data-chiba-zone="central"><b>中央</b><span>市原</span></button>
     <button data-chiba-zone="kisarazu"><b>内房北</b><span>木更津・富津</span></button>
     <button data-chiba-zone="south"><b>南房総</b><span>館山</span></button>
+    <button data-chiba-zone="sotobo"><b>外房</b><span>勝浦</span></button>
+    <button data-chiba-zone="kujukuri"><b>九十九里</b><span>一宮</span></button>
+    <button data-chiba-zone="choshi"><b>銚子</b><span>犬吠埼・名洗</span></button>
   </div>
   <div id="chibaZoneList" class="chiba-zone-list" hidden></div>
 </div>
@@ -972,15 +984,19 @@ function renderAreaSpots(area){
 
 function chibaZoneOf(s){
   if(s.pref!=='千葉') return '';
+  if(s.zone) return s.zone;
   if(/浦安|江戸川放水路/.test(s.name)) return 'north';
   if(/市原/.test(s.name)) return 'central';
   if(/木更津|富津/.test(s.name)) return 'kisarazu';
   if(/館山/.test(s.name)) return 'south';
+  if(/勝浦|御宿/.test(s.name)) return 'sotobo';
+  if(/九十九里|釣ヶ崎|一宮/.test(s.name)) return 'kujukuri';
+  if(/銚子|犬吠|長崎|名洗/.test(s.name)) return 'choshi';
   return 'other';
 }
 function renderChibaZone(zone){
   const root=document.getElementById('chibaZoneList'); if(!root)return;
-  const labels={north:'湾奥｜浦安・市川',central:'中央｜市原',kisarazu:'内房北｜木更津・富津',south:'南房総｜館山'};
+  const labels={north:'湾奥｜浦安・市川',central:'中央｜市原',kisarazu:'内房北｜木更津・富津',south:'南房総｜館山',sotobo:'外房｜御宿・勝浦・鴨川',kujukuri:'九十九里｜北部〜一宮',choshi:'銚子・旭｜犬吠埼・飯岡'};
   const spots=kantoFishingSpots.filter(s=>chibaZoneOf(s)===zone);
   root.hidden=false;
   root.innerHTML=`<div class="zone-head"><strong>${labels[zone]}</strong><span>${spots.length}か所</span></div>
