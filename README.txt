@@ -163,3 +163,11 @@ v10.1.0 - FISH PHOTO RESTORATION
 PHOTO SOURCES
 - マハゼ: Wikimedia Commons / ふうけ / Public Domain
 - ヒラメ: Wikimedia Commons / Daiju Azuma / CC BY-SA 2.5
+
+
+v10.2.0 - REAL SABA PHOTO
+- 魚図鑑「サバ」の線画をマサバの実写写真へ差し替え
+- 学名 Scomber japonicus を表示
+- 写真出典: Wikimedia Commons / Ruff tuff cream puff / CC0 1.0
+- fish-photo-sources.json に出典情報を登録
+- Service Workerをv10.2.0へ更新しオフラインキャッシュを刷新

@@ -20,6 +20,15 @@
       "file": null,
       "status": "pending",
       "note": "釣り人の通称ではネズミゴチ類もメゴチと呼ばれるため、再利用可能かつ同定の確かな写真を確認してから掲載する。"
+    },
+    "saba": {
+      "species": "Scomber japonicus",
+      "common_name_ja": "マサバ",
+      "file": "assets/fish/saba.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Scomber_japonicus_haul.jpg",
+      "author": "Ruff tuff cream puff",
+      "license": "CC0 1.0 Universal",
+      "note": "MFL図鑑の「サバ」はマサバの実写写真として掲載。"
     }
   }
 }

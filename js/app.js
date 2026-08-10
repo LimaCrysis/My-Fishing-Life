@@ -6,7 +6,7 @@ const fishMaster = [
   { name:'メゴチ', emoji:'🐟', scientific:'Suggrundus meerdervoortii', photoPending:true, edible:'天ぷら', guide:'12cm以上を目安に', danger:'エラぶた周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'釣り人がネズミゴチ類も「メゴチ」と呼ぶことがあります。写真だけで決めつけず、頭部・口・体型を確認。' },
   { name:'ヒラメ', emoji:'🐟', photo:'./assets/fish/hirame.jpg', photoCredit:'Wikimedia Commons / Daiju Azuma（CC BY-SA 2.5）', scientific:'Paralichthys olivaceus', edible:'刺身・ムニエル', guide:'茨城県では30cm未満は採捕禁止', danger:'鋭い歯に注意', dangerLevel:1, dangerAction:'口の中に指を入れない。' },
   { name:'シーバス', emoji:'🐟', photo:'./assets/fish/seabass.jpg', edible:'洗い・塩焼き', guide:'小型はリリース推奨', danger:'エラぶた・背びれ・歯に注意', dangerLevel:1 },
-  { name:'サバ', emoji:'🐟', photo:'./assets/fish/saba.jpg', photoType:'real', edible:'塩焼き・味噌煮', guide:'食べる分だけ持ち帰る', danger:'暴れて針が刺さる事故に注意', dangerLevel:1 },
+  { name:'サバ', emoji:'🐟', photo:'./assets/fish/saba.jpg', photoType:'real', scientific:'Scomber japonicus', photoCredit:'Wikimedia Commons / Ruff tuff cream puff（CC0）', edible:'塩焼き・味噌煮', guide:'食べる分だけ持ち帰る', danger:'暴れて針が刺さる事故に注意', dangerLevel:1 },
   { name:'アイゴ', emoji:'⚠️', photo:'./assets/fish/aigo.jpg', edible:'適切に処理すれば食用可', guide:'初心者は無理に触らない', danger:'背びれ・腹びれ・尻びれに毒棘', dangerLevel:3, dangerTitle:'毒棘あり・素手で触らない', dangerAction:'魚体を直接握らず、プライヤー等で針を外す。ヒレに触れない。' },
   { name:'ゴンズイ', emoji:'☠️', photo:'./assets/fish/gonzui.jpg', edible:'食用例はあるが初心者は扱わない', guide:'初心者はリリース推奨', danger:'背びれ・胸びれの毒棘に注意', dangerLevel:3, dangerTitle:'毒棘あり・絶対に素手で握らない', dangerAction:'死んだ個体でも棘に注意。フィッシュグリップだけを過信せず、棘から距離を取る。' },
   { name:'ハオコゼ', emoji:'☠️', photo:'./assets/fish/haokoze.jpg', edible:'食用例はあるが小型', guide:'初心者はリリース推奨', danger:'背びれの毒棘', dangerLevel:3, dangerTitle:'小さくても危険・毒棘あり', dangerAction:'小さいから安全と思わず、素手でつかまない。' },
