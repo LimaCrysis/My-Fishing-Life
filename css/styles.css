@@ -1219,3 +1219,214 @@ input,select,textarea{font-size:16px}
   .bottom-nav{padding-bottom:max(6px,env(safe-area-inset-bottom))}
   .bottom-nav .nav-item{min-height:54px}
 }
+
+/* MFL v14.0.1 - VISIBILITY PATCH */
+
+/* Fishing map: make outdoor reading easier */
+.fishing-map-view{
+  --map-title-size:15px;
+  --map-meta-size:11px;
+}
+.fishing-map-view .fishing-map-hero h2{font-size:27px}
+.fishing-map-view .fishing-map-hero p:not(.eyebrow){font-size:13px;line-height:1.65}
+.fishing-map-view .map-clean-hint{font-size:10px;line-height:1.5;margin-bottom:9px}
+
+.fishing-map-view .map-view-switcher button{
+  min-height:44px;
+  font-size:10px;
+  padding:11px 6px;
+}
+.fishing-map-view .map-search-box{
+  min-height:48px;
+  padding:9px 12px;
+}
+.fishing-map-view .map-search-box input{
+  font-size:16px;
+}
+.fishing-map-view .map-filter-panel-toggle{
+  min-height:54px;
+  padding:12px 13px;
+}
+.fishing-map-view .map-filter-panel-toggle>span{font-size:22px}
+.fishing-map-view .map-filter-panel-toggle strong{font-size:12px}
+.fishing-map-view .map-filter-panel-toggle small{font-size:9px}
+.fishing-map-view .map-filter-panel-toggle>b{font-size:9px}
+
+.fishing-map-view .map-priority-card{
+  flex-basis:180px;
+  min-height:82px;
+  padding:12px;
+  border-radius:16px;
+}
+.fishing-map-view .map-priority-card strong{font-size:13px}
+.fishing-map-view .map-priority-card small{font-size:9px}
+.fishing-map-view .map-priority-pin{font-size:23px}
+
+.fishing-map-view .beginner-map-results{
+  padding:14px;
+}
+.fishing-map-view .beginner-map-results-head strong{font-size:15px}
+.fishing-map-view .beginner-map-results-head small{font-size:9px}
+.fishing-map-view .beginner-map-results-head>span{font-size:9px}
+.beginner-open-hint{
+  margin:-2px 0 10px;
+  padding:8px 10px;
+  border-radius:10px;
+  background:#edf7f8;
+  color:#456f77;
+  font-size:10px;
+  line-height:1.45;
+}
+
+.fishing-map-view .beginner-map-results-list{gap:10px}
+.fishing-map-view .beginner-map-results-list button,
+.fishing-map-view .area-spot-button,
+.fishing-map-view .filter-spot-card,
+.fishing-map-view .map-search-list button,
+.fishing-map-view .map-style-result-list button,
+.fishing-map-view .facility-result-list button,
+.fishing-map-view .east-quick-list button{
+  min-height:88px;
+  padding:14px 15px;
+  border-radius:17px;
+}
+.fishing-map-view .beginner-map-results-list button{
+  grid-template-columns:34px 1fr 30px;
+  gap:10px;
+}
+.fishing-map-view .beginner-map-results-list button>span{font-size:24px}
+.fishing-map-view .beginner-map-results-list strong,
+.fishing-map-view .area-spot-button strong,
+.fishing-map-view .filter-spot-card strong,
+.fishing-map-view .map-search-list strong,
+.fishing-map-view .map-style-result-list strong,
+.fishing-map-view .facility-result-list strong,
+.fishing-map-view .east-quick-list strong{
+  font-size:15px;
+  line-height:1.35;
+}
+.fishing-map-view .beginner-map-results-list small,
+.fishing-map-view .area-spot-button small,
+.fishing-map-view .filter-spot-card small,
+.fishing-map-view .map-search-list small,
+.fishing-map-view .map-style-result-list small,
+.fishing-map-view .facility-result-list small,
+.fishing-map-view .east-quick-list small{
+  margin-top:5px;
+  font-size:10px;
+  line-height:1.5;
+}
+.fishing-map-view .beginner-map-results-list button>b,
+.fishing-map-view .area-spot-button>b,
+.fishing-map-view .map-search-list button>b,
+.fishing-map-view .map-style-result-list button>b,
+.fishing-map-view .facility-result-list button>b,
+.fishing-map-view .east-quick-list button>b{
+  display:grid;
+  place-items:center;
+  min-width:30px;
+  min-height:30px;
+  border-radius:50%;
+  background:#eef7ff;
+  color:#087fe8;
+  font-size:24px;
+  line-height:1;
+}
+
+.fishing-map-view .spot-status{
+  margin-top:7px;
+  padding:5px 8px;
+  font-size:9px;
+}
+.fishing-map-view .area-style-mini,
+.fishing-map-view .filter-mini-tags{
+  margin-top:6px;
+}
+.fishing-map-view .filter-mini-tags span,
+.fishing-map-view .area-style-mini span{
+  font-size:9px;
+}
+
+/* Detailed spot page */
+.fishing-map-view .spot-detail-card h3,
+.fishing-map-view .spot-detail h3{font-size:21px}
+.fishing-map-view .spot-detail-card h4,
+.fishing-map-view .spot-detail h4{font-size:15px}
+.fishing-map-view .spot-detail-card p,
+.fishing-map-view .spot-detail p{font-size:12px;line-height:1.75}
+.fishing-map-view .spot-detail-card small,
+.fishing-map-view .spot-detail small{font-size:10px}
+
+/* Guide: one step larger throughout */
+.guide-hero h2,
+.guide-article-title h3{font-size:21px}
+.guide-hero p{font-size:11px;line-height:1.65}
+.guide-group-label strong{font-size:13px}
+.guide-group-label small{font-size:9px}
+
+.guide-grid-compact{gap:9px}
+.guide-grid-compact .guide-menu-card{
+  min-height:80px;
+  padding:13px 14px;
+  border-radius:15px;
+}
+.guide-grid-compact .guide-menu-icon{font-size:25px}
+.guide-grid-compact .guide-menu-card strong{
+  font-size:13px;
+  line-height:1.35;
+}
+.guide-grid-compact .guide-menu-card small{
+  margin-top:4px;
+  font-size:10px;
+  line-height:1.45;
+}
+.guide-grid-compact .guide-menu-card>b{
+  font-size:22px;
+}
+
+.guide-section-summary>div{
+  min-height:76px;
+  padding:11px 7px;
+}
+.guide-section-summary span{font-size:23px}
+.guide-section-summary strong{font-size:12px}
+.guide-section-summary small{font-size:8px;line-height:1.4}
+
+.guide-welcome h3{font-size:16px}
+.guide-welcome p{font-size:10px;line-height:1.65}
+
+.guide-article p,
+.parts-card>p,
+.rigflow-body>p,
+.rules-card p,
+.line-type-card>p,
+.hook-intro p,
+.weight-intro p,
+.glossary-detail{
+  font-size:11px;
+  line-height:1.7;
+}
+.guide-warning strong{font-size:11px}
+.guide-warning p{font-size:10px;line-height:1.6}
+
+.guide-back-top{
+  min-height:42px;
+  padding:10px 12px;
+  font-size:10px;
+}
+
+/* Bottom nav legibility */
+.bottom-nav .nav-item small{font-size:10px}
+.bottom-nav .nav-item span{font-size:21px}
+
+/* iPhone portrait */
+@media(max-width:430px){
+  .fishing-map-view .beginner-map-results-list button{
+    min-height:94px;
+  }
+  .fishing-map-view .beginner-map-results-list strong{font-size:16px}
+  .fishing-map-view .beginner-map-results-list small{font-size:10px}
+  .guide-grid-compact .guide-menu-card{min-height:84px}
+  .guide-grid-compact .guide-menu-card strong{font-size:14px}
+  .guide-grid-compact .guide-menu-card small{font-size:10px}
+}
