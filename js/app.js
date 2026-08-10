@@ -2,9 +2,9 @@ const fishMaster = [
   { name:'シロギス', emoji:'🐟', photo:'./assets/fish/kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 },
   { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' },
   { name:'アジ', emoji:'🐟', photo:'./assets/fish/aji.jpg', edible:'刺身・フライ・なめろう', guide:'15cm以上を目安に', danger:'尾の近くのゼイゴが鋭いので注意', dangerLevel:1 },
-  { name:'マハゼ', emoji:'🐡', edible:'天ぷら・唐揚げ', guide:'12cm以上を目安に', danger:'特別な危険は少ない', dangerLevel:0 },
-  { name:'メゴチ', emoji:'🐟', edible:'天ぷら', guide:'12cm以上を目安に', danger:'エラぶた周辺のトゲに注意', dangerLevel:1 },
-  { name:'ヒラメ', emoji:'🐟', edible:'刺身・ムニエル', guide:'茨城県では30cm未満は採捕禁止', danger:'鋭い歯に注意', dangerLevel:1, dangerAction:'口の中に指を入れない。' },
+  { name:'マハゼ', emoji:'🐡', photo:'./assets/fish/mahaze.jpg', photoCredit:'Wikimedia Commons / ふうけ（Public Domain）', scientific:'Acanthogobius flavimanus', edible:'天ぷら・唐揚げ', guide:'12cm以上を目安に', danger:'特別な危険は少ない', dangerLevel:0 },
+  { name:'メゴチ', emoji:'🐟', scientific:'Suggrundus meerdervoortii', photoPending:true, edible:'天ぷら', guide:'12cm以上を目安に', danger:'エラぶた周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'釣り人がネズミゴチ類も「メゴチ」と呼ぶことがあります。写真だけで決めつけず、頭部・口・体型を確認。' },
+  { name:'ヒラメ', emoji:'🐟', photo:'./assets/fish/hirame.jpg', photoCredit:'Wikimedia Commons / Daiju Azuma（CC BY-SA 2.5）', scientific:'Paralichthys olivaceus', edible:'刺身・ムニエル', guide:'茨城県では30cm未満は採捕禁止', danger:'鋭い歯に注意', dangerLevel:1, dangerAction:'口の中に指を入れない。' },
   { name:'シーバス', emoji:'🐟', photo:'./assets/fish/seabass.jpg', edible:'洗い・塩焼き', guide:'小型はリリース推奨', danger:'エラぶた・背びれ・歯に注意', dangerLevel:1 },
   { name:'サバ', emoji:'🐟', photo:'./assets/fish/saba.jpg', photoType:'real', edible:'塩焼き・味噌煮', guide:'食べる分だけ持ち帰る', danger:'暴れて針が刺さる事故に注意', dangerLevel:1 },
   { name:'アイゴ', emoji:'⚠️', photo:'./assets/fish/aigo.jpg', edible:'適切に処理すれば食用可', guide:'初心者は無理に触らない', danger:'背びれ・腹びれ・尻びれに毒棘', dangerLevel:3, dangerTitle:'毒棘あり・素手で触らない', dangerAction:'魚体を直接握らず、プライヤー等で針を外す。ヒレに触れない。' },
@@ -613,6 +613,18 @@ function dangerLabel(f){
   if(f.dangerLevel === 1) return '⚠️ 注意';
   return '';
 }
+
+function fishPhotoSummary(){
+  const fishes=fishMaster.filter(f=>f.name!=='その他');
+  const withPhoto=fishes.filter(f=>f.photo).length;
+  return {total:fishes.length,withPhoto,pct:Math.round(withPhoto/fishes.length*100)};
+}
+function fishSourceLine(f){
+  if(f.photoCredit)return `<div class="fish-photo-source"><span>📷</span>${escapeHtml(f.photoCredit)}</div>`;
+  if(f.photoPending)return `<div class="fish-photo-source pending"><span>🔎</span>魚種同定と再利用条件を確認中。誤った写真は載せません。</div>`;
+  return '';
+}
+
 function renderEncyclopedia() {
   const caught = new Set(state.catches.map(c => c.fishName));
   app.innerHTML = `
@@ -620,11 +632,12 @@ function renderEncyclopedia() {
       <strong>⚠️ 分からない魚は素手で触らない</strong>
       <p>危険魚は赤いカードで表示します。小さい魚でも毒棘を持つ種類があります。</p>
     </section>
+    ${(()=>{const p=fishPhotoSummary();return `<section class="fish-photo-progress"><div><small>PHOTO ENCYCLOPEDIA</small><strong>実写写真 ${p.withPhoto}/${p.total}魚種</strong></div><span>${p.pct}%</span><i><em style="width:${p.pct}%"></em></i><p>魚種の取り違えを避けるため、確認できた写真だけを掲載します。</p></section>`})()}
     <section class="section fish-photo-grid">
       ${fishMaster.filter(f=>f.name!=='その他').map(f => `
         <button class="fish-photo-card danger-${f.dangerLevel||0}" data-fish="${escapeHtml(f.name)}">
           <div class="fish-photo-wrap">
-            ${f.photo ? `<img src="${f.photo}" alt="${escapeHtml(f.name)}の写真" loading="lazy">` : `<div class="fish-photo-fallback"><span>${f.emoji}</span><small>実写写真 準備中</small></div>`}
+            ${f.photo ? `<img src="${f.photo}" alt="${escapeHtml(f.name)}の写真" loading="lazy">` : `<div class="fish-photo-fallback"><span>${f.emoji}</span><small>${f.photoPending?'魚種確認中':'実写写真 準備中'}</small></div>`}
             ${f.dangerLevel ? `<span class="fish-danger-badge">${dangerLabel(f)}</span>` : ''}
             ${caught.has(f.name) ? `<span class="fish-caught-badge">釣った ✓</span>` : ''}
           </div>
@@ -649,7 +662,10 @@ function showFishDetail(f){
       </div>
       <div class="fish-detail-body">
         <h2>${escapeHtml(f.name)}</h2>
+        ${f.scientific?`<div class="fish-scientific">${escapeHtml(f.scientific)}</div>`:''}
+        ${fishSourceLine(f)}
         ${f.dangerLevel>=3?`<section class="danger-stop"><strong>素手で触らない</strong><p>${escapeHtml(f.danger)}</p>${f.dangerAction?`<p>${escapeHtml(f.dangerAction)}</p>`:''}</section>`:''}
+        ${f.photoPending?`<section class="fish-id-caution"><strong>🔎 同定注意</strong><p>${escapeHtml(f.dangerAction||'似た魚がいるため、写真だけで決めつけない。')}</p></section>`:''}
         <dl>
           <div><dt>食べ方</dt><dd>${escapeHtml(f.edible)}</dd></div>
           <div><dt>持ち帰り目安</dt><dd>${escapeHtml(f.guide)}</dd></div>
@@ -773,7 +789,7 @@ const kantoFishingSpots=[
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
 function renderKantoMap(){return `<article class="guide-article kanto-guide">
 <div class="guide-article-title"><span>🗺️</span><div><small>KANTO FISHING GUIDE</small><h3>釣り場を自分で選ぶ</h3></div></div>
-<div class="map-verification-banner"><div class="map-coverage"><b>🗺️ 専用地図 24か所</b><span>場所ごとに描き分け中</span></div><strong>🛟 MFL VERIFIED MAP · TIDE DATA 2026</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
+<div class="map-verification-banner"><div class="map-coverage"><b>🗺️ 専用地図 29か所</b><span>場所ごとに描き分け中</span></div><strong>🛟 MFL VERIFIED MAP · TIDE DATA 2026</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
 <p class="kanto-intro">まずエリアを選ぶ。条件検索やルールは必要な時だけ開く、MFLのシンプル表示にしました。</p>
 
 <div class="map-mode-label"><span>①</span><strong>エリアから探す</strong></div>
@@ -811,7 +827,7 @@ function renderKantoMap(){return `<article class="guide-article kanto-guide">
 <div class="kisarazu-research"><div class="kisarazu-head"><span>🌅</span><div><small>KISARAZU</small><strong>木更津方面・重点調査</strong></div></div><p>鳥居崎海浜公園・内港公園・潮浜公園などを調査中。公園の存在だけで「釣り可」とは判断せず、公式に釣り可能範囲を確認できた場所から正式掲載します。</p><div class="kisarazu-alert"><b>🦀 木更津地先の採捕ルール</b><span>ガザミ類は千葉県の委員会指示による採捕制限があります。現行の期間・場所・方法を公式情報で確認してください。</span></div></div><div class="kisarazu-focus-note"><strong>🌅 木更津方面を正式追加</strong><p>木更津市公式の安全案内を根拠に「木更津内港公園」を千葉エリアへ追加。木更津地先のガザミ類は採捕制限があるため要確認表示にしています。</p></div><div id="spotAreaPanel" class="spot-area-panel smart-area-panel" hidden></div>
 <div id="fishingSpotDetail" class="spot-detail smart-spot-detail"></div>
 
-<div class="research-master-summary"><div class="research-master-head"><span>🔬</span><div><small>KANTO MASTER RESEARCH</small><strong>関東釣り場マスター</strong><em class="research-quality">根拠優先モード</em></div><b>40件調査</b></div><div class="research-master-counts"><span class="r-verified"><b>29</b>VERIFIED</span><span class="r-hold"><b>5</b>HOLD</span><span class="r-excluded"><b>6</b>EXCLUDED</span><span class="r-map"><b>24</b>専用地図</span></div><div class="map-coverage-meter" id="mapCoverageMeter"><div><span>VERIFIED 地図カバー率</span><b>83%</b></div><i><em style="width:83%"></em></i><small>24 / 29か所を地図化</small></div><button class="research-master-toggle" id="researchMasterToggle"><span>調査状況を見る</span><b>›</b></button><div id="researchMasterPanel" class="research-master-panel" hidden><div class="research-rule"><strong>VERIFIED</strong><p>公式情報で釣り利用を確認。MFL掲載対象。</p></div><div class="research-rule hold"><strong>HOLD</strong><p>公式根拠が足りないため保留。</p></div><div class="research-rule excluded"><strong>EXCLUDED</strong><p>公式に禁止・立入不可を確認。今後も候補化しない。</p></div><div class="research-excluded-list"><small>再候補化しない代表例</small><span>⛔ 青海南ふ頭公園 隣接護岸</span><span>⛔ 久里浜外防波堤</span><span>⛔ 東扇島東公園</span><span>⛔ 川崎港内（西公園以外）</span><span>⛔ 鹿島港（魚釣園以外）</span></div><div class="research-hold-list"><small>保留</small><span>🟡 鳥居崎海浜公園周辺</span></div><div class="research-hold-list research-new"><small>千葉追加調査 v9.2</small><span>🟡 富津みなと公園</span><span>🟡 上総湊港海浜公園</span><span>🟡 袖ケ浦海浜公園</span><span>🟡 船橋港親水公園</span><span>⛔ 稲毛海浜公園 園内の池</span><p>公園・港湾緑地の存在だけでは「釣り可」と判定しない。公式に釣り可能範囲が確認できるまでHOLD。</p></div></div></div><div class="smart-tool-row">
+<div class="research-master-summary"><div class="research-master-head"><span>🔬</span><div><small>KANTO MASTER RESEARCH</small><strong>関東釣り場マスター</strong><em class="research-quality">根拠優先モード</em></div><b>40件調査</b></div><div class="research-master-counts"><span class="r-verified"><b>29</b>VERIFIED</span><span class="r-hold"><b>5</b>HOLD</span><span class="r-excluded"><b>6</b>EXCLUDED</span><span class="r-map"><b>29</b>専用地図</span></div><div class="map-coverage-meter" id="mapCoverageMeter"><div><span>VERIFIED 地図カバー率</span><b>100%</b></div><i><em style="width:100%"></em></i><small>29 / 29か所を地図化</small></div><button class="research-master-toggle" id="researchMasterToggle"><span>調査状況を見る</span><b>›</b></button><div id="researchMasterPanel" class="research-master-panel" hidden><div class="research-rule"><strong>VERIFIED</strong><p>公式情報で釣り利用を確認。MFL掲載対象。</p></div><div class="research-rule hold"><strong>HOLD</strong><p>公式根拠が足りないため保留。</p></div><div class="research-rule excluded"><strong>EXCLUDED</strong><p>公式に禁止・立入不可を確認。今後も候補化しない。</p></div><div class="research-excluded-list"><small>再候補化しない代表例</small><span>⛔ 青海南ふ頭公園 隣接護岸</span><span>⛔ 久里浜外防波堤</span><span>⛔ 東扇島東公園</span><span>⛔ 川崎港内（西公園以外）</span><span>⛔ 鹿島港（魚釣園以外）</span></div><div class="research-hold-list"><small>保留</small><span>🟡 鳥居崎海浜公園周辺</span></div><div class="research-hold-list research-new"><small>千葉追加調査 v9.2</small><span>🟡 富津みなと公園</span><span>🟡 上総湊港海浜公園</span><span>🟡 袖ケ浦海浜公園</span><span>🟡 船橋港親水公園</span><span>⛔ 稲毛海浜公園 園内の池</span><p>公園・港湾緑地の存在だけでは「釣り可」と判定しない。公式に釣り可能範囲が確認できるまでHOLD。</p></div></div></div><div class="smart-tool-row">
   <button class="smart-tool-toggle" id="filterToggle" aria-expanded="false">
     <span class="smart-tool-icon">🔎</span><span><strong>条件から探す</strong><small>初心者・釣り方・タックルで絞る</small></span><b>›</b>
   </button>
@@ -1058,20 +1074,29 @@ const seawallMapData={
   'futtsu_area':{title:'富津地区（市公式案内エリア）',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','千葉エリア','精密図ではなく現地把握用'],note:'この図は公式確認済みの釣り場を把握しやすくするMFL模式図。正確な釣り可能範囲・立入規制は現地掲示と公式情報を優先。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V110H0Z" fill="#ddd7c4"/><path d="M60 135H760" stroke="#e7dfc9" stroke-width="78"/><path d="M60 165H760" stroke="#0b7285" stroke-width="8"/><path d="M90 138H730" stroke="#f4b942" stroke-width="11"/><text x="330" y="225">海側</text><circle cx="350" cy="158" r="16" fill="#0b7285"/><text x="342" y="165" fill="#fff">🎣</text><circle cx="570" cy="158" r="16" fill="#0b7285"/><text x="562" y="165" fill="#fff">🎣</text></svg>`,legend:['護岸・水辺型','黄色＝水辺利用のイメージ','現地掲示・公式情報を最優先'],officialLabel:'MFL VERIFIED'},
   'edogawa_hosuiro':{title:'江戸川放水路（妙典周辺）',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','千葉エリア','精密図ではなく現地把握用'],note:'この図は公式確認済みの釣り場を把握しやすくするMFL模式図。正確な釣り可能範囲・立入規制は現地掲示と公式情報を優先。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V110H0Z" fill="#ddd7c4"/><path d="M60 135H760" stroke="#e7dfc9" stroke-width="78"/><path d="M60 165H760" stroke="#0b7285" stroke-width="8"/><path d="M90 138H730" stroke="#f4b942" stroke-width="11"/><text x="330" y="225">海側</text><circle cx="350" cy="158" r="16" fill="#0b7285"/><text x="342" y="165" fill="#fff">🎣</text><circle cx="570" cy="158" r="16" fill="#0b7285"/><text x="562" y="165" fill="#fff">🎣</text></svg>`,legend:['護岸・水辺型','黄色＝水辺利用のイメージ','現地掲示・公式情報を最優先'],officialLabel:'MFL VERIFIED'},
   'shinsakon':{title:'新左近川親水公園',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','東京エリア','精密図ではなく現地把握用'],note:'この図は公式確認済みの釣り場を把握しやすくするMFL模式図。正確な釣り可能範囲・立入規制は現地掲示と公式情報を優先。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d9eef2"/><path d="M0 0H820V100H0Z" fill="#ddd7c4"/><path d="M55 130H765" stroke="#e7dfc9" stroke-width="74"/><path d="M55 158H765" stroke="#0b7285" stroke-width="8"/><path d="M85 132H735" stroke="#f4b942" stroke-width="11"/><text x="325" y="215">水辺エリア</text><circle cx="300" cy="152" r="16" fill="#0b7285"/><text x="292" y="159" fill="#fff">🎣</text><circle cx="540" cy="152" r="16" fill="#0b7285"/><text x="532" y="159" fill="#fff">🎣</text></svg>`,legend:['公園・緑道型','黄色＝水辺利用のイメージ','現地掲示・公式情報を最優先'],officialLabel:'MFL VERIFIED'},
-  'kawarago':{title:'河原子海岸',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','茨城エリア','精密図ではなく現地把握用'],note:'この図は公式確認済みの釣り場を把握しやすくするMFL模式図。正確な釣り可能範囲・立入規制は現地掲示と公式情報を優先。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V110H0Z" fill="#ddd7c4"/><path d="M60 135H760" stroke="#e7dfc9" stroke-width="78"/><path d="M60 165H760" stroke="#0b7285" stroke-width="8"/><path d="M90 138H730" stroke="#f4b942" stroke-width="11"/><text x="330" y="225">海側</text><circle cx="350" cy="158" r="16" fill="#0b7285"/><text x="342" y="165" fill="#fff">🎣</text><circle cx="570" cy="158" r="16" fill="#0b7285"/><text x="562" y="165" fill="#fff">🎣</text></svg>`,legend:['護岸・水辺型','黄色＝水辺利用のイメージ','現地掲示・公式情報を最優先'],officialLabel:'MFL VERIFIED'}
+  'kawarago':{title:'河原子海岸',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','茨城エリア','精密図ではなく現地把握用'],note:'この図は公式確認済みの釣り場を把握しやすくするMFL模式図。正確な釣り可能範囲・立入規制は現地掲示と公式情報を優先。',svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V110H0Z" fill="#ddd7c4"/><path d="M60 135H760" stroke="#e7dfc9" stroke-width="78"/><path d="M60 165H760" stroke="#0b7285" stroke-width="8"/><path d="M90 138H730" stroke="#f4b942" stroke-width="11"/><text x="330" y="225">海側</text><circle cx="350" cy="158" r="16" fill="#0b7285"/><text x="342" y="165" fill="#fff">🎣</text><circle cx="570" cy="158" r="16" fill="#0b7285"/><text x="562" y="165" fill="#fff">🎣</text></svg>`,legend:['護岸・水辺型','黄色＝水辺利用のイメージ','現地掲示・公式情報を最優先'],officialLabel:'MFL VERIFIED'},
+  'hiraiso':{title:'平磯周辺の岩場',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','茨城エリア','細部は現地確認'],note:'現地把握用のMFL模式図です。正確な釣り可能範囲・入口・立入規制は現地掲示と公式情報を優先。',beginner:'まずは入口や管理施設に近い安全な場所から。無理に先端や混雑部へ入らない。',methods:['足元','軽い仕掛け','周囲優先'],svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d8eef2"/><path d="M0 0H820V110H0Z" fill="#ddd7c4"/><path d="M60 135H760" stroke="#e7dfc9" stroke-width="78"/><path d="M60 165H760" stroke="#0b7285" stroke-width="8"/><path d="M90 138H730" stroke="#46a56a" stroke-width="11"/><text x="330" y="225">海側</text><circle cx="350" cy="158" r="16" fill="#0b7285"/><text x="342" y="165" fill="#fff">🎣</text><circle cx="570" cy="158" r="16" fill="#0b7285"/><text x="562" y="165" fill="#fff">🎣</text><path d="M690 270H770" stroke="#d94c4c" stroke-width="9" stroke-dasharray="14 10"/><text x="635" y="310">規制確認</text></svg>`,legend:['護岸・水辺型','緑＝釣り可能側の目安','赤＝禁止・要確認','青＝水際'],officialLabel:'MFL VERIFIED'},
+  'odaiba':{title:'お台場海浜公園 釣り可能エリア',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','東京エリア','細部は現地確認'],note:'現地把握用のMFL模式図です。正確な釣り可能範囲・入口・立入規制は現地掲示と公式情報を優先。',beginner:'まずは入口や管理施設に近い安全な場所から。無理に先端や混雑部へ入らない。',methods:['足元','軽い仕掛け','周囲優先'],svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d9eef2"/><path d="M0 0H820V100H0Z" fill="#ddd7c4"/><path d="M55 130H765" stroke="#e8dfc9" stroke-width="74"/><path d="M55 158H765" stroke="#0b7285" stroke-width="8"/><path d="M85 132H735" stroke="#46a56a" stroke-width="12"/><text x="315" y="220">水辺エリア</text><circle cx="300" cy="152" r="16" fill="#0b7285"/><text x="292" y="159" fill="#fff">🎣</text><circle cx="540" cy="152" r="16" fill="#0b7285"/><text x="532" y="159" fill="#fff">🎣</text><path d="M665 245H760" stroke="#d94c4c" stroke-width="9" stroke-dasharray="14 10"/><text x="610" y="285">現地規制確認</text></svg>`,legend:['公園・水辺型','緑＝釣り可能側の目安','赤＝禁止・要確認','青＝水際'],officialLabel:'MFL VERIFIED'},
+  'mizunohiroba':{title:'水の広場公園 釣り可能エリア',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','東京エリア','細部は現地確認'],note:'現地把握用のMFL模式図です。正確な釣り可能範囲・入口・立入規制は現地掲示と公式情報を優先。',beginner:'まずは入口や管理施設に近い安全な場所から。無理に先端や混雑部へ入らない。',methods:['足元','軽い仕掛け','周囲優先'],svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d9eef2"/><path d="M0 0H820V100H0Z" fill="#ddd7c4"/><path d="M55 130H765" stroke="#e8dfc9" stroke-width="74"/><path d="M55 158H765" stroke="#0b7285" stroke-width="8"/><path d="M85 132H735" stroke="#46a56a" stroke-width="12"/><text x="315" y="220">水辺エリア</text><circle cx="300" cy="152" r="16" fill="#0b7285"/><text x="292" y="159" fill="#fff">🎣</text><circle cx="540" cy="152" r="16" fill="#0b7285"/><text x="532" y="159" fill="#fff">🎣</text><path d="M665 245H760" stroke="#d94c4c" stroke-width="9" stroke-dasharray="14 10"/><text x="610" y="285">現地規制確認</text></svg>`,legend:['公園・水辺型','緑＝釣り可能側の目安','赤＝禁止・要確認','青＝水際'],officialLabel:'MFL VERIFIED'},
+  'shinkiba':{title:'新木場公園 釣り可能エリア',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','東京エリア','細部は現地確認'],note:'現地把握用のMFL模式図です。正確な釣り可能範囲・入口・立入規制は現地掲示と公式情報を優先。',beginner:'まずは入口や管理施設に近い安全な場所から。無理に先端や混雑部へ入らない。',methods:['足元','軽い仕掛け','周囲優先'],svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d9eef2"/><path d="M0 0H820V100H0Z" fill="#ddd7c4"/><path d="M55 130H765" stroke="#e8dfc9" stroke-width="74"/><path d="M55 158H765" stroke="#0b7285" stroke-width="8"/><path d="M85 132H735" stroke="#46a56a" stroke-width="12"/><text x="315" y="220">水辺エリア</text><circle cx="300" cy="152" r="16" fill="#0b7285"/><text x="292" y="159" fill="#fff">🎣</text><circle cx="540" cy="152" r="16" fill="#0b7285"/><text x="532" y="159" fill="#fff">🎣</text><path d="M665 245H760" stroke="#d94c4c" stroke-width="9" stroke-dasharray="14 10"/><text x="610" y="285">現地規制確認</text></svg>`,legend:['公園・水辺型','緑＝釣り可能側の目安','赤＝禁止・要確認','青＝水際'],officialLabel:'MFL VERIFIED'},
+  'yumenoshima':{title:'夢の島緑道公園 釣り可能エリア',confidence:'公式確認済み・位置関係模式図',facts:['VERIFIED釣り場','東京エリア','細部は現地確認'],note:'現地把握用のMFL模式図です。正確な釣り可能範囲・入口・立入規制は現地掲示と公式情報を優先。',beginner:'まずは入口や管理施設に近い安全な場所から。無理に先端や混雑部へ入らない。',methods:['足元','軽い仕掛け','周囲優先'],svg:`<svg viewBox="0 0 820 360"><rect width="820" height="360" rx="28" fill="#d9eef2"/><path d="M0 0H820V100H0Z" fill="#ddd7c4"/><path d="M55 130H765" stroke="#e8dfc9" stroke-width="74"/><path d="M55 158H765" stroke="#0b7285" stroke-width="8"/><path d="M85 132H735" stroke="#46a56a" stroke-width="12"/><text x="315" y="220">水辺エリア</text><circle cx="300" cy="152" r="16" fill="#0b7285"/><text x="292" y="159" fill="#fff">🎣</text><circle cx="540" cy="152" r="16" fill="#0b7285"/><text x="532" y="159" fill="#fff">🎣</text><path d="M665 245H760" stroke="#d94c4c" stroke-width="9" stroke-dasharray="14 10"/><text x="610" y="285">現地規制確認</text></svg>`,legend:['公園・水辺型','緑＝釣り可能側の目安','赤＝禁止・要確認','青＝水際'],officialLabel:'MFL VERIFIED'}
 };
 
 function countSiteMaps(){return Object.keys(seawallMapData).length;}
 function seawallMapFor(s){
   const d=seawallMapData[s.id]; if(!d)return '';
-  return `<section class="seawall-card site-specific">
-    <div class="seawall-head"><div><small>🗺️ MFL SITE-SPECIFIC MAP</small><h4>${d.title}</h4></div><span>${d.officialLabel}</span></div>
+  const beginner=d.beginner||'まずは入口や管理施設に近い、足場が分かりやすい場所から。無理に先端や混雑部へ入らない。';
+  const methods=d.methods||['足元','サビキ・軽い仕掛け','周囲優先'];
+  return `<section class="seawall-card site-specific" data-seawall-card="${s.id}">
+    <div class="seawall-head"><div><small>🗺️ MFL SITE MAP</small><h4>${d.title}</h4></div><span>${d.officialLabel}</span></div>
     <div class="map-confidence">${d.confidence}</div>
+    <div class="map-quick-start"><span>👫</span><div><small>初心者はまずここ</small><strong>${beginner}</strong></div></div>
     <div class="map-fact-row">${d.facts.map(x=>`<span>${x}</span>`).join('')}</div>
-    <div class="seawall-svg">${d.svg}</div>
-    <div class="seawall-legend">${d.legend.map(x=>`<span>${x}</span>`).join('')}</div>
-    <p>${d.note}</p>
-    <div class="seawall-warning">⚠️ 実際の縮尺・細かな入口位置を示す測量図ではありません。現地掲示・工事・立入規制・管理者の最新案内を最優先してください。</div>
+    <button class="seawall-map-open" data-open-map="${s.id}"><div class="seawall-svg">${d.svg}</div><span>🔍 地図を大きく見る</span></button>
+    <div class="map-unified-legend"><span><i class="legend-ok"></i>釣りOK目安</span><span><i class="legend-ng"></i>禁止・入らない</span><span><i class="legend-warn"></i>注意・要確認</span><span><i class="legend-water"></i>海・運河</span></div>
+    <div class="map-info-tabs"><button data-map-info="methods" data-map-id="${s.id}">🎣 釣り方</button><button data-map-info="tide" data-map-id="${s.id}">🌊 潮</button><button data-map-info="caution" data-map-id="${s.id}">⚠️ 注意</button><button data-map-info="facility" data-map-id="${s.id}">🚻 設備</button></div>
+    <div class="map-info-panel" id="mapInfo-${s.id}" hidden></div>
+    <p>${d.note}</p><div class="seawall-warning">⚠️ 測量図ではありません。現地掲示・立入規制・管理者の最新案内を最優先してください。</div>
   </section>`;
 }
 
@@ -1164,6 +1189,29 @@ async function hydrateTideCard(s){
     <p class="tide-note">天文潮位の予測値です。実際の潮位は気圧・風などで変わります。「釣れる／釣れない」の断定には使いません。</p>`;
 }
 
+
+function setupSeawallInteractions(s){
+  document.querySelectorAll(`[data-open-map="${s.id}"]`).forEach(btn=>btn.onclick=()=>openSeawallFullscreen(s));
+  document.querySelectorAll(`[data-map-id="${s.id}"]`).forEach(btn=>btn.onclick=()=>{
+    const panel=document.getElementById(`mapInfo-${s.id}`); if(!panel)return;
+    const d=seawallMapData[s.id],type=btn.dataset.mapInfo;
+    document.querySelectorAll(`[data-map-id="${s.id}"]`).forEach(b=>b.classList.toggle('active',b===btn));
+    panel.hidden=false;
+    if(type==='methods'){const methods=d.methods||['足元','サビキ・軽い仕掛け','周囲優先'];panel.innerHTML=`<strong>🎣 向いている使い方</strong><div class="map-chip-row">${methods.map(x=>`<span>${x}</span>`).join('')}</div>`;}
+    else if(type==='tide')panel.innerHTML=`<strong>🌊 潮を見る</strong><p>詳細上部のMFL TIDE ASSISTを確認。潮だけで釣果は断定しません。</p>`;
+    else if(type==='caution')panel.innerHTML=`<strong>⚠️ 注意</strong><p>${d.note}</p>`;
+    else panel.innerHTML=`<strong>🚻 設備</strong><p>駐車場・トイレ・入口・営業時間は設備欄と公式リンクを確認してください。</p>`;
+  });
+}
+function openSeawallFullscreen(s){
+  const d=seawallMapData[s.id]; if(!d)return;
+  const wrap=document.createElement('div'); wrap.className='map-fullscreen';
+  wrap.innerHTML=`<div class="map-fullscreen-sheet"><div class="map-fullscreen-head"><div><small>MFL SITE MAP</small><strong>${d.title}</strong></div><button id="closeMapFullscreen">×</button></div><div class="map-fullscreen-svg">${d.svg}</div><div class="map-unified-legend fullscreen"><span><i class="legend-ok"></i>釣りOK目安</span><span><i class="legend-ng"></i>禁止・入らない</span><span><i class="legend-warn"></i>注意・要確認</span><span><i class="legend-water"></i>海・運河</span></div><p>${d.note}</p><div class="seawall-warning">⚠️ 現地掲示・立入規制・管理者の最新案内を最優先。</div></div>`;
+  document.body.appendChild(wrap); document.body.style.overflow='hidden';
+  const close=()=>{wrap.remove();document.body.style.overflow='';};
+  wrap.querySelector('#closeMapFullscreen').onclick=close; wrap.onclick=e=>{if(e.target===wrap)close();};
+}
+
 function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><div class="spot-verify-row"><small class="spot-type">${spotTypeLabel(s.id)}</small><span class="verified-badge">✓ 公式確認</span></div><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div>${tideCardShell(s)}${seawallMapFor(s)}${specialSpotRules(s)}<div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`
   requestAnimationFrame(()=>{
     const detail=document.getElementById('fishingSpotDetail');
@@ -1171,6 +1219,8 @@ function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=d
   });
 
   hydrateTideCard(s);
+
+  setupSeawallInteractions(s);
 }
 
 function renderGuideSection(section) {

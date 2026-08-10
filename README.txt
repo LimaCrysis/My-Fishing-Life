@@ -140,3 +140,26 @@ v9.3.0 - VERIFIED MAP PROGRESS
 - 江戸川放水路（妙典周辺）
 - 新左近川親水公園
 - 河原子海岸
+
+
+v10.0.0 MAP COMPLETE UX
+- VERIFIED地図カバー率 29/29 = 100%
+- 残りVERIFIEDを全て地図化
+- 緑/赤/黄/青の統一凡例
+- 初心者はまずここ
+- 釣り方/潮/注意/設備の折りたたみ
+- 地図フルスクリーン表示
+
+
+v10.1.0 - FISH PHOTO RESTORATION
+- マハゼを実写写真化
+- ヒラメを実写写真化
+- 写真出典・ライセンスをアプリ内/JSONで管理
+- メゴチは同定が曖昧な写真を無理に採用せず「魚種確認中」
+- メゴチとネズミゴチ類の通称混同に注意表示
+- 魚図鑑に実写写真進捗メーター追加
+- 誤同定を避け「確認できた写真だけ掲載」の方針を明示
+
+PHOTO SOURCES
+- マハゼ: Wikimedia Commons / ふうけ / Public Domain
+- ヒラメ: Wikimedia Commons / Daiju Azuma / CC BY-SA 2.5

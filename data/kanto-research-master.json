@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-10-v9.3",
+  "version": "2026-08-10-v10.0",
   "records": [
     {
       "id": "ichihara",
@@ -18,7 +18,7 @@
       "pref": "茨城",
       "official_url": "https://kashima-fa.com/infomation/",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -28,7 +28,7 @@
       "pref": "神奈川",
       "official_url": "https://yokohama-fishingpiers.jp/honmoku/",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -38,7 +38,7 @@
       "pref": "神奈川",
       "official_url": "https://yokohama-fishingpiers.jp/isogo/",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -58,7 +58,7 @@
       "pref": "神奈川",
       "official_url": "https://yokohama-fishingpiers.jp/daikoku/",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -68,7 +68,7 @@
       "pref": "神奈川",
       "official_url": "https://www.city.yokosuka.kanagawa.jp/5820/minato/amenity_kouen/umituri/index.html",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -78,7 +78,7 @@
       "pref": "神奈川",
       "official_url": "https://www.city.kawasaki.jp/580/page/0000001336.html",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -170,7 +170,7 @@
       "pref": "茨城",
       "official_url": "https://www.ibarakiguide.jp/spot.php?code=1085&mode=detail",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -180,7 +180,7 @@
       "pref": "東京",
       "official_url": "https://www.tptc.co.jp/park/01_02/fishing",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -220,7 +220,7 @@
       "pref": "東京",
       "official_url": "https://www.tptc.co.jp/park/search/01_04",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -230,7 +230,7 @@
       "pref": "東京",
       "official_url": "https://www.tptc.co.jp/park/search/01_04",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {
@@ -240,7 +240,7 @@
       "pref": "東京",
       "official_url": "https://www.tptc.co.jp/park/search/01_04",
       "status": "verified",
-      "map_ready": false,
+      "map_ready": true,
       "tide_ready": true
     },
     {

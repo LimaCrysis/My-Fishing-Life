@@ -1,0 +1,25 @@
+{
+  "updated": "2026-08-10",
+  "photos": {
+    "mahaze": {
+      "species": "Acanthogobius flavimanus",
+      "file": "assets/fish/mahaze.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Mahaze0811.jpg",
+      "author": "ふうけ",
+      "license": "Public Domain"
+    },
+    "hirame": {
+      "species": "Paralichthys olivaceus",
+      "file": "assets/fish/hirame.jpg",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Paralichthys_olivaceus.jpg",
+      "author": "Daiju Azuma / OpenCage",
+      "license": "CC BY-SA 2.5"
+    },
+    "megochi": {
+      "species": "Suggrundus meerdervoortii",
+      "file": null,
+      "status": "pending",
+      "note": "釣り人の通称ではネズミゴチ類もメゴチと呼ばれるため、再利用可能かつ同定の確かな写真を確認してから掲載する。"
+    }
+  }
+}
