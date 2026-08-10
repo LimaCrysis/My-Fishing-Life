@@ -1430,3 +1430,187 @@ input,select,textarea{font-size:16px}
   .guide-grid-compact .guide-menu-card strong{font-size:14px}
   .guide-grid-compact .guide-menu-card small{font-size:10px}
 }
+
+/* MFL v14.0.2 - REAL DEVICE VISIBILITY FIX */
+
+/* Beginner list: exact DOM classes */
+.beginner-map-results{
+  padding:18px 16px !important;
+  border-radius:18px !important;
+}
+.beginner-map-results-head{
+  margin-bottom:10px !important;
+}
+.beginner-map-results-head small{
+  font-size:11px !important;
+  letter-spacing:.14em !important;
+}
+.beginner-map-results-head strong{
+  font-size:19px !important;
+  line-height:1.2 !important;
+}
+.beginner-map-results-head>span{
+  font-size:11px !important;
+}
+.beginner-open-hint{
+  margin:0 0 14px !important;
+  padding:11px 13px !important;
+  border-radius:12px !important;
+  font-size:12px !important;
+  line-height:1.55 !important;
+}
+.beginner-map-results-list{
+  display:grid !important;
+  gap:14px !important;
+}
+.beginner-spot-card{
+  width:100% !important;
+  min-height:122px !important;
+  display:grid !important;
+  grid-template-columns:42px minmax(0,1fr) 46px !important;
+  gap:12px !important;
+  align-items:center !important;
+  padding:18px 18px !important;
+  border:1px solid #d7e6e9 !important;
+  border-radius:20px !important;
+  background:#fff !important;
+  text-align:left !important;
+  box-shadow:0 1px 0 rgba(31,87,97,.02) !important;
+  -webkit-tap-highlight-color:rgba(11,114,133,.12) !important;
+}
+.beginner-spot-card:active{
+  transform:scale(.995);
+  background:#f6fbfc !important;
+}
+.beginner-pin{
+  font-size:30px !important;
+  line-height:1 !important;
+}
+.beginner-spot-copy{
+  min-width:0 !important;
+}
+.beginner-spot-copy strong{
+  display:block !important;
+  font-size:19px !important;
+  line-height:1.35 !important;
+  color:#0986ef !important;
+  font-weight:800 !important;
+}
+.beginner-spot-copy small{
+  display:block !important;
+  margin-top:8px !important;
+  font-size:12px !important;
+  line-height:1.55 !important;
+  color:#6a8187 !important;
+}
+.beginner-arrow{
+  display:grid !important;
+  place-items:center !important;
+  width:44px !important;
+  height:44px !important;
+  border-radius:50% !important;
+  background:#eaf5ff !important;
+  color:#0a84ef !important;
+  font-size:34px !important;
+  font-weight:700 !important;
+  line-height:1 !important;
+}
+
+/* Map headings / surrounding controls */
+.fishing-map-view .map-clean-hint{
+  font-size:11px !important;
+  line-height:1.55 !important;
+}
+.fishing-map-view .map-view-switcher button{
+  min-height:48px !important;
+  font-size:11px !important;
+}
+.fishing-map-view .map-filter-panel-toggle{
+  min-height:58px !important;
+}
+.fishing-map-view .map-filter-panel-toggle strong{
+  font-size:13px !important;
+}
+.fishing-map-view .map-filter-panel-toggle small{
+  font-size:10px !important;
+}
+
+/* Guide menu: exact existing structure */
+.guide-group-label strong{
+  font-size:15px !important;
+}
+.guide-group-label small{
+  font-size:10px !important;
+}
+.guide-grid-compact{
+  gap:11px !important;
+}
+.guide-grid-compact .guide-menu-card{
+  min-height:96px !important;
+  padding:16px 16px !important;
+  border-radius:18px !important;
+}
+.guide-grid-compact .guide-menu-icon{
+  font-size:30px !important;
+}
+.guide-grid-compact .guide-menu-card strong{
+  font-size:16px !important;
+  line-height:1.35 !important;
+}
+.guide-grid-compact .guide-menu-card small{
+  margin-top:5px !important;
+  font-size:12px !important;
+  line-height:1.45 !important;
+}
+.guide-grid-compact .guide-menu-card>b{
+  font-size:30px !important;
+}
+.guide-section-summary>div{
+  min-height:88px !important;
+}
+.guide-section-summary span{
+  font-size:27px !important;
+}
+.guide-section-summary strong{
+  font-size:14px !important;
+}
+.guide-section-summary small{
+  font-size:9px !important;
+}
+
+/* Guide detail text */
+.guide-article-title h3{
+  font-size:24px !important;
+}
+.guide-article p,
+.parts-card>p,
+.rigflow-body>p,
+.rules-card p,
+.line-type-card>p,
+.hook-intro p,
+.weight-intro p,
+.glossary-detail{
+  font-size:13px !important;
+  line-height:1.75 !important;
+}
+
+/* Bottom nav */
+.bottom-nav .nav-item small{
+  font-size:11px !important;
+}
+.bottom-nav .nav-item span{
+  font-size:23px !important;
+}
+
+@media(max-width:430px){
+  .beginner-spot-card{
+    min-height:126px !important;
+    padding:18px 16px !important;
+  }
+  .beginner-spot-copy strong{
+    font-size:18px !important;
+  }
+  .beginner-spot-copy small{
+    font-size:12px !important;
+  }
+}

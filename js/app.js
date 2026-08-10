@@ -899,11 +899,19 @@ function beginnerRecommendedSpots(){
 function beginnerFilterResultsHTML(){
   const spots=beginnerRecommendedSpots();
   return `<section class="beginner-map-results">
-    <div class="beginner-map-results-head"><div><small>BEGINNER</small><strong>初心者向け候補</strong></div><span>${spots.length}か所</span></div>
-    <div class="beginner-open-hint">カードまたは「›」をタップすると詳細を開きます。</div>
+    <div class="beginner-map-results-head">
+      <div><small>BEGINNER</small><strong>初心者向け候補</strong></div>
+      <span>${spots.length}か所</span>
+    </div>
+    <div class="beginner-open-hint">カードをタップすると、その釣り場の詳細を開きます。</div>
     <div class="beginner-map-results-list">
-      ${spots.map(s=>`<button data-fishing-spot="${s.id}">
-        <span>📍</span><div><strong>${s.name}</strong><small>${s.pref}・初心者 ${stars(s.beginner)}・${styleMiniTags(s)}</small></div><b>›</b>
+      ${spots.map(s=>`<button type="button" class="beginner-spot-card" data-fishing-spot="${s.id}" aria-label="${s.name}の詳細を開く">
+        <span class="beginner-pin">📍</span>
+        <div class="beginner-spot-copy">
+          <strong>${s.name}</strong>
+          <small>${s.pref}・初心者 ${stars(s.beginner)}・${styleMiniTags(s)}</small>
+        </div>
+        <span class="beginner-arrow" aria-hidden="true">›</span>
       </button>`).join('')}
     </div>
   </section>`;
@@ -977,16 +985,22 @@ function setupMapFilterPanel(){
 }
 
 
+
+
+
 function setupGlobalFishingSpotClicks(){
-  const scope=document.querySelector('.fishing-map-view')||document;
-  scope.onclick=(e)=>{
-    const btn=e.target.closest('[data-fishing-spot]');
-    if(!btn)return;
+  const root=document.getElementById('app');
+  if(!root || root.dataset.spotDelegation==='1') return;
+  root.dataset.spotDelegation='1';
+  root.addEventListener('click',(e)=>{
+    const target=e.target.closest('[data-fishing-spot]');
+    if(!target) return;
+    const id=target.getAttribute('data-fishing-spot');
+    if(!id) return;
     e.preventDefault();
     e.stopPropagation();
-    const id=btn.dataset.fishingSpot;
-    if(id)showFishingSpot(id);
-  };
+    showFishingSpot(id);
+  });
 }
 
 function renderFishingMap(){
