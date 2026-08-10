@@ -72,8 +72,61 @@
       <details class="optional-fields">
         <summary>仕掛け・写真・メモを追加</summary>
         <label>仕掛け・エサ・ルアー
-          <input id="rig" type="text" placeholder="例：10号オモリ＋イソメ" />
+          <input id="rig" type="text" placeholder="例：8号オモリ＋イソメ" />
         </label>
+
+        <details class="field-data-fields">
+          <summary>🎯 実釣データを残す</summary>
+          <p class="field-data-hint">あとで「何で釣れたか」を振り返るための任意項目です。</p>
+
+          <div id="jigFieldData" class="field-method-block">
+            <div class="two-cols">
+              <label>ジグヘッド
+                <select id="jigHeadWeight">
+                  <option value="">未記録</option>
+                  <option value="7g">7g</option>
+                  <option value="14g">14g</option>
+                  <option value="その他">その他</option>
+                </select>
+              </label>
+              <label>ワームカラー
+                <select id="wormColor">
+                  <option value="">未記録</option>
+                  <option value="#163">#163 夜光・クリア系</option>
+                  <option value="#183">#183 ブルー/シルバー系</option>
+                  <option value="その他">その他</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div id="baitFieldData" class="field-method-block">
+            <label>エサ
+              <input id="fieldBait" type="text" placeholder="例：アオイソメ / アミエビ" />
+            </label>
+          </div>
+
+          <div class="two-cols">
+            <label>ヒットした層
+              <select id="hitZone">
+                <option value="">未記録</option>
+                <option>表層</option>
+                <option>中層</option>
+                <option>底</option>
+                <option>足元</option>
+              </select>
+            </label>
+            <label>潮の動き
+              <select id="fieldTide">
+                <option value="">未記録</option>
+                <option>上げ潮</option>
+                <option>下げ潮</option>
+                <option>潮止まり付近</option>
+                <option>不明</option>
+              </select>
+            </label>
+          </div>
+        </details>
       <div class="segmented" role="group" aria-label="持ち帰り区分">
         <input type="radio" id="keep" name="result" value="持ち帰り" checked><label for="keep">持ち帰り</label>
         <input type="radio" id="release" name="result" value="リリース"><label for="release">リリース</label>

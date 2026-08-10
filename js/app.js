@@ -1,15 +1,15 @@
 const fishMaster = [
-  { name:'シロギス', emoji:'🐟', photo:'./assets/fish/kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 },
-  { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' },
-  { name:'アジ', emoji:'🐟', photo:'./assets/fish/aji.jpg', edible:'刺身・フライ・なめろう', guide:'15cm以上を目安に', danger:'尾の近くのゼイゴが鋭いので注意', dangerLevel:1 },
-  { name:'マハゼ', emoji:'🐡', photo:'./assets/fish/mahaze.jpg', photoCredit:'Wikimedia Commons / ふうけ（Public Domain）', scientific:'Acanthogobius flavimanus', edible:'天ぷら・唐揚げ', guide:'12cm以上を目安に', danger:'特別な危険は少ない', dangerLevel:0 },
-  { name:'メゴチ', emoji:'🐟', scientific:'Suggrundus meerdervoortii', photoPending:true, edible:'天ぷら', guide:'12cm以上を目安に', danger:'エラぶた周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'釣り人がネズミゴチ類も「メゴチ」と呼ぶことがあります。写真だけで決めつけず、頭部・口・体型を確認。' },
-  { name:'ヒラメ', emoji:'🐟', photo:'./assets/fish/hirame.jpg', photoCredit:'Wikimedia Commons / Daiju Azuma（CC BY-SA 2.5）', scientific:'Paralichthys olivaceus', edible:'刺身・ムニエル', guide:'茨城県では30cm未満は採捕禁止', danger:'鋭い歯に注意', dangerLevel:1, dangerAction:'口の中に指を入れない。' },
-  { name:'シーバス', emoji:'🐟', photo:'./assets/fish/seabass.jpg', edible:'洗い・塩焼き', guide:'小型はリリース推奨', danger:'エラぶた・背びれ・歯に注意', dangerLevel:1 },
-  { name:'サバ', emoji:'🐟', photo:'./assets/fish/saba.jpg', photoType:'real', scientific:'Scomber japonicus', photoCredit:'Wikimedia Commons / Ruff tuff cream puff（CC0）', edible:'塩焼き・味噌煮', guide:'食べる分だけ持ち帰る', danger:'暴れて針が刺さる事故に注意', dangerLevel:1 },
-  { name:'アイゴ', emoji:'⚠️', photo:'./assets/fish/aigo.jpg', edible:'適切に処理すれば食用可', guide:'初心者は無理に触らない', danger:'背びれ・腹びれ・尻びれに毒棘', dangerLevel:3, dangerTitle:'毒棘あり・素手で触らない', dangerAction:'魚体を直接握らず、プライヤー等で針を外す。ヒレに触れない。' },
-  { name:'ゴンズイ', emoji:'☠️', photo:'./assets/fish/gonzui.jpg', edible:'食用例はあるが初心者は扱わない', guide:'初心者はリリース推奨', danger:'背びれ・胸びれの毒棘に注意', dangerLevel:3, dangerTitle:'毒棘あり・絶対に素手で握らない', dangerAction:'死んだ個体でも棘に注意。フィッシュグリップだけを過信せず、棘から距離を取る。' },
-  { name:'ハオコゼ', emoji:'☠️', photo:'./assets/fish/haokoze.jpg', edible:'食用例はあるが小型', guide:'初心者はリリース推奨', danger:'背びれの毒棘', dangerLevel:3, dangerTitle:'小さくても危険・毒棘あり', dangerAction:'小さいから安全と思わず、素手でつかまない。' },
+  { name:'シロギス', emoji:'🐟', photo:'./assets/fish/kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 , where:'砂地の堤防・海岸。内房や湾内の砂底をちょい投げで探る。', methods:['ちょい投げ','投げ釣り'], bait:'イソメ類', season:'春〜秋', touch:'危険魚ではない。針を外す時は背びれに注意。' },
+  { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' , where:'岩礁・テトラ・堤防際などの障害物周り。', methods:['胴突き','穴釣り','ジグヘッド'], bait:'イソメ・魚の切り身・ワーム', season:'通年', touch:'背びれのトゲに注意。' },
+  { name:'アジ', emoji:'🐟', photo:'./assets/fish/aji.jpg', edible:'刺身・フライ・なめろう', guide:'15cm以上を目安に', danger:'尾の近くのゼイゴが鋭いので注意', dangerLevel:1 , where:'港内・堤防・常夜灯周辺など。群れが入れば足元でも狙える。', methods:['サビキ','アジング','ウキ'], bait:'アミエビ・ワーム', season:'春〜秋を中心に通年', touch:'ゼイゴや背びれが硬いので握り方に注意。' },
+  { name:'マハゼ', emoji:'🐡', photo:'./assets/fish/mahaze.jpg', photoCredit:'Wikimedia Commons / ふうけ（Public Domain）', scientific:'Acanthogobius flavimanus', edible:'天ぷら・唐揚げ', guide:'12cm以上を目安に', danger:'特別な危険は少ない', dangerLevel:0 , where:'河口・運河・内湾の砂泥底。MFLでは東京湾奥や江戸川放水路系の場所と相性が良い。', methods:['ちょい投げ','足元','ミャク釣り'], bait:'イソメ類', season:'夏〜秋が特に狙いやすい', touch:'基本的に素手で扱えるが、ヒレや針に注意。' },
+  { name:'メゴチ', emoji:'🐟', scientific:'Suggrundus meerdervoortii', photoPending:true, edible:'天ぷら', guide:'12cm以上を目安に', danger:'エラぶた周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'釣り人がネズミゴチ類も「メゴチ」と呼ぶことがあります。写真だけで決めつけず、頭部・口・体型を確認。' , where:'砂泥底。ちょい投げの外道として掛かることが多い。', methods:['ちょい投げ'], bait:'イソメ類', season:'春〜秋', touch:'エラぶた周辺の鋭いトゲに注意。' },
+  { name:'ヒラメ', emoji:'🐟', photo:'./assets/fish/hirame.jpg', photoCredit:'Wikimedia Commons / Daiju Azuma（CC BY-SA 2.5）', scientific:'Paralichthys olivaceus', edible:'刺身・ムニエル', guide:'茨城県では30cm未満は採捕禁止', danger:'鋭い歯に注意', dangerLevel:1, dangerAction:'口の中に指を入れない。' , where:'砂地・砂泥底。ベイトが集まる海岸や港の出口周辺。', methods:['ジグヘッド＋ワーム','ルアー','泳がせ'], bait:'ワーム・小魚', season:'秋〜冬を中心に通年チャンス', touch:'歯が鋭いので口へ指を入れない。' },
+  { name:'シーバス', emoji:'🐟', photo:'./assets/fish/seabass.jpg', edible:'洗い・塩焼き', guide:'小型はリリース推奨', danger:'エラぶた・背びれ・歯に注意', dangerLevel:1 , where:'河口・運河・港湾。潮が動く場所や明暗部。', methods:['ルアー','ジグヘッド＋ワーム'], bait:'ルアー・ワーム', season:'春と秋が狙いやすい', touch:'エラぶたやヒレが鋭い。フィッシュグリップ推奨。' },
+  { name:'サバ', emoji:'🐟', photo:'./assets/fish/saba.jpg', photoType:'real', scientific:'Scomber japonicus', photoCredit:'Wikimedia Commons / Ruff tuff cream puff（CC0）', edible:'塩焼き・味噌煮', guide:'食べる分だけ持ち帰る', danger:'暴れて針が刺さる事故に注意', dangerLevel:1 , where:'回遊魚。堤防周りを群れで回遊することが多い。', methods:['サビキ','ルアー','ジグ'], bait:'アミエビ・小型ルアー', season:'春〜秋を中心に回遊次第', touch:'危険魚ではないが、暴れるので針外し時に注意。' },
+  { name:'アイゴ', emoji:'⚠️', photo:'./assets/fish/aigo.jpg', edible:'適切に処理すれば食用可', guide:'初心者は無理に触らない', danger:'背びれ・腹びれ・尻びれに毒棘', dangerLevel:3, dangerTitle:'毒棘あり・素手で触らない', dangerAction:'魚体を直接握らず、プライヤー等で針を外す。ヒレに触れない。' , where:'堤防・磯周り。海藻の多い場所で出会うことがある。', methods:['ウキ','サビキで掛かることも'], bait:'海藻・オキアミ等', season:'暖かい時期', touch:'毒棘あり。素手で触らない。' },
+  { name:'ゴンズイ', emoji:'☠️', photo:'./assets/fish/gonzui.jpg', edible:'食用例はあるが初心者は扱わない', guide:'初心者はリリース推奨', danger:'背びれ・胸びれの毒棘に注意', dangerLevel:3, dangerTitle:'毒棘あり・絶対に素手で握らない', dangerAction:'死んだ個体でも棘に注意。フィッシュグリップだけを過信せず、棘から距離を取る。' , where:'港内・堤防・夜の底付近。群れで釣れることがある。', methods:['胴突き','投げ釣りで掛かることも'], bait:'イソメ類', season:'暖かい時期〜秋', touch:'毒棘あり。絶対に素手で握らない。' },
+  { name:'ハオコゼ', emoji:'☠️', photo:'./assets/fish/haokoze.jpg', edible:'食用例はあるが小型', guide:'初心者はリリース推奨', danger:'背びれの毒棘', dangerLevel:3, dangerTitle:'小さくても危険・毒棘あり', dangerAction:'小さいから安全と思わず、素手でつかまない。' , where:'岩場・堤防際・海藻周り。', methods:['小物釣りで掛かることがある'], bait:'イソメ類', season:'春〜秋', touch:'毒棘あり。小さくても素手で触らない。' },
   { name:'その他', emoji:'❓', edible:'魚種を確認', guide:'不明魚は持ち帰らない', danger:'種類が分かるまで素手で触らない', dangerLevel:2, dangerTitle:'魚種不明＝触らない', dangerAction:'写真を撮り、魚種を確認してから扱う。' }
 ];
 
@@ -169,6 +169,45 @@ function keepDecision(fish,place,size,date){
 }
 function keepBadgeHTML(fish,place,size,date){const d=keepDecision(fish,place,size,date),icon=d.status==='ng'?'🔴':d.status==='ok'?'🟢':d.status==='check'?'🟡':'⚪';return `<div class="keep-badge keep-${d.status}"><strong>${icon} ${d.label}</strong><p>${d.detail}</p>${d.dangerous?'<span>⚠️ 危険魚：持ち帰り可否とは別に、素手で触らない</span>':''}</div>`}
 
+
+function catchFieldTags(c){
+  const tags=[];
+  if(c.jigHeadWeight)tags.push(`⚖️ ${c.jigHeadWeight}`);
+  if(c.wormColor)tags.push(`🪱 ${c.wormColor}`);
+  if(c.bait)tags.push(`🦐 ${c.bait}`);
+  if(c.hitZone)tags.push(`🎯 ${c.hitZone}`);
+  if(c.tidePhase)tags.push(`🌊 ${c.tidePhase}`);
+  return tags.length?`<div class="catch-field-tags">${tags.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div>`:'';
+}
+
+function fieldInsightsHTML(){
+  const rows=state.catches.filter(c=>c.jigHeadWeight||c.wormColor||c.bait||c.hitZone||c.tidePhase);
+  if(!rows.length)return '';
+  const countBy=key=>{
+    const m={}; rows.forEach(c=>{const v=c[key];if(v)m[v]=(m[v]||0)+Number(c.count||1)});
+    return Object.entries(m).sort((a,b)=>b[1]-a[1]);
+  };
+  const top=(key,label)=>{const a=countBy(key).slice(0,3);return a.length?`<div><small>${label}</small>${a.map(([v,n])=>`<span><b>${escapeHtml(v)}</b>${n}匹</span>`).join('')}</div>`:''};
+  return `<details class="field-insights">
+    <summary><span>📊 実釣データ</span><b>${rows.length}記録</b></summary>
+    <div class="field-insight-grid">
+      ${top('jigHeadWeight','ジグヘッド')}
+      ${top('wormColor','ワーム')}
+      ${top('hitZone','ヒット層')}
+      ${top('tidePhase','潮')}
+    </div>
+    <p>まだ少ないデータでもOK。釣行を重ねるほど、自分たちの傾向が見えてきます。</p>
+  </details>`;
+}
+
+function syncFieldDataVisibility(){
+  const m=document.getElementById('method')?.value||'';
+  const jig=document.getElementById('jigFieldData');
+  const bait=document.getElementById('baitFieldData');
+  if(jig)jig.hidden=!(m==='ジグヘッド'||m==='ルアー');
+  if(bait)bait.hidden=!(m==='ちょい投げ'||m==='サビキ'||m==='エサ釣り');
+}
+
 function catchCard(c, deletable = false) {
   const trip=state.trips.find(t=>t.id===c.tripId); const keepPlace=c.place||trip?.place||'';
   const f = getFish(c.fishName);
@@ -179,6 +218,7 @@ function catchCard(c, deletable = false) {
       <span class="badge">${escapeHtml(c.result)}</span>
     </div>
     ${keepBadgeHTML(c.fishName,keepPlace,c.size,c.date)}
+    ${catchFieldTags(c)}
     ${deletable ? `<button class="catch-delete-button" data-delete-catch="${c.id}" type="button">この魚記録だけ削除</button>` : ''}
   </article>`;
 }
@@ -283,6 +323,7 @@ function renderTrips() {
       </section>` :
       `<button class="primary-button" id="startTripBtn">新しい釣行を始める</button>`}
 
+    ${fieldInsightsHTML()}
     <div class="keep-system-intro"><strong>🐟 持ち帰り判定</strong><span>場所×魚×サイズで判定。県ルール上の個別制限なし / 要確認 / リリース / 情報不足を表示します。</span></div><section class="section trip-fold-list">
       ${grouped.length ? grouped.map((g, index) => {
         const count = g.catches.reduce((n,c)=>n+Number(c.count||0),0);
@@ -650,6 +691,19 @@ function renderEncyclopedia() {
     <div id="fishDetailOverlay"></div>`;
   document.querySelectorAll('[data-fish]').forEach(btn => btn.onclick = () => showFishDetail(getFish(btn.dataset.fish)));
 }
+
+function fishKnowledgeBlocks(f){
+  const methods=f.methods||[];
+  const dangerClass=(f.dangerLevel||0)>=2?'danger':((f.dangerLevel||0)===1?'caution':'safe');
+  const touch=f.touch||((f.dangerLevel||0)>=2?'素手で触らない。':'針やヒレに注意して扱う。');
+  return `<section class="fish-knowledge">
+    <div class="fish-knowledge-card"><span>📍</span><div><small>どこにいる？</small><strong>${escapeHtml(f.where||'釣り場・季節によって変わります。')}</strong></div></div>
+    <div class="fish-knowledge-card"><span>🎣</span><div><small>狙い方</small><div class="fish-method-chips">${methods.map(x=>`<b>${escapeHtml(x)}</b>`).join('')||'<b>仕掛けを確認</b>'}</div><em>エサ：${escapeHtml(f.bait||'状況に合わせる')}</em></div></div>
+    <div class="fish-knowledge-card"><span>🗓️</span><div><small>時期の目安</small><strong>${escapeHtml(f.season||'地域・年によって変動')}</strong></div></div>
+    <div class="fish-touch ${dangerClass}"><div><span>${dangerClass==='danger'?'☠️':dangerClass==='caution'?'⚠️':'✋'}</span><strong>触り方</strong></div><p>${escapeHtml(touch)}</p></div>
+  </section>`;
+}
+
 function showFishDetail(f){
   const root=document.getElementById('fishDetailOverlay');
   if(!root) return;
@@ -666,6 +720,7 @@ function showFishDetail(f){
         ${fishSourceLine(f)}
         ${f.dangerLevel>=3?`<section class="danger-stop"><strong>素手で触らない</strong><p>${escapeHtml(f.danger)}</p>${f.dangerAction?`<p>${escapeHtml(f.dangerAction)}</p>`:''}</section>`:''}
         ${f.photoPending?`<section class="fish-id-caution"><strong>🔎 同定注意</strong><p>${escapeHtml(f.dangerAction||'似た魚がいるため、写真だけで決めつけない。')}</p></section>`:''}
+        ${fishKnowledgeBlocks(f)}
         <dl>
           <div><dt>食べ方</dt><dd>${escapeHtml(f.edible)}</dd></div>
           <div><dt>持ち帰り目安</dt><dd>${escapeHtml(f.guide)}</dd></div>
@@ -1089,13 +1144,10 @@ function seawallMapFor(s){
   const methods=d.methods||['足元','サビキ・軽い仕掛け','周囲優先'];
   return `<section class="seawall-card site-specific" data-seawall-card="${s.id}">
     <div class="seawall-head"><div><small>🗺️ MFL SITE MAP</small><h4>${d.title}</h4></div><span>${d.officialLabel}</span></div>
-    <div class="map-confidence">${d.confidence}</div>
-    <div class="map-quick-start"><span>👫</span><div><small>初心者はまずここ</small><strong>${beginner}</strong></div></div>
+    <div class="map-confidence">${d.confidence}</div><div class="map-simple-note">地図は「場所・釣り可能側・禁止側」の確認を中心に表示します。</div>
     <div class="map-fact-row">${d.facts.map(x=>`<span>${x}</span>`).join('')}</div>
     <button class="seawall-map-open" data-open-map="${s.id}"><div class="seawall-svg">${d.svg}</div><span>🔍 地図を大きく見る</span></button>
     <div class="map-unified-legend"><span><i class="legend-ok"></i>釣りOK目安</span><span><i class="legend-ng"></i>禁止・入らない</span><span><i class="legend-warn"></i>注意・要確認</span><span><i class="legend-water"></i>海・運河</span></div>
-    <div class="map-info-tabs"><button data-map-info="methods" data-map-id="${s.id}">🎣 釣り方</button><button data-map-info="tide" data-map-id="${s.id}">🌊 潮</button><button data-map-info="caution" data-map-id="${s.id}">⚠️ 注意</button><button data-map-info="facility" data-map-id="${s.id}">🚻 設備</button></div>
-    <div class="map-info-panel" id="mapInfo-${s.id}" hidden></div>
     <p>${d.note}</p><div class="seawall-warning">⚠️ 測量図ではありません。現地掲示・立入規制・管理者の最新案内を最優先してください。</div>
   </section>`;
 }
@@ -1192,16 +1244,6 @@ async function hydrateTideCard(s){
 
 function setupSeawallInteractions(s){
   document.querySelectorAll(`[data-open-map="${s.id}"]`).forEach(btn=>btn.onclick=()=>openSeawallFullscreen(s));
-  document.querySelectorAll(`[data-map-id="${s.id}"]`).forEach(btn=>btn.onclick=()=>{
-    const panel=document.getElementById(`mapInfo-${s.id}`); if(!panel)return;
-    const d=seawallMapData[s.id],type=btn.dataset.mapInfo;
-    document.querySelectorAll(`[data-map-id="${s.id}"]`).forEach(b=>b.classList.toggle('active',b===btn));
-    panel.hidden=false;
-    if(type==='methods'){const methods=d.methods||['足元','サビキ・軽い仕掛け','周囲優先'];panel.innerHTML=`<strong>🎣 向いている使い方</strong><div class="map-chip-row">${methods.map(x=>`<span>${x}</span>`).join('')}</div>`;}
-    else if(type==='tide')panel.innerHTML=`<strong>🌊 潮を見る</strong><p>詳細上部のMFL TIDE ASSISTを確認。潮だけで釣果は断定しません。</p>`;
-    else if(type==='caution')panel.innerHTML=`<strong>⚠️ 注意</strong><p>${d.note}</p>`;
-    else panel.innerHTML=`<strong>🚻 設備</strong><p>駐車場・トイレ・入口・営業時間は設備欄と公式リンクを確認してください。</p>`;
-  });
 }
 function openSeawallFullscreen(s){
   const d=seawallMapData[s.id]; if(!d)return;
@@ -1348,6 +1390,13 @@ function openCatch() {
   document.getElementById('fishCount').value = 1;
   document.getElementById('keep').checked = true;
   renderQuickFish();
+  
+  const methodSelect=document.getElementById('method');
+  if(methodSelect){
+    methodSelect.onchange=syncFieldDataVisibility;
+    syncFieldDataVisibility();
+  }
+
   catchDialog.showModal();
 }
 
@@ -1419,6 +1468,11 @@ catchForm.addEventListener('submit', async e => {
       id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), tripId: state.activeTrip.id,
       place: state.activeTrip.place, date: state.activeTrip.date, fishName: fishName.value,
       tackleId, size: fishSize.value, count: fishCount.value, method: method.value, rig: rig.value.trim(), result,
+      jigHeadWeight: document.getElementById('jigHeadWeight')?.value || '',
+      wormColor: document.getElementById('wormColor')?.value || '',
+      bait: document.getElementById('fieldBait')?.value.trim() || '',
+      hitZone: document.getElementById('hitZone')?.value || '',
+      tidePhase: document.getElementById('fieldTide')?.value || '',
       note: catchNote.value.trim(), photo, createdAt: new Date().toISOString()
     };
     state.catches.unshift(catchItem);
