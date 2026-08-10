@@ -55,9 +55,9 @@ function getFish(name) { return fishMaster.find(f => f.name === name) || fishMas
 
 function render() {
   document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === state.view));
-  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', guide:'釣行手引き', gear:'持ち物', tackle:'My Tackle', assist:'MFL Assist', settings:'設定' };
+  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', guide:'釣行手引き', fishingmap:'釣地図', gear:'持ち物', tackle:'My Tackle', assist:'MFL Assist', settings:'設定' };
   if (pageTitle) pageTitle.textContent = titles[state.view];
-  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, guide: renderGuide, gear: renderGear, tackle: renderTackle, assist: renderAssist, settings: renderSettings })[state.view]();
+  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, guide: renderGuide, fishingmap: renderFishingMap, gear: renderGear, tackle: renderTackle, assist: renderAssist, settings: renderSettings })[state.view]();
 }
 
 
@@ -734,6 +734,23 @@ function showFishDetail(f){
 }
 
 
+
+function renderFishingMap(){
+  app.innerHTML = `
+    <section class="fishing-map-view">
+      <section class="fishing-map-hero">
+        <div>
+          <p class="eyebrow">MFL FISHING MAP</p>
+          <h2>関東 釣地図</h2>
+          <p>場所を探すことに集中する、MFLの独立した釣り場マップ。</p>
+        </div>
+        <span class="fishing-map-count">29 VERIFIED</span>
+      </section>
+      ${renderKantoMap()}
+    </section>`;
+  setupKantoMap();
+}
+
 function renderGuide() {
   app.innerHTML = `
     <section class="guide-hero">
@@ -742,9 +759,8 @@ function renderGuide() {
       <p>釣り場で困った時に、必要なところだけ確認するための手引き。</p>
     </section>
 
-    <div class="guide-group-label"><span>📍</span><div><small>FIELD</small><strong>釣り場で使う</strong></div></div>
+    <div class="guide-group-label"><span>🛟</span><div><small>FIELD SUPPORT</small><strong>困った時に見る</strong></div></div>
     <section class="guide-grid guide-grid-field">
-      <button class="guide-menu-card guide-map-menu" data-guide-section="kanto"><span class="guide-menu-icon">🗺️</span><span><strong>関東釣り場ガイド</strong><small>千葉・東京を中心に探す</small></span><b>›</b></button>
       <button class="guide-menu-card" data-guide-section="trouble"><span class="guide-menu-icon">🛟</span><span><strong>困ったとき</strong><small>根掛かり・糸絡み・知らない魚</small></span><b>›</b></button>
     </section>
 
@@ -843,9 +859,9 @@ const kantoFishingSpots=[
 ];
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
 function renderKantoMap(){return `<article class="guide-article kanto-guide">
-<div class="guide-article-title"><span>🗺️</span><div><small>KANTO FISHING GUIDE</small><h3>釣り場を自分で選ぶ</h3></div></div>
+<div class="guide-article-title fishing-map-title"><span>🗺️</span><div><small>KANTO FISHING MAP</small><h3>行きたい釣り場を探す</h3></div></div>
 <div class="map-verification-banner"><div class="map-coverage"><b>🗺️ 専用地図 29か所</b><span>場所ごとに描き分け中</span></div><strong>🛟 MFL VERIFIED MAP · TIDE DATA 2026</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
-<p class="kanto-intro">まずエリアを選ぶ。条件検索やルールは必要な時だけ開く、MFLのシンプル表示にしました。</p>
+<p class="kanto-intro">エリアを選んで、気になる場所を開く。細かな情報は必要な時だけ確認できます。</p>
 
 <div class="map-mode-label"><span>①</span><strong>エリアから探す</strong></div>
 <div class="chiba-density-panel">

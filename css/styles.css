@@ -766,3 +766,90 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .field-insight-grid span{display:flex;justify-content:space-between;gap:5px;padding:3px 0;font-size:8px}.field-insight-grid span b{font-size:8px}
 .field-insights>p{margin:0;padding:0 11px 11px;font-size:8px;line-height:1.5;color:var(--muted)}
 @media(max-width:390px){.field-insight-grid{grid-template-columns:1fr}}
+
+/* MFL v12.0.0 - INDEPENDENT FISHING MAP */
+.fishing-map-view{display:block}
+.fishing-map-hero{margin:0 0 14px;padding:18px 17px;border-radius:22px;background:linear-gradient(135deg,#0d6675,#168493);color:#fff;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;box-shadow:0 8px 24px rgba(16,83,94,.13)}
+.fishing-map-hero .eyebrow{margin:0 0 4px;color:#dff5f7;font-size:10px;font-weight:900;letter-spacing:.13em}
+.fishing-map-hero h2{margin:0;font-size:25px;line-height:1.15}
+.fishing-map-hero p:not(.eyebrow){margin:7px 0 0;font-size:12px;line-height:1.6;color:#e8f8f9}
+.fishing-map-count{flex:0 0 auto;padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.16);font-size:9px;font-weight:900;white-space:nowrap}
+
+.fishing-map-view .kanto-guide{margin:0}
+.fishing-map-view .guide-article-title.fishing-map-title{padding:3px 2px 12px}
+.fishing-map-view .guide-article-title.fishing-map-title>span{font-size:30px}
+.fishing-map-view .guide-article-title h3{font-size:20px;line-height:1.25}
+.fishing-map-view .guide-article-title small{font-size:9px;letter-spacing:.11em}
+.fishing-map-view .kanto-intro{font-size:12px;line-height:1.7;margin:0 2px 15px}
+
+.fishing-map-view .map-verification-banner{padding:14px;border-radius:16px}
+.fishing-map-view .map-verification-banner strong{font-size:10px;line-height:1.45}
+.fishing-map-view .map-verification-banner>span{font-size:10px;line-height:1.65}
+.fishing-map-view .map-coverage{margin-bottom:10px}
+.fishing-map-view .map-coverage b{font-size:11px}
+.fishing-map-view .map-coverage span{font-size:9px}
+
+.fishing-map-view .map-mode-label{margin:18px 0 10px}
+.fishing-map-view .map-mode-label span{width:30px;height:30px;font-size:12px}
+.fishing-map-view .map-mode-label strong{font-size:14px}
+.fishing-map-view .chiba-density-panel{padding:14px;border-radius:18px}
+.fishing-map-view .chiba-density-title small{font-size:9px}
+.fishing-map-view .chiba-density-title strong{font-size:15px}
+.fishing-map-view .chiba-density-grid{gap:8px;margin-top:12px}
+.fishing-map-view .chiba-density-grid button{min-height:72px;padding:12px 10px;border-radius:14px}
+.fishing-map-view .chiba-density-grid button b{font-size:14px}
+.fishing-map-view .chiba-density-grid button span{font-size:10px;margin-top:4px}
+
+.fishing-map-view .area-map-card,
+.fishing-map-view [data-area-open],
+.fishing-map-view [data-fishing-spot],
+.fishing-map-view .filter-spot-card{min-height:68px}
+.fishing-map-view [data-area-open],
+.fishing-map-view [data-fishing-spot]{padding:13px 14px;border-radius:15px}
+.fishing-map-view [data-area-open] strong,
+.fishing-map-view [data-fishing-spot] strong,
+.fishing-map-view .filter-spot-card strong{font-size:13px;line-height:1.35}
+.fishing-map-view [data-area-open] small,
+.fishing-map-view [data-fishing-spot] small,
+.fishing-map-view .filter-spot-card small{font-size:9px;line-height:1.5}
+
+.fishing-map-view .spot-detail-card,
+.fishing-map-view .spot-detail{font-size:11px}
+.fishing-map-view .spot-detail-card h3,
+.fishing-map-view .spot-detail h3{font-size:19px}
+.fishing-map-view .spot-detail-card h4,
+.fishing-map-view .spot-detail h4{font-size:14px}
+.fishing-map-view .spot-detail-card p,
+.fishing-map-view .spot-detail p{font-size:10px;line-height:1.7}
+.fishing-map-view .spot-detail-card small,
+.fishing-map-view .spot-detail small{font-size:9px}
+
+.fishing-map-view .seawall-card{padding:15px;border-radius:18px}
+.fishing-map-view .seawall-head h4{font-size:17px}
+.fishing-map-view .seawall-head small{font-size:9px}
+.fishing-map-view .seawall-head>span{font-size:9px}
+.fishing-map-view .map-confidence{font-size:9px;padding:6px 9px}
+.fishing-map-view .map-fact-row span{font-size:9px;padding:7px 9px}
+.fishing-map-view .seawall-svg{border-radius:16px}
+.fishing-map-view .seawall-svg svg text{font-size:23px!important;font-weight:900!important}
+.fishing-map-view .seawall-map-open>span{font-size:11px;padding:11px}
+.fishing-map-view .map-unified-legend span{font-size:9px;padding:6px 8px}
+.fishing-map-view .seawall-warning{font-size:9px;line-height:1.6}
+
+.fishing-map-view .tide-card{padding:15px}
+.fishing-map-view .tide-head h4{font-size:17px}
+.fishing-map-view .tide-head small,.fishing-map-view .tide-head>span{font-size:9px}
+.fishing-map-view .tide-now strong{font-size:17px}
+.fishing-map-view .tide-now small,.fishing-map-view .tide-now em{font-size:9px}
+.fishing-map-view .tide-events b{font-size:13px}
+.fishing-map-view .tide-events span,.fishing-map-view .tide-events small{font-size:9px}
+
+.bottom-nav .nav-item[data-view="fishingmap"] span{font-size:22px}
+
+@media(max-width:390px){
+  .fishing-map-hero{padding:16px 14px}
+  .fishing-map-hero h2{font-size:22px}
+  .fishing-map-count{font-size:8px}
+  .fishing-map-view .chiba-density-grid{grid-template-columns:1fr 1fr}
+  .fishing-map-view .seawall-svg svg text{font-size:25px!important}
+}
