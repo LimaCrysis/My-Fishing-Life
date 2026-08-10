@@ -54,10 +54,12 @@ function timeString() { const d = new Date(); return `${String(d.getHours()).pad
 function getFish(name) { return fishMaster.find(f => f.name === name) || fishMaster.at(-1); }
 
 function render() {
+  const views={  home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, guide: renderGuide, fishingmap: renderFishingMap, gear: renderGear, tackle: renderTackle, assist: renderAssist, settings: renderSettings  };
+  const titles={  home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', guide:'釣行手引き', fishingmap:'釣地図', gear:'持ち物', tackle:'My Tackle', assist:'MFL Assist', settings:'設定'  };
+  if(!views[state.view]) state.view='home';
   document.querySelectorAll('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.view === state.view));
-  const titles = { home:'ホーム', calendar:'釣行予定', trips:'釣行記録', encyclopedia:'魚図鑑', guide:'釣行手引き', fishingmap:'釣地図', gear:'持ち物', tackle:'My Tackle', assist:'MFL Assist', settings:'設定' };
-  if (pageTitle) pageTitle.textContent = titles[state.view];
-  ({ home: renderHome, calendar: renderCalendar, trips: renderTrips, encyclopedia: renderEncyclopedia, guide: renderGuide, fishingmap: renderFishingMap, gear: renderGear, tackle: renderTackle, assist: renderAssist, settings: renderSettings })[state.view]();
+  if (pageTitle) pageTitle.textContent = titles[state.view] || 'MFL';
+  views[state.view]();
 }
 
 
@@ -106,6 +108,7 @@ function renderHome() {
       </span>
       <span class="home-tool-arrow" aria-hidden="true">›</span>
     </button>
+    <div class="mfl-build-badge">MFL FIELD TEST v14.0.0</div>
     <section class="section">
       <div class="stats-grid">
         <div class="stat-card"><strong>${state.trips.length}</strong><span>釣行回数</span></div>
@@ -735,6 +738,243 @@ function showFishDetail(f){
 
 
 
+
+function fishingMapPrioritySpots(){
+  const ids=[
+    'ichihara','wakasu','kisarazu_inner','tateyama_sunset',
+    'higashiogishima_west','umibetsuri','choshi-marina-coast',
+    'asahi-ioka-coast','onjuku-coast','kamogawa-coast'
+  ];
+  return ids.map(id=>kantoFishingSpots.find(s=>s.id===id)).filter(Boolean);
+}
+function prioritySpotStripHTML(){
+  const spots=fishingMapPrioritySpots();
+  return `<section class="map-priority-strip">
+    <div class="map-priority-head">
+      <div><small>MFL PICK</small><strong>まず見るならここ</strong></div>
+      <span>${spots.length}候補</span>
+    </div>
+    <div class="map-priority-scroll">
+      ${spots.map(s=>`<button data-fishing-spot="${s.id}" class="map-priority-card">
+        <span class="map-priority-pin">📍</span>
+        <div><strong>${s.short||s.name}</strong><small>${s.pref}・初心者 ${stars(s.beginner)}</small></div>
+      </button>`).join('')}
+    </div>
+  </section>`;
+}
+
+
+function eastChibaSpots(){
+  return kantoFishingSpots.filter(s=>s.pref==='千葉' && ['sotobo','kujukuri','choshi'].includes(chibaZoneOf(s)));
+}
+function eastChibaQuickHTML(){
+  const spots=eastChibaSpots();
+  return `<section class="east-quick-panel">
+    <div class="east-quick-head"><div><small>CHIBA EAST</small><strong>千葉東岸</strong></div><span>${spots.length}候補</span></div>
+    <div class="east-quick-list">
+      ${spots.map(s=>`<button data-fishing-spot="${s.id}">
+        <span>📍</span><div><strong>${s.name}</strong><small>${s.type||'海岸・周辺候補'}｜初心者 ${stars(s.beginner)}</small></div><b>›</b>
+      </button>`).join('')}
+    </div>
+  </section>`;
+}
+function setupMapViewModes(){
+  const root=document.getElementById('mapViewMode'); if(!root)return;
+  const renderMode=(mode)=>{
+    document.querySelectorAll('[data-map-view-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mapViewMode===mode));
+    if(mode==='recommended'){
+      root.innerHTML=`${prioritySpotStripHTML()}${renderKantoMap()}`;
+      setupKantoMap();
+    }else if(mode==='east'){
+      root.innerHTML=`${eastChibaQuickHTML()}${renderKantoMap()}`;
+      setupKantoMap();
+    }else{
+      root.innerHTML=renderKantoMap();
+      setupKantoMap();
+    }
+    root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
+  };
+  document.querySelectorAll('[data-map-view-mode]').forEach(btn=>btn.onclick=()=>renderMode(btn.dataset.mapViewMode));
+}
+
+
+function recentFishingSpots(){
+  const ids=JSON.parse(localStorage.getItem('mfl_recentFishingSpots')||'[]');
+  return ids.map(id=>kantoFishingSpots.find(s=>s.id===id)).filter(Boolean).slice(0,5);
+}
+function rememberFishingSpot(id){
+  let ids=JSON.parse(localStorage.getItem('mfl_recentFishingSpots')||'[]').filter(x=>x!==id);
+  ids.unshift(id);
+  localStorage.setItem('mfl_recentFishingSpots',JSON.stringify(ids.slice(0,5)));
+}
+function recentFishingSpotsHTML(){
+  const spots=recentFishingSpots();
+  if(!spots.length)return '';
+  return `<section class="recent-map-spots">
+    <div class="recent-map-head">
+      <div><small>RECENT</small><strong>最近見た釣り場</strong></div>
+      <button id="clearRecentFishingSpots">消去</button>
+    </div>
+    <div class="recent-map-list">
+      ${spots.map(s=>`<button data-fishing-spot="${s.id}">
+        <span>🕘</span><div><strong>${s.short||s.name}</strong><small>${s.pref}・${s.name}</small></div><b>›</b>
+      </button>`).join('')}
+    </div>
+  </section>`;
+}
+function setupRecentFishingSpots(){
+  const clear=document.getElementById('clearRecentFishingSpots');
+  if(clear)clear.onclick=()=>{
+    localStorage.removeItem('mfl_recentFishingSpots');
+    const block=document.querySelector('.recent-map-spots');
+    if(block)block.remove();
+  };
+}
+
+
+function mapSearchText(s){
+  return `${s.name||''} ${s.short||''} ${s.pref||''} ${s.area||''} ${s.address||''} ${s.fish||''}`.toLowerCase();
+}
+function mapSearchResultsHTML(spots){
+  if(!spots.length)return `<div class="map-search-empty">該当する釣り場が見つかりません。</div>`;
+  return `<div class="map-search-count">${spots.length}件</div>
+    <div class="map-search-list">${spots.slice(0,20).map(s=>`<button data-fishing-spot="${s.id}">
+      <span>📍</span><div><strong>${s.name}</strong><small>${s.pref}・初心者 ${stars(s.beginner)}・${s.short||''}</small></div><b>›</b>
+    </button>`).join('')}</div>`;
+}
+function setupMapSpotSearch(){
+  const input=document.getElementById('mapSpotSearch');
+  const clear=document.getElementById('mapSpotSearchClear');
+  const root=document.getElementById('mapSearchResults');
+  if(!input||!root)return;
+
+  const run=()=>{
+    const q=input.value.trim().toLowerCase();
+    if(clear)clear.hidden=!q;
+    if(!q){root.hidden=true;root.innerHTML='';return;}
+    const spots=kantoFishingSpots.filter(s=>mapSearchText(s).includes(q));
+    root.hidden=false;
+    root.innerHTML=mapSearchResultsHTML(spots);
+    root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
+  };
+  input.oninput=run;
+  if(clear)clear.onclick=()=>{input.value='';run();input.focus();};
+}
+
+
+function styleMatchSpot(s,style){
+  if(style==='all') return true;
+  const styles=(s.styles||[]).join(' ');
+  if(style==='ちょい投げ') return /ちょい投げ|投げ釣り/.test(styles);
+  if(style==='ジグヘッド') return /ジグヘッド|ワーム/.test(styles);
+  if(style==='サビキ') return /サビキ/.test(styles);
+  if(style==='ルアー') return /ルアー|ジグ/.test(styles);
+  return false;
+}
+function mapStyleResultsHTML(spots,style){
+  if(style==='all') return '';
+  if(!spots.length) return `<div class="map-style-empty">この釣り方で掲載中の候補はまだありません。</div>`;
+  return `<div class="map-style-result-head"><strong>${style}</strong><span>${spots.length}候補</span></div>
+    <div class="map-style-result-list">${spots.slice(0,12).map(s=>`<button data-fishing-spot="${s.id}">
+      <span>📍</span><div><strong>${s.name}</strong><small>${s.pref}・初心者 ${stars(s.beginner)}・${styleMiniTags(s)}</small></div><b>›</b>
+    </button>`).join('')}</div>`;
+}
+function setupMapStyleFilter(){
+  const root=document.getElementById('mapStyleResults'); if(!root)return;
+  document.querySelectorAll('[data-map-style]').forEach(btn=>btn.onclick=()=>{
+    const style=btn.dataset.mapStyle;
+    document.querySelectorAll('[data-map-style]').forEach(x=>x.classList.toggle('active',x===btn));
+    if(style==='all'){root.hidden=true;root.innerHTML='';return;}
+    const spots=kantoFishingSpots.filter(s=>styleMatchSpot(s,style));
+    root.hidden=false;
+    root.innerHTML=mapStyleResultsHTML(spots,style);
+    root.querySelectorAll('[data-fishing-spot]').forEach(b=>b.onclick=()=>showFishingSpot(b.dataset.fishingSpot));
+  });
+}
+
+
+function beginnerRecommendedSpots(){
+  return kantoFishingSpots.filter(s=>Number(s.beginner||0)>=4);
+}
+function beginnerFilterResultsHTML(){
+  const spots=beginnerRecommendedSpots();
+  return `<section class="beginner-map-results">
+    <div class="beginner-map-results-head"><div><small>BEGINNER</small><strong>初心者向け候補</strong></div><span>${spots.length}か所</span></div>
+    <div class="beginner-map-results-list">
+      ${spots.map(s=>`<button data-fishing-spot="${s.id}">
+        <span>📍</span><div><strong>${s.name}</strong><small>${s.pref}・初心者 ${stars(s.beginner)}・${styleMiniTags(s)}</small></div><b>›</b>
+      </button>`).join('')}
+    </div>
+  </section>`;
+}
+function setupBeginnerOnlyFilter(){
+  const btn=document.getElementById('beginnerOnlyToggle');
+  const root=document.getElementById('mapViewMode');
+  if(!btn||!root)return;
+  let on=false;
+  btn.onclick=()=>{
+    on=!on;
+    btn.setAttribute('aria-pressed',String(on));
+    btn.classList.toggle('active',on);
+    const state=btn.querySelector('b'); if(state)state.textContent=on?'ON':'OFF';
+    if(on){
+      root.innerHTML=beginnerFilterResultsHTML();
+      root.querySelectorAll('[data-fishing-spot]').forEach(x=>x.onclick=()=>showFishingSpot(x.dataset.fishingSpot));
+    }else{
+      root.innerHTML=`${prioritySpotStripHTML()}${renderKantoMap()}`;
+      setupKantoMap();
+      root.querySelectorAll('[data-fishing-spot]').forEach(x=>x.onclick=()=>showFishingSpot(x.dataset.fishingSpot));
+    }
+  };
+}
+
+
+function facilityMatchSpot(s,type){
+  const f=(s.facilities||[]).join(' ');
+  if(type==='parking')return /駐車場/.test(f);
+  if(type==='toilet')return /トイレ/.test(f);
+  if(type==='managed')return /管理施設|監視員|職員|海釣り施設|魚釣園/.test(f+' '+(s.name||''));
+  return false;
+}
+function facilityResultsHTML(spots,type){
+  const labels={parking:'駐車場あり',toilet:'トイレあり',managed:'管理施設'};
+  if(!spots.length)return `<div class="facility-empty">${labels[type]}の掲載候補はまだありません。</div>`;
+  return `<div class="facility-result-head"><strong>${labels[type]}</strong><span>${spots.length}候補</span></div>
+  <div class="facility-result-list">${spots.map(s=>`<button data-fishing-spot="${s.id}">
+    <span>📍</span><div><strong>${s.name}</strong><small>${s.pref}・${(s.facilities||[]).slice(0,3).join(' / ')}</small></div><b>›</b>
+  </button>`).join('')}</div>`;
+}
+function setupMapFacilityFilter(){
+  const root=document.getElementById('mapFacilityResults');if(!root)return;
+  let active='';
+  document.querySelectorAll('[data-map-facility]').forEach(btn=>btn.onclick=()=>{
+    const type=btn.dataset.mapFacility;
+    const same=active===type;
+    active=same?'':type;
+    document.querySelectorAll('[data-map-facility]').forEach(x=>x.classList.toggle('active',!same&&x===btn));
+    if(!active){root.hidden=true;root.innerHTML='';return;}
+    const spots=kantoFishingSpots.filter(s=>facilityMatchSpot(s,type));
+    root.hidden=false;
+    root.innerHTML=facilityResultsHTML(spots,type);
+    root.querySelectorAll('[data-fishing-spot]').forEach(b=>b.onclick=()=>showFishingSpot(b.dataset.fishingSpot));
+  });
+}
+
+
+function setupMapFilterPanel(){
+  const toggle=document.getElementById('mapFilterPanelToggle');
+  const panel=document.getElementById('mapFilterPanel');
+  if(!toggle||!panel)return;
+  toggle.onclick=()=>{
+    const open=panel.hidden;
+    panel.hidden=!open;
+    toggle.setAttribute('aria-expanded',String(open));
+    toggle.classList.toggle('active',open);
+    const state=toggle.querySelector('b');
+    if(state)state.textContent=open?'閉じる':'開く';
+  };
+}
+
 function renderFishingMap(){
   app.innerHTML = `
     <section class="fishing-map-view">
@@ -746,9 +986,63 @@ function renderFishingMap(){
         </div>
         <span class="fishing-map-count">${kantoFishingSpots.length} SPOTS</span>
       </section>
-      ${renderKantoMap()}
+      <section class="map-view-switcher">
+        <button class="active" data-map-view-mode="recommended">⭐ おすすめ</button>
+        <button data-map-view-mode="all">🗺️ 全エリア</button>
+        <button data-map-view-mode="east">🌊 千葉東岸</button>
+      </section>
+      <div class="map-clean-hint">場所名を検索。必要な時だけ条件を開く。</div>
+      <section class="map-search-box">
+        <span>🔎</span>
+        <input id="mapSpotSearch" type="search" placeholder="釣り場名・地域で検索">
+        <button id="mapSpotSearchClear" hidden>×</button>
+      </section>
+      <button id="mapFilterPanelToggle" class="map-filter-panel-toggle" aria-expanded="false"><span>⚙️</span><div><strong>条件を絞る</strong><small>初心者・設備・釣り方</small></div><b>開く</b></button>
+      <section id="mapFilterPanel" class="map-filter-panel" hidden>
+      <section class="map-beginner-filter">
+        <button id="beginnerOnlyToggle" aria-pressed="false"><span>👫</span><div><strong>初心者向けだけ表示</strong><small>初心者評価 ★★★★☆ 以上</small></div><b>OFF</b></button>
+      </section>
+
+      <section class="map-facility-filter">
+        <div class="map-facility-head"><small>FACILITY</small><strong>設備から探す</strong></div>
+        <div class="map-facility-buttons">
+          <button data-map-facility="parking">🅿️ 駐車場</button>
+          <button data-map-facility="toilet">🚻 トイレ</button>
+          <button data-map-facility="managed">🛟 管理施設</button>
+        </div>
+        <div id="mapFacilityResults" class="map-facility-results" hidden></div>
+      </section>
+
+      <section class="map-style-filter">
+        <div class="map-style-filter-head"><small>STYLE</small><strong>釣り方から探す</strong></div>
+        <div class="map-style-filter-buttons">
+          <button data-map-style="all" class="active">全部</button>
+          <button data-map-style="ちょい投げ">🎣 ちょい投げ</button>
+          <button data-map-style="ジグヘッド">🪱 ジグヘッド</button>
+          <button data-map-style="サビキ">🐟 サビキ</button>
+          <button data-map-style="ルアー">✨ ルアー</button>
+        </div>
+        <div id="mapStyleResults" class="map-style-results" hidden></div>
+      </section>
+      </section>
+      <section id="mapSearchResults" class="map-search-results" hidden></section>
+      ${recentFishingSpotsHTML()}
+      <section id="mapViewMode">
+        ${prioritySpotStripHTML()}
+        ${renderKantoMap()}
+      </section>
     </section>`;
   setupKantoMap();
+  document.querySelectorAll('.map-priority-card[data-fishing-spot]').forEach(btn=>{
+    btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot);
+  });
+  setupMapViewModes();
+  setupRecentFishingSpots();
+  setupMapSpotSearch();
+  setupMapStyleFilter();
+  setupBeginnerOnlyFilter();
+  setupMapFacilityFilter();
+  setupMapFilterPanel();
 }
 
 function renderGuide() {
@@ -756,23 +1050,40 @@ function renderGuide() {
     <section class="guide-hero">
       <p class="eyebrow">MFL FIELD GUIDE</p>
       <h2>釣行手引き</h2>
-      <p>釣り場で困った時に、必要なところだけ確認するための手引き。</p>
+      <p>分からない時に必要な項目だけ開く、MFLの実用手引き。</p>
     </section>
 
-    <div class="guide-group-label"><span>🛟</span><div><small>FIELD SUPPORT</small><strong>困った時に見る</strong></div></div>
-    <section class="guide-grid guide-grid-field">
+    <div class="guide-section-summary">
+      <div><span>🧩</span><strong>仕掛け</strong><small>組み方・金具・重さ</small></div>
+      <div><span>📚</span><strong>知識</strong><small>用語・ライン・針</small></div>
+      <div><span>🚧</span><strong>現地</strong><small>安全・ルール・困りごと</small></div>
+    </div>
+
+    <div class="guide-group-label"><span>🧩</span><div><small>RIG</small><strong>仕掛けを組む</strong></div></div>
+    <section class="guide-grid guide-grid-compact">
+      <button class="guide-menu-card" data-guide-section="rigflow"><span class="guide-menu-icon">🧩</span><span><strong>仕掛けのつなぎ方</strong><small>順番どおりに組み立てる</small></span><b>›</b></button>
+      <button class="guide-menu-card guide-parts-menu" data-guide-section="parts"><span class="guide-menu-icon">🔗</span><span><strong>接続パーツ</strong><small>サルカン・スナップ</small></span><b>›</b></button>
+      <button class="guide-menu-card guide-weight-menu" data-guide-section="weights"><span class="guide-menu-icon">⚖️</span><span><strong>オモリ号数</strong><small>号 ↔ g の目安</small></span><b>›</b></button>
+      <button class="guide-menu-card guide-knot-menu" data-guide-section="knots"><span class="guide-menu-icon">🧵</span><span><strong>糸の結び方</strong><small>STEP図解</small></span><b>›</b></button>
+    </section>
+
+    <div class="guide-group-label"><span>📚</span><div><small>KNOWLEDGE</small><strong>意味を調べる</strong></div></div>
+    <section class="guide-grid guide-grid-compact">
+      <button class="guide-menu-card guide-glossary-menu" data-guide-section="glossary"><span class="guide-menu-icon">📚</span><span><strong>釣り用語</strong><small>分からない言葉を検索</small></span><b>›</b></button>
+      <button class="guide-menu-card guide-hook-menu" data-guide-section="hooks"><span class="guide-menu-icon">🪝</span><span><strong>針の号数</strong><small>種類とサイズの見方</small></span><b>›</b></button>
+      <button class="guide-menu-card guide-line-menu" data-guide-section="lines"><span class="guide-menu-icon">🧵</span><span><strong>ラインの種類</strong><small>ナイロン・フロロ・PE</small></span><b>›</b></button>
+      <button class="guide-menu-card" data-guide-section="rigs"><span class="guide-menu-icon">🎣</span><span><strong>仕掛けの基本</strong><small>釣り方ごとの特徴</small></span><b>›</b></button>
+    </section>
+
+    <div class="guide-group-label"><span>🚧</span><div><small>FIELD</small><strong>現地で確認する</strong></div></div>
+    <section class="guide-grid guide-grid-compact">
+      <button class="guide-menu-card guide-rules-menu" data-guide-section="rules"><span class="guide-menu-icon">🚧</span><span><strong>現地ルールの見方</strong><small>禁止・制限・施設ルール</small></span><b>›</b></button>
+      <button class="guide-menu-card" data-guide-section="pier"><span class="guide-menu-icon">🌊</span><span><strong>堤防の見方</strong><small>足元・流れ・明暗</small></span><b>›</b></button>
       <button class="guide-menu-card" data-guide-section="trouble"><span class="guide-menu-icon">🛟</span><span><strong>困ったとき</strong><small>根掛かり・糸絡み・知らない魚</small></span><b>›</b></button>
     </section>
 
-    <div class="guide-group-label"><span>🎣</span><div><small>BASICS</small><strong>基本を確認する</strong></div></div>
-    <section class="guide-grid">
-      <button class="guide-menu-card" data-guide-section="pier"><span class="guide-menu-icon">🌊</span><span><strong>堤防の見方</strong><small>足元・流れ・明暗を見る</small></span><b>›</b></button>
-      <button class="guide-menu-card" data-guide-section="rigs"><span class="guide-menu-icon">🪝</span><span><strong>仕掛けの基本</strong><small>ちょい投げ・サビキ・ワーム</small></span><b>›</b></button>
-      <button class="guide-menu-card guide-knot-menu" data-guide-section="knots"><span class="guide-menu-icon">🧵</span><span><strong>糸の結び方</strong><small>手描き挿絵対応準備済み</small></span><b>›</b></button>
-    </section>
-
     <section id="guideContent" class="guide-content">
-      <div class="guide-welcome"><span>📖</span><h3>見たい項目を選んでね</h3><p>MFLは釣り方を決めません。分からない所だけ確認して、あとは自分で楽しもう。</p></div>
+      <div class="guide-welcome"><span>📖</span><h3>必要なところだけ開けばOK</h3><p>最初から全部覚える必要はありません。現場で迷った項目だけ確認できます。</p></div>
     </section>`;
   document.querySelectorAll('[data-guide-section]').forEach(btn => {
     btn.onclick = () => {
@@ -859,18 +1170,22 @@ const kantoFishingSpots=[
 ,{id:'choshi-marina-coast',area:'chiba-east',zone:'choshi',name:'銚子マリーナ・名洗港海浜公園周辺',short:'名洗',pref:'千葉',beginner:3,tackle:'○',address:'千葉県銚子市潮見町',fish:'回遊魚・シーバス等（周辺海域）',styles:['海岸からの釣り △','ルアー △'],facilities:['無料駐車場','常設トイレ','海浜公園'],note:'銚子市公式で銚子マリーナ海水浴場と隣接する名洗港海浜公園を確認。海水浴場開設期間は遊泳者最優先。マリーナ・港湾作業区域や立入規制は現地表示を必ず確認。MFLでは釣り専用施設ではなく周辺候補として掲載。',gear:'S90ML中心。外洋側は風・波が強い日は無理をしない。',checked:'2026年8月',official:'https://www.city.choshi.chiba.jp/kanko/page110015.html'}
 ,{id:'choshi-nagasaki-coast',area:'chiba-east',zone:'choshi',name:'長崎海岸・犬吠埼南側',short:'長崎',pref:'千葉',beginner:2,tackle:'○',address:'千葉県銚子市長崎町',fish:'沿岸魚（状況次第）',styles:['海岸・磯 △'],facilities:['無料駐車場','夏季トイレ'],note:'銚子市公式で長崎海水浴場を確認。磯浜で外洋の波を受けやすい。海水浴場開設期間は遊泳区域で釣りをしない。荒天・高波時は候補から外す。',gear:'初心者は穏やかな日限定。滑りやすい岩場へ無理に入らない。',checked:'2026年8月',official:'https://www.city.choshi.chiba.jp/kanko/page110015.html'}
 ,{id:'asahi-ioka-coast',area:'chiba-east',zone:'choshi',name:'飯岡・旭海岸周辺',short:'飯岡',pref:'千葉',beginner:2,tackle:'○',address:'千葉県旭市飯岡',fish:'ヒラメ・スズキ・回遊魚など（海況次第）',styles:['サーフ △','ルアー △'],facilities:['海岸','周辺駐車場は現地確認'],note:'九十九里・銚子海域をつなぐサーフ候補。千葉県管理海岸は原則自由使用で釣りも例示されているが、港湾・漁港区域は別扱い。遊泳者・サーファーを最優先し、離岸流・高波・工事規制を現地確認。',gear:'100MHを活かしやすい。初心者は波の低い日限定。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kakan/kaigan/kaigannriyou.html'}
-,{id:'sosa-kujukuri-coast',area:'chiba-east',zone:'kujukuri',name:'匝瑳・九十九里北部海岸',short:'匝瑳',pref:'千葉',beginner:2,tackle:'○',address:'千葉県匝瑳市 九十九里浜',fish:'ヒラメ・スズキなど（海況次第）',styles:['サーフ △'],facilities:['九十九里浜'],note:'九十九里北部のサーフ候補。県管理海岸の自由使用原則を前提に掲載。ヘッドランド周辺は流れが複雑になり得るため近づきすぎず、工事・立入表示を優先。',gear:'100MH向き。波打ち際に立ち込みすぎない。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kakan/kaigan/kaigannriyou.html'}
-,{id:'kujukuri-central-coast',area:'chiba-east',zone:'kujukuri',name:'九十九里町・中央海岸',short:'九十九里',pref:'千葉',beginner:2,tackle:'○',address:'千葉県山武郡九十九里町',fish:'ヒラメ・スズキなど（海況次第）',styles:['サーフ △'],facilities:['九十九里浜'],note:'長大な砂浜の中央部。県は九十九里浜全域で侵食対策を進めているため、工事区間・ヘッドランド・立入表示を必ず確認。海水浴期は遊泳区域を避ける。',gear:'100MH中心。7gより14g以上が扱いやすい場面が多い。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kasei/kaigan/kujukurihama-sinsyokutaisaku-keikaku.html'}
-,{id:'chosei-coast',area:'chiba-east',zone:'kujukuri',name:'長生・一松海岸周辺',short:'長生',pref:'千葉',beginner:2,tackle:'○',address:'千葉県長生郡長生村',fish:'ヒラメ・スズキなど（海況次第）',styles:['サーフ △'],facilities:['九十九里自然公園周辺'],note:'南九十九里のサーフ候補。サーフィン利用も盛んな地域なのでキャスト前後の安全確認を徹底。海水浴区域・イベント・現地規制を優先。',gear:'100MH向き。混雑時は釣りを見送る判断も必要。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kc-hkazusa/kankou/index.html'}
 ,{id:'onjuku-coast',area:'chiba-east',zone:'sotobo',name:'御宿海岸周辺',short:'御宿',pref:'千葉',beginner:2,tackle:'○',address:'千葉県夷隅郡御宿町',fish:'ヒラメ・スズキなど（海況次第）',styles:['サーフ △'],facilities:['砂浜','観光海岸'],note:'外房の砂浜候補。県の外房地域区分にも含まれる海岸。海水浴・サーフィン利用者を最優先し、夏季や混雑時は釣り場所を慎重に選ぶ。',gear:'100MH中心。波と風が弱い日に。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/shousupo/press/2026/bososurfing2026.html'}
 ,{id:'kamogawa-coast',area:'chiba-east',zone:'sotobo',name:'鴨川・前原海岸周辺',short:'鴨川',pref:'千葉',beginner:2,tackle:'○',address:'千葉県鴨川市',fish:'ヒラメ・スズキ・回遊魚など（海況次第）',styles:['サーフ △','ルアー △'],facilities:['海岸','市街地近接'],note:'外房南部の海岸候補。漁港内ではなく県管理海岸の考え方を基準に掲載。遊泳・サーフィン・イベント利用を優先し、港湾・漁港区域へ無断で入らない。',gear:'100MHを活かしやすい。S90MLは穏やかな近距離向け。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kakan/kaigan/kaigannriyou.html'}
 
 ];
+
+function spotStatusBadge(s){
+  const east=['sotobo','kujukuri','choshi'].includes(chibaZoneOf(s));
+  if(east && /周辺|海岸/.test(s.name)) return '<span class="spot-status research">調査候補</span>';
+  return '<span class="spot-status verified">掲載中</span>';
+}
+
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
 function renderKantoMap(){return `<article class="guide-article kanto-guide">
 <div class="guide-article-title fishing-map-title"><span>🗺️</span><div><small>KANTO FISHING MAP</small><h3>行きたい釣り場を探す</h3></div></div>
-<div class="map-verification-banner"><div class="map-coverage"><b>🗺️ 千葉東岸 実釣候補を厳選</b><span>場所ごとに描き分け中</span></div><strong>🛟 MFL VERIFIED MAP · TIDE DATA 2026</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
-<p class="kanto-intro">エリアを選んで、気になる場所を開く。細かな情報は必要な時だけ確認できます。</p><div class="east-coast-safety"><strong>🌊 東岸サーフの見方</strong><span>千葉県管理海岸は原則自由使用で「釣り」も例示されています。ただし港湾・漁港区域は別。海水浴、サーフィン、工事、現地の立入規制を最優先にしてください。</span></div><div class="map-curation-note"><strong>🎯 MFL掲載基準</strong><span>「場所の目印」だけの地点は減らし、実際の釣行候補として役立つ場所を優先表示。候補が増えすぎたら、密度より見やすさを優先して整理します。</span></div>
+<div class="map-verification-banner"><div class="map-coverage"><b>🗺️ 千葉東岸 使える候補を厳選</b><span>場所ごとに描き分け中</span></div><strong>🛟 MFL VERIFIED MAP · TIDE DATA 2026</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
+<p class="kanto-intro">エリアを選んで、気になる場所を開く。細かな情報は必要な時だけ確認できます。</p><div class="east-coast-safety"><strong>🌊 東岸サーフの見方</strong><span>千葉県管理海岸は原則自由使用で「釣り」も例示されています。ただし港湾・漁港区域は別。海水浴、サーフィン、工事、現地の立入規制を最優先にしてください。</span></div><div class="map-curation-note"><strong>🎯 MFL掲載基準</strong><span>実際に『ここへ行こう』と選べる場所を優先。範囲が広すぎる候補や目印だけの地点は、地図から外して整理します。</span></div>
 
 <div class="map-mode-label"><span>①</span><strong>エリアから探す</strong></div>
 <div class="chiba-density-panel">
@@ -976,7 +1291,7 @@ function renderAreaSpots(area){
    : kantoFishingSpots.filter(s=>s.area===area);
  root.hidden=false;
  root.innerHTML=`<div class="area-panel-head"><div><small>AREA</small><h4>${labels[area]}</h4></div><button id="closeAreaPanel">閉じる ×</button></div>
- <div class="area-spot-list">${spots.map(s=>`<button class="area-spot-button" data-fishing-spot="${s.id}"><span class="area-spot-pin">📍</span><span class="area-spot-copy"><strong>${s.name}</strong><small>初心者 ${stars(s.beginner)}　タックル ${s.tackle}</small><span class="area-style-mini">${styleMiniTags(s)}</span></span><b>›</b></button>`).join('')}</div>`;
+ <div class="area-spot-list">${spots.map(s=>`<button class="area-spot-button" data-fishing-spot="${s.id}"><span class="area-spot-pin">📍</span><span class="area-spot-copy"><strong>${s.name}</strong><small>初心者 ${stars(s.beginner)}　タックル ${s.tackle}</small>${spotStatusBadge(s)}<span class="area-style-mini">${styleMiniTags(s)}</span></span><b>›</b></button>`).join('')}</div>`;
  document.getElementById('closeAreaPanel').onclick=()=>root.hidden=true;
  root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
  root.scrollIntoView({behavior:'smooth',block:'nearest'});
@@ -1001,7 +1316,7 @@ function renderChibaZone(zone){
   root.hidden=false;
   root.innerHTML=`<div class="zone-head"><strong>${labels[zone]}</strong><span>${spots.length}か所</span></div>
   <div class="zone-list">${spots.map(s=>`<button class="zone-spot" data-fishing-spot="${s.id}">
-    <span>📍</span><div><strong>${s.name}</strong><small>初心者 ${stars(s.beginner)}　タックル ${s.tackle}</small></div><b>›</b>
+    <span>📍</span><div><strong>${s.name}</strong><small>初心者 ${stars(s.beginner)}　タックル ${s.tackle}</small>${spotStatusBadge(s)}</div><b>›</b>
   </button>`).join('')}</div>`;
   root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
   root.scrollIntoView({behavior:'smooth',block:'nearest'});
@@ -1280,13 +1595,14 @@ function setupSeawallInteractions(s){
 function openSeawallFullscreen(s){
   const d=seawallMapData[s.id]; if(!d)return;
   const wrap=document.createElement('div'); wrap.className='map-fullscreen';
-  wrap.innerHTML=`<div class="map-fullscreen-sheet"><div class="map-fullscreen-head"><div><small>MFL SITE MAP</small><strong>${d.title}</strong></div><button id="closeMapFullscreen">×</button></div><div class="map-fullscreen-svg">${d.svg}</div><div class="map-unified-legend fullscreen"><span><i class="legend-ok"></i>釣りOK目安</span><span><i class="legend-ng"></i>禁止・入らない</span><span><i class="legend-warn"></i>注意・要確認</span><span><i class="legend-water"></i>海・運河</span></div><p>${d.note}</p><div class="seawall-warning">⚠️ 現地掲示・立入規制・管理者の最新案内を最優先。</div></div>`;
+  wrap.innerHTML=`<div class="map-fullscreen-sheet"><div class="map-fullscreen-head"><div><small>MFL SITE MAP</small><strong>${d.title}</strong></div><button id="closeMapFullscreen">×</button></div><div class="map-fullscreen-svg">${d.svg}</div><div class="map-unified-legend fullscreen"><span><i class="legend-ok"></i>釣りOK目安</span><span><i class="legend-ng"></i>禁止・入らない</span><span><i class="legend-warn"></i>注意・要確認</span><span><i class="legend-water"></i>海・運河</span></div><p>${d.note}</p><div class="map-readability-tip">🔍 地図は拡大表示推奨。文字や禁止範囲は全画面で確認してください。</div><div class="seawall-warning">⚠️ 現地掲示・立入規制・管理者の最新案内を最優先。</div></div>`;
   document.body.appendChild(wrap); document.body.style.overflow='hidden';
   const close=()=>{wrap.remove();document.body.style.overflow='';};
   wrap.querySelector('#closeMapFullscreen').onclick=close; wrap.onclick=e=>{if(e.target===wrap)close();};
 }
 
-function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><div class="spot-verify-row"><small class="spot-type">${spotTypeLabel(s.id)}</small><span class="verified-badge">✓ 公式確認</span></div><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div>${tideCardShell(s)}${seawallMapFor(s)}${specialSpotRules(s)}<div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`
+function showFishingSpot(id){
+  rememberFishingSpot(id);const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><div class="spot-verify-row"><small class="spot-type">${spotTypeLabel(s.id)}</small><span class="verified-badge">✓ 公式確認</span></div><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div>${tideCardShell(s)}${seawallMapFor(s)}${specialSpotRules(s)}<div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`
   requestAnimationFrame(()=>{
     const detail=document.getElementById('fishingSpotDetail');
     if(detail) detail.scrollIntoView({behavior:'smooth',block:'start'});
@@ -1295,6 +1611,79 @@ function showFishingSpot(id){const s=kantoFishingSpots.find(x=>x.id===id),root=d
   hydrateTideCard(s);
 
   setupSeawallInteractions(s);
+}
+
+
+function setupPartsQuickAnswer(){
+  const box=document.getElementById('partsQuickAnswer'); if(!box)return;
+  const answers={
+    jig:['小型スナップ','道糸またはリーダー → 小型スナップ → ジグヘッド。サルカンは基本なくてOK。'],
+    casting:['スナップ付きサルカン','道糸 → スナップ付きサルカン → 天秤・仕掛け。交換しやすく、糸ヨレ対策にも。'],
+    sabiki:['サルカン / スナップ付きサルカン','市販仕掛けの接続部を確認。仕掛け袋に指定がある場合はその方法を優先。'],
+    lure:['小型スナップ','道糸またはリーダー → スナップ → ルアー。交換のたびに結び直さなくて済む。']
+  };
+  document.querySelectorAll('[data-part-answer]').forEach(btn=>btn.onclick=()=>{
+    document.querySelectorAll('[data-part-answer]').forEach(x=>x.classList.remove('active')); btn.classList.add('active');
+    const a=answers[btn.dataset.partAnswer]; box.innerHTML=`<small>おすすめ</small><strong>${a[0]}</strong><p>${a[1]}</p>`;
+  });
+}
+
+
+const beginnerGlossary=[
+  {term:'道糸',cat:'糸',icon:'🧵',short:'リールに巻いてあるメインの糸。',detail:'竿から仕掛けまで力を伝える中心の糸。ナイロン・PE・カーボナイロンなどがあります。'},
+  {term:'ハリス',cat:'糸',icon:'🧵',short:'針の近くに使う細い糸。',detail:'魚に見えにくくしたり、根掛かり時に仕掛け全体を失いにくくしたりする役割があります。'},
+  {term:'幹糸',cat:'糸',icon:'🧵',short:'複数の針をまとめる仕掛けの中心の糸。',detail:'サビキや投げ釣り仕掛けで、ハリスを枝のようにつなぐ本体側の糸です。'},
+  {term:'リーダー',cat:'糸',icon:'🧵',short:'道糸の先に付ける別の糸。',detail:'PEライン使用時の擦れ対策や、ルアー・仕掛けとの接続に使います。'},
+  {term:'サルカン',cat:'金具',icon:'🔄',short:'糸ヨレを減らす回転金具。',detail:'道糸と仕掛けの接続に使います。回転するため、仕掛けが回った時の糸ヨレを軽減します。'},
+  {term:'スナップ',cat:'金具',icon:'📎',short:'仕掛けを素早く交換する開閉金具。',detail:'ジグヘッドやルアー交換に便利。軽い仕掛けでは小型を選ぶと扱いやすいです。'},
+  {term:'スナップ付きサルカン',cat:'金具',icon:'🔗',short:'サルカンとスナップが一体。',detail:'糸ヨレ対策と仕掛け交換の両方ができます。ちょい投げの天秤接続にも便利。'},
+  {term:'天秤',cat:'仕掛け',icon:'⚖️',short:'オモリと仕掛けを絡みにくくするパーツ。',detail:'ちょい投げや投げ釣りで使います。仕掛けが道糸へ絡むのを減らします。'},
+  {term:'オモリ',cat:'仕掛け',icon:'⬇️',short:'仕掛けを沈めたり飛ばしたりする重り。',detail:'日本では「号」で表すことも多く、1号は約3.75gが目安です。'},
+  {term:'ジグヘッド',cat:'ルアー',icon:'🪝',short:'オモリと針が一体になったルアー用の針。',detail:'ワームを付けて使います。重さで飛距離・沈む速さ・底取りのしやすさが変わります。'},
+  {term:'ワーム',cat:'ルアー',icon:'🪱',short:'柔らかい素材でできた疑似餌。',detail:'小魚や虫などを模した形が多く、ジグヘッドと組み合わせて使います。'},
+  {term:'サビキ',cat:'仕掛け',icon:'🐟',short:'小さな疑似針を複数付けた仕掛け。',detail:'アジ・イワシ・サバなどの回遊魚狙いでよく使います。アミエビを使うことが多いです。'},
+  {term:'ちょい投げ',cat:'釣り方',icon:'🎣',short:'近〜中距離へ軽く投げて底を探る釣り。',detail:'キス・ハゼ・メゴチなどを狙いやすく、初心者にも始めやすい釣り方です。'},
+  {term:'底を取る',cat:'釣り方',icon:'🌊',short:'仕掛けが海底に着いた状態を確認すること。',detail:'ジグヘッドやちょい投げでは重要。糸の張りや竿先の変化で着底を判断します。'},
+  {term:'表層 / 中層 / 底',cat:'釣り方',icon:'📏',short:'魚を狙う水深の位置。',detail:'表層＝水面近く、中層＝水の中間、底＝海底付近。魚種や時間帯で居場所が変わります。'},
+  {term:'号数',cat:'サイズ',icon:'🔢',short:'針・糸・オモリなどのサイズ表記。',detail:'同じ「号」でも針・糸・オモリでは意味が違います。商品ごとの用途表示を確認します。'},
+  {term:'ドラグ',cat:'リール',icon:'🌀',short:'強く引かれた時に糸を出すリールの機能。',detail:'魚の引きで糸が切れるのを防ぎます。締めすぎ・緩めすぎに注意。'},
+  {term:'アイ',cat:'金具',icon:'⭕',short:'糸やスナップを付ける輪。',detail:'ジグヘッド・ルアー・針などに付いている接続部分のことです。'}
+];
+
+function setupGlossaryGuide(){
+  const input=document.getElementById('glossarySearch');
+  const root=document.getElementById('glossaryList');
+  const empty=document.getElementById('glossaryEmpty');
+  if(!input||!root)return;
+
+  const renderList=(query='')=>{
+    const q=query.trim().toLowerCase();
+    const rows=beginnerGlossary.filter(x=>!q||`${x.term} ${x.cat} ${x.short} ${x.detail}`.toLowerCase().includes(q));
+    root.innerHTML=rows.map((x,i)=>`<details class="glossary-item">
+      <summary><span>${x.icon}</span><div><strong>${x.term}</strong><small>${x.cat}｜${x.short}</small></div><b>›</b></summary>
+      <div class="glossary-detail">${x.detail}</div>
+    </details>`).join('');
+    if(empty)empty.hidden=rows.length>0;
+  };
+
+  input.oninput=()=>renderList(input.value);
+  document.querySelectorAll('[data-glossary-filter]').forEach(btn=>btn.onclick=()=>{
+    const val=btn.dataset.glossaryFilter;
+    input.value=val==='all'?'':val;
+    renderList(input.value);
+    document.querySelectorAll('[data-glossary-filter]').forEach(x=>x.classList.toggle('active',x===btn));
+  });
+  renderList();
+}
+
+
+function guideBackButtonHTML(){
+  return `<button class="guide-back-top" id="guideBackTop">← 手引き一覧へ戻る</button>`;
+}
+function setupGuideBackTop(){
+  const btn=document.getElementById('guideBackTop');
+  if(!btn)return;
+  btn.onclick=()=>renderGuide();
 }
 
 function renderGuideSection(section) {
@@ -1333,8 +1722,323 @@ function renderGuideSection(section) {
 
       <div class="guide-warning"><strong>結び終わったら</strong><p>必ず手で引っ張って強度確認。滑る・ほどけるなら使わず結び直す。</p></div>
     </article>`;
+
+  
+  if(section==='glossary') root.innerHTML=`
+    <article class="guide-article glossary-guide">
+      <div class="guide-article-title"><span>📚</span><div><small>BEGINNER GLOSSARY</small><h3>釣り用語ミニ辞典</h3></div></div>
+      <div class="glossary-intro"><strong>分からない言葉はその場で調べる</strong><p>最初から全部覚えなくてOK。釣具の説明や仕掛け袋で見かけた言葉を検索できます。</p></div>
+      <div class="glossary-search-wrap"><span>🔎</span><input id="glossarySearch" type="search" placeholder="例：ハリス、天秤、ジグヘッド"></div>
+      <div class="glossary-filters">
+        <button class="active" data-glossary-filter="all">全部</button>
+        <button data-glossary-filter="糸">糸</button>
+        <button data-glossary-filter="金具">金具</button>
+        <button data-glossary-filter="仕掛け">仕掛け</button>
+        <button data-glossary-filter="釣り方">釣り方</button>
+        <button data-glossary-filter="ルアー">ルアー</button>
+      </div>
+      <div id="glossaryList" class="glossary-list"></div>
+      <div id="glossaryEmpty" class="glossary-empty" hidden>その言葉はまだ登録されていません。</div>
+      <div class="guide-warning"><strong>💡 用語は少しずつ追加</strong><p>実際に「これ何？」となった言葉をMFLに追加していく前提です。</p></div>
+    </article>`;
+  if(section==='glossary') setupGlossaryGuide();
+
+
+  
+  
+  
+  
+  if(section==='rules') root.innerHTML=`
+    <article class="guide-article rules-guide">
+      <div class="guide-article-title"><span>🚧</span><div><small>LOCAL RULES</small><h3>現地ルールの見方</h3></div></div>
+
+      <div class="rules-intro">
+        <strong>「釣れる場所」より先に「入っていい場所」</strong>
+        <p>MFLの地図も最終判断は現地掲示と管理者の最新案内を優先します。</p>
+      </div>
+
+      <section class="rules-cards">
+        <div class="rules-card danger">
+          <span>⛔</span><div><strong>立入禁止</strong><p>防波堤・作業区域・柵の先など。釣果情報があっても入らない。</p></div>
+        </div>
+        <div class="rules-card warning">
+          <span>⚠️</span><div><strong>釣り方の制限</strong><p>投げ釣り禁止、ルアー禁止、竿の本数制限など。施設ごとに違います。</p></div>
+        </div>
+        <div class="rules-card info">
+          <span>🕒</span><div><strong>営業時間・入場制限</strong><p>管理釣り施設は開場時間、定員、料金、休園日を確認。</p></div>
+        </div>
+        <div class="rules-card info">
+          <span>🦺</span><div><strong>安全装備</strong><p>ライフジャケット必須の施設もあります。子ども用規定が別の場合も。</p></div>
+        </div>
+        <div class="rules-card warning">
+          <span>🪣</span><div><strong>コマセ・エサの制限</strong><p>カゴ使用のみ、撒き餌禁止などのルールがある場所もあります。</p></div>
+        </div>
+        <div class="rules-card danger">
+          <span>🚢</span><div><strong>船・漁業作業を最優先</strong><p>港は釣り場ではなく作業場所でもあります。船の出入りや漁具を邪魔しない。</p></div>
+        </div>
+      </section>
+
+      <section class="rules-order">
+        <strong>現地で見る順番</strong>
+        <div><span>1</span><b>入口の看板</b><small>禁止・営業時間・料金</small></div>
+        <div><span>2</span><b>柵・ロープ・カラーコーン</b><small>越えない</small></div>
+        <div><span>3</span><b>釣り方の掲示</b><small>投げ方・竿数・コマセ</small></div>
+        <div><span>4</span><b>管理者の案内</b><small>その日の規制を最優先</small></div>
+      </section>
+
+      <div class="guide-warning">
+        <strong>⚠️ ネット情報より現地の最新表示</strong>
+        <p>以前は釣れた場所でも、工事・事故・管理変更で立入禁止になることがあります。</p>
+      </div>
+    </article>`;
+if(section==='lines') root.innerHTML=`
+    <article class="guide-article line-guide">
+      <div class="guide-article-title"><span>🧵</span><div><small>FISHING LINE</small><h3>ラインの種類と違い</h3></div></div>
+
+      <div class="line-intro">
+        <strong>最初は「扱いやすさ」で選んでOK</strong>
+        <p>飛距離・感度・擦れへの強さなど、それぞれ得意分野があります。</p>
+      </div>
+
+      <section class="line-type-card">
+        <div class="line-type-head"><span>🟦</span><div><small>NYLON</small><h4>ナイロン</h4></div><b>初心者向け</b></div>
+        <p>しなやかで扱いやすく、結びやすい。伸びがあるので魚の引きを吸収しやすい。</p>
+        <div class="line-bars"><span><b>扱いやすさ</b><i style="width:95%"></i></span><span><b>感度</b><i style="width:55%"></i></span><span><b>擦れ耐性</b><i style="width:65%"></i></span></div>
+      </section>
+
+      <section class="line-type-card">
+        <div class="line-type-head"><span>⬜</span><div><small>FLUOROCARBON</small><h4>フロロカーボン</h4></div><b>擦れに強い</b></div>
+        <p>根や堤防際など、擦れが気になる場所に強い。硬めで、リーダーやハリスにもよく使われます。</p>
+        <div class="line-bars"><span><b>扱いやすさ</b><i style="width:65%"></i></span><span><b>感度</b><i style="width:75%"></i></span><span><b>擦れ耐性</b><i style="width:90%"></i></span></div>
+      </section>
+
+      <section class="line-type-card">
+        <div class="line-type-head"><span>🟨</span><div><small>PE</small><h4>PEライン</h4></div><b>高感度</b></div>
+        <p>細くても強く、伸びが少ないため感度と飛距離に優れる。ただし擦れに弱く、基本的にリーダーを組み合わせます。</p>
+        <div class="line-bars"><span><b>扱いやすさ</b><i style="width:45%"></i></span><span><b>感度</b><i style="width:98%"></i></span><span><b>擦れ耐性</b><i style="width:35%"></i></span></div>
+      </section>
+
+      <section class="line-type-card">
+        <div class="line-type-head"><span>🟩</span><div><small>CARBON NYLON</small><h4>カーボナイロン</h4></div><b>バランス型</b></div>
+        <p>ナイロン系の扱いやすさと、やや高い感度・耐摩耗性を狙ったタイプ。製品ごとに性格が違います。</p>
+        <div class="line-bars"><span><b>扱いやすさ</b><i style="width:85%"></i></span><span><b>感度</b><i style="width:65%"></i></span><span><b>擦れ耐性</b><i style="width:70%"></i></span></div>
+      </section>
+
+      <section class="line-choose">
+        <div class="line-choose-head"><span>🤔</span><strong>迷った時の考え方</strong></div>
+        <div><span>まず釣りを始める</span><b>ナイロン / カーボナイロン</b></div>
+        <div><span>ルアーの感度・飛距離</span><b>PE＋リーダー</b></div>
+        <div><span>根・堤防際の擦れ</span><b>フロロ系を意識</b></div>
+      </section>
+
+      <div class="guide-warning">
+        <strong>⚠️ 同じ号数でも強度は製品ごとに違う</strong>
+        <p>ロッド・リールの適合ライン範囲と、ライン製品の強度表記を確認してください。</p>
+      </div>
+    </article>`;
+if(section==='hooks') root.innerHTML=`
+    <article class="guide-article hook-guide">
+      <div class="guide-article-title"><span>🪝</span><div><small>HOOK SIZE</small><h3>針の号数の見方</h3></div></div>
+
+      <div class="hook-intro">
+        <strong>同じ「6号」でも針の種類で大きさは違う</strong>
+        <p>針は「号数だけ」では決めません。キス針・袖針・伊勢尼など、針の種類ごとにサイズ感が違います。</p>
+      </div>
+
+      <section class="hook-rule">
+        <div><span>①</span><strong>まず針の種類を見る</strong><p>キス針6号と別種類の6号は、同じ大きさとは限りません。</p></div>
+        <div><span>②</span><strong>次に号数を見る</strong><p>同じ種類なら、基本的に数字が大きいほど針も大きくなります。</p></div>
+        <div><span>③</span><strong>対象魚に合わせる</strong><p>小さい魚に大きすぎる針を使うと掛かりにくくなることがあります。</p></div>
+      </section>
+
+      <section class="hook-example">
+        <div class="hook-example-head"><span>🎣</span><strong>MFLで今使う目安</strong></div>
+        <div><b>6〜7号前後</b><span>キス・ハゼなどのちょい投げ仕掛けでよく見るサイズ帯</span></div>
+        <div><b>市販仕掛け</b><span>最初は対象魚がパッケージに書かれた完成仕掛けを選ぶと失敗しにくい</span></div>
+      </section>
+
+      <section class="hook-parts">
+        <strong>針で見るポイント</strong>
+        <div class="hook-parts-grid">
+          <span><b>針先</b><small>魚に掛かる先端</small></span>
+          <span><b>フトコロ</b><small>針のカーブ部分</small></span>
+          <span><b>軸</b><small>針のまっすぐな部分</small></span>
+          <span><b>アイ / チモト</b><small>糸を結ぶ部分</small></span>
+        </div>
+      </section>
+
+      <div class="guide-warning">
+        <strong>⚠️ 「号」の意味は部品ごとに違う</strong>
+        <p>針6号・糸3号・オモリ5号は、同じ基準ではありません。針は針、糸は糸、オモリはオモリとして確認します。</p>
+      </div>
+    </article>`;
+if(section==='weights') root.innerHTML=`
+    <article class="guide-article weight-guide">
+      <div class="guide-article-title"><span>⚖️</span><div><small>SINKER WEIGHT</small><h3>オモリ号数の目安</h3></div></div>
+
+      <div class="weight-intro">
+        <strong>1号 ≒ 3.75g</strong>
+        <p>オモリの「号」は重さの目安。ロッドの適合重量を超えないように確認します。</p>
+      </div>
+
+      <section class="weight-table">
+        ${[
+          [1,'約3.8g'],[2,'約7.5g'],[3,'約11.3g'],[4,'約15g'],
+          [5,'約18.8g'],[6,'約22.5g'],[8,'約30g'],[10,'約37.5g'],
+          [12,'約45g'],[15,'約56.3g'],[20,'約75g']
+        ].map(x=>`<div class="${[5,8].includes(x[0])?'weight-row current':''}">
+          <strong>${x[0]}号</strong><span>${x[1]}</span>${x[0]===5?'<b>軽めのちょい投げ</b>':x[0]===8?'<b>しっかり底取り</b>':''}
+        </div>`).join('')}
+      </section>
+
+      <section class="weight-now">
+        <div class="weight-now-head"><span>🎣</span><strong>MFLで今使う目安</strong></div>
+        <div><span>5号</span><b>約18.8g</b><small>軽め・初心者でも扱いやすい</small></div>
+        <div><span>8号</span><b>約30g</b><small>少し重め・底を取りやすい</small></div>
+        <div><span>ジグヘッド 7g</span><b>軽め</b><small>近距離・浅め</small></div>
+        <div><span>ジグヘッド 14g</span><b>中間</b><small>飛距離・底取り</small></div>
+      </section>
+
+      <div class="guide-warning">
+        <strong>⚠️ 竿の上限を優先</strong>
+        <p>同じMHやMLでも適合重量は竿ごとに違います。ロッド本体やメーカー表記のLURE / SINKER範囲を確認してください。</p>
+      </div>
+    </article>`;
+if(section==='rigflow') root.innerHTML=`
+    <article class="guide-article rigflow-guide">
+      <div class="guide-article-title"><span>🧩</span><div><small>RIG CONNECTION</small><h3>仕掛けのつなぎ方</h3></div></div>
+      <div class="rigflow-intro">
+        <strong>上から順番に見ればOK</strong>
+        <p>「何と何をつなぐの？」で迷った時用。まずはこの3パターンを覚えれば十分です。</p>
+      </div>
+
+      <details class="rigflow-card" open>
+        <summary><span>🎣</span><div><strong>ちょい投げ</strong><small>天秤＋エサ仕掛け</small></div><b>›</b></summary>
+        <div class="rigflow-body">
+          <div class="rigflow-chain">
+            <span>リールの道糸</span><b>↓</b>
+            <strong>スナップ付きサルカン</strong><b>↓</b>
+            <span>天秤・オモリ</span><b>↓</b>
+            <span>投げ釣り仕掛け</span><b>↓</b>
+            <em>エサ</em>
+          </div>
+          <p>仕掛けセットに天秤・オモリまで一体になっている場合は、その商品の接続部へ付ければOK。</p>
+        </div>
+      </details>
+
+      <details class="rigflow-card">
+        <summary><span>🪱</span><div><strong>ジグヘッド＋ワーム</strong><small>7g / 14g</small></div><b>›</b></summary>
+        <div class="rigflow-body">
+          <div class="rigflow-chain">
+            <span>道糸 / リーダー</span><b>↓</b>
+            <strong>小型スナップ</strong><b>↓</b>
+            <span>ジグヘッド</span><b>↓</b>
+            <em>ワーム</em>
+          </div>
+          <p>スナップ付きサルカンは基本不要。金具を増やさずシンプルにします。</p>
+        </div>
+      </details>
+
+      <details class="rigflow-card">
+        <summary><span>🐟</span><div><strong>サビキ</strong><small>市販仕掛け</small></div><b>›</b></summary>
+        <div class="rigflow-body">
+          <div class="rigflow-chain">
+            <span>リールの道糸</span><b>↓</b>
+            <strong>サルカン / スナップサルカン</strong><b>↓</b>
+            <span>サビキ仕掛け</span><b>↓</b>
+            <span>カゴ</span><b>↓</b>
+            <em>オモリ</em>
+          </div>
+          <p>上カゴ・下カゴなど商品によって順番が違うため、仕掛け袋の図を最優先に確認。</p>
+        </div>
+      </details>
+
+      <section class="rigflow-check">
+        <div><span>①</span><strong>結び目を引っ張る</strong><small>滑らないか確認</small></div>
+        <div><span>②</span><strong>スナップを閉じる</strong><small>半開きにしない</small></div>
+        <div><span>③</span><strong>針の向きを見る</strong><small>絡み・引っ掛かり確認</small></div>
+      </section>
+
+      <div class="guide-warning"><strong>⚠️ 投げる前に1回確認</strong><p>仕掛けを軽く引っ張って、外れそうな部分がないか確認してからキャスト。</p></div>
+    </article>`;
+if(section==='parts') root.innerHTML=`
+    <article class="guide-article parts-guide">
+      <div class="guide-article-title"><span>🔗</span><div><small>CONNECTION PARTS</small><h3>サルカン・スナップの違い</h3></div></div>
+
+      <div class="parts-intro">
+        <strong>見た目が似ていても役割が違う</strong>
+        <p>全部「つなぐ金具」だけど、何につなぐか・何を楽にしたいかで使い分けます。</p>
+      </div>
+      <section class="parts-quick">
+        <div class="parts-quick-head"><span>⚡</span><div><small>QUICK ANSWER</small><strong>何を付ける？</strong></div></div>
+        <div class="parts-quick-grid">
+          <button data-part-answer="jig"><span>🪱</span><strong>ジグヘッド</strong><small>ワームで釣る</small></button>
+          <button data-part-answer="casting"><span>🎣</span><strong>ちょい投げ</strong><small>天秤・仕掛け</small></button>
+          <button data-part-answer="sabiki"><span>🐟</span><strong>サビキ</strong><small>仕掛けを接続</small></button>
+          <button data-part-answer="lure"><span>✨</span><strong>ルアー</strong><small>交換を楽に</small></button>
+        </div>
+        <div id="partsQuickAnswer" class="parts-quick-answer"><strong>釣り方を選ぶと、使う金具がすぐ分かります。</strong></div>
+      </section>
+
+      <section class="parts-card">
+        <div class="parts-card-head"><span class="parts-icon">🔄</span><div><small>SWIVEL</small><h4>サルカン</h4></div></div>
+        <p>道糸と仕掛けをつなぎ、回転することで<strong>糸ヨレを減らす</strong>金具。</p>
+        <div class="parts-use"><b>向いている場面</b><span>ちょい投げ</span><span>サビキ</span><span>胴突き</span><span>ウキ釣り</span></div>
+        <div class="parts-flow"><span>道糸</span><b>→</b><strong>サルカン</strong><b>→</b><span>仕掛け</span></div>
+      </section>
+
+      <section class="parts-card">
+        <div class="parts-card-head"><span class="parts-icon">📎</span><div><small>SNAP</small><h4>スナップ</h4></div></div>
+        <p>開閉できる金具で、結び直さず<strong>ルアーやジグヘッドを素早く交換</strong>できます。</p>
+        <div class="parts-use"><b>向いている場面</b><span>ジグヘッド</span><span>ルアー</span><span>メタルジグ</span></div>
+        <div class="parts-flow"><span>道糸 / リーダー</span><b>→</b><strong>小型スナップ</strong><b>→</b><span>ジグヘッド</span></div>
+        <div class="parts-note">💡 軽いジグヘッドほど、小さく軽いスナップの方が使いやすい。</div>
+      </section>
+
+      <section class="parts-card">
+        <div class="parts-card-head"><span class="parts-icon">🔗</span><div><small>SNAP SWIVEL</small><h4>スナップ付きサルカン</h4></div></div>
+        <p><strong>サルカン＋スナップ</strong>が一体になったタイプ。糸ヨレ対策と仕掛け交換の両方ができます。</p>
+        <div class="parts-use"><b>向いている場面</b><span>ちょい投げ</span><span>天秤</span><span>仕掛け交換</span></div>
+        <div class="parts-flow"><span>道糸</span><b>→</b><strong>スナップサルカン</strong><b>→</b><span>天秤</span></div>
+      </section>
+
+      <section class="parts-choose">
+        <div class="parts-choose-head"><span>🤔</span><strong>どれを使えばいい？</strong></div>
+        <div class="parts-choose-grid">
+          <div><small>ちょい投げ</small><strong>スナップ付きサルカン</strong><p>天秤や仕掛け交換が楽。</p></div>
+          <div><small>ジグヘッド＋ワーム</small><strong>小型スナップ</strong><p>余計な回転金具を付けずシンプル。</p></div>
+          <div><small>サビキ・胴突き</small><strong>サルカン / スナップサルカン</strong><p>仕掛け構成に合わせて選ぶ。</p></div>
+          <div><small>迷ったら</small><strong>仕掛け袋の指定を確認</strong><p>メーカー推奨の接続方法が最優先。</p></div>
+        </div>
+      </section>
+
+      <section class="parts-real-example">
+        <strong>🎣 MFLの今の使い分け例</strong>
+        <div><span>ちょい投げ</span><b>スナップ付きサルカン</b></div>
+        <div><span>7g / 14g ジグヘッド</span><b>小型スナップ</b></div>
+        <p>大きすぎる金具は不要。仕掛けの重さと強度に対して十分なサイズを選びます。</p>
+      </section>
+
+      <section class="parts-glossary">
+        <div class="parts-glossary-head"><span>📖</span><strong>ついでに覚える言葉</strong></div>
+        <dl>
+          <div><dt>道糸</dt><dd>リールに巻いてあるメインの糸。</dd></div>
+          <div><dt>リーダー</dt><dd>道糸の先につなぐ糸。擦れ対策や仕掛けとの接続に使う。</dd></div>
+          <div><dt>天秤</dt><dd>ちょい投げなどで、オモリと仕掛けを絡みにくくするパーツ。</dd></div>
+          <div><dt>アイ</dt><dd>ルアーやジグヘッドにある、糸やスナップを付ける輪。</dd></div>
+        </dl>
+      </section>
+
+      <div class="guide-warning">
+        <strong>⚠️ 接続後は必ず確認</strong>
+        <p>スナップが閉じているか、サルカンの輪に正しく結べているか、引っ張って確認してから投げる。</p>
+      </div>
+    </article>`;
+
+  if(section==='parts') setupPartsQuickAnswer();
+
   if(section==='rigs') root.innerHTML=`
-    <article class="guide-article"><div class="guide-article-title"><span>🎣</span><div><small>RIG BASICS</small><h3>仕掛けの基本</h3></div></div>
+    <article class="guide-article"><div class="guide-crosslink"><strong>💡 詳しい接続順は「仕掛けのつなぎ方」</strong><p>ここでは釣り方の特徴だけ確認。金具や接続順は専用ページにまとめています。</p></div><div class="guide-article-title"><span>🎣</span><div><small>RIG BASICS</small><h3>仕掛けの基本</h3></div></div>
     <div class="rig-card"><strong>ちょい投げ</strong><p>道糸 → 天秤・オモリ → 仕掛け → エサ</p><small>底にいるキスやハゼなどを狙いやすい。</small></div>
     <div class="rig-card"><strong>サビキ</strong><p>道糸 → サビキ仕掛け → カゴ</p><small>アジ・サバなどの回遊魚を足元〜近距離で狙う。</small></div>
     <div class="rig-card"><strong>ジグヘッド＋ワーム</strong><p>道糸 → 必要ならリーダー → ジグヘッド → ワーム</p><small>投げて巻く・沈めるなど自由度が高い。</small></div>
@@ -1345,6 +2049,12 @@ function renderGuideSection(section) {
     <details class="guide-step"><summary><strong>糸が絡んだ</strong><small>無理に引っ張らない</small><b>›</b></summary><p>テンションを抜いて、絡みの外側から少しずつほどく。</p></details>
     <details class="guide-step"><summary><strong>仕掛けが飛ばない</strong><small>重さだけが原因とは限らない</small><b>›</b></summary><p>ラインが太すぎないか、ガイドに糸が絡んでいないか、仕掛けが重すぎないかを確認。</p></details>
     <details class="guide-step"><summary><strong>知らない魚が釣れた</strong><small>触らない</small><b>›</b></summary><p>まず魚図鑑を確認。分からない魚は素手で触らず、毒棘や鋭い歯がある前提で扱う。</p></details></article>`;
+
+  const article=root?.querySelector('.guide-article');
+  if(article && !article.querySelector('.guide-back-top')){
+    article.insertAdjacentHTML('afterbegin',guideBackButtonHTML());
+    setupGuideBackTop();
+  }
 }
 
 function renderGear() {
