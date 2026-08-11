@@ -1006,26 +1006,32 @@ function setupGlobalFishingSpotClicks(){
 function renderFishingMap(){
   app.innerHTML = `
     <section class="fishing-map-view">
-      <section class="fishing-map-hero">
-        <div>
-          <p class="eyebrow">MFL FISHING MAP</p>
-          <h2>関東 釣地図</h2>
-          <p>場所を探すことに集中する、MFLの独立した釣り場マップ。</p>
-        </div>
-        <span class="fishing-map-count">${kantoFishingSpots.length} SPOTS</span>
-      </section>
-      <section class="map-view-switcher">
+      <div class="map-top-stack">
+        <section class="map-view-switcher">
         <button class="active" data-map-view-mode="recommended">⭐ おすすめ</button>
         <button data-map-view-mode="all">🗺️ 全エリア</button>
         <button data-map-view-mode="east">🌊 千葉東岸</button>
       </section>
-      <div class="map-clean-hint">場所名を検索。必要な時だけ条件を開く。</div>
+        <section class="fishing-map-hero">
+        <div>
+          <p class="eyebrow">MFL FISHING MAP</p>
+          <h2>関東 釣地図</h2>
+          <p>場所を探すことに集中する、MFLの釣り場マップ。</p>
+        </div>
+        <span class="fishing-map-count">${kantoFishingSpots.length} SPOTS</span>
+      </section>
+        <div class="map-clean-hint">場所名を検索。必要な時だけ条件を開く。</div>
       <section class="map-search-box">
         <span>🔎</span>
         <input id="mapSpotSearch" type="search" placeholder="釣り場名・地域で検索">
         <button id="mapSpotSearchClear" hidden>×</button>
       </section>
-      <button id="mapFilterPanelToggle" class="map-filter-panel-toggle" aria-expanded="false"><span>⚙️</span><div><strong>条件を絞る</strong><small>初心者・設備・釣り方</small></div><b>開く</b></button>
+        <button id="mapFilterPanelToggle" class="map-filter-panel-toggle" aria-expanded="false"><span>⚙️</span><div><strong>条件を絞る</strong><small>初心者・設備・釣り方</small></div><b>開く</b></button>
+      </div>
+      
+      
+      
+      
       <section id="mapFilterPanel" class="map-filter-panel" hidden>
       <section class="map-beginner-filter">
         <button id="beginnerOnlyToggle" aria-pressed="false"><span>👫</span><div><strong>初心者向けだけ表示</strong><small>初心者評価 ★★★★☆ 以上</small></div><b>OFF</b></button>
