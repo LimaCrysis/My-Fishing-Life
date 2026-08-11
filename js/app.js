@@ -1631,17 +1631,56 @@ function openSeawallFullscreen(s){
   wrap.querySelector('#closeMapFullscreen').onclick=close; wrap.onclick=e=>{if(e.target===wrap)close();};
 }
 
+
 function showFishingSpot(id){
-  rememberFishingSpot(id);const s=kantoFishingSpots.find(x=>x.id===id),root=document.getElementById('fishingSpotDetail');if(!s||!root)return;document.querySelectorAll('[data-fishing-spot]').forEach(b=>b.classList.toggle('active',b.dataset.fishingSpot===id));root.innerHTML=`<section class="spot-card"><div class="spot-card-head"><span class="spot-pref">${s.pref}</span><div><div class="spot-verify-row"><small class="spot-type">${spotTypeLabel(s.id)}</small><span class="verified-badge">✓ 公式確認</span></div><h3>${s.name}</h3><p>${s.address}</p></div></div><div class="spot-score-grid"><div><small>初心者</small><strong>${stars(s.beginner)}</strong></div><div><small>2人のタックル</small><strong>${s.tackle}</strong></div></div><div class="spot-section"><small>狙える魚の例</small><p>${s.fish}</p></div><div class="spot-section"><small>向いている釣り</small><div class="spot-tags">${s.styles.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-section"><small>設備</small><div class="spot-tags muted">${s.facilities.map(x=>`<span>${x}</span>`).join('')}</div></div><div class="spot-gear-note"><strong>🎣 2人のタックル目線</strong><p>${s.gear}</p></div><div class="spot-warning"><strong>⚠️ 現地ルール</strong><p>${s.note}</p></div>${tideCardShell(s)}${seawallMapFor(s)}${specialSpotRules(s)}<div class="spot-footer"><span>情報確認：${s.checked}</span><a href="${s.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div></section>`
-  requestAnimationFrame(()=>{
-    const detail=document.getElementById('fishingSpotDetail');
-    if(detail) detail.scrollIntoView({behavior:'smooth',block:'start'});
-  });
+  const s=kantoFishingSpots.find(x=>x.id===id);
+  if(!s)return;
 
-  hydrateTideCard(s);
+  rememberFishingSpot(id);
 
-  setupSeawallInteractions(s);
+  const existing=document.getElementById('fishingSpotOverlay');
+  if(existing) existing.remove();
+
+  const overlay=document.createElement('div');
+  overlay.id='fishingSpotOverlay';
+  overlay.className='fishing-spot-overlay';
+  overlay.innerHTML=`
+    <div class="fishing-spot-sheet" role="dialog" aria-modal="true" aria-label="${escapeHtml(s.name)}の詳細">
+      <div class="fishing-spot-sheet-head">
+        <button type="button" class="fishing-spot-close" aria-label="閉じる">×</button>
+        <div>
+          <small>${escapeHtml(s.pref||'')}</small>
+          <h3>${escapeHtml(s.name||'')}</h3>
+        </div>
+      </div>
+
+      <div class="fishing-spot-maininfo">
+        <div><span>初心者</span><strong>${stars(s.beginner||0)}</strong></div>
+        <div><span>タックル</span><strong>${escapeHtml(s.tackle||'—')}</strong></div>
+      </div>
+
+      ${s.fish?`<section class="fishing-spot-section"><h4>🐟 狙える魚・傾向</h4><p>${escapeHtml(s.fish)}</p></section>`:''}
+      ${(s.styles&&s.styles.length)?`<section class="fishing-spot-section"><h4>🎣 釣り方</h4><div class="fishing-spot-tags">${s.styles.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div></section>`:''}
+      ${(s.facilities&&s.facilities.length)?`<section class="fishing-spot-section"><h4>🅿️ 設備</h4><div class="fishing-spot-tags">${s.facilities.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div></section>`:''}
+      ${s.address?`<section class="fishing-spot-section"><h4>📍 場所</h4><p>${escapeHtml(s.address)}</p></section>`:''}
+      ${s.gear?`<section class="fishing-spot-section"><h4>🧰 タックル目安</h4><p>${escapeHtml(s.gear)}</p></section>`:''}
+      ${s.note?`<section class="fishing-spot-section"><h4>⚠️ 注意・ポイント</h4><p>${escapeHtml(s.note)}</p></section>`:''}
+      ${s.checked?`<div class="fishing-spot-checked">最終確認: ${escapeHtml(s.checked)}</div>`:''}
+      ${s.official?`<a class="fishing-spot-official" href="${s.official}" target="_blank" rel="noopener">公式情報を開く ↗</a>`:''}
+    </div>`;
+
+  document.body.appendChild(overlay);
+
+  const close=()=>{
+    overlay.classList.add('closing');
+    setTimeout(()=>overlay.remove(),160);
+  };
+  overlay.querySelector('.fishing-spot-close').onclick=close;
+  overlay.onclick=(e)=>{ if(e.target===overlay) close(); };
+
+  requestAnimationFrame(()=>overlay.classList.add('open'));
 }
+
 
 
 function setupPartsQuickAnswer(){
