@@ -1214,8 +1214,7 @@ function spotStatusBadge(s){
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
 function renderKantoMap(){return `<article class="guide-article kanto-guide">
 <div class="guide-article-title fishing-map-title"><span>🗺️</span><div><small>KANTO FISHING MAP</small><h3>行きたい釣り場を探す</h3></div></div>
-<div class="map-verification-banner"><div class="map-coverage"><b>🗺️ 千葉東岸 使える候補を厳選</b><span>場所ごとに描き分け中</span></div><strong>🛟 MFL VERIFIED MAP · TIDE DATA 2026</strong><span>数より正確性。公式に釣り可能と確認できた場所を少しずつ増やし、東京湾奥・千葉・木更津方面の密度を上げていきます。</span></div>
-<p class="kanto-intro">エリアを選んで、気になる場所を開く。細かな情報は必要な時だけ確認できます。</p><div class="east-coast-safety"><strong>🌊 東岸サーフの見方</strong><span>千葉県管理海岸は原則自由使用で「釣り」も例示されています。ただし港湾・漁港区域は別。海水浴、サーフィン、工事、現地の立入規制を最優先にしてください。</span></div><div class="map-curation-note"><strong>🎯 MFL掲載基準</strong><span>実際に『ここへ行こう』と選べる場所を優先。範囲が広すぎる候補や目印だけの地点は、地図から外して整理します。</span></div>
+<p class="kanto-intro map-main-intro">エリアを選んで、気になる釣り場を開く。</p>
 
 <div class="map-mode-label"><span>①</span><strong>エリアから探す</strong></div>
 <div class="chiba-density-panel">
@@ -1252,10 +1251,10 @@ function renderKantoMap(){return `<article class="guide-article kanto-guide">
   </div>
   <p>チェックは保存しません。出発前に「忘れてないか」を見るだけの簡易確認です。</p>
 </div>
-<div class="kisarazu-research"><div class="kisarazu-head"><span>🌅</span><div><small>KISARAZU</small><strong>木更津方面・重点調査</strong></div></div><p>鳥居崎海浜公園・内港公園・潮浜公園などを調査中。公園の存在だけで「釣り可」とは判断せず、公式に釣り可能範囲を確認できた場所から正式掲載します。</p><div class="kisarazu-alert"><b>🦀 木更津地先の採捕ルール</b><span>ガザミ類は千葉県の委員会指示による採捕制限があります。現行の期間・場所・方法を公式情報で確認してください。</span></div></div><div class="kisarazu-focus-note"><strong>🌅 木更津方面を正式追加</strong><p>木更津市公式の安全案内を根拠に「木更津内港公園」を千葉エリアへ追加。木更津地先のガザミ類は採捕制限があるため要確認表示にしています。</p></div><div id="spotAreaPanel" class="spot-area-panel smart-area-panel" hidden></div>
+<div id="spotAreaPanel" class="spot-area-panel smart-area-panel" hidden></div>
 <div id="fishingSpotDetail" class="spot-detail smart-spot-detail"></div>
 
-<div class="research-master-summary"><div class="research-master-head"><span>🔬</span><div><small>KANTO MASTER RESEARCH</small><strong>関東釣り場マスター</strong><em class="research-quality">根拠優先モード</em></div><b>40件調査</b></div><div class="research-master-counts"><span class="r-verified"><b>29</b>VERIFIED</span><span class="r-hold"><b>5</b>HOLD</span><span class="r-excluded"><b>6</b>EXCLUDED</span><span class="r-map"><b>29</b>専用地図</span></div><div class="map-coverage-meter" id="mapCoverageMeter"><div><span>VERIFIED 地図カバー率</span><b>100%</b></div><i><em style="width:100%"></em></i><small>29 / 29か所を地図化</small></div><button class="research-master-toggle" id="researchMasterToggle"><span>調査状況を見る</span><b>›</b></button><div id="researchMasterPanel" class="research-master-panel" hidden><div class="research-rule"><strong>VERIFIED</strong><p>公式情報で釣り利用を確認。MFL掲載対象。</p></div><div class="research-rule hold"><strong>HOLD</strong><p>公式根拠が足りないため保留。</p></div><div class="research-rule excluded"><strong>EXCLUDED</strong><p>公式に禁止・立入不可を確認。今後も候補化しない。</p></div><div class="research-excluded-list"><small>再候補化しない代表例</small><span>⛔ 青海南ふ頭公園 隣接護岸</span><span>⛔ 久里浜外防波堤</span><span>⛔ 東扇島東公園</span><span>⛔ 川崎港内（西公園以外）</span><span>⛔ 鹿島港（魚釣園以外）</span></div><div class="research-hold-list"><small>保留</small><span>🟡 鳥居崎海浜公園周辺</span></div><div class="research-hold-list research-new"><small>千葉追加調査 v9.2</small><span>🟡 富津みなと公園</span><span>🟡 上総湊港海浜公園</span><span>🟡 袖ケ浦海浜公園</span><span>🟡 船橋港親水公園</span><span>⛔ 稲毛海浜公園 園内の池</span><p>公園・港湾緑地の存在だけでは「釣り可」と判定しない。公式に釣り可能範囲が確認できるまでHOLD。</p></div></div></div><div class="smart-tool-row">
+<div class="smart-tool-row">
   <button class="smart-tool-toggle" id="filterToggle" aria-expanded="false">
     <span class="smart-tool-icon">🔎</span><span><strong>条件から探す</strong><small>初心者・釣り方・タックルで絞る</small></span><b>›</b>
   </button>
@@ -1275,12 +1274,23 @@ function renderKantoMap(){return `<article class="guide-article kanto-guide">
   <button class="smart-tool-toggle" id="rulesToggle" aria-expanded="false">
     <span class="smart-tool-icon">🛟</span><span><strong>安全・掲載ルール</strong><small>禁止場所とMFLの掲載基準</small></span><b>›</b>
   </button>
-  <div id="rulesPanel" class="smart-collapsible" hidden>
-    <div class="ibaraki-ban-note">
-      <strong>⚠️ 茨城港の港内は釣り禁止</strong>
-      <p>大洗港区・日立港区・常陸那珂港区の岸壁や防波堤など、港湾施設での魚釣りは禁止です。</p>
+  <div id="rulesPanel" class="smart-collapsible map-rules-panel" hidden>
+    <div class="map-rule-card">
+      <strong>🎯 厳選・掲載基準</strong>
+      <p>数より正確性を優先。「昔は釣れた」「ネットで有名」だけでは追加せず、現在の釣り可否や公式ルールを確認できた場所を中心に掲載します。実際に「ここへ行こう」と選べる地点を優先します。</p>
     </div>
-    <div class="accuracy-note"><strong>🔎 MFL掲載ルール</strong><p>「昔は釣れた」「ネットで有名」だけでは追加しません。現在の釣り可否と公式ルールを確認できた場所だけ載せます。</p></div>
+    <div class="map-rule-card">
+      <strong>🌊 東岸サーフの見方</strong>
+      <p>千葉県管理海岸は釣り利用が例示されていますが、港湾・漁港区域は別です。海水浴・サーフィン・工事・現地の立入規制を最優先にします。</p>
+    </div>
+    <div class="map-rule-card kisarazu-rule-card">
+      <strong>🌅 木更津方面</strong>
+      <p>内港公園など、公式情報で確認できた場所から正式掲載。公園があるだけでは「釣り可」と判断しません。木更津地先のガザミ類は採捕制限があるため、期間・場所・方法を現行の公式情報で確認します。</p>
+    </div>
+    <div class="map-rule-card warning">
+      <strong>⚠️ 禁止・現地ルール</strong>
+      <p>茨城港の港内など、公式に釣り禁止と確認できた場所は候補から除外。工事・立入禁止・施設独自ルールはMFL表示より現地表示を優先します。</p>
+    </div>
   </div>
 </div>
 </article>`}

@@ -1741,3 +1741,239 @@ input,select,textarea{font-size:16px}
   font-size:12px;
   font-weight:900;
 }
+
+
+/* MFL v14.0.4 - SAMPLE SCALE MOBILE UI
+   実機をサンプル画像の読みやすさへ寄せる */
+@media (max-width: 600px){
+  .fishing-map-view{
+    --map-title-size:18px;
+    --map-meta-size:14px;
+  }
+
+  .fishing-map-view .fishing-map-hero{
+    padding:20px 18px;
+    border-radius:22px;
+  }
+  .fishing-map-view .fishing-map-hero .eyebrow{font-size:12px}
+  .fishing-map-view .fishing-map-hero h2{font-size:30px}
+  .fishing-map-view .fishing-map-hero p:not(.eyebrow){
+    font-size:15px;
+    line-height:1.6;
+  }
+  .fishing-map-count{font-size:12px}
+
+  .fishing-map-view .map-view-switcher{
+    gap:8px;
+    margin-bottom:14px;
+  }
+  .fishing-map-view .map-view-switcher button{
+    min-height:54px !important;
+    padding:13px 5px !important;
+    border-radius:14px;
+    font-size:14px !important;
+  }
+  .fishing-map-view .map-clean-hint{
+    margin:0 0 10px !important;
+    font-size:13px !important;
+    line-height:1.55 !important;
+  }
+
+  .fishing-map-view .map-search-box{
+    min-height:64px !important;
+    grid-template-columns:36px 1fr 32px;
+    padding:11px 14px !important;
+    border-radius:17px;
+  }
+  .fishing-map-view .map-search-box>span{font-size:24px}
+  .fishing-map-view .map-search-box input{font-size:17px !important}
+
+  .fishing-map-view .map-filter-panel-toggle{
+    min-height:72px !important;
+    grid-template-columns:38px 1fr auto;
+    gap:11px;
+    padding:14px 15px !important;
+    border-radius:17px;
+  }
+  .fishing-map-view .map-filter-panel-toggle>span{font-size:27px !important}
+  .fishing-map-view .map-filter-panel-toggle strong{font-size:16px !important}
+  .fishing-map-view .map-filter-panel-toggle small{
+    margin-top:3px;
+    font-size:13px !important;
+  }
+  .fishing-map-view .map-filter-panel-toggle>b{
+    padding:7px 9px;
+    font-size:12px !important;
+  }
+
+  .map-filter-panel{padding:12px;border-radius:17px}
+  .map-beginner-filter button{
+    min-height:68px;
+    grid-template-columns:36px 1fr auto;
+    padding:13px 14px;
+    border-radius:15px;
+  }
+  .map-beginner-filter button>span{font-size:25px}
+  .map-beginner-filter strong{font-size:15px}
+  .map-beginner-filter small{font-size:12px}
+  .map-beginner-filter button>b{font-size:11px}
+
+  .map-facility-filter,.map-style-filter{
+    padding:14px;
+    border-radius:16px;
+  }
+  .map-facility-head small,.map-style-filter-head small{font-size:11px}
+  .map-facility-head strong,.map-style-filter-head strong{font-size:17px}
+  .map-facility-buttons{gap:8px}
+  .map-facility-buttons button{
+    min-height:48px;
+    font-size:12px;
+  }
+  .map-style-filter-buttons{
+    gap:8px;
+    padding-bottom:2px;
+  }
+  .map-style-filter-buttons button{
+    min-height:40px;
+    padding:9px 12px;
+    font-size:12px;
+  }
+
+  .recent-map-spots{
+    margin-bottom:16px;
+    padding:15px;
+    border-radius:18px;
+  }
+  .recent-map-head small{font-size:10px}
+  .recent-map-head strong{font-size:17px}
+  .recent-map-head button{font-size:11px}
+  .recent-map-list{gap:10px}
+  .recent-map-list>button{
+    flex-basis:190px;
+    min-height:86px;
+    grid-template-columns:30px 1fr 16px;
+    gap:9px;
+    padding:13px;
+    border-radius:15px;
+  }
+  .recent-map-list>button>span{font-size:23px}
+  .recent-map-list strong{font-size:15px}
+  .recent-map-list small{
+    margin-top:4px;
+    font-size:11px;
+    line-height:1.45;
+  }
+  .recent-map-list b{font-size:19px}
+
+  .map-priority-strip{
+    padding:15px;
+    border-radius:19px;
+    margin-bottom:18px;
+  }
+  .map-priority-head{margin-bottom:11px}
+  .map-priority-head small{font-size:10px}
+  .map-priority-head strong{font-size:18px}
+  .map-priority-head>span{font-size:11px}
+  .fishing-map-view .map-priority-card{
+    flex-basis:205px !important;
+    min-height:94px !important;
+    grid-template-columns:34px 1fr;
+    gap:10px;
+    padding:14px !important;
+    border-radius:17px !important;
+  }
+  .fishing-map-view .map-priority-pin{font-size:27px}
+  .fishing-map-view .map-priority-card strong{font-size:16px !important}
+  .fishing-map-view .map-priority-card small{
+    margin-top:5px;
+    font-size:12px !important;
+    line-height:1.45;
+  }
+
+  .fishing-map-title h3{font-size:24px !important}
+  .fishing-map-title small{font-size:11px !important}
+  .map-main-intro{
+    margin:6px 0 14px;
+    font-size:14px !important;
+    line-height:1.55;
+  }
+
+  .map-mode-label strong{font-size:16px}
+  .chiba-density-title small{font-size:10px}
+  .chiba-density-title strong{font-size:17px}
+  .chiba-density-grid button{
+    min-height:62px;
+    padding:10px 6px;
+  }
+  .chiba-density-grid button b{font-size:14px}
+  .chiba-density-grid button span{font-size:11px}
+
+  .area-select-card{
+    min-height:84px;
+    padding:14px;
+  }
+  .area-select-card>span{font-size:27px}
+  .area-select-card small{font-size:10px}
+  .area-select-card strong{font-size:16px}
+  .area-select-card em{font-size:11px}
+
+  .field-ready-head small{font-size:10px}
+  .field-ready-head strong{font-size:17px}
+  .field-ready-grid label{font-size:13px}
+  .field-ready-card p{font-size:11px}
+
+  .smart-tool-toggle{
+    min-height:72px;
+    padding:14px 15px;
+    border-radius:17px;
+  }
+  .smart-tool-toggle .smart-tool-icon{font-size:26px}
+  .smart-tool-toggle strong{font-size:16px}
+  .smart-tool-toggle small{font-size:12px}
+  .smart-tool-toggle>b{font-size:24px}
+
+  .map-rules-panel{
+    padding:10px 0 0;
+  }
+  .map-rule-card{
+    margin:0 0 10px;
+    padding:14px 15px;
+    border:1px solid #d6e6e8;
+    border-radius:15px;
+    background:#fff;
+  }
+  .map-rule-card strong{
+    display:block;
+    font-size:15px;
+    color:#245f69;
+  }
+  .map-rule-card p{
+    margin:6px 0 0;
+    font-size:13px;
+    line-height:1.7;
+    color:#55757b;
+  }
+  .map-rule-card.kisarazu-rule-card{background:#fffaf1}
+  .map-rule-card.warning{background:#fff7f3}
+
+  .beginner-map-results{
+    padding:18px 16px !important;
+  }
+  .beginner-map-results-head small{font-size:11px !important}
+  .beginner-map-results-head strong{font-size:20px !important}
+  .beginner-map-results-head>span{font-size:12px !important}
+  .beginner-open-hint{font-size:13px !important}
+  .beginner-spot-card{
+    min-height:126px !important;
+    grid-template-columns:42px minmax(0,1fr) 48px !important;
+    padding:18px !important;
+  }
+  .beginner-pin{font-size:31px !important}
+  .beginner-spot-copy strong{font-size:20px !important}
+  .beginner-spot-copy small{font-size:13px !important}
+  .beginner-arrow{
+    width:46px !important;
+    height:46px !important;
+    font-size:34px !important;
+  }
+}
