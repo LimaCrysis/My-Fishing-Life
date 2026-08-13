@@ -1060,6 +1060,7 @@ function renderFishingMap(){
       </section>
       </section>
       <section id="mapSearchResults" class="map-search-results" hidden></section>
+      <section id="fishingConditionsHub"></section>
       ${recentFishingSpotsHTML()}
       <section id="mapViewMode">
         ${prioritySpotStripHTML()}
@@ -1077,6 +1078,7 @@ function renderFishingMap(){
   setupBeginnerOnlyFilter();
   setupMapFacilityFilter();
   setupMapFilterPanel();
+  if(window.MFLConditions) window.MFLConditions.mountHub('fishingConditionsHub',kantoFishingSpots);
 
   setupGlobalFishingSpotClicks();
 }
@@ -1722,6 +1724,8 @@ function showFishingSpot(id){
         <div><span>タックル</span><strong>${escapeHtml(s.tackle||'—')}</strong></div>
       </div>
 
+      <section id="spotConditionsCard"></section>
+
       ${s.fish?`<section class="fishing-spot-section"><h4>🐟 狙える魚・傾向</h4><p>${escapeHtml(s.fish)}</p></section>`:''}
       ${(s.styles&&s.styles.length)?`<section class="fishing-spot-section"><h4>🎣 釣り方</h4><div class="fishing-spot-tags">${s.styles.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div></section>`:''}
       ${(s.facilities&&s.facilities.length)?`<section class="fishing-spot-section"><h4>🅿️ 設備</h4><div class="fishing-spot-tags">${s.facilities.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div></section>`:''}
@@ -1734,6 +1738,7 @@ function showFishingSpot(id){
     </div>`;
 
   document.body.appendChild(overlay);
+  if(window.MFLConditions) window.MFLConditions.mountSpot('spotConditionsCard',s,kantoFishingSpots);
 
   const close=()=>{
     overlay.classList.add('closing');
