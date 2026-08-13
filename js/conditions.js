@@ -1,55 +1,76 @@
-/* MFL Fishing Conditions v14.2.0 — provider adapter + offline/manual fallback */
+/* MFL Fishing Conditions v14.3.0 — basin-aware live adapters */
 (function(){
   'use strict';
-  const KEY='mfl_conditions_manual_v1';
-  const COMPARE_KEY='mfl_conditions_compare_v1';
-  const defaults={
-    ichihara:{weather:'くもり',rainChance:40,rain24h:58,lightning:'注意',windDir:'南東',windSpeed:5.8,wave:0.8,tide:'中潮・上げ',water:'雨後の濁りあり',updated:'デモデータ'},
-    kashima:{weather:'晴れ',rainChance:20,rain24h:4,lightning:'低',windDir:'東',windSpeed:6.6,wave:1.4,tide:'中潮・下げ',water:'やや濁り',updated:'デモデータ'}
+  const KEY='mfl_conditions_manual_v2',COMPARE_KEY='mfl_conditions_compare_v1',CACHE_KEY='mfl_conditions_live_cache_v1';
+  const profiles={
+    ichihara:{lat:35.536,lon:140.069,basin:'養老川流域',basinLat:35.347,basinLon:140.153,exposure:'bay',facility:'管理施設'},
+    kemigawa_beach:{lat:35.622,lon:140.040,basin:'花見川・印旛沼流域',basinLat:35.720,basinLon:140.180,exposure:'bay',facility:'一般海岸'},
+    wakasu:{lat:35.617,lon:139.833,basin:'荒川・江戸川流域',basinLat:35.790,basinLon:139.850,exposure:'bay',facility:'管理施設'},
+    ariake_west:{lat:35.629,lon:139.792,basin:'隅田川・荒川／東京港内',basinLat:35.750,basinLon:139.810,exposure:'harbor',facility:'指定釣り可能エリア'},
+    kisarazu_uchiko:{lat:35.382,lon:139.911,basin:'小櫃川・矢那川流域',basinLat:35.330,basinLon:140.020,exposure:'harbor',facility:'公園・港内'},
+    tateyama_sunset:{lat:34.987,lon:139.853,basin:'館山湾小河川流域',basinLat:35.000,basinLon:139.900,exposure:'open',facility:'管理桟橋'},
+    kashima:{lat:35.965,lon:140.692,basin:'鹿島灘沿岸流域',basinLat:35.980,basinLon:140.550,exposure:'open',facility:'管理施設'}
   };
-  const fallback={weather:'未取得',rainChance:null,rain24h:null,lightning:'不明',windDir:'—',windSpeed:null,wave:null,tide:'未取得',water:'不明',updated:'データ未設定'};
-  function loadManual(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(_){return{}}}
+  const demos={
+    ichihara:{weather:'くもり',rainChance:40,rain24h:58,rain48h:82,basinRain24h:74,basinRain48h:108,lightning:'注意',windDir:'南東',windSpeed:5.8,wave:.8,tide:'中潮・上げ',water:'雨後の濁りあり'},
+    kemigawa_beach:{weather:'くもり',rainChance:35,rain24h:42,rain48h:65,basinRain24h:61,basinRain48h:90,lightning:'低',windDir:'南',windSpeed:4.8,wave:.6,tide:'中潮',water:'花見川河口の濁り注意'},
+    wakasu:{weather:'晴れ',rainChance:20,rain24h:12,rain48h:28,basinRain24h:38,basinRain48h:62,lightning:'低',windDir:'南東',windSpeed:5.5,wave:.7,tide:'中潮',water:'湾奥河川の影響あり'},
+    ariake_west:{weather:'晴れ',rainChance:20,rain24h:10,rain48h:24,basinRain24h:34,basinRain48h:57,lightning:'低',windDir:'南',windSpeed:4.2,wave:.3,tide:'中潮',water:'港内・低塩分に注意'},
+    kisarazu_uchiko:{weather:'くもり',rainChance:30,rain24h:26,rain48h:45,basinRain24h:41,basinRain48h:68,lightning:'低',windDir:'南西',windSpeed:4.8,wave:.5,tide:'中潮',water:'河川流入に注意'},
+    tateyama_sunset:{weather:'晴れ',rainChance:15,rain24h:4,rain48h:12,basinRain24h:9,basinRain48h:18,lightning:'低',windDir:'南西',windSpeed:5.2,wave:1.0,tide:'中潮',water:'通常'},
+    kashima:{weather:'晴れ',rainChance:20,rain24h:4,rain48h:8,basinRain24h:6,basinRain48h:12,lightning:'低',windDir:'東',windSpeed:6.6,wave:1.4,tide:'中潮・下げ',water:'やや濁り'}
+  };
+  const fallback={weather:'未取得',rainChance:null,rain24h:null,rain48h:null,basinRain24h:null,basinRain48h:null,lightning:'不明',windDir:'—',windSpeed:null,wave:null,tide:'既存潮汐表を確認',water:'不明',facilityStatus:'未確認',officialWarning:'未接続',updated:'データ未設定'};
+  const weatherLabels={0:'快晴',1:'晴れ',2:'一部くもり',3:'くもり',45:'霧',48:'霧',51:'霧雨',53:'霧雨',55:'強い霧雨',61:'雨',63:'雨',65:'強い雨',80:'にわか雨',81:'にわか雨',82:'強いにわか雨',95:'雷雨',96:'雷雨',99:'激しい雷雨'};
+  const degToDir=d=>['北','北東','東','南東','南','南西','西','北西'][Math.round(Number(d||0)/45)%8];
+  const num=v=>Number.isFinite(Number(v))?Number(v):null;
+  function read(key){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch(_){return{}}}
+  function sumTail(values,hours){return (values||[]).slice(-hours).reduce((a,v)=>a+(num(v)||0),0)}
+  async function fetchJSON(url,timeout=7000){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout);try{const res=await fetch(url,{signal:controller.signal});if(!res.ok)throw new Error(`HTTP ${res.status}`);return await res.json()}finally{clearTimeout(timer)}}
+  function forecastURL(lat,lon){return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=weather_code,wind_speed_10m,wind_direction_10m&hourly=precipitation,precipitation_probability,weather_code&past_hours=48&forecast_hours=12&wind_speed_unit=ms&timezone=Asia%2FTokyo`}
+  function marineURL(lat,lon){return `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&current=wave_height&hourly=wave_height&forecast_hours=12&timezone=Asia%2FTokyo&cell_selection=sea`}
+  async function openMeteo(spot){
+    const p=profiles[spot.id];if(!p)throw new Error('地点プロファイル未登録');
+    const [local,basin,marine]=await Promise.all([fetchJSON(forecastURL(p.lat,p.lon)),fetchJSON(forecastURL(p.basinLat,p.basinLon)),fetchJSON(marineURL(p.lat,p.lon)).catch(()=>({}))]);
+    const localPast=(local.hourly?.precipitation||[]).slice(0,48),basinPast=(basin.hourly?.precipitation||[]).slice(0,48),futureCodes=(local.hourly?.weather_code||[]).slice(-12),futureRain=(local.hourly?.precipitation_probability||[]).slice(-12);
+    return {...fallback,weather:weatherLabels[local.current?.weather_code]||'天候コード '+local.current?.weather_code,rainChance:Math.max(0,...futureRain.map(x=>num(x)||0)),rain24h:+sumTail(localPast,24).toFixed(1),rain48h:+sumTail(localPast,48).toFixed(1),basinRain24h:+sumTail(basinPast,24).toFixed(1),basinRain48h:+sumTail(basinPast,48).toFixed(1),lightning:futureCodes.some(x=>Number(x)>=95)?'高':'低',windDir:degToDir(local.current?.wind_direction_10m),windSpeed:num(local.current?.wind_speed_10m),wave:num(marine.current?.wave_height),water:'流域雨量から推定',facilityStatus:'公式確認が必要',officialWarning:'気象庁情報を確認',updated:new Date().toLocaleString('ja-JP'),profile:p};
+  }
+  async function warnings(spot){if(typeof window.MFL_WARNING_ADAPTER!=='function')return{};return await window.MFL_WARNING_ADAPTER(spot)}
   const adapters={
-    manual:{name:'手動 / デモ',async get(spot){return {...fallback,...(defaults[spot.id]||{}),...(loadManual()[spot.id]||{})}}},
-    api:{name:'外部API',async get(spot){
-      if(typeof window.MFL_CONDITIONS_API!=='function') throw new Error('API未設定');
-      return {...fallback,...await window.MFL_CONDITIONS_API(spot)};
-    }}
+    openMeteo:{name:'Open-Meteo 実データ',get:openMeteo},
+    warnings:{name:'気象庁・施設情報接続口',get:warnings},
+    manual:{name:'手動 / デモ',async get(spot){return {...fallback,...(demos[spot.id]||{}),...(read(KEY)[spot.id]||{}),profile:profiles[spot.id],updated:(read(KEY)[spot.id]?.updated)||'デモデータ'}}}
   };
   async function get(spot){
-    try{const data=await adapters.api.get(spot);return{...data,source:'api'}}
-    catch(_){return{...await adapters.manual.get(spot),source:'manual'}}
+    try{const live=await adapters.openMeteo.get(spot),safe=await adapters.warnings.get(spot);const data={...live,...safe,source:'live'};const cache=read(CACHE_KEY);cache[spot.id]=data;localStorage.setItem(CACHE_KEY,JSON.stringify(cache));return data}
+    catch(_){const manual=read(KEY)[spot.id];if(manual)return{...fallback,...manual,profile:profiles[spot.id],source:'manual'};const cached=read(CACHE_KEY)[spot.id];if(cached)return{...cached,source:'cache'};return{...await adapters.manual.get(spot),source:'demo'}}
   }
-  function num(v){return Number.isFinite(Number(v))?Number(v):null}
   function evaluate(d){
-    let score=100; const reasons=[]; const rain=num(d.rainChance),past=num(d.rain24h),wind=num(d.windSpeed),wave=num(d.wave);
-    if(d.lightning==='高'||d.lightning==='警報'){score-=70;reasons.push('雷リスクが高い')}
-    else if(d.lightning==='注意'){score-=25;reasons.push('雷に注意')}
+    let score=100;const reasons=[];const rain=num(d.rainChance),local24=num(d.rain24h),basin24=num(d.basinRain24h),basin48=num(d.basinRain48h),wind=num(d.windSpeed),wave=num(d.wave);let hardStop=false;
+    if(d.regulation==='禁止'||d.facilityStatus==='閉鎖'){hardStop=true;reasons.push(d.regulation==='禁止'?'釣り禁止':'施設閉鎖')}
+    if(/特別警報|警報/.test(d.officialWarning||'')){hardStop=true;reasons.push(d.officialWarning)}
+    if(d.lightning==='高'||d.lightning==='警報'){score-=70;reasons.push('雷リスクが高い')}else if(d.lightning==='注意'){score-=25;reasons.push('雷に注意')}
     if(wind!==null){if(wind>=10){score-=55;reasons.push(`風${wind}m/s`)}else if(wind>=7){score-=30;reasons.push(`強めの風${wind}m/s`)}else if(wind>=5){score-=12;reasons.push(`風${wind}m/s`)}}
     if(wave!==null){if(wave>=2){score-=55;reasons.push(`波${wave}m`)}else if(wave>=1.5){score-=28;reasons.push(`波高め${wave}m`)}else if(wave>=1){score-=12;reasons.push(`波${wave}m`)}}
     if(rain!==null){if(rain>=70){score-=25;reasons.push(`降水${rain}%`)}else if(rain>=40){score-=12;reasons.push(`降水${rain}%`)}}
-    if(past!==null&&past>=50){score-=28;reasons.push(`直近雨量${past}mm`)}else if(past!==null&&past>=20){score-=14;reasons.push(`直近雨量${past}mm`)}
-    const rank=score>=82?{symbol:'◎',label:'行きやすい',className:'great'}:score>=62?{symbol:'○',label:'条件付き',className:'good'}:score>=38?{symbol:'△',label:'慎重に',className:'careful'}:{symbol:'×',label:'見送り',className:'stop'};
-    return{score:Math.max(0,score),reasons:reasons.length?reasons:['大きな注意要素なし'],...rank,heavyRain:past!==null&&past>=30};
+    if(basin24!==null&&basin24>=60){score-=32;reasons.push(`流域24h ${basin24}mm`)}else if(basin24!==null&&basin24>=30){score-=20;reasons.push(`流域24h ${basin24}mm`)}else if(basin48!==null&&basin48>=50){score-=12;reasons.push(`流域48h ${basin48}mm`)}
+    if(local24!==null&&local24>=50){score-=18;reasons.push(`現地24h ${local24}mm`)}else if(local24!==null&&local24>=20){score-=9;reasons.push(`現地24h ${local24}mm`)}
+    if(hardStop)score=0;const rank=score>=82?['◎','行きやすい','great']:score>=62?['○','条件付き','good']:score>=38?['△','慎重に','careful']:['×','見送り','stop'];
+    return{score:Math.max(0,score),symbol:rank[0],label:rank[1],className:rank[2],reasons:reasons.length?reasons:['大きな注意要素なし'],heavyRain:(basin24||0)>=30||(basin48||0)>=50,hardStop};
   }
-  function advice(d,result){
-    const wind=num(d.windSpeed),past=num(d.rain24h); const strongWind=wind!==null&&wind>=5; const muddy=/濁/.test(d.water||'')||(past!==null&&past>=30);
-    if(result.className==='stop')return{weight:'釣行を優先せず見送り',worm:'—',method:'警報・施設発表と安全確保を優先'};
-    return{weight:strongWind?'14gを軸に、扱いづらければ中止':'7gから開始',worm:muddy?'アピール強め（チャート・グロー・波動）':'クリア/ナチュラル系から',method:strongWind?'風上への無理なキャストを避け、足元〜風下を探る':'表層→中層→底の順で反応を確認'};
-  }
+  function advice(d,r){if(r.className==='stop')return{weight:'釣行を優先せず見送り',worm:'—',method:'警報・施設発表と安全確保を優先'};const strong=(num(d.windSpeed)||0)>=5,muddy=r.heavyRain||/濁/.test(d.water||'');return{weight:strong?'14gを軸に、扱いづらければ中止':'7gから開始',worm:muddy?'アピール強め（チャート・グロー・波動）':'クリア/ナチュラル系から',method:strong?'風上への無理なキャストを避け、足元〜風下を探る':'表層→中層→底の順で反応を確認'}}
   function metric(icon,label,value){return `<div class="fc-metric"><span>${icon}</span><small>${label}</small><strong>${value??'—'}</strong></div>`}
-  function card(spot,d,compact=false){const r=evaluate(d),a=advice(d,r);return `<article class="fc-card ${r.className}${compact?' compact':''}">
-    <div class="fc-head"><div><small>MFL FISHING CONDITIONS</small><h4>${spot.short||spot.name}</h4></div><div class="fc-rank"><b>${r.symbol}</b><span>${r.label}</span></div></div>
-    <div class="fc-metrics">${metric('🌤️','天気',d.weather)}${metric('☔','降水',d.rainChance==null?'—':d.rainChance+'%')}${metric('⚡','雷',d.lightning)}${metric('💨','風',d.windSpeed==null?'—':`${d.windDir} ${d.windSpeed}m/s`)}${metric('🌊','波',d.wave==null?'—':d.wave+'m')}${metric('🌙','潮',d.tide)}</div>
-    ${r.heavyRain?`<div class="fc-rain-alert"><b>⚠️ 直近の大雨 ${d.rain24h}mm</b><span>河川流入・濁り・淡水・漂流物の影響が残る可能性があります。</span></div>`:''}
-    <div class="fc-reasons">${r.reasons.map(x=>`<span>${x}</span>`).join('')}</div>
-    ${compact?'':`<div class="fc-assist"><small>MFL ASSIST</small><div><b>⚖️ ${a.weight}</b><b>🪱 ${a.worm}</b></div><p>${a.method}</p></div>
-    <div class="fc-source"><span>${d.source==='api'?'API取得':'手動 / デモ'}</span><span>${d.updated||'更新時刻なし'}</span></div>`}
-  </article>`}
-  async function mountSpot(id,spot,spots){const root=document.getElementById(id);if(!root)return;root.innerHTML='<div class="fc-loading">コンディションを判定中…</div>';const d=await get(spot);root.innerHTML=card(spot,d)+`<div class="fc-actions"><button data-fc-manual>手動で更新</button><button data-fc-compare>比較に追加</button></div><p class="fc-disclaimer">参考判定です。警報・施設の営業情報・現地規制を必ず優先してください。</p>`;root.querySelector('[data-fc-manual]').onclick=()=>openManual(spot,d,()=>mountSpot(id,spot,spots));root.querySelector('[data-fc-compare]').onclick=()=>{let ids=compareIds();ids=ids.filter(x=>x!==spot.id);ids.push(spot.id);localStorage.setItem(COMPARE_KEY,JSON.stringify(ids.slice(-2)));alert('比較候補に追加しました');};}
+  function sourceLabel(s){return s==='live'?'LIVE API':s==='cache'?'保存済みAPI':s==='manual'?'手動':'デモ'}
+  function card(spot,d,compact=false){const r=evaluate(d),a=advice(d,r),p=d.profile||profiles[spot.id];return `<article class="fc-card ${r.className}${compact?' compact':''}"><div class="fc-head"><div><small>MFL FISHING CONDITIONS</small><h4>${spot.short||spot.name}</h4></div><div class="fc-rank"><b>${r.symbol}</b><span>${r.label}</span></div></div>
+  <div class="fc-metrics">${metric('🌤️','天気',d.weather)}${metric('☔','降水',d.rainChance==null?'—':d.rainChance+'%')}${metric('⚡','雷',d.lightning)}${metric('💨','風',d.windSpeed==null?'—':`${d.windDir} ${d.windSpeed}m/s`)}${metric('🌊','波',d.wave==null?'—':d.wave+'m')}${metric('🌙','潮',d.tide)}</div>
+  ${p?`<div class="fc-basin"><div><small>流入河川・流域</small><strong>${p.basin}</strong></div><span>24h ${d.basinRain24h??'—'}mm</span><span>48h ${d.basinRain48h??'—'}mm</span></div>`:'<div class="fc-profile-missing">流域プロファイル未登録：手動データで判定</div>'}
+  ${r.heavyRain?`<div class="fc-rain-alert"><b>⚠️ 流域の大雨影響</b><span>河川流入・濁り・淡水・漂流物が24〜48時間残る可能性があります。</span></div>`:''}
+  ${r.hardStop?`<div class="fc-stop-alert">安全・規制条件により天候点数より優先して「見送り」です。</div>`:''}<div class="fc-reasons">${r.reasons.map(x=>`<span>${x}</span>`).join('')}</div>
+  ${compact?'':`<div class="fc-safety"><span>施設 ${d.facilityStatus}</span><span>警報 ${d.officialWarning}</span></div><div class="fc-assist"><small>MFL ASSIST（実釣学習前の基礎提案）</small><div><b>⚖️ ${a.weight}</b><b>🪱 ${a.worm}</b></div><p>${a.method}</p></div><div class="fc-source"><span>${sourceLabel(d.source)}・Open-Meteo attribution</span><span>${d.updated}</span></div>`}</article>`}
+  async function mountSpot(id,spot,spots){const root=document.getElementById(id);if(!root)return;root.innerHTML='<div class="fc-loading">実データを取得中…</div>';const d=await get(spot);root.innerHTML=card(spot,d)+`<div class="fc-actions"><button data-fc-manual>手動で補正</button><button data-fc-compare>比較に追加</button></div><p class="fc-disclaimer">参考判定です。気象庁の警報・施設発表・現地規制を必ず優先してください。</p>`;root.querySelector('[data-fc-manual]').onclick=()=>openManual(spot,d,()=>mountSpot(id,spot,spots));root.querySelector('[data-fc-compare]').onclick=()=>{let ids=compareIds().filter(x=>x!==spot.id);ids.push(spot.id);localStorage.setItem(COMPARE_KEY,JSON.stringify(ids.slice(-2)));alert('比較候補に追加しました')}}
   function compareIds(){try{return JSON.parse(localStorage.getItem(COMPARE_KEY)||'["ichihara","kashima"]')}catch(_){return['ichihara','kashima']}}
-  async function renderCompare(root,spots,ids){const selected=ids.map(id=>spots.find(s=>s.id===id)).filter(Boolean);const rows=await Promise.all(selected.map(async s=>({s,d:await get(s)})));root.querySelector('.fc-compare-results').innerHTML=rows.map(x=>card(x.s,x.d,true)).join('')||'<p>比較する釣り場を選んでください。</p>';}
-  function mountHub(id,spots){const root=document.getElementById(id);if(!root)return;const usable=spots.filter(s=>s.id&&s.verify!=='EXCLUDED');const ids=compareIds();root.innerHTML=`<section class="fc-hub"><div class="fc-hub-title"><div><small>TRIP DECISION</small><h3>コンディション比較</h3><p>天気ではなく「釣りに向いているか」で2地点を比較。</p></div><span>最大2地点</span></div><div class="fc-selects"><select data-fc-select="0">${usable.map(s=>`<option value="${s.id}" ${s.id===ids[0]?'selected':''}>${s.short||s.name}</option>`).join('')}</select><b>VS</b><select data-fc-select="1">${usable.map(s=>`<option value="${s.id}" ${s.id===ids[1]?'selected':''}>${s.short||s.name}</option>`).join('')}</select></div><div class="fc-compare-results"></div><p class="fc-disclaimer">API未設定時は手動/デモデータで動作します。安全判断は公式警報・施設発表を優先。</p></section>`;const update=()=>{const next=[...root.querySelectorAll('[data-fc-select]')].map(x=>x.value);localStorage.setItem(COMPARE_KEY,JSON.stringify(next));renderCompare(root,spots,next)};root.querySelectorAll('[data-fc-select]').forEach(x=>x.onchange=update);update();}
-  function openManual(spot,current,done){const raw=prompt(`${spot.short||spot.name}の手動データ\n天気,降水%,直近24h雨量mm,雷(低/注意/高),風向,風速m/s,波m,潮,水色`,[current.weather,current.rainChance,current.rain24h,current.lightning,current.windDir,current.windSpeed,current.wave,current.tide,current.water].join(','));if(raw==null)return;const v=raw.split(',').map(x=>x.trim());if(v.length<9){alert('9項目をカンマ区切りで入力してください');return}const all=loadManual();all[spot.id]={weather:v[0],rainChance:num(v[1]),rain24h:num(v[2]),lightning:v[3],windDir:v[4],windSpeed:num(v[5]),wave:num(v[6]),tide:v[7],water:v[8],updated:new Date().toLocaleString('ja-JP')};localStorage.setItem(KEY,JSON.stringify(all));done();}
-  window.MFLConditions={adapters,get,evaluate,advice,mountSpot,mountHub};
+  async function renderCompare(root,spots,ids){const box=root.querySelector('.fc-compare-results');box.innerHTML='<div class="fc-loading">2地点の実データを取得中…</div>';const rows=await Promise.all(ids.map(id=>spots.find(s=>s.id===id)).filter(Boolean).map(async s=>({s,d:await get(s)})));box.innerHTML=rows.map(x=>card(x.s,x.d,true)).join('')}
+  function mountHub(id,spots){const root=document.getElementById(id);if(!root)return;const usable=spots.filter(s=>profiles[s.id]||read(KEY)[s.id]),ids=compareIds();root.innerHTML=`<section class="fc-hub"><div class="fc-hub-title"><div><small>LIVE TRIP DECISION</small><h3>コンディション比較</h3><p>現地と流域の雨を分け、最大2地点を同じ基準で比較。</p></div><span>${Object.keys(profiles).length}地点対応</span></div><div class="fc-selects"><select data-fc-select="0">${usable.map(s=>`<option value="${s.id}" ${s.id===ids[0]?'selected':''}>${s.short||s.name}</option>`).join('')}</select><b>VS</b><select data-fc-select="1">${usable.map(s=>`<option value="${s.id}" ${s.id===ids[1]?'selected':''}>${s.short||s.name}</option>`).join('')}</select></div><div class="fc-provider-status"><span>天気・雨量：LIVE</span><span>波：LIVE</span><span>警報・施設：確認接続口</span></div><div class="fc-compare-results"></div><p class="fc-disclaimer">API取得失敗時は保存済みデータ→手動→デモの順で安全に切り替わります。</p></section>`;const update=()=>{const next=[...root.querySelectorAll('[data-fc-select]')].map(x=>x.value);localStorage.setItem(COMPARE_KEY,JSON.stringify(next));renderCompare(root,spots,next)};root.querySelectorAll('[data-fc-select]').forEach(x=>x.onchange=update);update()}
+  function openManual(spot,current,done){const raw=prompt(`${spot.short||spot.name}の補正\n天気,降水%,現地24h,流域24h,流域48h,雷,風向,風速,波,潮,水色,施設状態,警報`,[current.weather,current.rainChance,current.rain24h,current.basinRain24h,current.basinRain48h,current.lightning,current.windDir,current.windSpeed,current.wave,current.tide,current.water,current.facilityStatus,current.officialWarning].join(','));if(raw==null)return;const v=raw.split(',').map(x=>x.trim());if(v.length<13){alert('13項目をカンマ区切りで入力してください');return}const all=read(KEY);all[spot.id]={weather:v[0],rainChance:num(v[1]),rain24h:num(v[2]),basinRain24h:num(v[3]),basinRain48h:num(v[4]),lightning:v[5],windDir:v[6],windSpeed:num(v[7]),wave:num(v[8]),tide:v[9],water:v[10],facilityStatus:v[11],officialWarning:v[12],updated:new Date().toLocaleString('ja-JP')};localStorage.setItem(KEY,JSON.stringify(all));done()}
+  window.MFLConditions={profiles,adapters,get,evaluate,advice,mountSpot,mountHub};
 })();

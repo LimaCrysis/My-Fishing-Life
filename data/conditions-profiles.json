@@ -1,0 +1,19 @@
+{
+  "version": "14.3.0",
+  "policy": "現地雨量と流域雨量を分離。規制・閉鎖・警報はスコアより優先。",
+  "providers": {
+    "weather": "Open-Meteo Forecast API",
+    "marine": "Open-Meteo Marine API",
+    "warnings": "MFL_WARNING_ADAPTER (JMA XML / facility adapter ready)",
+    "tide": "MFL existing tide table preferred"
+  },
+  "spots": [
+    {"id":"ichihara","basin":"養老川流域","status":"verified"},
+    {"id":"kemigawa_beach","basin":"花見川・印旛沼流域","status":"verified"},
+    {"id":"wakasu","basin":"荒川・江戸川流域","status":"verified"},
+    {"id":"ariake_west","basin":"隅田川・荒川／東京港内","status":"verified"},
+    {"id":"kisarazu_uchiko","basin":"小櫃川・矢那川流域","status":"verified"},
+    {"id":"tateyama_sunset","basin":"館山湾小河川流域","status":"verified"},
+    {"id":"kashima","basin":"鹿島灘沿岸流域","status":"verified"}
+  ]
+}
