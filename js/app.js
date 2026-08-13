@@ -782,17 +782,24 @@ function setupMapViewModes(){
   const root=document.getElementById('mapViewMode'); if(!root)return;
   const renderMode=(mode)=>{
     document.querySelectorAll('[data-map-view-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mapViewMode===mode));
-    if(mode==='recommended'){
-      root.innerHTML=`${prioritySpotStripHTML()}${renderKantoMap()}`;
-      setupKantoMap();
+    const discovery=document.querySelectorAll('.map-clean-hint,.map-search-box,.map-filter-panel-toggle');
+    discovery.forEach(el=>el.hidden=mode==='conditions');
+    const filterPanel=document.getElementById('mapFilterPanel');
+    const searchResults=document.getElementById('mapSearchResults');
+    if(mode==='conditions'){
+      if(filterPanel)filterPanel.hidden=true;
+      if(searchResults)searchResults.hidden=true;
+      root.innerHTML='<section id="fishingConditionsHub"></section>';
+      if(window.MFLConditions)window.MFLConditions.mountHub('fishingConditionsHub',kantoFishingSpots);
     }else if(mode==='east'){
-      root.innerHTML=`${eastChibaQuickHTML()}${renderKantoMap()}`;
+      root.innerHTML=`${recentFishingSpotsHTML()}${eastChibaQuickHTML()}${renderKantoMap()}`;
       setupKantoMap();
     }else{
-      root.innerHTML=renderKantoMap();
+      root.innerHTML=`${recentFishingSpotsHTML()}${renderKantoMap()}`;
       setupKantoMap();
     }
     root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
+    setupRecentFishingSpots();
   };
   document.querySelectorAll('[data-map-view-mode]').forEach(btn=>btn.onclick=()=>renderMode(btn.dataset.mapViewMode));
 }
@@ -1008,8 +1015,8 @@ function renderFishingMap(){
     <section class="fishing-map-view">
       <div class="map-top-stack">
         <section class="map-view-switcher">
-        <button class="active" data-map-view-mode="recommended">⭐ おすすめ</button>
-        <button data-map-view-mode="all">🗺️ 全エリア</button>
+        <button class="active" data-map-view-mode="all">🗺️ 全エリア</button>
+        <button data-map-view-mode="conditions">🌦️ コンディション</button>
         <button data-map-view-mode="east">🌊 千葉東岸</button>
       </section>
         <section class="fishing-map-hero">
@@ -1060,10 +1067,8 @@ function renderFishingMap(){
       </section>
       </section>
       <section id="mapSearchResults" class="map-search-results" hidden></section>
-      <section id="fishingConditionsHub"></section>
-      ${recentFishingSpotsHTML()}
       <section id="mapViewMode">
-        ${prioritySpotStripHTML()}
+        ${recentFishingSpotsHTML()}
         ${renderKantoMap()}
       </section>
     </section>`;
@@ -1078,7 +1083,6 @@ function renderFishingMap(){
   setupBeginnerOnlyFilter();
   setupMapFacilityFilter();
   setupMapFilterPanel();
-  if(window.MFLConditions) window.MFLConditions.mountHub('fishingConditionsHub',kantoFishingSpots);
 
   setupGlobalFishingSpotClicks();
 }
