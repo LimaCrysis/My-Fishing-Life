@@ -373,9 +373,9 @@
       "id": "sodegaura_seaside_park",
       "name": "袖ケ浦海浜公園",
       "pref": "千葉",
-      "status": "hold",
-      "reason": "千葉県の港湾緑地として現行管理対象を確認。釣り可能区画の公式根拠が取れるまで保留。",
-      "official_url": "https://www.pref.chiba.lg.jp/kouwan/shiteikanri/2026/kouwanryokuti/r8bosyu.html",
+      "status": "excluded",
+      "reason": "公園公式で園内の釣り禁止、テトラポット内への立入り禁止を確認。",
+      "official_url": "https://sodegaura-kaihinpark.com/about/",
       "map_ready": false
     },
     {

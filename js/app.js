@@ -1167,8 +1167,32 @@ function knotSteps(type, steps) {
 }
 
 
+
+const mflExcludedChibaSpots=[
+  {name:'袖ケ浦海浜公園',status:'EXCLUDED',reason:'園内での釣りは禁止。テトラポット内への立入りも禁止。',checked:'2026年8月13日',checkedISO:'2026-08-13',official:'https://sodegaura-kaihinpark.com/about/'}
+];
+
+const mflPendingChibaSpots=[
+  {name:'鳥居崎海浜公園周辺',status:'調査中 / HOLD',evidence:'公園・イベント利用は確認済み',reason:'イベント時の釣り教室は確認できましたが、常設の釣り可能範囲を明示する公式根拠が不足しています。釣り場としては案内しません。',nextCheck:'通常時の釣り可否・可能範囲・現地管理ルール',checked:'2026年8月13日',checkedISO:'2026-08-13',official:'https://www.city.kisarazu.lg.jp/soshiki/keizai/kankoshinko/2/6/10394.html'},
+  {name:'富津みなと公園',status:'調査中 / HOLD',evidence:'海沿いの港湾緑地は確認済み',reason:'海に面した遊歩道を持つ公園であることは確認できましたが、公式ページに釣りの記載がなく、常設の釣り可否・利用可能範囲を断定できません。',nextCheck:'護岸・遊歩道での釣り可否と禁止区画',checked:'2026年8月13日',checkedISO:'2026-08-13',official:'https://www.pref.chiba.lg.jp/cs-kisarazu-k/shisetsu/kouen.html'}
+];
+
+function verificationReviewMeta(item){
+  if(!item.checkedISO)return{label:'確認日未登録',state:'unknown',due:'—'};
+  const checked=new Date(`${item.checkedISO}T00:00:00`);
+  const due=new Date(checked); due.setDate(due.getDate()+90);
+  const now=new Date(); now.setHours(0,0,0,0);
+  const days=Math.ceil((due-now)/86400000);
+  const dueText=`${due.getFullYear()}年${due.getMonth()+1}月${due.getDate()}日`;
+  if(days<0)return{label:`再確認期限を${Math.abs(days)}日超過`,state:'overdue',due:dueText};
+  if(days<=14)return{label:`再確認まで${days}日`,state:'soon',due:dueText};
+  return{label:'確認情報は有効期間内',state:'current',due:dueText};
+}
+
 const kantoFishingSpots=[
 {id:'ichihara',area:'bay-east',name:'オリジナルメーカー海づり公園',short:'市原',pref:'千葉',beginner:5,tackle:'◎',x:61,y:61,address:'千葉県市原市五井南海岸1-12',fish:'アジ・サバ・スズキ・クロダイ・イワシなど',styles:['サビキ ◎','軽めのルアー ○','ジグヘッド ○','ちょい投げ ○'],facilities:['フェンス','監視員','トイレ','売店','貸竿','食堂'],note:'足場と安全設備が整った桟橋型。初心者・家族連れ向けを公式に案内。',gear:'S90MLは軽め、100MHは少し重めを試しやすく、2本の性格差を楽しみやすい。',checked:'2026年8月',official:'https://ichihara-umizuri.com/'},
+{id:'kemigawa_beach',area:'chiba',name:'検見川の浜',short:'検見川',pref:'千葉',beginner:4,tackle:'○',address:'千葉県千葉市美浜区磯辺2丁目・検見川の浜',fish:'ハゼ・シロギス・スズキなど東京湾岸の魚種（魚種は季節・状況で変動）',styles:['ちょい投げ ○','軽いルアー ○','ジグヘッド ○','岸からの釣り ○'],facilities:['人工海浜','周辺駐車場','稲毛ヨットハーバー','周辺トイレ'],note:'千葉県の県管理海岸は港湾・漁港区域を除き自由使用の例として釣りが示されています。検見川の浜はマリンスポーツ利用が盛んなため、ヨット・ウインドサーフィン・歩行者を最優先。コアジサシ保護区域（ロープ内）は立入禁止。防波堤・立入禁止区域には入らず、現地表示を必ず優先してください。',gear:'S90MLは軽いジグヘッドやちょい投げと相性良好。100MHは30g前後など少し重めの仕掛けを試せるが、周囲の利用者が多い時はキャストを控える。',checked:'2026年8月13日',checkedISO:'2026-08-13',official:'https://www.city.chiba.jp/bayside/kemigawa-hama.html',verify:'VERIFIED',verifyNote:'2026年8月：千葉県の海岸利用ルール、千葉市の検見川の浜案内、2026年コアジサシ保護情報を確認済み。'},
+
 {id:'kashima',area:'ibaraki',name:'鹿島港魚釣園',short:'鹿島',pref:'茨城',beginner:5,tackle:'◎',x:72,y:25,address:'茨城県鹿嶋市新浜11',fish:'アジ・サバ・イワシ・スズキ・根魚など',styles:['サビキ ◎','ルアー ○','ジグヘッド ○','ちょい投げ ○'],facilities:['トイレ','売店','貸竿','無料駐車場','職員','救助設備'],note:'ライフジャケット着用が必要。茨城県公式では鹿島港は魚釣園以外は釣り禁止。港湾施設・防波堤には入らない。',gear:'水深3〜10mで釣り方の幅を出しやすく、S90MLと100MHの使い分け向き。',checked:'2026年8月',official:'https://kashima-fa.com/infomation/'},
 {id:'honmoku',area:'bay-south',name:'本牧海づり施設',short:'本牧',pref:'神奈川',beginner:5,tackle:'◎',x:42,y:70,address:'神奈川県横浜市中区本牧ふ頭1',fish:'アジ・サバ・イワシ・スズキ・クロダイなど',styles:['サビキ ◎','ルアー ○','ジグヘッド ○','ちょい投げ ○'],facilities:['管理施設','売店','食堂','貸竿','トイレ'],note:'大型の管理海づり施設。料金・ルール・混雑状況は公式で事前確認。',gear:'S90MLで軽め、100MHで重めを試し分けやすい。',checked:'2026年8月',official:'https://yokohama-fishingpiers.jp/honmoku/'},
 {id:'isogo',area:'bay-south',name:'磯子海づり施設',short:'磯子',pref:'神奈川',beginner:5,tackle:'○',x:39,y:77,address:'神奈川県横浜市磯子区新磯子39',fish:'アジ・サバ・メバル・カサゴ・クロダイなど',styles:['サビキ ◎','ジグヘッド ○','軽い仕掛け ○'],facilities:['管理施設','貸竿','売店','駐車場','トイレ'],note:'管理された海づり施設。駐車場は有料。営業時間とルールを公式で確認。',gear:'特にS90MLの軽快さを活かしやすい。100MHは軽い釣りではオーバーパワー気味の場面あり。',checked:'2026年8月',official:'https://yokohama-fishingpiers.jp/isogo/'},
@@ -1195,14 +1219,14 @@ const kantoFishingSpots=[
 {id:'mizunohiroba',area:'tokyo',name:'水の広場公園 釣り可能エリア',short:'水の広場',pref:'東京',beginner:5,tackle:'○',address:'東京都江東区青海・有明周辺',fish:'東京湾奥の小物・スズキ類など',styles:['足元狙い ◎','小物釣り ◎','軽い仕掛け ○'],facilities:['公園','釣り可能エリア','周辺施設'],note:'東京都港湾局系の海上公園公式「釣り・磯遊び」対象公園。現地の釣り可能範囲・掲示を必ず優先。',gear:'S90MLで軽い仕掛けや足元狙いに向く。100MHは軽い釣りでは強め。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/search/01_04'},
 {id:'shinkiba',area:'tokyo',name:'新木場公園 釣り可能エリア',short:'新木場',pref:'東京',beginner:5,tackle:'○',address:'東京都江東区新木場2丁目周辺',fish:'東京湾奥の小物・スズキ類など',styles:['足元狙い ◎','小物釣り ◎','軽い仕掛け ○'],facilities:['公園','釣り可能エリア'],note:'海上公園公式の釣り対象公園。釣り可能範囲と現地ルールを確認し、他の公園利用者を優先。',gear:'S90ML向き。100MHは軽い釣りではオーバーパワー気味。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/search/01_04'},
 {id:'yumenoshima',area:'tokyo',name:'夢の島緑道公園 釣り可能エリア',short:'夢の島',pref:'東京',beginner:5,tackle:'○',address:'東京都江東区夢の島周辺',fish:'東京湾奥の小物・スズキ類など',styles:['足元狙い ◎','小物釣り ◎','軽い仕掛け ○'],facilities:['緑道公園','釣り可能エリア'],note:'海上公園公式の釣り対象公園。指定範囲・現地掲示を優先し、歩行者など他利用者へ配慮。',gear:'S90MLで軽い仕掛け向き。100MHの性能を活かす場所というより練習候補。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/search/01_04'},
-{id:'kisarazu_uchiko',area:'chiba',name:'木更津内港公園',short:'木更津内港',pref:'千葉',beginner:4,tackle:'◎',address:'千葉県木更津市内港1 周辺',fish:'ハゼ・スズキ類など東京湾内の魚種',styles:['足元狙い ◎','軽いちょい投げ ○','ルアー ○'],facilities:['公園','港周辺','市公式安全案内'],note:'木更津市は内港公園や堤防で1年を通じて海釣りを楽しめると案内。転落事故もあるためライフジャケット着用を強く推奨。港湾施設・立入禁止表示・工事区画は必ず現地ルールを優先。',gear:'S90MLはハゼや軽め、100MHは少し重めのルアーや仕掛けで使い分けしやすい。',checked:'2026年8月',official:'https://www.city.kisarazu.lg.jp/soshiki/shobo/keibo/1/4060.html'}
+{id:'kisarazu_uchiko',area:'chiba',name:'木更津内港公園',short:'木更津内港',pref:'千葉',beginner:4,tackle:'◎',address:'千葉県木更津市内港1 周辺',fish:'ハゼ・スズキ類など東京湾内の魚種',styles:['足元狙い ◎','軽いちょい投げ ○','ルアー ○'],facilities:['公園','港周辺','市公式安全案内'],note:'木更津市は内港公園や堤防で1年を通じて海釣りを楽しめると案内。転落事故もあるためライフジャケット着用を強く推奨。港湾施設・立入禁止表示・工事区画は必ず現地ルールを優先。',gear:'S90MLはハゼや軽め、100MHは少し重めのルアーや仕掛けで使い分けしやすい。',checked:'2026年8月13日',checkedISO:'2026-08-13',official:'https://www.city.kisarazu.lg.jp/soshiki/shobo/keibo/1/4060.html',verify:'VERIFIED',verifyNote:'2026年8月：木更津市公式「釣り中の事故に注意しましょう！」で、内港公園や堤防で年間を通じて海釣りを楽しめる旨を確認。安全対策・現地規制を優先。'}
 ,{id:'aicle',area:'yokosuka',name:'アイクル海釣りコーナー',short:'アイクル',pref:'神奈川',beginner:4,tackle:'○',address:'神奈川県横須賀市浦郷町5丁目2931番地',fish:'東京湾の岸壁魚種',styles:['足元狙い ◎','サビキ ○','軽い仕掛け ○'],facilities:['無料','公共施設','海釣りコーナー'],note:'横須賀市公式の無料海釣りコーナー。休館日を除き9:00〜17:00。天候や波で利用中止の場合あり。近隣に釣具店なし。',gear:'S90MLで軽い仕掛けを扱いやすい。100MHは軽い釣りでは強めなので、夫婦で役割を分ける練習候補。',checked:'2026年8月',official:'https://www.city.yokosuka.kanagawa.jp/4160/aicle/umizuri-corner.html'}
 
 ,{id:'harumi_ryokudo',area:'tokyo',name:'晴海緑道公園',short:'晴海緑道',pref:'東京',beginner:5,tackle:'○',address:'東京都中央区晴海4丁目・5丁目',fish:'マハゼ・セイゴ・フッコなど東京湾奥の魚種',styles:['足元狙い ◎','小物釣り ◎','軽い仕掛け ○'],facilities:['通年利用','無料','公園','公共交通向き'],note:'公式に釣り可能。通年・無料。公園専用駐車場はないため公共交通向き。使用した釣り具やゴミは必ず持ち帰る。',gear:'S90MLで軽い仕掛けや足元狙いに向く。100MHは軽い釣りでは強め。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/02_08'}
 ,{id:'ariake_north',area:'tokyo',name:'有明北緑道公園',short:'有明北',pref:'東京',beginner:5,tackle:'○',address:'東京都江東区有明1丁目・2丁目',fish:'マハゼ・セイゴ・フッコなど',styles:['足元狙い ◎','小物釣り ◎','軽い仕掛け ○'],facilities:['通年利用','無料','釣り可能エリア','公共交通向き'],note:'有明西運河沿いの公式釣り可能公園。通年・無料。釣り可能エリアは公園マップと現地掲示を確認。専用駐車場なし。',gear:'S90ML向き。100MHは軽い釣りではオーバーパワー気味。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/02_06'}
 ,{id:'shiokaze',area:'tokyo',name:'潮風公園 南コーストデッキ',short:'潮風公園',pref:'東京',beginner:4,tackle:'○',address:'東京都品川区東八潮',fish:'マハゼ・セイゴ・フッコなど',styles:['足元狙い ◎','軽い仕掛け ○','小物釣り ○'],facilities:['通年利用','無料','南側釣り可能エリア','公園'],note:'南コーストデッキが釣り可能エリア。北側護岸は工事等で閉鎖される場合があるため、当日の公式案内と現地表示を確認。',gear:'S90MLで軽い仕掛け向き。100MHは軽い釣りでは強め。',checked:'2026年8月',official:'https://www.tptc.co.jp/park/01_03/point'}
 
-,{id:'tateyama_sunset',area:'chiba',name:'館山夕日桟橋',short:'館山夕日桟橋',pref:'千葉',beginner:5,tackle:'◎',address:'千葉県館山市館山1564-1周辺',fish:'アジ・サバ・シロギス・クロダイ・スズキなど',styles:['サビキ ◎','ちょい投げ ◎','ヘチ釣り ○','ルアー ○'],facilities:['約500m桟橋','手すり','周辺トイレ','渚の駅たてやま'],note:'館山市公式が桟橋での釣りを案内。竿は1人2本まで。上投げ・横投げは禁止。コマセは「カゴ」に入れたもののみ使用可能。歩道側・先端部での釣りは禁止。工事・船舶利用等で臨時規制がある場合は当日の公式案内を優先。',gear:'S90MLでサビキ・ちょい投げ・軽いルアー、100MHで少し重めの仕掛けと使い分けしやすい。',checked:'2026年8月',official:'https://www.city.tateyama.chiba.jp/minato/page100352.html'}
+,{id:'tateyama_sunset',area:'chiba',name:'館山夕日桟橋',short:'館山夕日桟橋',pref:'千葉',beginner:5,tackle:'◎',address:'千葉県館山市館山1564-1周辺',fish:'アジ・サバ・シロギス・クロダイ・スズキなど',styles:['サビキ ◎','ちょい投げ ◎','ヘチ釣り ○','ルアー ○'],facilities:['約500m桟橋','手すり','周辺トイレ','渚の駅たてやま'],note:'館山市公式が桟橋での釣りをレジャーとして案内。竿は1人2本まで。上投げ・横投げは禁止。コマセはカゴ使用のみ。歩道側・先端部での釣りは禁止。2026年6月15日〜8月21日は歩道改修工事により平日8:30〜17:00の一部区間が立入禁止。船舶利用等による臨時規制も当日の公式案内を最優先。',gear:'S90MLでサビキ・ちょい投げ・軽いルアー、100MHで少し重めの仕掛けと使い分けしやすい。',checked:'2026年8月13日',checkedISO:'2026-08-13',official:'https://www.city.tateyama.chiba.jp/minato/page100352.html',verify:'VERIFIED',verifyNote:'2026年8月：館山市公式の釣りルール（釣法・竿2本まで・投げ方・コマセ・禁止区域）を確認。2026年8月21日までの歩道改修工事による一部立入禁止情報も反映。'}
 ,{id:'choshi-marina-coast',area:'chiba-east',zone:'choshi',name:'銚子マリーナ・名洗港海浜公園周辺',short:'名洗',pref:'千葉',beginner:3,tackle:'○',address:'千葉県銚子市潮見町',fish:'回遊魚・シーバス等（周辺海域）',styles:['海岸からの釣り △','ルアー △'],facilities:['無料駐車場','常設トイレ','海浜公園'],note:'銚子市公式で銚子マリーナ海水浴場と隣接する名洗港海浜公園を確認。海水浴場開設期間は遊泳者最優先。マリーナ・港湾作業区域や立入規制は現地表示を必ず確認。MFLでは釣り専用施設ではなく周辺候補として掲載。',gear:'S90ML中心。外洋側は風・波が強い日は無理をしない。',checked:'2026年8月',official:'https://www.city.choshi.chiba.jp/kanko/page110015.html'}
 ,{id:'choshi-nagasaki-coast',area:'chiba-east',zone:'choshi',name:'長崎海岸・犬吠埼南側',short:'長崎',pref:'千葉',beginner:2,tackle:'○',address:'千葉県銚子市長崎町',fish:'沿岸魚（状況次第）',styles:['海岸・磯 △'],facilities:['無料駐車場','夏季トイレ'],note:'銚子市公式で長崎海水浴場を確認。磯浜で外洋の波を受けやすい。海水浴場開設期間は遊泳区域で釣りをしない。荒天・高波時は候補から外す。',gear:'初心者は穏やかな日限定。滑りやすい岩場へ無理に入らない。',checked:'2026年8月',official:'https://www.city.choshi.chiba.jp/kanko/page110015.html'}
 ,{id:'asahi-ioka-coast',area:'chiba-east',zone:'choshi',name:'飯岡・旭海岸周辺',short:'飯岡',pref:'千葉',beginner:2,tackle:'○',address:'千葉県旭市飯岡',fish:'ヒラメ・スズキ・回遊魚など（海況次第）',styles:['サーフ △','ルアー △'],facilities:['海岸','周辺駐車場は現地確認'],note:'九十九里・銚子海域をつなぐサーフ候補。千葉県管理海岸は原則自由使用で釣りも例示されているが、港湾・漁港区域は別扱い。遊泳者・サーファーを最優先し、離岸流・高波・工事規制を現地確認。',gear:'100MHを活かしやすい。初心者は波の低い日限定。',checked:'2026年8月',official:'https://www.pref.chiba.lg.jp/kakan/kaigan/kaigannriyou.html'}
@@ -1296,6 +1320,26 @@ function renderKantoMap(){return `<article class="guide-article kanto-guide">
     <div class="map-rule-card warning">
       <strong>⚠️ 禁止・現地ルール</strong>
       <p>茨城港の港内など、公式に釣り禁止と確認できた場所は候補から除外。工事・立入禁止・施設独自ルールはMFL表示より現地表示を優先します。</p>
+    </div>
+    <div class="map-rule-card pending-list">
+      <strong>🔎 千葉・調査中 / 保留</strong>
+      <p class="pending-list-intro">公園や海辺の存在だけでは釣り可と判断しません。公式情報で常設の釣り可否・範囲を確認できるまで、おすすめ一覧や地図には表示しません。</p>
+      <div class="verification-status-summary" aria-label="千葉公式確認ステータス">
+        <span class="verified"><b>${kantoFishingSpots.filter(x=>x.pref==='千葉'&&x.verify==='VERIFIED').length}</b><small>VERIFIED</small></span>
+        <span class="hold"><b>${mflPendingChibaSpots.length}</b><small>HOLD</small></span>
+        <span class="excluded"><b>${mflExcludedChibaSpots.length}</b><small>EXCLUDED</small></span>
+      </div>
+      <div class="hold-promotion-rule"><b>VERIFIEDへの条件</b><span>常設の釣り可否</span><span>利用可能範囲</span><span>公式または管理者情報</span></div>
+      ${mflPendingChibaSpots.map(x=>{const review=verificationReviewMeta(x);return `<div class="pending-spot-row"><div><b>${x.name}</b><em>${x.evidence}</em><small>${x.reason}</small><dl><dt>次に確認</dt><dd>${x.nextCheck}</dd><dt>最終確認</dt><dd>${x.checked}</dd><dt>定期確認</dt><dd>${review.due}</dd></dl><i class="review-freshness ${review.state}">${review.label}</i><a href="${x.official}" target="_blank" rel="noopener">確認した公式情報 ↗</a></div><span>${x.status}</span></div>`}).join('')}
+    </div>
+    <div class="map-rule-card verified-ledger">
+      <strong>✅ 千葉・公式確認台帳</strong>
+      <p>VERIFIEDの判定根拠・確認日・公式情報をまとめています。確認できた事実の範囲を超えて安全や利用可否を保証するものではありません。</p>
+      ${kantoFishingSpots.filter(x=>x.pref==='千葉'&&x.verify==='VERIFIED').map(x=>{const review=verificationReviewMeta(x);return `<details class="verified-ledger-row"><summary><span><b>${x.name}</b><small>最終確認 ${x.checked||'—'}</small></span><em>MFL VERIFIED</em></summary><p>${x.verifyNote||x.note||''}</p><div class="ledger-review-line"><span>次回確認 ${review.due}</span><i class="review-freshness ${review.state}">${review.label}</i></div><a href="${x.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></details>`}).join('')}
+    </div>
+    <div class="map-rule-card excluded-list">
+      <strong>⛔ 千葉・掲載しない場所</strong>
+      ${mflExcludedChibaSpots.map(x=>{const review=verificationReviewMeta(x);return `<div class="excluded-spot-row"><div><b>${x.name}</b><small>${x.reason}</small><i class="review-freshness ${review.state}">${review.label}・次回 ${review.due}</i><a href="${x.official}" target="_blank" rel="noopener">公式情報を確認 ↗</a></div><span>${x.status}</span></div>`}).join('')}
     </div>
   </div>
 </div>
@@ -1432,6 +1476,7 @@ function spotTypeLabel(id){
     ariake_north:'緑道公園',
     shiokaze:'海上公園',
     tateyama_sunset:'観光桟橋',
+    kemigawa_beach:'人工海浜',
     umikaze:'平日のみ釣り可'
   };
   return types[id]||'釣り場';
@@ -1445,6 +1490,7 @@ function specialSpotRules(s){
     <div><span>投げ方</span><b>上投げ・横投げ禁止</b></div>
     <div><span>コマセ</span><b>カゴのみ可</b></div>
     <div><span>釣り方</span><b>ウキ / フカセ / サビキ / ちょい投げ / ヘチ / ルアー</b></div>
+    <div><span>工事</span><b>2026/8/21まで平日8:30〜17:00 一部立入禁止</b></div>
   </div>`;
   if(s.id==='kisarazu_uchiko') return `<div class="special-rules"><strong>🛟 木更津安全メモ</strong><div><span>安全</span><b>ライフジャケット推奨</b></div><div><span>現地</span><b>工事・立入表示を優先</b></div></div>`;
   return '';
@@ -1667,6 +1713,7 @@ function showFishingSpot(id){
         <div>
           <small>${escapeHtml(s.pref||'')}</small>
           <h3>${escapeHtml(s.name||'')}</h3>
+          ${s.verify==='VERIFIED'?`<span class="mfl-verified-badge">✓ MFL VERIFIED</span>`:''}
         </div>
       </div>
 
@@ -1681,6 +1728,7 @@ function showFishingSpot(id){
       ${s.address?`<section class="fishing-spot-section"><h4>📍 場所</h4><p>${escapeHtml(s.address)}</p></section>`:''}
       ${s.gear?`<section class="fishing-spot-section"><h4>🧰 タックル目安</h4><p>${escapeHtml(s.gear)}</p></section>`:''}
       ${s.note?`<section class="fishing-spot-section"><h4>⚠️ 注意・ポイント</h4><p>${escapeHtml(s.note)}</p></section>`:''}
+      ${s.verifyNote?`<section class="fishing-spot-section verification"><h4>🔎 MFL確認メモ</h4><p>${escapeHtml(s.verifyNote)}</p></section>`:''}
       ${s.checked?`<div class="fishing-spot-checked">最終確認: ${escapeHtml(s.checked)}</div>`:''}
       ${s.official?`<a class="fishing-spot-official" href="${s.official}" target="_blank" rel="noopener">公式情報を開く ↗</a>`:''}
     </div>`;
