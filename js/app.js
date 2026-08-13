@@ -80,6 +80,7 @@ function renderHome() {
       <p>${state.activeTrip ? `${formatDate(state.activeTrip.date)} ${escapeHtml(state.activeTrip.weather)}／${escapeHtml(state.activeTrip.start)}開始` : '釣行を始めて、思い出を一匹ずつ残そう。'}</p>
       <button class="primary-button" id="heroAction">${state.activeTrip ? '釣果を記録する' : '釣行を始める'}</button>
     </section>
+    <section id="kantoWeeklyWeather"></section>
     <button class="section home-tools" id="openCalendar" type="button" aria-label="釣行予定カレンダーを開く">
       <span class="date-icon-button" aria-hidden="true">
         <span class="date-icon-month">${now.getMonth()+1}月</span>
@@ -121,6 +122,7 @@ function renderHome() {
       ${recent.length ? recent.map(catchCard).join('') : `<section class="empty-state"><div class="empty-icon">🐟</div><h2>まだ釣果がありません</h2><p>最初の一匹を記録すると、ここに表示されます。</p></section>`}
     </section>`;
   // Home actions are handled by the delegated click listener below.
+  if(window.MFLConditions)window.MFLConditions.mountWeekly('kantoWeeklyWeather',()=>{state.view='fishingmap';render();});
 
 }
 
@@ -1077,6 +1079,10 @@ function renderFishingMap(){
     btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot);
   });
   setupMapViewModes();
+  if(localStorage.getItem('mfl_open_conditions')==='1'){
+    localStorage.removeItem('mfl_open_conditions');
+    document.querySelector('[data-map-view-mode="conditions"]')?.click();
+  }
   setupRecentFishingSpots();
   setupMapSpotSearch();
   setupMapStyleFilter();
