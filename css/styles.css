@@ -3631,4 +3631,89 @@ html[data-theme="dark"] .fishing-spot-section p{color:#c2d6db}
 html[data-theme="dark"] .fishing-spot-tags span{background:#17424e;color:#bce8ee}
 html[data-theme="dark"] .fishing-spot-section.verification{background:#12352d;border-color:#2c6b57}
 
+/* MFL v14.12.2 - real-device contrast fix for surfaces that intentionally stay light */
+html[data-theme="dark"]{
+  --light-surface-ink:#17313a;
+  --light-surface-muted:#587078;
+  --light-surface-link:#075f70;
+}
+html[data-theme="dark"] .settings-home-card,
+html[data-theme="dark"] .fish-photo-progress,
+html[data-theme="dark"] .glossary-intro,
+html[data-theme="dark"] .glossary-search-wrap,
+html[data-theme="dark"] .glossary-filters button:not(.active),
+html[data-theme="dark"] .glossary-item,
+html[data-theme="dark"] .rigflow-intro,
+html[data-theme="dark"] .rigflow-card,
+html[data-theme="dark"] .rigflow-chain,
+html[data-theme="dark"] .rigflow-check>div,
+html[data-theme="dark"] .parts-intro,
+html[data-theme="dark"] .parts-quick,
+html[data-theme="dark"] .parts-quick-grid button,
+html[data-theme="dark"] .parts-quick-answer,
+html[data-theme="dark"] .parts-card,
+html[data-theme="dark"] .parts-flow,
+html[data-theme="dark"] .parts-choose,
+html[data-theme="dark"] .parts-choose-grid>div,
+html[data-theme="dark"] .parts-real-example,
+html[data-theme="dark"] .parts-glossary,
+html[data-theme="dark"] .weight-intro,
+html[data-theme="dark"] .weight-now,
+html[data-theme="dark"] .knot-art-step,
+html[data-theme="dark"] .hook-intro,
+html[data-theme="dark"] .hook-rule>div,
+html[data-theme="dark"] .hook-example,
+html[data-theme="dark"] .hook-parts-grid>span,
+html[data-theme="dark"] .line-intro,
+html[data-theme="dark"] .rules-intro,
+html[data-theme="dark"] .pier-point,
+html[data-theme="dark"] .map-view-switcher button:not(.active),
+html[data-theme="dark"] .recent-map-spots,
+html[data-theme="dark"] .recent-map-list>button,
+html[data-theme="dark"] .chiba-density-panel,
+html[data-theme="dark"] .chiba-density-grid button{
+  color:var(--light-surface-ink)!important;
+}
+html[data-theme="dark"] .settings-home-card .home-tool-description,
+html[data-theme="dark"] .settings-home-card .home-tool-arrow,
+html[data-theme="dark"] .fish-photo-progress p,
+html[data-theme="dark"] .glossary-intro p,
+html[data-theme="dark"] .glossary-item summary small,
+html[data-theme="dark"] .glossary-detail,
+html[data-theme="dark"] .rigflow-intro p,
+html[data-theme="dark"] .rigflow-card summary small,
+html[data-theme="dark"] .rigflow-card>p,
+html[data-theme="dark"] .rigflow-check small,
+html[data-theme="dark"] .parts-intro p,
+html[data-theme="dark"] .parts-quick-grid small,
+html[data-theme="dark"] .parts-card>p,
+html[data-theme="dark"] .parts-choose-grid p,
+html[data-theme="dark"] .parts-real-example p,
+html[data-theme="dark"] .parts-glossary dd,
+html[data-theme="dark"] .weight-intro p,
+html[data-theme="dark"] .weight-now small,
+html[data-theme="dark"] .hook-intro p,
+html[data-theme="dark"] .hook-rule p,
+html[data-theme="dark"] .hook-example span,
+html[data-theme="dark"] .hook-parts-grid small,
+html[data-theme="dark"] .line-intro p,
+html[data-theme="dark"] .rules-intro p,
+html[data-theme="dark"] .recent-map-list small,
+html[data-theme="dark"] .recent-map-list b,
+html[data-theme="dark"] .chiba-density-grid button span{
+  color:var(--light-surface-muted)!important;
+}
+html[data-theme="dark"] .glossary-search-wrap input{
+  color:var(--light-surface-ink)!important;
+  background:transparent!important;
+}
+html[data-theme="dark"] .glossary-search-wrap input::placeholder{color:#6f858c!important}
+html[data-theme="dark"] .glossary-item summary>b,
+html[data-theme="dark"] .recent-map-head button{
+  color:var(--light-surface-link)!important;
+}
+html[data-theme="dark"] .recent-map-head small,
+html[data-theme="dark"] .chiba-density-title small,
+html[data-theme="dark"] .fish-photo-progress small{color:#08798b!important}
+
 @media(max-width:390px){.theme-options{grid-template-columns:1fr}.theme-options label:last-child{grid-column:auto}.theme-options label>span{min-height:60px}}
