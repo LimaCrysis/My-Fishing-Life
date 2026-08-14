@@ -1031,12 +1031,6 @@ function renderFishingMap(){
         </div>
         <span class="fishing-map-count">${kantoFishingSpots.length} SPOTS</span>
       </section>
-        <div class="map-clean-hint">場所名を検索。必要な時だけ条件を開く。</div>
-      <section class="map-search-box">
-        <span>🔎</span>
-        <input id="mapSpotSearch" type="search" placeholder="釣り場名・地域で検索">
-        <button id="mapSpotSearchClear" hidden>×</button>
-      </section>
         <button id="mapFilterPanelToggle" class="map-filter-panel-toggle" aria-expanded="false"><span>⚙️</span><div><strong>条件を絞る</strong><small>初心者・設備・釣り方</small></div><b>開く</b></button>
       </div>
       
@@ -1070,7 +1064,6 @@ function renderFishingMap(){
         <div id="mapStyleResults" class="map-style-results" hidden></div>
       </section>
       </section>
-      <section id="mapSearchResults" class="map-search-results" hidden></section>
       <section id="mapViewMode">
         ${recentFishingSpotsHTML()}
         ${renderKantoMap()}
@@ -1086,7 +1079,6 @@ function renderFishingMap(){
     document.querySelector('[data-map-view-mode="conditions"]')?.click();
   }
   setupRecentFishingSpots();
-  setupMapSpotSearch();
   setupMapStyleFilter();
   setupBeginnerOnlyFilter();
   setupMapFacilityFilter();

@@ -3391,5 +3391,80 @@ input,select,textarea{font-size:16px}
   .ledger-review-line{padding:0 13px 10px;font-size:11px;gap:8px}
   .review-freshness{font-size:10px;padding:6px 8px}
   .verified-ledger-row>a{margin:0 13px 13px;font-size:12px;padding:4px 0}
-  .excluded-spot-row a{font-size:12px;padding:4px 0}
+.excluded-spot-row a{font-size:12px;padding:4px 0}
 }
+
+/* MFL v14.10.1 - guide detail typography at every screen width */
+.guide-content .guide-article-title h3{font-size:27px!important;line-height:1.3!important}
+.guide-content .guide-article-title small{font-size:11px!important}
+.guide-content .guide-article p,
+.guide-content .guide-article li,
+.guide-content .guide-warning p,
+.guide-content .guide-crosslink p,
+.guide-content .guide-tip-list p,
+.guide-content .rig-card p,
+.guide-content .parts-card>p,
+.guide-content .rigflow-body>p,
+.guide-content .rules-card p,
+.guide-content .line-type-card>p,
+.guide-content .hook-intro p,
+.guide-content .hook-rule p,
+.guide-content .weight-intro p,
+.guide-content .glossary-detail,
+.guide-content .parts-intro p,
+.guide-content .glossary-intro p,
+.guide-content .rules-intro p,
+.guide-content .line-intro p,
+.guide-content .parts-quick-answer>p{
+  font-size:15px!important;
+  line-height:1.85!important;
+}
+.guide-content .guide-step summary{min-height:78px!important;padding:15px 16px!important}
+.guide-content .guide-step summary strong,
+.guide-content .rigflow-card summary strong,
+.guide-content .glossary-item summary strong{font-size:17px!important;line-height:1.45!important}
+.guide-content .guide-step summary small,
+.guide-content .rigflow-card summary small,
+.guide-content .glossary-item summary small{font-size:13px!important;line-height:1.5!important}
+.guide-content .guide-step>p{padding:4px 16px 18px!important}
+.guide-content .guide-tip-list b,
+.guide-content .rig-card strong,
+.guide-content .rules-card strong,
+.guide-content .hook-rule strong,
+.guide-content .guide-warning strong{font-size:16px!important;line-height:1.45!important}
+.guide-content .rigflow-chain span,
+.guide-content .rigflow-chain strong,
+.guide-content .rigflow-chain em,
+.guide-content .parts-flow span,
+.guide-content .parts-flow strong,
+.guide-content .parts-flow b{font-size:14px!important;line-height:1.55!important}
+.guide-content .rigflow-check strong{font-size:14px!important}
+.guide-content .rigflow-check small{font-size:12px!important;line-height:1.45!important}
+.guide-content .parts-card-head h4{font-size:21px!important}
+.guide-content .parts-card-head small{font-size:12px!important}
+.guide-content .parts-use b{font-size:13px!important}
+.guide-content .parts-use span{font-size:13px!important;line-height:1.5!important}
+.guide-content .parts-note{font-size:13px!important;line-height:1.65!important}
+.guide-content .parts-glossary-head strong{font-size:16px!important}
+.guide-content .parts-glossary dt{font-size:14px!important}
+.guide-content .parts-glossary dd{font-size:13px!important;line-height:1.7!important}
+.guide-content .weight-row strong,
+.guide-content .weight-row span{font-size:15px!important;line-height:1.5!important}
+.guide-content .weight-row b{font-size:12px!important;line-height:1.45!important}
+.guide-content .weight-now-head strong{font-size:16px!important}
+.guide-content .weight-now>div span,
+.guide-content .weight-now>div b{font-size:13px!important}
+.guide-content .weight-now>div small{font-size:12px!important;line-height:1.55!important}
+.guide-content .hook-example-head strong,
+.guide-content .hook-parts>strong{font-size:16px!important}
+.guide-content .hook-example b,
+.guide-content .hook-parts-grid b{font-size:14px!important}
+.guide-content .hook-example span,
+.guide-content .hook-parts-grid small{font-size:13px!important;line-height:1.6!important}
+.guide-content .line-type-head h4{font-size:19px!important}
+.guide-content .line-type-head small,
+.guide-content .line-type-head>b,
+.guide-content .line-bars b{font-size:13px!important}
+.guide-content .knot-step-head strong{font-size:15px!important;line-height:1.65!important}
+.guide-content .knot-step-word,
+.guide-content .knot-step-number{font-size:12px!important}
