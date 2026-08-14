@@ -3,15 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <meta name="theme-color" content="#0b7285" />
+  <meta name="theme-color" content="#0b7285" id="themeColorMeta" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="My Fishing Life" />
+  <script>
+    (() => {
+      const KEY = 'mfl_theme';
+      const media = window.matchMedia('(prefers-color-scheme: dark)');
+      const valid = new Set(['light', 'dark', 'system']);
+      const readChoice = () => {
+        try { const value = localStorage.getItem(KEY) || 'light'; return valid.has(value) ? value : 'light'; }
+        catch (_) { return 'light'; }
+      };
+      const resolvedTheme = choice => choice === 'system' ? (media.matches ? 'dark' : 'light') : choice;
+      const apply = choice => {
+        const theme = resolvedTheme(choice);
+        document.documentElement.dataset.themeChoice = choice;
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#071923' : '#0b7285');
+        document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')?.setAttribute('content', theme === 'dark' ? 'black-translucent' : 'default');
+        return theme;
+      };
+      let choice = readChoice();
+      apply(choice);
+      const onSystemChange = () => { if (choice === 'system') apply(choice); };
+      if (media.addEventListener) media.addEventListener('change', onSystemChange);
+      else if (media.addListener) media.addListener(onSystemChange);
+      window.MFLTheme = {
+        key: KEY,
+        getChoice: () => choice,
+        setChoice: value => {
+          choice = valid.has(value) ? value : 'light';
+          try { localStorage.setItem(KEY, choice); } catch (_) {}
+          apply(choice);
+          window.dispatchEvent(new CustomEvent('mflthemechange', { detail: { choice, theme: resolvedTheme(choice) } }));
+        }
+      };
+    })();
+  </script>
   <title>My Fishing Life</title>
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="css/styles.css?v=14.12.1" />
-  <link rel="stylesheet" href="css/conditions.css?v=14.12.1" />
-  <link rel="stylesheet" href="css/realmap.css?v=14.12.1" />
+  <link rel="stylesheet" href="css/styles.css?v=14.12.2" />
+  <link rel="stylesheet" href="css/conditions.css?v=14.12.2" />
+  <link rel="stylesheet" href="css/realmap.css?v=14.12.2" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 </head>
 <body>
@@ -196,9 +232,9 @@
   </template>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="js/official-status.js?v=14.12.1"></script>
-  <script src="js/conditions.js?v=14.12.1"></script>
-  <script src="js/conditions-ui.js?v=14.12.1"></script>
-  <script src="js/app.js?v=14.12.1"></script>
+  <script src="js/official-status.js?v=14.12.2"></script>
+  <script src="js/conditions.js?v=14.12.2"></script>
+  <script src="js/conditions-ui.js?v=14.12.2"></script>
+  <script src="js/app.js?v=14.12.2"></script>
 </body>
 </html>

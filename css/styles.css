@@ -3469,3 +3469,166 @@ input,select,textarea{font-size:16px}
 .guide-content .knot-step-word,
 .guide-content .knot-step-number{font-size:12px!important}
 .app-update-card small{font-size:9px;font-weight:900;letter-spacing:.12em;color:var(--accent)}.app-update-card h3{margin:3px 0 5px;font-size:25px}.app-update-card p{font-size:13px;line-height:1.7}.app-update-card .primary-button{margin-top:13px}.app-update-card>span{display:block;min-height:18px;margin-top:8px;color:var(--muted);font-size:11px;line-height:1.5}
+
+/* MFL v14.12.2 - appearance and ocean dark theme */
+.settings-card-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.settings-card-heading small{color:var(--accent);font-size:10px;font-weight:900;letter-spacing:.14em}.settings-card-heading h3{margin:3px 0 0;font-size:23px}.settings-card-heading>span{font-size:28px}.appearance-card>p{margin:10px 0 14px;color:var(--muted);font-size:14px;line-height:1.65}.theme-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}.theme-options label{margin:0}.theme-options label:last-child{grid-column:1/-1}.theme-options input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.theme-options label>span{display:flex;align-items:center;gap:10px;min-height:58px;padding:12px 14px;border:2px solid var(--line);border-radius:16px;background:var(--bg);color:var(--ink)}.theme-options label>span b{font-size:22px}.theme-options label>span strong{font-size:15px;line-height:1.4}.theme-options input:checked+span{border-color:var(--accent);background:var(--soft);box-shadow:0 0 0 3px rgba(32,176,196,.14)}.theme-options input:focus-visible+span{outline:3px solid rgba(32,176,196,.34);outline-offset:2px}.theme-help{display:block;margin-top:12px;color:var(--muted);font-size:12px;line-height:1.6}
+
+html[data-theme="dark"]{
+  --bg:#071923;
+  --card:#102a36;
+  --ink:#edf8fa;
+  --muted:#aac2c9;
+  --line:#294753;
+  --accent:#35bfd2;
+  --accent-dark:#83deea;
+  --soft:#163d49;
+  --danger:#ff8585;
+  --shadow:0 12px 30px rgba(0,7,12,.34);
+}
+html[data-theme="dark"],html[data-theme="dark"] body{background:#071923;color:var(--ink)}
+html[data-theme="dark"] body{color-scheme:dark}
+html[data-theme="dark"] .app-shell{background:var(--bg)}
+html[data-theme="dark"] .topbar{background:rgba(7,25,35,.94);border-bottom-color:rgba(53,83,94,.88)}
+html[data-theme="dark"] .bottom-nav{background:rgba(10,29,39,.97);border-top-color:var(--line)}
+html[data-theme="dark"] button{color:inherit}
+html[data-theme="dark"] .nav-item{color:var(--muted)}
+html[data-theme="dark"] .nav-item.active{color:#8ae5ef;background:#17414d}
+html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .fish-card,
+html[data-theme="dark"] .schedule-card,
+html[data-theme="dark"] .empty-state.compact,
+html[data-theme="dark"] .home-tools,
+html[data-theme="dark"] .tackle-home-card,
+html[data-theme="dark"] .tackle-card,
+html[data-theme="dark"] .ocean-rank-guide,
+html[data-theme="dark"] .assist-spec,
+html[data-theme="dark"] .assist-overall,
+html[data-theme="dark"] .assist-parts article,
+html[data-theme="dark"] .assist-item,
+html[data-theme="dark"] .line-sim-card,
+html[data-theme="dark"] .target-assist-card,
+html[data-theme="dark"] .fish-photo-card,
+html[data-theme="dark"] .guide-menu-card,
+html[data-theme="dark"] .guide-welcome,
+html[data-theme="dark"] .guide-article,
+html[data-theme="dark"] .guide-step,
+html[data-theme="dark"] .trip-fold-card,
+html[data-theme="dark"] .trip-fold-body,
+html[data-theme="dark"] .area-spot-button,
+html[data-theme="dark"] .filter-spot-card,
+html[data-theme="dark"] .smart-tool-toggle,
+html[data-theme="dark"] .map-search-list button,
+html[data-theme="dark"] .map-style-result-list button,
+html[data-theme="dark"] .facility-result-list button,
+html[data-theme="dark"] .beginner-map-results-list button,
+html[data-theme="dark"] .rules-card,
+html[data-theme="dark"] .line-type-card,
+html[data-theme="dark"] .weight-row,
+html[data-theme="dark"] .guide-back-top,
+html[data-theme="dark"] .map-filter-panel-toggle,
+html[data-theme="dark"] .verified-ledger-row,
+html[data-theme="dark"] .pending-spot-row{background:var(--card)!important;border-color:var(--line)!important;color:var(--ink)}
+html[data-theme="dark"] .sheet,
+html[data-theme="dark"] .fish-detail-sheet{background:#0d2632;color:var(--ink)}
+html[data-theme="dark"] .sheet-dialog::backdrop{background:rgba(0,7,12,.76)}
+html[data-theme="dark"] .sheet-handle{background:#496673}
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{background:#0a202b;border-color:#365560;color:var(--ink)}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder{color:#87a3ab;opacity:1}
+html[data-theme="dark"] input:focus,
+html[data-theme="dark"] select:focus,
+html[data-theme="dark"] textarea:focus{border-color:#46c7d8;box-shadow:0 0 0 3px rgba(70,199,216,.2)}
+html[data-theme="dark"] .segmented label,
+html[data-theme="dark"] .quick-fish button,
+html[data-theme="dark"] .date-icon-button,
+html[data-theme="dark"] .plan-date-list button{background:#102a36;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .hero{background:linear-gradient(145deg,#07556a,#0b7f91)}
+html[data-theme="dark"] .hero .primary-button,
+html[data-theme="dark"] .tackle-intro .primary-button,
+html[data-theme="dark"] .active-trip-card .primary-button{background:#e8fbfd;color:#07586a}
+html[data-theme="dark"] .secondary-button{background:#17414d;color:#9ce9f2}
+html[data-theme="dark"] .danger-button{background:#44252a;color:#ffaaaa}
+html[data-theme="dark"] .appearance-card .theme-options label>span{background:#0a202b;border-color:#365560}
+html[data-theme="dark"] .appearance-card .theme-options input:checked+span{background:#174552;border-color:#4fd1e0}
+html[data-theme="dark"] .assist-home-card{background:#102f3a;border-color:var(--line)}
+html[data-theme="dark"] .assist-home-icon{background:#174753}
+html[data-theme="dark"] .assist-note{background:#273022;color:#f0edcf}
+html[data-theme="dark"] .line-sim-result,
+html[data-theme="dark"] .target-result,
+html[data-theme="dark"] .line-effect-grid span,
+html[data-theme="dark"] .line-compare,
+html[data-theme="dark"] .target-fish-button,
+html[data-theme="dark"] .optional-fields,
+html[data-theme="dark"] .knot-diagram-step,
+html[data-theme="dark"] .spot-card,
+html[data-theme="dark"] .region-card,
+html[data-theme="dark"] .tokyo-bay-panel,
+html[data-theme="dark"] .area-select-card,
+html[data-theme="dark"] .spot-area-panel,
+html[data-theme="dark"] .map-progress,
+html[data-theme="dark"] .accuracy-note,
+html[data-theme="dark"] .map-guide-note,
+html[data-theme="dark"] .map-filter-panel,
+html[data-theme="dark"] .map-style-filter,
+html[data-theme="dark"] .map-facility-filter,
+html[data-theme="dark"] .beginner-map-results,
+html[data-theme="dark"] .line-choose,
+html[data-theme="dark"] .rules-order,
+html[data-theme="dark"] .guide-section-summary>div,
+html[data-theme="dark"] .guide-crosslink{background:#0c2430!important;border-color:var(--line)!important;color:var(--ink)}
+html[data-theme="dark"] .spot-score-grid>div,
+html[data-theme="dark"] .field-ready-grid label{background:#173440;border-color:var(--line)}
+html[data-theme="dark"] .spot-tags.muted span{background:#243d47;color:#bfd0d5}
+html[data-theme="dark"] .spot-gear-note{background:#143b36;color:#bde8df}
+html[data-theme="dark"] .spot-warning,
+html[data-theme="dark"] .guide-warning,
+html[data-theme="dark"] .assist-warning,
+html[data-theme="dark"] .note,
+html[data-theme="dark"] .keep-system-intro{background:#40371d;color:#ffe5a0}
+html[data-theme="dark"] .fish-safety-banner,
+html[data-theme="dark"] .danger-stop,
+html[data-theme="dark"] .ibaraki-ban-note,
+html[data-theme="dark"] .rules-card.danger{background:#472329!important;color:#ffbab3;border-color:#c55f58!important}
+html[data-theme="dark"] .fish-photo-card.danger-3{background:#342127;border-color:#e05d55}
+html[data-theme="dark"] .keep-ng{background:#482329;color:#ffb9b4}
+html[data-theme="dark"] .keep-check{background:#41361c;color:#ffe19a}
+html[data-theme="dark"] .keep-unknown{background:#263c45;color:#d1e0e4}
+html[data-theme="dark"] .verification-status-summary .verified,
+html[data-theme="dark"] .review-freshness.current{background:#173f34;color:#8fe2bc;border-color:#2d7159}
+html[data-theme="dark"] .verification-status-summary .hold,
+html[data-theme="dark"] .review-freshness.soon{background:#493b18;color:#ffe18a;border-color:#8d722e}
+html[data-theme="dark"] .verification-status-summary .excluded,
+html[data-theme="dark"] .review-freshness.overdue{background:#4b2727;color:#ffaaa2;border-color:#92504a}
+html[data-theme="dark"] .map-rule-card.verified-ledger{background:#12352d;border-color:#2a6855}
+html[data-theme="dark"] .pending-spot-row>span{background:#493b18;color:#ffe18a}
+html[data-theme="dark"] .verified-ledger-row summary b{color:#8fe2bc}
+html[data-theme="dark"] .verified-ledger-row summary small,
+html[data-theme="dark"] .verified-ledger-row>p,
+html[data-theme="dark"] .ledger-review-line{color:#b6cbc5}
+html[data-theme="dark"] .calendar-day.muted{color:#657d86}
+html[data-theme="dark"] .calendar-guide{background:#153e49;color:#b8edf3}
+html[data-theme="dark"] .calendar-week span:first-child{color:#ff9393}
+html[data-theme="dark"] .calendar-week span:last-child{color:#82bfff}
+html[data-theme="dark"] .fish-photo-wrap,
+html[data-theme="dark"] .fish-detail-photo,
+html[data-theme="dark"] .fish-photo-wrap img,
+html[data-theme="dark"] .fish-detail-photo img{background:#dce5e6}
+html[data-theme="dark"] img{filter:none}
+html[data-theme="dark"] .fishing-spot-overlay{background:rgba(0,7,12,.76)}
+html[data-theme="dark"] .fishing-spot-sheet,
+html[data-theme="dark"] .fishing-spot-sheet-head{background:#0d2632;color:var(--ink)}
+html[data-theme="dark"] .fishing-spot-close{background:#173d49;color:#b9e8ee}
+html[data-theme="dark"] .fishing-spot-sheet-head small,
+html[data-theme="dark"] .fishing-spot-maininfo span,
+html[data-theme="dark"] .fishing-spot-checked{color:var(--muted)}
+html[data-theme="dark"] .fishing-spot-sheet-head h3{color:#7cdeea}
+html[data-theme="dark"] .fishing-spot-maininfo>div,
+html[data-theme="dark"] .fishing-spot-section{background:#122f3b;border-color:#31515d;color:var(--ink)}
+html[data-theme="dark"] .fishing-spot-section p{color:#c2d6db}
+html[data-theme="dark"] .fishing-spot-tags span{background:#17424e;color:#bce8ee}
+html[data-theme="dark"] .fishing-spot-section.verification{background:#12352d;border-color:#2c6b57}
+
+@media(max-width:390px){.theme-options{grid-template-columns:1fr}.theme-options label:last-child{grid-column:auto}.theme-options label>span{min-height:60px}}

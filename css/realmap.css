@@ -2,3 +2,13 @@
 @media(max-width:420px){.conditions-real-map{height:390px}.cm-leaflet-pin{width:64px}.cm-leaflet-pin span{font-size:7px}}
 .cm-finder{margin:13px 0 9px;padding:13px;border:1px solid #c8dfe3;border-radius:18px;background:linear-gradient(145deg,#f8fcfd,#eaf5f7)}.cm-finder-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.cm-finder-head div{display:grid}.cm-finder-head small,.cm-candidates>small{font-size:8px;font-weight:900;letter-spacing:.12em;color:#5b7d84}.cm-finder-head strong{font-size:15px;color:#20383e}.cm-finder-head>span{padding:5px 8px;border-radius:99px;background:#fff;color:#527079;font-size:8px;font-weight:900}.cm-search{display:flex;align-items:center;gap:7px;margin-top:10px;padding:9px 11px;border:1px solid #bfd6da;border-radius:13px;background:#fff}.cm-search input{min-width:0;width:100%;border:0;outline:0;background:transparent;color:#23383d;font-size:12px}.cm-candidates{margin-top:10px}.cm-candidates>div{display:flex;gap:6px;overflow-x:auto;margin-top:5px;padding-bottom:2px;scrollbar-width:none}.cm-candidates button{flex:0 0 auto;border:1px solid currentColor;border-radius:99px;background:#fff;padding:6px 9px;font-size:9px;font-weight:900}.cm-candidates button.great{color:#087f5b}.cm-candidates button.good{color:#1971c2}.cm-candidates button b{margin-right:4px}.cm-candidates span{font-size:9px;color:#7b6a55}.cm-finder>p{margin:8px 0 0;font-size:8px;color:#6d8085}.conditions-spot-list>button[hidden]{display:none!important}
 .conditions-spot-list>.conditions-map-detail{margin:2px 0 8px}.conditions-spot-list>.conditions-map-detail .fc-card{margin:0}.conditions-spot-list>button.selected{border-radius:13px 13px 7px 7px}
+
+/* MFL v14.12.2 - real map controls in dark theme; map tiles remain unfiltered */
+html[data-theme="dark"] .cm-finder{background:linear-gradient(145deg,#102e3a,#0b222d);border-color:#31515d}
+html[data-theme="dark"] .cm-finder-head strong{color:var(--ink)}
+html[data-theme="dark"] .cm-finder-head small,html[data-theme="dark"] .cm-candidates>small,html[data-theme="dark"] .cm-finder>p,html[data-theme="dark"] .cm-map-note span{color:var(--muted)}
+html[data-theme="dark"] .cm-finder-head>span,html[data-theme="dark"] .cm-search,html[data-theme="dark"] .cm-candidates button{background:#122f3b;border-color:#3a5a65;color:var(--ink)}
+html[data-theme="dark"] .cm-search input{color:var(--ink)}
+html[data-theme="dark"] .cm-map-note button{color:#77dce8}
+html[data-theme="dark"] .conditions-real-map{background:#16303b;border-color:#456470}
+html[data-theme="dark"] .conditions-real-map .leaflet-tile{filter:none}
