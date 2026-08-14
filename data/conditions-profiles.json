@@ -21,6 +21,13 @@
     {"id":"choshi-marina-coast","basin":"利根川下流・銚子沿岸流域","status":"verified"},
     {"id":"asahi-ioka-coast","basin":"九十九里北部沿岸流域","status":"verified"},
     {"id":"onjuku-coast","basin":"御宿・夷隅沿岸流域","status":"verified"},
-    {"id":"kamogawa-coast","basin":"加茂川・鴨川沿岸流域","status":"verified"}
+    {"id":"kamogawa-coast","basin":"加茂川・鴨川沿岸流域","status":"verified"},
+    {"id":"honmoku","basin":"横浜港・大岡川流域","status":"verified"},
+    {"id":"isogo","basin":"横浜南部沿岸流域","status":"verified"},
+    {"id":"daikoku","basin":"横浜港・鶴見川流域","status":"verified"},
+    {"id":"higashiogishima","basin":"多摩川・川崎港流域","status":"verified"},
+    {"id":"umibetsuri","basin":"横須賀東岸小河川流域","status":"verified"},
+    {"id":"kawarago","basin":"鮎川・日立沿岸流域","status":"verified"},
+    {"id":"hiraiso","basin":"那珂川・ひたちなか沿岸流域","status":"verified"}
   ]
 }
