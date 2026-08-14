@@ -14,6 +14,13 @@
     {"id":"ariake_west","basin":"隅田川・荒川／東京港内","status":"verified"},
     {"id":"kisarazu_uchiko","basin":"小櫃川・矢那川流域","status":"verified"},
     {"id":"tateyama_sunset","basin":"館山湾小河川流域","status":"verified"},
-    {"id":"kashima","basin":"鹿島灘沿岸流域","status":"verified"}
+    {"id":"kashima","basin":"鹿島灘沿岸流域","status":"verified"},
+    {"id":"urayasu_chidori","basin":"旧江戸川・江戸川流域","status":"verified"},
+    {"id":"edogawa_hosuiro","basin":"江戸川流域","status":"verified"},
+    {"id":"futtsu_area","basin":"富津岬周辺小河川流域","status":"verified"},
+    {"id":"choshi-marina-coast","basin":"利根川下流・銚子沿岸流域","status":"verified"},
+    {"id":"asahi-ioka-coast","basin":"九十九里北部沿岸流域","status":"verified"},
+    {"id":"onjuku-coast","basin":"御宿・夷隅沿岸流域","status":"verified"},
+    {"id":"kamogawa-coast","basin":"加茂川・鴨川沿岸流域","status":"verified"}
   ]
 }
