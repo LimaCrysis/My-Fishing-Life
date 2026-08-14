@@ -3468,3 +3468,4 @@ input,select,textarea{font-size:16px}
 .guide-content .knot-step-head strong{font-size:15px!important;line-height:1.65!important}
 .guide-content .knot-step-word,
 .guide-content .knot-step-number{font-size:12px!important}
+.app-update-card small{font-size:9px;font-weight:900;letter-spacing:.12em;color:var(--accent)}.app-update-card h3{margin:3px 0 5px;font-size:25px}.app-update-card p{font-size:13px;line-height:1.7}.app-update-card .primary-button{margin-top:13px}.app-update-card>span{display:block;min-height:18px;margin-top:8px;color:var(--muted);font-size:11px;line-height:1.5}

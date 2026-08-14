@@ -1,3 +1,4 @@
+const APP_VERSION='14.11.0';
 const fishMaster = [
   { name:'シロギス', emoji:'🐟', photo:'./assets/fish/kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 , where:'砂地の堤防・海岸。内房や湾内の砂底をちょい投げで探る。', methods:['ちょい投げ','投げ釣り'], bait:'イソメ類', season:'春〜秋', touch:'危険魚ではない。針を外す時は背びれに注意。' },
   { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' , where:'岩礁・テトラ・堤防際などの障害物周り。', methods:['胴突き','穴釣り','ジグヘッド'], bait:'イソメ・魚の切り身・ワーム', season:'通年', touch:'背びれのトゲに注意。' },
@@ -109,7 +110,7 @@ function renderHome() {
       </span>
       <span class="home-tool-arrow" aria-hidden="true">›</span>
     </button>
-    <div class="mfl-build-badge">MFL FIELD TEST v14.0.0</div>
+    <div class="mfl-build-badge">MFL FIELD TEST v${APP_VERSION}</div>
     <section class="section">
       <div class="stats-grid">
         <div class="stat-card"><strong>${state.trips.length}</strong><span>釣行回数</span></div>
@@ -2208,13 +2209,19 @@ function renderGear() {
 }
 
 function renderSettings() {
-  app.innerHTML = `<section class="card"><h2>My Fishing Life</h2><p>釣りに行く前、釣りの最中、帰宅後まで使える自分専用の釣り手帳です。</p></section><section class="card"><h3>データ保存</h3><p>記録はこの端末のブラウザ内に保存されます。ブラウザのデータを削除すると記録も消えるため、今後バックアップ機能を追加予定です。</p></section><button class="danger-button" id="deleteAll">すべての記録を削除</button>`;
+  app.innerHTML = `<section class="card"><h2>My Fishing Life</h2><p>釣りに行く前、釣りの最中、帰宅後まで使える自分専用の釣り手帳です。</p></section><section class="card app-update-card"><div><small>INSTALLED VERSION</small><h3>v${APP_VERSION}</h3><p>PCとiPhoneで表示が違う時は、ここから最新版を確認できます。</p></div><button class="primary-button" id="updateApp">最新版を確認して更新</button><span id="updateAppStatus" aria-live="polite"></span></section><section class="card"><h3>データ保存</h3><p>記録はこの端末のブラウザ内に保存されます。更新操作では釣行・釣果・設定を削除しません。</p></section><button class="danger-button" id="deleteAll">すべての記録を削除</button>`;
+  document.getElementById('updateApp').onclick=refreshMFLApp;
   document.getElementById('deleteAll').onclick = () => {
     if (confirm('すべての釣行・釣果・持ち物チェックを削除しますか？')) {
       if (!confirmDestructiveAction('本当にすべてのMFLデータを削除しますか？', '釣行記録・釣果・写真・タックル・Ocean Rank・予定・設定がすべて消えます。')) return;
   localStorage.clear(); location.reload();
     }
   };
+}
+
+async function refreshMFLApp(){
+  const button=document.getElementById('updateApp'),status=document.getElementById('updateAppStatus');button.disabled=true;button.textContent='更新を確認中…';status.textContent='記録を残したままアプリ表示だけ更新します。';
+  try{if('caches'in window){const keys=await caches.keys();await Promise.all(keys.filter(key=>key.startsWith('my-fishing-life-')).map(key=>caches.delete(key)))}if('serviceWorker'in navigator){const registrations=await navigator.serviceWorker.getRegistrations();await Promise.all(registrations.map(registration=>registration.update()))}status.textContent='更新しました。画面を開き直します。';setTimeout(()=>location.reload(),500)}catch(_){status.textContent='自動更新できませんでした。Safariで再読み込みしてください。';button.disabled=false;button.textContent='もう一度確認する'}
 }
 
 function recentFishNames() {
