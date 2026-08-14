@@ -3,7 +3,7 @@ const fishMaster = [
   { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' , where:'岩礁・テトラ・堤防際などの障害物周り。', methods:['胴突き','穴釣り','ジグヘッド'], bait:'イソメ・魚の切り身・ワーム', season:'通年', touch:'背びれのトゲに注意。' },
   { name:'アジ', emoji:'🐟', photo:'./assets/fish/aji.jpg', edible:'刺身・フライ・なめろう', guide:'15cm以上を目安に', danger:'尾の近くのゼイゴが鋭いので注意', dangerLevel:1 , where:'港内・堤防・常夜灯周辺など。群れが入れば足元でも狙える。', methods:['サビキ','アジング','ウキ'], bait:'アミエビ・ワーム', season:'春〜秋を中心に通年', touch:'ゼイゴや背びれが硬いので握り方に注意。' },
   { name:'マハゼ', emoji:'🐡', photo:'./assets/fish/mahaze.jpg', photoCredit:'Wikimedia Commons / ふうけ（Public Domain）', scientific:'Acanthogobius flavimanus', edible:'天ぷら・唐揚げ', guide:'12cm以上を目安に', danger:'特別な危険は少ない', dangerLevel:0 , where:'河口・運河・内湾の砂泥底。MFLでは東京湾奥や江戸川放水路系の場所と相性が良い。', methods:['ちょい投げ','足元','ミャク釣り'], bait:'イソメ類', season:'夏〜秋が特に狙いやすい', touch:'基本的に素手で扱えるが、ヒレや針に注意。' },
-  { name:'メゴチ', emoji:'🐟', scientific:'Suggrundus meerdervoortii', photoPending:true, edible:'天ぷら', guide:'12cm以上を目安に', danger:'エラぶた周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'釣り人がネズミゴチ類も「メゴチ」と呼ぶことがあります。写真だけで決めつけず、頭部・口・体型を確認。' , where:'砂泥底。ちょい投げの外道として掛かることが多い。', methods:['ちょい投げ'], bait:'イソメ類', season:'春〜秋', touch:'エラぶた周辺の鋭いトゲに注意。' },
+  { name:'メゴチ', emoji:'🐟', scientific:'Suggrundus meerdervoortii', photo:'./assets/fish/megochi-ai-reference.png', photoType:'ai-reference', photoCredit:'MFL AI参考画像（学名・同定資料の特徴をもとに作成／実個体写真ではありません）', edible:'天ぷら', guide:'12cm以上を目安に', danger:'エラぶた周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'釣り人がネズミゴチ類も「メゴチ」と呼ぶことがあります。画像だけで決めつけず、頭部・口・体型を確認。' , where:'砂泥底。ちょい投げの外道として掛かることが多い。', methods:['ちょい投げ'], bait:'イソメ類', season:'春〜秋', touch:'エラぶた周辺の鋭いトゲに注意。' },
   { name:'ヒラメ', emoji:'🐟', photo:'./assets/fish/hirame.jpg', photoCredit:'Wikimedia Commons / Daiju Azuma（CC BY-SA 2.5）', scientific:'Paralichthys olivaceus', edible:'刺身・ムニエル', guide:'茨城県では30cm未満は採捕禁止', danger:'鋭い歯に注意', dangerLevel:1, dangerAction:'口の中に指を入れない。' , where:'砂地・砂泥底。ベイトが集まる海岸や港の出口周辺。', methods:['ジグヘッド＋ワーム','ルアー','泳がせ'], bait:'ワーム・小魚', season:'秋〜冬を中心に通年チャンス', touch:'歯が鋭いので口へ指を入れない。' },
   { name:'シーバス', emoji:'🐟', photo:'./assets/fish/seabass.jpg', edible:'洗い・塩焼き', guide:'小型はリリース推奨', danger:'エラぶた・背びれ・歯に注意', dangerLevel:1 , where:'河口・運河・港湾。潮が動く場所や明暗部。', methods:['ルアー','ジグヘッド＋ワーム'], bait:'ルアー・ワーム', season:'春と秋が狙いやすい', touch:'エラぶたやヒレが鋭い。フィッシュグリップ推奨。' },
   { name:'サバ', emoji:'🐟', photo:'./assets/fish/saba.jpg', photoType:'real', scientific:'Scomber japonicus', photoCredit:'Wikimedia Commons / Ruff tuff cream puff（CC0）', edible:'塩焼き・味噌煮', guide:'食べる分だけ持ち帰る', danger:'暴れて針が刺さる事故に注意', dangerLevel:1 , where:'回遊魚。堤防周りを群れで回遊することが多い。', methods:['サビキ','ルアー','ジグ'], bait:'アミエビ・小型ルアー', season:'春〜秋を中心に回遊次第', touch:'危険魚ではないが、暴れるので針外し時に注意。' },
@@ -678,12 +678,13 @@ function renderEncyclopedia() {
       <strong>⚠️ 分からない魚は素手で触らない</strong>
       <p>危険魚は赤いカードで表示します。小さい魚でも毒棘を持つ種類があります。</p>
     </section>
-    ${(()=>{const p=fishPhotoSummary();return `<section class="fish-photo-progress"><div><small>PHOTO ENCYCLOPEDIA</small><strong>実写写真 ${p.withPhoto}/${p.total}魚種</strong></div><span>${p.pct}%</span><i><em style="width:${p.pct}%"></em></i><p>魚種の取り違えを避けるため、確認できた写真だけを掲載します。</p></section>`})()}
+    ${(()=>{const p=fishPhotoSummary();return `<section class="fish-photo-progress"><div><small>PHOTO ENCYCLOPEDIA</small><strong>写真・参考画像 ${p.withPhoto}/${p.total}魚種</strong></div><span>${p.pct}%</span><i><em style="width:${p.pct}%"></em></i><p>実写を基本に掲載し、AI参考画像は画像内に明記します。</p></section>`})()}
     <section class="section fish-photo-grid">
       ${fishMaster.filter(f=>f.name!=='その他').map(f => `
         <button class="fish-photo-card danger-${f.dangerLevel||0}" data-fish="${escapeHtml(f.name)}">
           <div class="fish-photo-wrap">
             ${f.photo ? `<img src="${f.photo}" alt="${escapeHtml(f.name)}の写真" loading="lazy">` : `<div class="fish-photo-fallback"><span>${f.emoji}</span><small>${f.photoPending?'魚種確認中':'実写写真 準備中'}</small></div>`}
+            ${f.photoType==='ai-reference'?'<span class="fish-ai-badge">AI参考画像</span>':''}
             ${f.dangerLevel ? `<span class="fish-danger-badge">${dangerLabel(f)}</span>` : ''}
             ${caught.has(f.name) ? `<span class="fish-caught-badge">釣った ✓</span>` : ''}
           </div>
@@ -717,6 +718,7 @@ function showFishDetail(f){
       <button class="fish-detail-x" id="fishDetailX">×</button>
       <div class="fish-detail-photo">
         ${f.photo?`<img src="${f.photo}" alt="${escapeHtml(f.name)}">`:`<div>${f.emoji}</div>`}
+        ${f.photoType==='ai-reference'?'<div class="fish-detail-ai">AI参考画像・実個体写真ではありません</div>':''}
         ${f.dangerLevel>=2?`<div class="fish-detail-danger">${f.dangerLevel>=3?'☠️':'⚠️'} ${escapeHtml(f.dangerTitle||f.danger)}</div>`:''}
       </div>
       <div class="fish-detail-body">

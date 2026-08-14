@@ -17,9 +17,11 @@
     },
     "megochi": {
       "species": "Suggrundus meerdervoortii",
-      "file": null,
-      "status": "pending",
-      "note": "釣り人の通称ではネズミゴチ類もメゴチと呼ばれるため、再利用可能かつ同定の確かな写真を確認してから掲載する。"
+      "file": "assets/fish/megochi-ai-reference.png",
+      "type": "ai-reference",
+      "status": "published-with-label",
+      "source_basis": ["FishBase species record", "鹿児島大学総合研究博物館の同定解説"],
+      "note": "実個体写真ではないことを画面上に明記。再利用可能で同定の確かな実写を確認できた時点で差し替える。"
     },
     "saba": {
       "species": "Scomber japonicus",

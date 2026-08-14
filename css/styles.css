@@ -11,6 +11,51 @@
   --shadow: 0 10px 28px rgba(15, 58, 66, .09);
   --radius: 22px;
 }
+
+/* MFL v14.10.0 - complete fish visuals and readable guide details */
+.fish-ai-badge{position:absolute;left:8px;bottom:8px;padding:5px 7px;border-radius:8px;background:rgba(31,51,57,.88);color:#fff;font-size:8px;font-weight:900;letter-spacing:.04em}.fish-detail-ai{position:absolute;left:12px;bottom:12px;padding:7px 9px;border-radius:9px;background:rgba(31,51,57,.9);color:#fff;font-size:9px;font-weight:900}.fish-detail-photo{position:relative}
+
+@media(max-width:600px){
+  .guide-content .guide-article p,
+  .guide-content .guide-article li,
+  .guide-content .guide-warning p,
+  .guide-content .guide-crosslink p,
+  .guide-content .parts-card>p,
+  .guide-content .rigflow-body>p,
+  .guide-content .rules-card p,
+  .guide-content .line-type-card>p,
+  .guide-content .hook-intro p,
+  .guide-content .hook-rule p,
+  .guide-content .weight-intro p,
+  .guide-content .glossary-detail,
+  .guide-content .parts-intro p,
+  .guide-content .glossary-intro p,
+  .guide-content .rules-intro p,
+  .guide-content .line-intro p{
+    font-size:15px !important;
+    line-height:1.85 !important;
+  }
+  .guide-content .guide-step summary strong,
+  .guide-content .rigflow-card summary strong,
+  .guide-content .glossary-item summary strong{font-size:17px !important;line-height:1.45 !important}
+  .guide-content .guide-step summary small,
+  .guide-content .rigflow-card summary small,
+  .guide-content .glossary-item summary small{font-size:13px !important;line-height:1.5 !important}
+  .guide-content .guide-step>p{padding:4px 16px 17px !important}
+  .guide-content .guide-tip-list b,
+  .guide-content .rig-card strong,
+  .guide-content .rules-card strong,
+  .guide-content .hook-rule strong{font-size:16px !important;line-height:1.45 !important}
+  .guide-content .parts-use span,
+  .guide-content .parts-flow span,
+  .guide-content .parts-flow strong,
+  .guide-content .rigflow-chain span,
+  .guide-content .rigflow-chain strong,
+  .guide-content .rigflow-chain em{font-size:14px !important;line-height:1.5 !important}
+  .guide-content .weight-row strong,
+  .guide-content .weight-row span{font-size:15px !important}
+  .guide-content .weight-row b{font-size:12px !important}
+}
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; }
 body { overscroll-behavior-y: none; }
