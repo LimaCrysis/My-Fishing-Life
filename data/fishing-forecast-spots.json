@@ -1,0 +1,14 @@
+{
+  "version":"1.3.0","updated":"2026-08-22","spots":{
+    "kashima":{"name":"鹿島港魚釣園","tideStation":"D2","timezone":"Asia/Tokyo","speciesGroups":{
+      "pelagic":{"label":"回遊系","species":["アジ","シマアジ","イワシ","サバ","ショゴ","カンパチ","コノシロ"],"methods":["サビキ","軽いルアー"],"recommendedMethod":"サビキ"},
+      "bottom":{"label":"底物系","species":["シロギス","メゴチ","カワハギ"],"methods":["ちょい投げ"],"recommendedMethod":"ちょい投げ"},
+      "other":{"label":"その他","species":["クロダイ","カサゴ","スズキ","根魚"],"methods":["ワーム","足元釣り"],"recommendedMethod":"ワーム"}
+    },"periods":{"dawn":{"label":"朝マヅメ"},"day":{"label":"日中"},"dusk":{"label":"夕マヅメ"},"night":{"label":"夜"}}},
+    "kemigawa_beach":{"name":"検見川の浜","tideStation":"CB","timezone":"Asia/Tokyo","speciesGroups":{
+      "pelagic":{"label":"回遊系","species":["カタクチイワシ","サッパ","アジ"],"methods":["サビキ"],"recommendedMethod":"サビキ"},
+      "bottom":{"label":"底物系","species":["シロギス","ハゼ","メゴチ"],"methods":["ちょい投げ"],"recommendedMethod":"ちょい投げ"},
+      "other":{"label":"その他","species":["スズキ"],"methods":["ワーム","軽いルアー"],"recommendedMethod":"ワーム"}
+    },"periods":{"dawn":{"label":"朝マヅメ"},"day":{"label":"日中"},"dusk":{"label":"夕マヅメ"},"night":{"label":"夜"}}}
+  }
+}

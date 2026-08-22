@@ -1,4 +1,4 @@
-const APP_VERSION='14.12.2';
+const APP_VERSION='14.17.0';
 const fishMaster = [
   { name:'シロギス', emoji:'🐟', photo:'./assets/fish/kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 , where:'砂地の堤防・海岸。内房や湾内の砂底をちょい投げで探る。', methods:['ちょい投げ','投げ釣り'], bait:'イソメ類', season:'春〜秋', touch:'危険魚ではない。針を外す時は背びれに注意。' },
   { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' , where:'岩礁・テトラ・堤防際などの障害物周り。', methods:['胴突き','穴釣り','ジグヘッド'], bait:'イソメ・魚の切り身・ワーム', season:'通年', touch:'背びれのトゲに注意。' },
@@ -47,6 +47,27 @@ function save() {
   localStorage.setItem('mfl_fishingDays', JSON.stringify(state.fishingDays));
   localStorage.setItem('mfl_lastTackleId', state.lastTackleId || '');
   localStorage.setItem('mfl_lastMethod', state.lastMethod || 'ちょい投げ');
+}
+let bodyScrollLockCount=0;
+let bodyScrollLockState=null;
+function lockBodyScroll(){
+  if(bodyScrollLockCount++===0){
+    const scrollY=window.scrollY;
+    bodyScrollLockState={scrollY,position:document.body.style.position,top:document.body.style.top,width:document.body.style.width,overflow:document.body.style.overflow};
+    Object.assign(document.body.style,{position:'fixed',top:`-${scrollY}px`,width:'100%',overflow:'hidden'});
+  }
+  let released=false;
+  return()=>{
+    if(released)return;
+    released=true;
+    bodyScrollLockCount=Math.max(0,bodyScrollLockCount-1);
+    if(bodyScrollLockCount===0&&bodyScrollLockState){
+      const saved=bodyScrollLockState;
+      bodyScrollLockState=null;
+      Object.assign(document.body.style,{position:saved.position,top:saved.top,width:saved.width,overflow:saved.overflow});
+      window.scrollTo(0,saved.scrollY);
+    }
+  };
 }
 function escapeHtml(value='') { return String(value).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 function formatDate(s) { if (!s) return ''; const d = new Date(`${s}T00:00:00`); return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`; }
@@ -1391,7 +1412,6 @@ function renderAreaSpots(area){
  <div class="area-spot-list">${spots.map(s=>`<button class="area-spot-button" data-fishing-spot="${s.id}"><span class="area-spot-pin">📍</span><span class="area-spot-copy"><strong>${s.name}</strong><small>初心者 ${stars(s.beginner)}　タックル ${s.tackle}</small>${spotStatusBadge(s)}<span class="area-style-mini">${styleMiniTags(s)}</span></span><b>›</b></button>`).join('')}</div>`;
  document.getElementById('closeAreaPanel').onclick=()=>root.hidden=true;
  root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
- root.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
 function chibaZoneOf(s){
@@ -1416,7 +1436,6 @@ function renderChibaZone(zone){
     <span>📍</span><div><strong>${s.name}</strong><small>初心者 ${stars(s.beginner)}　タックル ${s.tackle}</small>${spotStatusBadge(s)}</div><b>›</b>
   </button>`).join('')}</div>`;
   root.querySelectorAll('[data-fishing-spot]').forEach(btn=>btn.onclick=()=>showFishingSpot(btn.dataset.fishingSpot));
-  root.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
 function setupKantoMap(){
@@ -1441,10 +1460,6 @@ function setupKantoMap(){
   document.querySelectorAll('[data-area-open]').forEach(btn=>btn.onclick=()=>{
     renderAreaSpots(btn.dataset.areaOpen);
     document.querySelectorAll('[data-area-open]').forEach(b=>b.classList.toggle('selected',b===btn));
-    requestAnimationFrame(()=>{
-      const panel=document.getElementById('spotAreaPanel');
-      if(panel) panel.scrollIntoView({behavior:'smooth',block:'start'});
-    });
   });
 
   document.querySelectorAll('[data-spot-filter]').forEach(btn=>btn.onclick=()=>{
@@ -1599,29 +1614,6 @@ function seawallMapFor(s){
 }
 
 
-const tideStationMap={
-  TK:{name:'東京',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=TK'},
-  CB:{name:'千葉港',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=CB'},
-  TT:{name:'館山',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=TT'},
-  QS:{name:'横浜',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=QS'},
-  D2:{name:'鹿島',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=D2'},
-  D3:{name:'大洗',jma:'https://www.data.jma.go.jp/kaiyou/db/tide/suisan/suisan.php?stn=D3'}
-};
-let mflTideData=null;
-
-function tideStationForSpot(s){
-  if(s.pref==='東京') return 'TK';
-  if(s.pref==='千葉'){
-    if(/館山/.test(s.name)) return 'TT';
-    return 'CB';
-  }
-  if(s.pref==='神奈川') return 'QS';
-  if(s.pref==='茨城'){
-    if(/鹿島/.test(s.name)) return 'D2';
-    return 'D3';
-  }
-  return null;
-}
 function todayJst(){
   const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
   const o=Object.fromEntries(parts.map(x=>[x.type,x.value]));
@@ -1630,64 +1622,6 @@ function todayJst(){
 function nowHourJst(){
   return Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tokyo',hour:'2-digit',hourCycle:'h23'}).format(new Date()));
 }
-function tideTrend(day,hour){
-  const h=day?.hourly||[];
-  if(h.length<24)return {label:'不明',symbol:'→'};
-  const a=h[Math.max(0,hour-1)],b=h[Math.min(23,hour+1)];
-  if(a==null||b==null)return {label:'不明',symbol:'→'};
-  const d=b-a;
-  if(d>5)return {label:'上げ潮',symbol:'↗'};
-  if(d<-5)return {label:'下げ潮',symbol:'↘'};
-  return {label:'潮止まり付近',symbol:'→'};
-}
-function tideSparkline(hourly){
-  const vals=hourly.filter(v=>v!=null); if(vals.length<2)return '';
-  const min=Math.min(...vals),max=Math.max(...vals),range=Math.max(1,max-min);
-  const pts=hourly.map((v,i)=>v==null?null:[10+i*(300/23),86-(v-min)/range*66]).filter(Boolean);
-  return `<svg viewBox="0 0 320 100" class="tide-chart" aria-label="24時間潮位グラフ">
-    <line x1="10" y1="86" x2="310" y2="86" stroke="#cfe0e3" stroke-width="1"/>
-    <polyline points="${pts.map(p=>p.join(',')).join(' ')}" fill="none" stroke="#0b7285" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
-    <text x="10" y="98">0時</text><text x="284" y="98">23時</text>
-  </svg>`;
-}
-function tideEventsHtml(events,kind){
-  if(!events?.length)return `<span class="tide-none">${kind}なし</span>`;
-  return events.slice(0,2).map(x=>`<div><b>${x.time}</b><span>${x.level}cm</span></div>`).join('');
-}
-async function ensureTideData(){
-  if(mflTideData)return mflTideData;
-  try{
-    const r=await fetch('./data/tides-2026.json',{cache:'force-cache'});
-    if(!r.ok)throw new Error('tide data');
-    mflTideData=await r.json(); return mflTideData;
-  }catch(e){return null}
-}
-function tideCardShell(s){
-  const st=tideStationForSpot(s); if(!st)return '';
-  return `<section class="tide-card" data-tide-card="${s.id}">
-    <div class="tide-head"><div><small>🌊 MFL TIDE ASSIST</small><h4>潮の状況</h4></div><span>基準地点：${tideStationMap[st].name}</span></div>
-    <div class="tide-loading">潮位データを読み込み中…</div>
-  </section>`;
-}
-async function hydrateTideCard(s){
-  const root=document.querySelector(`[data-tide-card="${s.id}"]`); if(!root)return;
-  const code=tideStationForSpot(s), data=await ensureTideData();
-  if(!data||!code){root.querySelector('.tide-loading').textContent='潮位データを読み込めませんでした。';return}
-  const date=todayJst(),day=data.stations?.[code]?.days?.[date];
-  if(!day){root.querySelector('.tide-loading').innerHTML=`2026年以外の日付はまだMFL内蔵データ対象外です。 <a href="${tideStationMap[code].jma}" target="_blank" rel="noopener">気象庁で確認</a>`;return}
-  const hour=nowHourJst(),trend=tideTrend(day,hour),nowLevel=day.hourly?.[hour];
-  root.innerHTML=`<div class="tide-head"><div><small>🌊 MFL TIDE ASSIST</small><h4>${date.replaceAll('-','/')} の潮</h4></div><span>基準：${tideStationMap[code].name}</span></div>
-    <div class="tide-now"><span class="tide-arrow">${trend.symbol}</span><div><small>現在の目安</small><strong>${trend.label}</strong><em>${nowLevel!=null?`${hour}:00予測 ${nowLevel}cm`:''}</em></div></div>
-    ${tideSparkline(day.hourly)}
-    <div class="tide-events">
-      <section><small>🔵 満潮</small>${tideEventsHtml(day.highs,'満潮')}</section>
-      <section><small>🔻 干潮</small>${tideEventsHtml(day.lows,'干潮')}</section>
-    </div>
-    <div class="tide-actions"><a href="${tideStationMap[code].jma}" target="_blank" rel="noopener">気象庁の潮位表を開く ↗</a></div>
-    <p class="tide-note">天文潮位の予測値です。実際の潮位は気圧・風などで変わります。「釣れる／釣れない」の断定には使いません。</p>`;
-}
-
-
 function setupSeawallInteractions(s){
   document.querySelectorAll(`[data-open-map="${s.id}"]`).forEach(btn=>btn.onclick=()=>openSeawallFullscreen(s));
 }
@@ -1695,8 +1629,8 @@ function openSeawallFullscreen(s){
   const d=seawallMapData[s.id]; if(!d)return;
   const wrap=document.createElement('div'); wrap.className='map-fullscreen';
   wrap.innerHTML=`<div class="map-fullscreen-sheet"><div class="map-fullscreen-head"><div><small>MFL SITE MAP</small><strong>${d.title}</strong></div><button id="closeMapFullscreen">×</button></div><div class="map-fullscreen-svg">${d.svg}</div><div class="map-unified-legend fullscreen"><span><i class="legend-ok"></i>釣りOK目安</span><span><i class="legend-ng"></i>禁止・入らない</span><span><i class="legend-warn"></i>注意・要確認</span><span><i class="legend-water"></i>海・運河</span></div><p>${d.note}</p><div class="map-readability-tip">🔍 地図は拡大表示推奨。文字や禁止範囲は全画面で確認してください。</div><div class="seawall-warning">⚠️ 現地掲示・立入規制・管理者の最新案内を最優先。</div></div>`;
-  document.body.appendChild(wrap); document.body.style.overflow='hidden';
-  const close=()=>{wrap.remove();document.body.style.overflow='';};
+  document.body.appendChild(wrap); const unlockBody=lockBodyScroll();
+  const close=()=>{wrap.remove();unlockBody();};
   wrap.querySelector('#closeMapFullscreen').onclick=close; wrap.onclick=e=>{if(e.target===wrap)close();};
 }
 
@@ -1708,7 +1642,7 @@ function showFishingSpot(id){
   rememberFishingSpot(id);
 
   const existing=document.getElementById('fishingSpotOverlay');
-  if(existing) existing.remove();
+  if(existing) existing._mflDispose?.();
 
   const overlay=document.createElement('div');
   overlay.id='fishingSpotOverlay';
@@ -1730,6 +1664,7 @@ function showFishingSpot(id){
       </div>
 
       <section id="spotConditionsCard"></section>
+      ${window.MFLForecastUI?.supported?.has(s.id)?'<section id="spotForecastCard"></section>':''}
 
       ${s.fish?`<section class="fishing-spot-section"><h4>🐟 狙える魚・傾向</h4><p>${escapeHtml(s.fish)}</p></section>`:''}
       ${(s.styles&&s.styles.length)?`<section class="fishing-spot-section"><h4>🎣 釣り方</h4><div class="fishing-spot-tags">${s.styles.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div></section>`:''}
@@ -1743,12 +1678,19 @@ function showFishingSpot(id){
     </div>`;
 
   document.body.appendChild(overlay);
+  const unlockBody=lockBodyScroll();
   if(window.MFLConditions) window.MFLConditions.mountSpot('spotConditionsCard',s,kantoFishingSpots);
+  if(window.MFLForecastUI) window.MFLForecastUI.mount('spotForecastCard',s);
 
-  const close=()=>{
+  let closed=false;
+  const close=(immediate=false)=>{
+    if(closed)return;
+    closed=true;
+    if(immediate===true){overlay.remove();unlockBody();return}
     overlay.classList.add('closing');
-    setTimeout(()=>overlay.remove(),160);
+    setTimeout(()=>{overlay.remove();unlockBody()},160);
   };
+  overlay._mflDispose=()=>close(true);
   overlay.querySelector('.fishing-spot-close').onclick=close;
   overlay.onclick=(e)=>{ if(e.target===overlay) close(); };
 

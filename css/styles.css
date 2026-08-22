@@ -10,6 +10,14 @@
   --danger: #c24141;
   --shadow: 0 10px 28px rgba(15, 58, 66, .09);
   --radius: 22px;
+  --surface: #ffffff;
+  --surface-raised: #f8fbfc;
+  --surface-ink: var(--ink);
+  --surface-muted: var(--muted);
+  --surface-border: var(--line);
+  --fixed-light-surface: #ffffff;
+  --fixed-light-ink: #17313a;
+  --fixed-light-muted: #587078;
 }
 
 /* MFL v14.10.0 - complete fish visuals and readable guide details */
@@ -60,7 +68,7 @@
 html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; }
 body { overscroll-behavior-y: none; }
 button, input, select, textarea { font: inherit; }
-button { touch-action: manipulation; }
+button { color: var(--ink); touch-action: manipulation; }
 .app-shell { min-height: 100dvh; max-width: 760px; margin: 0 auto; background: var(--bg); padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
 .topbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; padding: calc(14px + env(safe-area-inset-top)) 18px 14px; background: rgba(243,247,247,.94); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(223,233,233,.8); }
 .eyebrow { margin: 0 0 3px; color: var(--accent); font-weight: 800; font-size: 11px; letter-spacing: .18em; }
@@ -1671,21 +1679,25 @@ input,select,textarea{font-size:16px}
   background:rgba(9,38,44,.28);
   opacity:0;
   transition:opacity .16s ease;
+  overscroll-behavior:contain;
 }
 .fishing-spot-overlay.open{opacity:1}
 .fishing-spot-overlay.closing{opacity:0}
 .fishing-spot-sheet{
   width:min(100%,760px);
-  max-height:88vh;
-  overflow:auto;
+  max-height:min(88dvh,calc(100dvh - env(safe-area-inset-top)));
+  overflow-x:hidden;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+  touch-action:pan-y;
   padding:18px 18px calc(24px + env(safe-area-inset-bottom));
   border-radius:24px 24px 0 0;
   background:#fff;
   box-shadow:0 -8px 30px rgba(10,50,58,.18);
-  transform:translateY(18px);
-  transition:transform .16s ease;
 }
-.fishing-spot-overlay.open .fishing-spot-sheet{transform:translateY(0)}
+.fishing-spot-overlay.open .fishing-spot-sheet{animation:fishing-spot-sheet-in .16s ease-out both}
+@keyframes fishing-spot-sheet-in{from{transform:translateY(18px)}to{transform:none}}
 .fishing-spot-sheet-head{
   display:grid;
   grid-template-columns:44px 1fr;
@@ -2177,7 +2189,7 @@ input,select,textarea{font-size:16px}
   .map-search-list strong,.map-style-result-list strong,.facility-result-list strong,.east-quick-list strong{font-size:17px!important}
   .map-search-list small,.map-style-result-list small,.facility-result-list small,.east-quick-list small{font-size:12px!important;line-height:1.5!important}
 
-  .fishing-spot-sheet{max-height:90vh!important;padding:20px 18px calc(26px + env(safe-area-inset-bottom))!important;border-radius:26px 26px 0 0!important}
+  .fishing-spot-sheet{max-height:min(90dvh,calc(100dvh - env(safe-area-inset-top)))!important;padding:20px 18px calc(26px + env(safe-area-inset-bottom))!important;border-radius:26px 26px 0 0!important}
   .fishing-spot-sheet-head{grid-template-columns:48px 1fr!important;gap:12px!important}
   .fishing-spot-close{width:46px!important;height:46px!important;font-size:30px!important}
   .fishing-spot-sheet-head small{font-size:12px!important}
@@ -3484,13 +3496,17 @@ html[data-theme="dark"]{
   --soft:#163d49;
   --danger:#ff8585;
   --shadow:0 12px 30px rgba(0,7,12,.34);
+  --surface:#102a36;
+  --surface-raised:#122f3b;
+  --surface-ink:#edf8fa;
+  --surface-muted:#aac2c9;
+  --surface-border:#31515d;
 }
 html[data-theme="dark"],html[data-theme="dark"] body{background:#071923;color:var(--ink)}
 html[data-theme="dark"] body{color-scheme:dark}
 html[data-theme="dark"] .app-shell{background:var(--bg)}
 html[data-theme="dark"] .topbar{background:rgba(7,25,35,.94);border-bottom-color:rgba(53,83,94,.88)}
 html[data-theme="dark"] .bottom-nav{background:rgba(10,29,39,.97);border-top-color:var(--line)}
-html[data-theme="dark"] button{color:inherit}
 html[data-theme="dark"] .nav-item{color:var(--muted)}
 html[data-theme="dark"] .nav-item.active{color:#8ae5ef;background:#17414d}
 html[data-theme="dark"] .stat-card,
@@ -3715,5 +3731,93 @@ html[data-theme="dark"] .recent-map-head button{
 html[data-theme="dark"] .recent-map-head small,
 html[data-theme="dark"] .chiba-density-title small,
 html[data-theme="dark"] .fish-photo-progress small{color:#08798b!important}
+
+/* MFL v14.13.0 - shared themed surfaces */
+html[data-theme="dark"] :where(
+  .glossary-intro,
+  .glossary-search-wrap,
+  .glossary-filters button:not(.active),
+  .glossary-item,
+  .map-view-switcher button:not(.active),
+  .recent-map-spots,
+  .recent-map-list>button,
+  .area-select-card,
+  .spot-area-panel,
+  .map-info-tabs button:not(.active),
+  .map-info-panel,
+  .east-quick-panel,
+  .east-quick-list button,
+  .map-search-box,
+  .map-search-results,
+  .map-search-list button,
+  .map-style-filter,
+  .map-style-filter-buttons button,
+  .map-style-result-list button,
+  .map-facility-filter,
+  .map-facility-buttons button,
+  .facility-result-list button,
+  .map-beginner-filter button,
+  .beginner-map-results,
+  .beginner-map-results-list button,
+  .map-filter-panel-toggle,
+  .map-filter-panel,
+  .map-fullscreen-sheet,
+  .tide-card,
+  .tide-now,
+  .tide-events>section,
+  .map-coverage-meter,
+  .map-unified-legend span,
+  .research-master-toggle,
+  .research-rule:not(.hold):not(.excluded),
+  .research-excluded-list,
+  .research-hold-list
+){
+  background:var(--surface-raised)!important;
+  border-color:var(--surface-border)!important;
+  color:var(--surface-ink)!important;
+}
+html[data-theme="dark"] :where(
+  .glossary-intro p,
+  .glossary-item summary small,
+  .glossary-detail,
+  .recent-map-head small,
+  .recent-map-list small,
+  .area-select-card em,
+  .map-search-count,
+  .map-search-list small,
+  .map-style-result-head span,
+  .map-style-result-list small,
+  .facility-result-head span,
+  .facility-result-list small,
+  .beginner-map-results-head>span,
+  .beginner-map-results-list small,
+  .east-quick-list small,
+  .map-fullscreen-sheet>p,
+  .tide-now small,
+  .tide-now em,
+  .tide-events span
+){color:var(--surface-muted)!important}
+html[data-theme="dark"] :where(
+  .glossary-search-wrap input,
+  .map-search-box input
+){background:transparent!important;color:var(--surface-ink)!important}
+html[data-theme="dark"] .map-fullscreen-head button{background:var(--soft);color:var(--ink)}
+html[data-theme="dark"] .map-fullscreen-svg{
+  background:var(--fixed-light-surface);
+  border-color:#d6e6e8;
+  color:var(--fixed-light-ink);
+}
+html[data-theme="dark"] .tide-chart{background:var(--surface);color:var(--surface-ink)}
+html[data-theme="dark"] .tide-chart text{fill:var(--surface-muted)}
+html[data-theme="dark"] .tide-head>span,
+html[data-theme="dark"] .tide-arrow{background:var(--soft);color:var(--accent-dark)}
+html[data-theme="dark"] #spotConditionsCard .fc-spot-loading{
+  min-height:220px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--surface-border);
+  border-radius:18px;
+  background:var(--surface);
+}
 
 @media(max-width:390px){.theme-options{grid-template-columns:1fr}.theme-options label:last-child{grid-column:auto}.theme-options label>span{min-height:60px}}
