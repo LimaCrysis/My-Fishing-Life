@@ -1001,7 +1001,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 
 /* MFL v12.8.0 - PARALLEL MAP DEVELOPMENT */
 .map-view-switcher{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:0 0 12px}
-.map-view-switcher button{padding:10px 5px;border:1px solid #d8e7e9;border-radius:12px;background:#fff;font-size:9px;font-weight:900;color:#55747b}
+.map-view-switcher button{padding:10px 5px;border:1px solid var(--surface-border);border-radius:12px;background:var(--surface-raised);font-size:9px;font-weight:900;color:var(--surface-muted)}
 .map-view-switcher button.active{background:#0b7285;color:#fff;border-color:#0b7285}
 
 .east-quick-panel{margin:0 0 13px;padding:12px;border:1px solid #d4e6e9;border-radius:16px;background:#f6fbfc}
@@ -1048,14 +1048,14 @@ input:focus, select:focus, textarea:focus { border-color: var(--accent); box-sha
 .rigflow-check span{display:grid;place-items:center;width:24px;height:24px;margin:0 auto 5px;border-radius:50%;background:#0b7285;color:#fff;font-size:9px;font-weight:900}
 .rigflow-check strong,.rigflow-check small{display:block}.rigflow-check strong{font-size:8px}.rigflow-check small{margin-top:2px;font-size:7px;color:var(--muted)}
 
-.recent-map-spots{margin:0 0 12px;padding:12px;border:1px solid #d6e6e8;border-radius:16px;background:#fbfdfd}
+.recent-map-spots{margin:0 0 12px;padding:12px;border:1px solid var(--surface-border);border-radius:16px;background:var(--surface-raised);color:var(--surface-ink)}
 .recent-map-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .recent-map-head small,.recent-map-head strong{display:block}.recent-map-head small{font-size:8px;font-weight:900;letter-spacing:.12em;color:var(--accent)}
 .recent-map-head strong{font-size:13px}.recent-map-head button{border:0;background:transparent;color:var(--muted);font-size:8px;text-decoration:underline}
 .recent-map-list{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}.recent-map-list::-webkit-scrollbar{display:none}
-.recent-map-list>button{flex:0 0 160px;display:grid;grid-template-columns:24px 1fr 12px;gap:6px;align-items:center;padding:10px;border:1px solid #e0eaec;border-radius:12px;background:#fff;text-align:left}
+.recent-map-list>button{flex:0 0 160px;display:grid;grid-template-columns:24px 1fr 12px;gap:6px;align-items:center;padding:10px;border:1px solid var(--surface-border);border-radius:12px;background:var(--surface);color:var(--surface-ink);text-align:left}
 .recent-map-list>button>span{font-size:16px}.recent-map-list strong,.recent-map-list small{display:block}
-.recent-map-list strong{font-size:10px}.recent-map-list small{margin-top:2px;font-size:7px;line-height:1.35;color:var(--muted)}.recent-map-list b{font-size:14px;color:#82989c}
+.recent-map-list strong{font-size:10px;color:var(--surface-ink)}.recent-map-list small{margin-top:2px;font-size:7px;line-height:1.35;color:var(--surface-muted)}.recent-map-list b{font-size:14px;color:var(--surface-muted)}
 @media(max-width:390px){.rigflow-check{grid-template-columns:1fr}.recent-map-list>button{flex-basis:150px}}
 
 /* MFL v13.0.0 - MAP SEARCH + WEIGHT GUIDE */
@@ -3546,7 +3546,7 @@ html[data-theme="dark"] .map-filter-panel-toggle,
 html[data-theme="dark"] .verified-ledger-row,
 html[data-theme="dark"] .pending-spot-row{background:var(--card)!important;border-color:var(--line)!important;color:var(--ink)}
 html[data-theme="dark"] .sheet,
-html[data-theme="dark"] .fish-detail-sheet{background:#0d2632;color:var(--ink)}
+html[data-theme="dark"] .fish-detail-sheet{background:var(--surface);color:var(--surface-ink)}
 html[data-theme="dark"] .sheet-dialog::backdrop{background:rgba(0,7,12,.76)}
 html[data-theme="dark"] .sheet-handle{background:#496673}
 html[data-theme="dark"] input,
@@ -3571,6 +3571,12 @@ html[data-theme="dark"] .appearance-card .theme-options label>span{background:#0
 html[data-theme="dark"] .appearance-card .theme-options input:checked+span{background:#174552;border-color:#4fd1e0}
 html[data-theme="dark"] .assist-home-card{background:#102f3a;border-color:var(--line)}
 html[data-theme="dark"] .assist-home-icon{background:#174753}
+html[data-theme="dark"] .settings-home-card{background:var(--surface-raised);color:var(--surface-ink);border-color:var(--surface-border)}
+html[data-theme="dark"] .settings-home-card .home-tool-title{color:var(--surface-ink)}
+html[data-theme="dark"] .settings-home-card .home-tool-description{color:var(--surface-muted)}
+html[data-theme="dark"] .settings-home-card .home-tool-arrow{color:var(--accent)}
+html[data-theme="dark"] .settings-home-card .tackle-home-icon{background:var(--surface);color:var(--surface-ink);border:1px solid var(--surface-border)}
+html[data-theme="dark"] .mfl-build-badge{background:var(--surface);color:var(--surface-muted);border:1px solid var(--surface-border)}
 html[data-theme="dark"] .assist-note{background:#273022;color:#f0edcf}
 html[data-theme="dark"] .line-sim-result,
 html[data-theme="dark"] .target-result,
@@ -3597,6 +3603,10 @@ html[data-theme="dark"] .guide-section-summary>div,
 html[data-theme="dark"] .guide-crosslink{background:#0c2430!important;border-color:var(--line)!important;color:var(--ink)}
 html[data-theme="dark"] .spot-score-grid>div,
 html[data-theme="dark"] .field-ready-grid label{background:#173440;border-color:var(--line)}
+html[data-theme="dark"] .field-ready-card{background:var(--surface-raised);border-color:var(--surface-border);color:var(--surface-ink)}
+html[data-theme="dark"] .field-ready-grid label{background:var(--surface);border:1px solid var(--surface-border);color:var(--surface-ink)}
+html[data-theme="dark"] .field-ready-card>p{color:var(--surface-muted)}
+html[data-theme="dark"] .field-ready-head small{color:var(--accent)}
 html[data-theme="dark"] .spot-tags.muted span{background:#243d47;color:#bfd0d5}
 html[data-theme="dark"] .spot-gear-note{background:#143b36;color:#bde8df}
 html[data-theme="dark"] .spot-warning,
@@ -3631,7 +3641,12 @@ html[data-theme="dark"] .calendar-week span:last-child{color:#82bfff}
 html[data-theme="dark"] .fish-photo-wrap,
 html[data-theme="dark"] .fish-detail-photo,
 html[data-theme="dark"] .fish-photo-wrap img,
-html[data-theme="dark"] .fish-detail-photo img{background:#dce5e6}
+html[data-theme="dark"] .fish-detail-photo img{background:var(--fixed-light-surface)}
+html[data-theme="dark"] .fish-photo-fallback{color:var(--fixed-light-ink)}
+html[data-theme="dark"] .fish-photo-fallback small{color:var(--fixed-light-muted)}
+html[data-theme="dark"] .fish-photo-wrap{color:var(--fixed-light-ink)}
+html[data-theme="dark"] .fish-detail-x{background:var(--fixed-light-surface);color:var(--fixed-light-ink)}
+html[data-theme="dark"] .fish-caught-badge{background:var(--fixed-light-surface);color:var(--fixed-light-ink)}
 html[data-theme="dark"] img{filter:none}
 html[data-theme="dark"] .fishing-spot-overlay{background:rgba(0,7,12,.76)}
 html[data-theme="dark"] .fishing-spot-sheet,
@@ -3653,7 +3668,6 @@ html[data-theme="dark"]{
   --light-surface-muted:#587078;
   --light-surface-link:#075f70;
 }
-html[data-theme="dark"] .settings-home-card,
 html[data-theme="dark"] .fish-photo-progress,
 html[data-theme="dark"] .glossary-intro,
 html[data-theme="dark"] .glossary-search-wrap,
@@ -3690,8 +3704,6 @@ html[data-theme="dark"] .chiba-density-panel,
 html[data-theme="dark"] .chiba-density-grid button{
   color:var(--light-surface-ink)!important;
 }
-html[data-theme="dark"] .settings-home-card .home-tool-description,
-html[data-theme="dark"] .settings-home-card .home-tool-arrow,
 html[data-theme="dark"] .fish-photo-progress p,
 html[data-theme="dark"] .glossary-intro p,
 html[data-theme="dark"] .glossary-item summary small,
@@ -3819,5 +3831,61 @@ html[data-theme="dark"] #spotConditionsCard .fc-spot-loading{
   border-radius:18px;
   background:var(--surface);
 }
+html[data-theme="dark"] .map-view-switcher button:not(.active),
+html[data-theme="dark"] .recent-map-spots,
+html[data-theme="dark"] .recent-map-list>button{
+  background:var(--surface-raised)!important;
+  border-color:var(--surface-border)!important;
+  color:var(--surface-ink)!important;
+}
+html[data-theme="dark"] .recent-map-list strong{color:var(--surface-ink)!important}
+html[data-theme="dark"] .recent-map-head small,
+html[data-theme="dark"] .recent-map-list small,
+html[data-theme="dark"] .recent-map-list b{color:var(--surface-muted)!important}
+html[data-theme="dark"] .recent-map-head button{color:var(--accent)!important}
+
+/* Chiba density cards are app surfaces in dark mode (light mode stays unchanged). */
+html[data-theme="dark"] .chiba-density-panel{
+  background:var(--surface)!important;
+  border-color:var(--surface-border)!important;
+  color:var(--surface-ink)!important;
+}
+html[data-theme="dark"] .chiba-density-grid button{
+  background:var(--surface-raised)!important;
+  border-color:var(--surface-border)!important;
+  color:var(--surface-ink)!important;
+}
+html[data-theme="dark"] .chiba-density-grid button span{color:var(--surface-muted)!important}
+html[data-theme="dark"] .chiba-density-title small{color:var(--accent)!important}
+
+/* Fish encyclopedia detail surfaces share the app theme; photos remain fixed-light. */
+html[data-theme="dark"] :where(
+  .fish-photo-progress,
+  .fish-photo-source,
+  .fish-knowledge-card,
+  .fish-touch,
+  .assist-safety-strip
+){
+  background:var(--surface-raised)!important;
+  border-color:var(--surface-border)!important;
+  color:var(--surface-ink)!important;
+}
+html[data-theme="dark"] :where(
+  .fish-scientific,
+  .fish-photo-source,
+  .fish-photo-progress p,
+  .fish-knowledge-card em,
+  .fish-touch p,
+  .assist-safety-strip span
+){color:var(--surface-muted)!important}
+html[data-theme="dark"] .fish-method-chips b{background:var(--soft);color:var(--accent-dark)}
+html[data-theme="dark"] .fish-touch.caution,
+html[data-theme="dark"] .fish-photo-source.pending,
+html[data-theme="dark"] .fish-id-caution{background:#40371d!important;border-color:#75642d!important;color:#ffe5a0!important}
+html[data-theme="dark"] .fish-touch.caution p,
+html[data-theme="dark"] .fish-photo-source.pending p,
+html[data-theme="dark"] .fish-id-caution p{color:#f2dfa8!important}
+html[data-theme="dark"] .fish-touch.danger{background:#472329!important;border-color:#8d4a4a!important;color:#ffbab3!important}
+html[data-theme="dark"] .fish-touch.danger p{color:#f1c2bd!important}
 
 @media(max-width:390px){.theme-options{grid-template-columns:1fr}.theme-options label:last-child{grid-column:auto}.theme-options label>span{min-height:60px}}

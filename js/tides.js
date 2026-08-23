@@ -14,6 +14,9 @@
   const stationBySpot={
     kashima:'D2',
     kemigawa_beach:'CB',
+    ichihara:'CB',
+    kisarazu_uchiko:'CB',
+    futtsu_area:'CB',
     tateyama_sunset:'TT',
     honmoku:'QS',
     isogo:'QS',

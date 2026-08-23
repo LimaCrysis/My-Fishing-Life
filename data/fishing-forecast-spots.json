@@ -1,5 +1,5 @@
 {
-  "version":"1.3.0","updated":"2026-08-22","spots":{
+  "version":"1.3.0","updated":"2026-08-23","spots":{
     "kashima":{"name":"鹿島港魚釣園","tideStation":"D2","timezone":"Asia/Tokyo","speciesGroups":{
       "pelagic":{"label":"回遊系","species":["アジ","シマアジ","イワシ","サバ","ショゴ","カンパチ","コノシロ"],"methods":["サビキ","軽いルアー"],"recommendedMethod":"サビキ"},
       "bottom":{"label":"底物系","species":["シロギス","メゴチ","カワハギ"],"methods":["ちょい投げ"],"recommendedMethod":"ちょい投げ"},
@@ -9,6 +9,21 @@
       "pelagic":{"label":"回遊系","species":["カタクチイワシ","サッパ","アジ"],"methods":["サビキ"],"recommendedMethod":"サビキ"},
       "bottom":{"label":"底物系","species":["シロギス","ハゼ","メゴチ"],"methods":["ちょい投げ"],"recommendedMethod":"ちょい投げ"},
       "other":{"label":"その他","species":["スズキ"],"methods":["ワーム","軽いルアー"],"recommendedMethod":"ワーム"}
+    },"periods":{"dawn":{"label":"朝マヅメ"},"day":{"label":"日中"},"dusk":{"label":"夕マヅメ"},"night":{"label":"夜"}}},
+    "ichihara":{"name":"オリジナルメーカー海づり公園","tideStation":"CB","timezone":"Asia/Tokyo","speciesGroups":{
+      "pelagic":{"label":"回遊系","species":["アジ","イワシ","サッパ","コノシロ","サヨリ"],"methods":["サビキ"],"recommendedMethod":"サビキ"},
+      "bottom":{"label":"底物系","species":["シロギス","イシモチ"],"methods":["ちょい投げ"],"recommendedMethod":"ちょい投げ"},
+      "other":{"label":"その他","species":["クロダイ","スズキ","フッコ","セイゴ","マゴチ","メジナ"],"methods":["ワーム","足元釣り"],"recommendedMethod":"ワーム"}
+    },"periods":{"dawn":{"label":"朝マヅメ"},"day":{"label":"日中"},"dusk":{"label":"夕マヅメ"},"night":{"label":"夜"}}},
+    "kisarazu_uchiko":{"name":"木更津内港公園","tideStation":"CB","timezone":"Asia/Tokyo","speciesGroups":{
+      "pelagic":{"label":"回遊系","species":["アジ","イワシ","コノシロ"],"methods":["サビキ","軽いルアー"],"recommendedMethod":"サビキ"},
+      "bottom":{"label":"底物系","species":["ハゼ","シロギス","イシモチ"],"methods":["ちょい投げ","足元釣り"],"recommendedMethod":"ちょい投げ"},
+      "other":{"label":"その他","species":["スズキ","クロダイ","メバル"],"methods":["ワーム","軽いルアー"],"recommendedMethod":"ワーム"}
+    },"periods":{"dawn":{"label":"朝マヅメ"},"day":{"label":"日中"},"dusk":{"label":"夕マヅメ"},"night":{"label":"夜"}}},
+    "futtsu_area":{"name":"富津地区","tideStation":"CB","timezone":"Asia/Tokyo","speciesGroups":{
+      "pelagic":{"label":"回遊系","species":["タチウオ"],"methods":["軽いルアー"],"recommendedMethod":"軽いルアー"},
+      "bottom":{"label":"底物系","species":["シロギス","イシモチ"],"methods":["ちょい投げ"],"recommendedMethod":"ちょい投げ"},
+      "other":{"label":"その他","species":["カサゴ","スズキ","メバル","マダコ"],"methods":["ワーム","足元釣り"],"recommendedMethod":"ワーム"}
     },"periods":{"dawn":{"label":"朝マヅメ"},"day":{"label":"日中"},"dusk":{"label":"夕マヅメ"},"night":{"label":"夜"}}}
   }
 }

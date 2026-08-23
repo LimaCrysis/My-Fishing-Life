@@ -20,6 +20,7 @@
     edogawa_hosuiro:{lat:35.682,lon:139.934,basin:'江戸川流域',basinLat:35.850,basinLon:139.900,exposure:'river',facility:'河口・放水路'},
     futtsu_area:{lat:35.310,lon:139.814,basin:'富津岬周辺小河川流域',basinLat:35.300,basinLon:139.900,exposure:'bay',facility:'市公式案内エリア'},
     'choshi-marina-coast':{lat:35.706,lon:140.857,basin:'利根川下流・銚子沿岸流域',basinLat:35.800,basinLon:140.650,exposure:'open',facility:'海浜公園周辺'},
+    'choshi-nagasaki-coast':{lat:35.709,lon:140.846,basin:'銚子南部沿岸流域',basinLat:35.700,basinLon:140.790,exposure:'open',facility:'海岸・磯浜'},
     'asahi-ioka-coast':{lat:35.692,lon:140.719,basin:'九十九里北部沿岸流域',basinLat:35.740,basinLon:140.620,exposure:'open',facility:'一般海岸'},
     'onjuku-coast':{lat:35.182,lon:140.357,basin:'御宿・夷隅沿岸流域',basinLat:35.250,basinLon:140.300,exposure:'open',facility:'一般海岸'},
     'kamogawa-coast':{lat:35.107,lon:140.105,basin:'加茂川・鴨川沿岸流域',basinLat:35.150,basinLon:140.050,exposure:'open',facility:'一般海岸'},
@@ -28,6 +29,8 @@
     daikoku:{lat:35.461,lon:139.682,basin:'横浜港・鶴見川流域',basinLat:35.520,basinLon:139.630,exposure:'harbor',facility:'管理海づり施設'},
     higashiogishima:{lat:35.501,lon:139.768,basin:'多摩川・川崎港流域',basinLat:35.600,basinLon:139.700,exposure:'harbor',facility:'公園釣り施設'},
     umibetsuri:{lat:35.281,lon:139.675,basin:'横須賀東岸小河川流域',basinLat:35.270,basinLon:139.650,exposure:'bay',facility:'管理海辺つり公園'},
+    umikaze:{lat:35.274,lon:139.675,basin:'横須賀東岸小河川流域',basinLat:35.270,basinLon:139.650,exposure:'bay',facility:'公園釣り場'},
+    aicle:{lat:35.284,lon:139.651,basin:'横須賀北東岸小河川流域',basinLat:35.290,basinLon:139.640,exposure:'harbor',facility:'海釣りコーナー'},
     kawarago:{lat:36.548,lon:140.627,basin:'鮎川・日立沿岸流域',basinLat:36.570,basinLon:140.570,exposure:'open',facility:'一般海岸'},
     hiraiso:{lat:36.347,lon:140.621,basin:'那珂川・ひたちなか沿岸流域',basinLat:36.390,basinLon:140.520,exposure:'open',facility:'岩場・磯'}
   };

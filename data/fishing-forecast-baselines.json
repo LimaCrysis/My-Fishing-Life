@@ -1,5 +1,5 @@
 {
-  "version":"1.3.0","updated":"2026-08-22","method":"MFL v1.3 validated monthly species-group baselines. Replaceable with reviewed aggregated observations.",
+  "version":"1.3.0","updated":"2026-08-23","method":"MFL v1.3 validated monthly species-group baselines. Replaceable with reviewed aggregated observations.",
   "spots":{
     "kashima":{"models":{
       "pelagic":{"default":[24,22,20,20,25,38,50,48,42,40,43,47,54,62,56,52,61,76,72,62,51,42,34,28],"season":{
@@ -27,6 +27,39 @@
       "other":{"default":[29,27,25,24,26,31,37,39,38,37,36,36,37,39,42,46,52,58,56,49,42,37,33,30],"season":{
         "08":{"offset":5,"evidence":{"speciesGroup":"other","month":8,"sampleCount":2,"sourceCount":1,"lastUpdated":"2026-08-18","dateRange":{"from":"2026-08-10","to":"2026-08-18"},"sourceType":["curated_baseline"],"observedSpecies":["スズキ"],"hourlyEvidence":false,"confidence":"low"}},
         "09":{"hourly":[29,27,25,25,28,34,40,43,42,40,39,39,40,42,45,49,55,61,59,52,45,39,34,31],"offset":0,"evidence":{"speciesGroup":"other","month":9,"sampleCount":3,"sourceCount":1,"lastUpdated":"2026-08-22","dateRange":{"from":"2025-09-15","to":"2025-09-28"},"sourceType":["curated_baseline"],"observedSpecies":["スズキ"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"9月の魚種傾向"}}
+      }}
+    }},
+    "ichihara":{"models":{
+      "pelagic":{"default":[18,17,16,17,22,30,38,42,44,46,48,50,51,52,52,51,50,48,45,40,34,29,24,20],"season":{
+        "08":{"offset":8,"evidence":{"speciesGroup":"pelagic","month":8,"sampleCount":5,"sourceCount":1,"lastUpdated":"2026-08-19","dateRange":{"from":"2026-08-06","to":"2026-08-19"},"sourceType":["facility_daily_catch_summary"],"observedSpecies":["アジ","イワシ","サッパ","コノシロ","サヨリ"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"8月の回遊魚実績"}}
+      }},
+      "bottom":{"default":[20,19,18,18,20,25,31,37,43,48,52,55,57,58,58,56,52,47,41,35,30,26,23,21],"season":{
+        "08":{"offset":6,"evidence":{"speciesGroup":"bottom","month":8,"sampleCount":5,"sourceCount":1,"lastUpdated":"2026-08-19","dateRange":{"from":"2026-08-06","to":"2026-08-19"},"sourceType":["facility_daily_catch_summary"],"observedSpecies":["シロギス","イシモチ"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"8月の底物実績"}}
+      }},
+      "other":{"default":[28,27,26,25,27,32,38,42,44,46,48,50,52,54,56,59,62,64,61,56,49,42,36,31],"season":{
+        "08":{"offset":5,"evidence":{"speciesGroup":"other","month":8,"sampleCount":5,"sourceCount":1,"lastUpdated":"2026-08-19","dateRange":{"from":"2026-08-06","to":"2026-08-19"},"sourceType":["facility_daily_catch_summary"],"observedSpecies":["クロダイ","スズキ","フッコ","セイゴ","マゴチ","メジナ"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"8月の魚種実績"}}
+      }}
+    }},
+    "kisarazu_uchiko":{"models":{
+      "pelagic":{"default":[18,17,16,17,23,31,39,42,39,35,32,31,32,34,36,39,44,50,48,41,34,29,24,20],"season":{
+        "08":{"offset":2,"evidence":{"speciesGroup":"pelagic","month":8,"sampleCount":1,"sourceCount":1,"lastUpdated":"2024-02-29","dateRange":{"from":"2024-02-29","to":"2024-02-29"},"sourceType":["municipal_area_guidance","curated_baseline"],"observedSpecies":["アジ","イワシ","コノシロ"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"木更津内港の地域傾向"}}
+      }},
+      "bottom":{"default":[25,24,23,23,25,30,36,42,47,51,54,56,57,57,56,54,51,47,42,37,33,29,27,26],"season":{
+        "08":{"offset":4,"evidence":{"speciesGroup":"bottom","month":8,"sampleCount":1,"sourceCount":1,"lastUpdated":"2024-09-30","dateRange":{"from":"2024-09-21","to":"2024-09-21"},"sourceType":["municipal_event_species_record","curated_baseline"],"observedSpecies":["ハゼ","シロギス","イシモチ"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"内港の底物傾向"}}
+      }},
+      "other":{"default":[34,32,30,29,31,37,43,45,43,41,40,40,41,43,46,50,56,62,60,54,47,41,37,35],"season":{
+        "08":{"offset":3,"evidence":{"speciesGroup":"other","month":8,"sampleCount":1,"sourceCount":1,"lastUpdated":"2024-02-29","dateRange":{"from":"2024-02-29","to":"2024-02-29"},"sourceType":["municipal_area_guidance","curated_baseline"],"observedSpecies":["スズキ","クロダイ","メバル"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"木更津内港の魚種傾向"}}
+      }}
+    }},
+    "futtsu_area":{"models":{
+      "pelagic":{"default":[20,18,17,18,23,30,37,39,36,33,31,30,31,33,36,41,48,56,58,52,44,36,29,24],"season":{
+        "08":{"offset":3,"evidence":{"speciesGroup":"pelagic","month":8,"sampleCount":1,"sourceCount":1,"lastUpdated":"2021-09-16","dateRange":{"from":"2021-09-16","to":"2021-09-16"},"sourceType":["municipal_seasonal_species_guide"],"observedSpecies":["タチウオ"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"富津の季節魚種案内"}}
+      }},
+      "bottom":{"default":[23,22,21,21,23,28,35,42,48,53,57,60,62,63,62,59,55,50,44,38,33,29,26,24],"season":{
+        "08":{"offset":6,"evidence":{"speciesGroup":"bottom","month":8,"sampleCount":1,"sourceCount":1,"lastUpdated":"2021-09-16","dateRange":{"from":"2021-09-16","to":"2021-09-16"},"sourceType":["municipal_seasonal_species_guide"],"observedSpecies":["シロギス","イシモチ"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"富津の底物シーズン"}}
+      }},
+      "other":{"default":[35,33,31,30,32,38,44,46,44,42,42,43,45,48,52,57,63,68,66,59,51,44,39,36],"season":{
+        "08":{"offset":5,"evidence":{"speciesGroup":"other","month":8,"sampleCount":1,"sourceCount":1,"lastUpdated":"2021-09-16","dateRange":{"from":"2021-09-16","to":"2021-09-16"},"sourceType":["municipal_seasonal_species_guide"],"observedSpecies":["カサゴ","スズキ","メバル","マダコ"],"hourlyEvidence":false,"confidence":"low","reasonLabel":"富津の魚種シーズン"}}
       }}
     }}
   }

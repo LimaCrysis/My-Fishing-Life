@@ -1,4 +1,4 @@
-const APP_VERSION='14.17.0';
+const APP_VERSION='14.26.2';
 const fishMaster = [
   { name:'シロギス', emoji:'🐟', photo:'./assets/fish/kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 , where:'砂地の堤防・海岸。内房や湾内の砂底をちょい投げで探る。', methods:['ちょい投げ','投げ釣り'], bait:'イソメ類', season:'春〜秋', touch:'危険魚ではない。針を外す時は背びれに注意。' },
   { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' , where:'岩礁・テトラ・堤防際などの障害物周り。', methods:['胴突き','穴釣り','ジグヘッド'], bait:'イソメ・魚の切り身・ワーム', season:'通年', touch:'背びれのトゲに注意。' },
@@ -809,7 +809,7 @@ function setupMapViewModes(){
   const renderMode=(mode)=>{
     document.querySelectorAll('[data-map-view-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mapViewMode===mode));
     const discovery=document.querySelectorAll('.map-clean-hint,.map-search-box,.map-filter-panel-toggle');
-    discovery.forEach(el=>el.hidden=mode==='conditions');
+    discovery.forEach(el=>el.hidden=mode==='conditions'||mode==='forecast');
     const filterPanel=document.getElementById('mapFilterPanel');
     const searchResults=document.getElementById('mapSearchResults');
     if(mode==='conditions'){
@@ -817,9 +817,11 @@ function setupMapViewModes(){
       if(searchResults)searchResults.hidden=true;
       root.innerHTML='<section id="fishingConditionsHub"></section>';
       if(window.MFLConditions)window.MFLConditions.mountHub('fishingConditionsHub',kantoFishingSpots);
-    }else if(mode==='east'){
-      root.innerHTML=`${recentFishingSpotsHTML()}${eastChibaQuickHTML()}${renderKantoMap()}`;
-      setupKantoMap();
+    }else if(mode==='forecast'){
+      if(filterPanel)filterPanel.hidden=true;
+      if(searchResults)searchResults.hidden=true;
+      root.innerHTML='<section id="fishingForecastHub"></section>';
+      if(window.MFLForecastUI)window.MFLForecastUI.mountHub('fishingForecastHub',kantoFishingSpots,id=>showFishingSpot(id,{view:'forecast'}));
     }else{
       root.innerHTML=`${recentFishingSpotsHTML()}${renderKantoMap()}`;
       setupKantoMap();
@@ -1043,7 +1045,7 @@ function renderFishingMap(){
         <section class="map-view-switcher">
         <button class="active" data-map-view-mode="all">🗺️ 全エリア</button>
         <button data-map-view-mode="conditions">🌦️ コンディション</button>
-        <button data-map-view-mode="east">🌊 千葉東岸</button>
+        <button data-map-view-mode="forecast">🐟 釣果期待度</button>
       </section>
         <section class="fishing-map-hero">
         <div>
@@ -1635,9 +1637,10 @@ function openSeawallFullscreen(s){
 }
 
 
-function showFishingSpot(id){
+function showFishingSpot(id,options={}){
   const s=kantoFishingSpots.find(x=>x.id===id);
   if(!s)return;
+  const forecastOnly=options.view==='forecast';
 
   rememberFishingSpot(id);
 
@@ -1658,29 +1661,32 @@ function showFishingSpot(id){
         </div>
       </div>
 
-      <div class="fishing-spot-maininfo">
+      ${forecastOnly?'':`<div class="fishing-spot-maininfo">
         <div><span>初心者</span><strong>${stars(s.beginner||0)}</strong></div>
         <div><span>タックル</span><strong>${escapeHtml(s.tackle||'—')}</strong></div>
-      </div>
+      </div>`}
 
-      <section id="spotConditionsCard"></section>
-      ${window.MFLForecastUI?.supported?.has(s.id)?'<section id="spotForecastCard"></section>':''}
+      ${forecastOnly?'<section id="spotForecastSummary"></section><section id="spotForecastCard"></section>':`<section id="spotConditionsCard"></section>${window.MFLForecastUI?.supported?.has(s.id)?'<section id="spotForecastCard"></section>':''}`}
 
-      ${s.fish?`<section class="fishing-spot-section"><h4>🐟 狙える魚・傾向</h4><p>${escapeHtml(s.fish)}</p></section>`:''}
-      ${(s.styles&&s.styles.length)?`<section class="fishing-spot-section"><h4>🎣 釣り方</h4><div class="fishing-spot-tags">${s.styles.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div></section>`:''}
-      ${(s.facilities&&s.facilities.length)?`<section class="fishing-spot-section"><h4>🅿️ 設備</h4><div class="fishing-spot-tags">${s.facilities.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div></section>`:''}
-      ${s.address?`<section class="fishing-spot-section"><h4>📍 場所</h4><p>${escapeHtml(s.address)}</p></section>`:''}
-      ${s.gear?`<section class="fishing-spot-section"><h4>🧰 タックル目安</h4><p>${escapeHtml(s.gear)}</p></section>`:''}
-      ${s.note?`<section class="fishing-spot-section"><h4>⚠️ 注意・ポイント</h4><p>${escapeHtml(s.note)}</p></section>`:''}
-      ${s.verifyNote?`<section class="fishing-spot-section verification"><h4>🔎 MFL確認メモ</h4><p>${escapeHtml(s.verifyNote)}</p></section>`:''}
-      ${s.checked?`<div class="fishing-spot-checked">最終確認: ${escapeHtml(s.checked)}</div>`:''}
-      ${s.official?`<a class="fishing-spot-official" href="${s.official}" target="_blank" rel="noopener">公式情報を開く ↗</a>`:''}
+      ${!forecastOnly&&s.fish?`<section class="fishing-spot-section"><h4>🐟 狙える魚・傾向</h4><p>${escapeHtml(s.fish)}</p></section>`:''}
+      ${!forecastOnly&&s.styles?.length?`<section class="fishing-spot-section"><h4>🎣 釣り方</h4><div class="fishing-spot-tags">${s.styles.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div></section>`:''}
+      ${!forecastOnly&&s.facilities?.length?`<section class="fishing-spot-section"><h4>🅿️ 設備</h4><div class="fishing-spot-tags">${s.facilities.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div></section>`:''}
+      ${!forecastOnly&&s.address?`<section class="fishing-spot-section"><h4>📍 場所</h4><p>${escapeHtml(s.address)}</p></section>`:''}
+      ${!forecastOnly&&s.gear?`<section class="fishing-spot-section"><h4>🧰 タックル目安</h4><p>${escapeHtml(s.gear)}</p></section>`:''}
+      ${!forecastOnly&&s.note?`<section class="fishing-spot-section"><h4>⚠️ 注意・ポイント</h4><p>${escapeHtml(s.note)}</p></section>`:''}
+      ${!forecastOnly&&s.verifyNote?`<section class="fishing-spot-section verification"><h4>🔎 MFL確認メモ</h4><p>${escapeHtml(s.verifyNote)}</p></section>`:''}
+      ${!forecastOnly&&s.checked?`<div class="fishing-spot-checked">最終確認: ${escapeHtml(s.checked)}</div>`:''}
+      ${!forecastOnly&&s.official?`<a class="fishing-spot-official" href="${s.official}" target="_blank" rel="noopener">公式情報を開く ↗</a>`:''}
     </div>`;
 
   document.body.appendChild(overlay);
   const unlockBody=lockBodyScroll();
-  if(window.MFLConditions) window.MFLConditions.mountSpot('spotConditionsCard',s,kantoFishingSpots);
-  if(window.MFLForecastUI) window.MFLForecastUI.mount('spotForecastCard',s);
+  if(forecastOnly){
+    if(window.MFLForecastUI)window.MFLForecastUI.mountForecastView('spotForecastSummary','spotForecastCard',s);
+  }else{
+    if(window.MFLConditions)window.MFLConditions.mountSpot('spotConditionsCard',s,kantoFishingSpots);
+    if(window.MFLForecastUI)window.MFLForecastUI.mount('spotForecastCard',s);
+  }
 
   let closed=false;
   const close=(immediate=false)=>{
