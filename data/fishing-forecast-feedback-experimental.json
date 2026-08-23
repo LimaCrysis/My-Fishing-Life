@@ -1,0 +1,12 @@
+{
+  "version":"1.4.0-experimental",
+  "updated":"2026-08-23",
+  "note":"Experimental comparison input only. Not loaded by the production v1.3 forecast or UI. The FIELD TEST date is an experimental fixture date, not a newly verified public catch date.",
+  "definitions":{"feedbackTypes":["catch","bite","surfaceActivity","nuisanceFish"],"recentCatchDecayDays":[7,14,30],"unknownSpeciesRule":"species remains null and speciesConfirmed remains false"},
+  "recentCatchSignals":[],
+  "fieldFeedback":[
+    {"id":"kashima-field-2026-08-nuisance","spotId":"kashima","observedAt":"2026-08-23","dateBasis":"experimentalFixture","startHour":15,"endHour":19,"type":"nuisanceFish","outcome":"catch","species":"フグ","speciesConfirmed":true,"countApprox":6,"method":"ちょい投げ","modelSignals":{"bottom":0.5},"note":"本命魚の釣果としては扱わず、底付近の魚の反応を示す弱いシグナルに限定する。"},
+    {"id":"kashima-field-2026-08-bite","spotId":"kashima","observedAt":"2026-08-23","dateBasis":"experimentalFixture","startHour":15,"endHour":19,"type":"bite","species":null,"speciesConfirmed":false,"method":"ジグ","modelSignals":{"pelagic":0.5,"other":0.5},"note":"アタリのみ。釣果・魚種確定として扱わない。"},
+    {"id":"kashima-field-2026-08-surface","spotId":"kashima","observedAt":"2026-08-23","dateBasis":"experimentalFixture","startHour":17,"endHour":19,"type":"surfaceActivity","species":null,"speciesConfirmed":false,"method":null,"modelSignals":{"pelagic":0.25,"other":0.25},"note":"魚種不明のボイル・跳ね。特定魚種の根拠として扱わない。"}
+  ]
+}
