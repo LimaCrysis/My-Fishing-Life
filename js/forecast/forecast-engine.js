@@ -44,7 +44,7 @@
     if(!dominant)return{hour:feature.hour,score:null,rawScore:null,confidence:'low',recommended:false,reasons:['予測データなし'],models,feature,modelSource:null,debug:{hour:feature.hour,totalScore:null,level:null,modelScores:{},modifiers:{}}};
     const unsafe=feature.safety?.hardStop||feature.safety?.className==='stop',secondary=ranked[1],synergy=secondary?.rawScore>=55?4:secondary?.rawScore>=45?2:0,raw=unsafe?0:clamp(dominant.rawScore+synergy,0,100);let confidence=dominant.confidence;
     if(secondary&&confidenceRank[secondary.confidence]<confidenceRank[confidence]-1)confidence=['low','medium','high'][Math.max(0,confidenceRank[confidence]-1)];
-    const reasons=unsafe?userReasons('安全条件を優先して非推奨',[],dominant.reasons):dominant.reasons;
+    const reasons=unsafe?userReasons(feature.safety?.restriction?.reason||'安全条件を優先して非推奨',[],dominant.reasons):dominant.reasons;
     return{hour:feature.hour,score:scoreLevel(raw),rawScore:raw,confidence,recommended:!unsafe,reasons,dominantGroup:dominant.group,recommendedMethod:dominant.recommendedMethod,targetSpecies:dominant.species,models,feature,modelSource:dominant.modelSource,evidenceLastUpdated:dominant.evidence?.lastUpdated||null,debug:{hour:feature.hour,totalScore:raw,level:scoreLevel(raw),dominantModel:dominant.group,modelScores:Object.fromEntries(Object.entries(models).map(([group,item])=>[group,item.rawScore])),modifiers:{...dominant.modifiers,synergy,safety:unsafe?-dominant.rawScore:0},confidence,confidenceDetails:dominant.confidenceDebug,detailedReasons:dominant.detailedReasons,modelSource:dominant.modelSource}};
   }
   function buildPeakWindows(hours){

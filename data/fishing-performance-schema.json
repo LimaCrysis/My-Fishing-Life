@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mfl.local/schemas/fishing-performance-record-v1.json",
+  "title": "MFL地点別実績レコード",
+  "type": "object",
+  "required": ["spotId", "date", "species", "count", "sizeMin", "sizeMax", "waterTemp", "weather", "tide", "visitors", "timeRange", "method", "source", "sourceType", "sourceDate", "dataQuality"],
+  "properties": {
+    "recordType": {"enum": ["catch_summary", "effort_summary"]},
+    "spotId": {"type": "string", "minLength": 1},
+    "date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "species": {"type": ["string", "null"]},
+    "count": {"type": ["number", "null"], "minimum": 0},
+    "sizeMin": {"type": ["number", "null"], "minimum": 0},
+    "sizeMax": {"type": ["number", "null"], "minimum": 0},
+    "waterTemp": {"type": ["number", "null"]},
+    "weather": {"type": ["string", "null"]},
+    "tide": {"type": ["string", "null"]},
+    "visitors": {"type": ["number", "null"], "minimum": 0},
+    "timeRange": {
+      "anyOf": [
+        {"type": "null"},
+        {"type": "object", "required": ["start", "end"], "properties": {"start": {"type": ["string", "null"]}, "end": {"type": ["string", "null"]}}}
+      ]
+    },
+    "method": {"type": ["string", "null"]},
+    "outcome": {"enum": ["caught", "not_caught", "unknown"]},
+    "effortMinutes": {"type": ["number", "null"], "minimum": 0},
+    "conditions": {
+      "type": "object",
+      "properties": {
+        "windSpeed": {"type": ["number", "null"]},
+        "windDirection": {"type": ["string", "null"]},
+        "wave": {"type": ["number", "null"]},
+        "rain": {"type": ["number", "null"]},
+        "tidePhase": {"type": ["string", "null"]}
+      }
+    },
+    "source": {"type": "string", "minLength": 1},
+    "sourceType": {"enum": ["official", "licensed_external", "mfl_actual", "manual_reference"]},
+    "sourceDate": {"type": ["string", "null"]},
+    "dataQuality": {
+      "type": "object",
+      "required": ["level", "verified", "permission"],
+      "properties": {
+        "level": {"enum": ["low", "medium", "high"]},
+        "verified": {"type": "boolean"},
+        "permission": {"enum": ["allowed", "pending", "manual_only"]},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

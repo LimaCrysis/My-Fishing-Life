@@ -1,0 +1,29 @@
+{
+  "version":"1.0.0",
+  "species":{
+    "aji":{"canonical":"アジ","aliases":["アジ","マアジ"]},
+    "saba":{"canonical":"サバ","aliases":["サバ","マサバ","ゴマサバ"]},
+    "iwashi":{"canonical":"イワシ類","aliases":["イワシ","イワシ類","マイワシ","カタクチイワシ"]},
+    "kisu":{"canonical":"シロギス","aliases":["シロギス","キス"]},
+    "mahaze":{"canonical":"ハゼ","aliases":["ハゼ","マハゼ"]},
+    "seabass":{"canonical":"シーバス","aliases":["シーバス","スズキ","フッコ","セイゴ"]},
+    "kurodai":{"canonical":"クロダイ","aliases":["クロダイ","チヌ"]},
+    "hirame":{"canonical":"ヒラメ","aliases":["ヒラメ"]},
+    "magochi":{"canonical":"マゴチ","aliases":["マゴチ"]},
+    "mebaru":{"canonical":"メバル類","aliases":["メバル","メバル類","アカメバル","クロメバル","シロメバル"]},
+    "kasago":{"canonical":"カサゴ","aliases":["カサゴ","ガシラ"]},
+    "ainame":{"canonical":"アイナメ","aliases":["アイナメ","アブラコ"]},
+    "mejina":{"canonical":"メジナ","aliases":["メジナ","グレ"]},
+    "tachiuo":{"canonical":"タチウオ","aliases":["タチウオ"]},
+    "buri":{"canonical":"ブリ","aliases":["ブリ","ワカシ","イナダ","ワラサ"]},
+    "sawara":{"canonical":"サワラ","aliases":["サワラ","サゴシ"]},
+    "akakamasu":{"canonical":"アカカマス","aliases":["アカカマス","カマス"]},
+    "aoriika":{"canonical":"アオリイカ","aliases":["アオリイカ"]},
+    "kouika":{"canonical":"コウイカ","aliases":["コウイカ","スミイカ"]},
+    "madako":{"canonical":"マダコ","aliases":["マダコ","タコ"]},
+    "kawahagi":{"canonical":"カワハギ","aliases":["カワハギ"]},
+    "ishimochi":{"canonical":"シログチ","aliases":["シログチ","イシモチ"]},
+    "maanago":{"canonical":"マアナゴ","aliases":["マアナゴ","アナゴ"]},
+    "makogarei":{"canonical":"マコガレイ","aliases":["マコガレイ","カレイ"]}
+  }
+}

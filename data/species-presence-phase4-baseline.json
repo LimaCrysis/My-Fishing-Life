@@ -1,0 +1,6 @@
+{
+  "date":"2026-08-30","hour":15,"timeZone":"Asia/Tokyo","speciesCount":9,"evaluationCount":198,
+  "waterAvailable":117,"waterMissing":81,
+  "comparisonSummary":{"total":198,"comparable":138,"notComparable":60},
+  "mismatchCounts":{"existing_high_presence_low":0,"existing_low_presence_high":51,"season_water_conflict":0,"high_score_low_confidence":0,"missing_critical_environment":81,"water_temperature_outlier":0,"regional_mismatch":0}
+}

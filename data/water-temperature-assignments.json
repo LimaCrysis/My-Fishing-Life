@@ -1,0 +1,19 @@
+{
+  "version":"1.0.0",
+  "updated":"2026-08-30",
+  "sourceId":"noaa_oisst_v21_nrt",
+  "policy":"OISSTは0.25度日次解析格子。地点実測ではなく、海域代表のregional_observedとしてのみ利用する。閉鎖性の高い湾奥・港内・河口では適用しない。",
+  "freshnessHours":{"fresh":48,"usable":120,"stale":240},
+  "regions":{
+    "tokyo_bay_inner":{"enabled":false,"reason":"0.25度格子では東京湾奥・汽水・河口を分離できない"},
+    "tokyo_bay_central":{"enabled":false,"reason":"0.25度格子では港内・湾中央部を十分に表現できない"},
+    "tokyo_bay_mouth":{"enabled":true,"latitude":35.125,"longitude":139.875,"mappingQuality":"medium"},
+    "uchibo":{"enabled":true,"latitude":35.125,"longitude":139.875,"mappingQuality":"medium"},
+    "sotobo":{"enabled":true,"latitude":35.125,"longitude":140.125,"mappingQuality":"high"},
+    "kujukuri":{"enabled":true,"latitude":35.625,"longitude":140.625,"mappingQuality":"high"},
+    "kashimanada":{"enabled":true,"latitude":35.875,"longitude":140.875,"mappingQuality":"high"},
+    "ibaraki_north":{"enabled":true,"latitude":36.375,"longitude":140.875,"mappingQuality":"high"},
+    "miura_tokyo_bay":{"enabled":true,"latitude":35.125,"longitude":139.875,"mappingQuality":"medium","reason":"東京湾口の外海影響を受ける地域代表値。港内地点実測ではない"},
+    "sagami_bay":{"enabled":true,"latitude":35.125,"longitude":139.625,"mappingQuality":"high"}
+  }
+}

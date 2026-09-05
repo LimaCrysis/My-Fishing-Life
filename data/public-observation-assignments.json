@@ -1,0 +1,37 @@
+{
+  "version":"1.0.0",
+  "updated":"2026-08-30",
+  "policy":"距離だけでなく海域・地形・遮蔽度を確認する。気象観測は近隣陸上観測として扱い、海水温・波浪へ転用しない。",
+  "tideStations":{
+    "TK":{"name":"東京","latitude":35.65,"longitude":139.77},
+    "CB":{"name":"千葉港","latitude":35.57,"longitude":140.05},
+    "TT":{"name":"館山","latitude":34.98,"longitude":139.86},
+    "QS":{"name":"横浜","latitude":35.45,"longitude":139.65},
+    "D2":{"name":"鹿島","latitude":35.95,"longitude":140.70},
+    "D3":{"name":"大洗","latitude":36.31,"longitude":140.59}
+  },
+  "spots":{
+    "kemigawa_beach":{"latitude":35.62,"longitude":140.04,"tideStation":"CB","environment":"bay_inner","exposure":"sheltered"},
+    "urayasu_chidori":{"latitude":35.63,"longitude":139.91,"tideStation":"TK","environment":"bay_inner","exposure":"sheltered"},
+    "edogawa_hosuiro":{"latitude":35.68,"longitude":139.93,"tideStation":"TK","environment":"estuary","exposure":"sheltered"},
+    "ichihara":{"latitude":35.53,"longitude":140.05,"tideStation":"CB","environment":"bay","exposure":"sheltered"},
+    "kisarazu_uchiko":{"latitude":35.38,"longitude":139.91,"tideStation":"CB","environment":"harbor","exposure":"sheltered"},
+    "futtsu_area":{"latitude":35.31,"longitude":139.81,"tideStation":"CB","environment":"semi_open_coast","exposure":"moderate"},
+    "tateyama_sunset":{"latitude":35.00,"longitude":139.85,"tideStation":"TT","environment":"semi_open_coast","exposure":"moderate"},
+    "choshi-marina-coast":{"latitude":35.70,"longitude":140.83,"tideStation":"D2","environment":"open_coast","exposure":"exposed"},
+    "choshi-nagasaki-coast":{"latitude":35.69,"longitude":140.86,"tideStation":"D2","environment":"rocky_open_coast","exposure":"exposed"},
+    "asahi-ioka-coast":{"latitude":35.69,"longitude":140.72,"tideStation":"D2","environment":"surf","exposure":"exposed"},
+    "onjuku-coast":{"latitude":35.18,"longitude":140.36,"tideStation":"TT","environment":"surf","exposure":"exposed"},
+    "kamogawa-coast":{"latitude":35.10,"longitude":140.11,"tideStation":"TT","environment":"surf","exposure":"exposed"},
+    "kashima":{"latitude":35.95,"longitude":140.69,"tideStation":"D2","environment":"port_open_coast","exposure":"exposed"},
+    "kawarago":{"latitude":36.52,"longitude":140.64,"tideStation":"D3","environment":"surf","exposure":"exposed"},
+    "hiraiso":{"latitude":36.35,"longitude":140.62,"tideStation":"D3","environment":"rocky_open_coast","exposure":"exposed"},
+    "honmoku":{"latitude":35.42,"longitude":139.68,"tideStation":"QS","environment":"bay","exposure":"sheltered"},
+    "isogo":{"latitude":35.40,"longitude":139.64,"tideStation":"QS","environment":"bay","exposure":"sheltered"},
+    "daikoku":{"latitude":35.46,"longitude":139.68,"tideStation":"QS","environment":"bay","exposure":"moderate"},
+    "higashiogishima":{"latitude":35.50,"longitude":139.77,"tideStation":"TK","environment":"bay","exposure":"moderate"},
+    "umibetsuri":{"latitude":35.27,"longitude":139.69,"tideStation":"QS","environment":"bay_mouth","exposure":"moderate"},
+    "umikaze":{"latitude":35.28,"longitude":139.68,"tideStation":"QS","environment":"bay_mouth","exposure":"moderate"},
+    "aicle":{"latitude":35.32,"longitude":139.63,"tideStation":"QS","environment":"bay_mouth","exposure":"moderate"}
+  }
+}

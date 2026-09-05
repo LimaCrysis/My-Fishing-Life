@@ -1,0 +1,17 @@
+'use strict';
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),root=__dirname+'/..';global.window=global;
+vm.runInThisContext(fs.readFileSync(`${root}/js/forecast/species-presence-baseline.js`,'utf8'),{filename:'species-presence-baseline.js'});
+const regions=JSON.parse(fs.readFileSync(`${root}/data/marine-regions.json`)),profiles=JSON.parse(fs.readFileSync(`${root}/data/species-presence-profiles.json`)),samples=JSON.parse(fs.readFileSync(`${root}/data/public-environmental-samples.json`)),sources=JSON.parse(fs.readFileSync(`${root}/data/public-environmental-sources.json`));
+const evaluate=(overrides={})=>MFLSpeciesPresenceBaseline.evaluate({spotId:'ichihara',speciesId:'aji',date:'2026-08-20',environment:{waveHeight:.5,windSpeed:3,tidePhase:'rising'},observations:samples.observations,regions,profiles,sources,...overrides});
+const summerAji=evaluate();assert.ok(summerAji.score>=.75);assert.ok(summerAji.label.includes('期待できる'));assert.equal(summerAji.waterTemperature.quality,'regional');
+const winterKisu=evaluate({speciesId:'kisu',date:'2026-01-20'});assert.ok(winterKisu.score<.5);assert.notEqual(winterKisu.label,'かなり期待できる環境');
+const hotAji=evaluate({environment:{waterTemperature:34,waterTemperatureQuality:'observed',waveHeight:.5,windSpeed:3}});assert.ok(hotAji.scores.waterTempScore<=.1);assert.ok(hotAji.score<summerAji.score);
+const missing=evaluate({spotId:'umibetsuri',date:'2026-08-20',environment:{},observations:[]});assert.equal(missing.waterTemperature.quality,'missing');assert.equal(missing.scores.waterTempScore,null);assert.ok(Number.isFinite(missing.score));assert.ok(missing.dataConfidence.missing.includes('waterTemperature'));
+const climatology=evaluate({date:'2026-01-20',observations:samples.observations});assert.equal(climatology.waterTemperature.quality,'climatology');
+const wrongRegion=evaluate({spotId:'edogawa_hosuiro',speciesId:'hirame'});assert.ok(wrongRegion.scores.regionScore<=.12);assert.ok(wrongRegion.score<summerAji.score);
+assert.equal(Object.keys(regions.spots).length,22);assert.ok(Object.values(regions.spots).every(item=>regions.regions[item.marineRegion]));assert.equal(Object.keys(profiles.species).length,24);
+assert.equal(MFLSpeciesPresenceBaseline.FORECAST_WEIGHT,0);assert.equal(sources.policy.predictionWeight,0);assert.equal(sources.policy.productionCollection,false);assert.equal(samples.production,false);
+const existing={hours:[{hour:12,score:3,recommended:true}],confidence:'medium'},snapshot=JSON.stringify(existing),comparison=MFLSpeciesPresenceBaseline.compare(existing,summerAji);assert.equal(JSON.stringify(existing),snapshot);assert.equal(comparison.integration.connected,false);assert.equal(comparison.integration.forecastWeight,0);assert.equal(comparison.integration.historicalPerformanceWeight,0);
+const engine=fs.readFileSync(`${root}/js/forecast/forecast-engine.js`,'utf8'),features=fs.readFileSync(`${root}/js/forecast/forecast-features.js`,'utf8'),restrictions=fs.readFileSync(`${root}/js/forecast/forecast-restrictions.js`,'utf8'),forecastData=fs.readFileSync(`${root}/js/forecast/forecast-data.js`,'utf8');assert.ok(!engine.includes('speciesPresenceBaseline'));assert.ok(!features.includes('speciesPresenceBaseline'));assert.ok(!restrictions.includes('speciesPresenceBaseline'));assert.ok(!forecastData.includes('species-presence'));
+assert.ok(summerAji.disclaimer.includes('釣果確率ではない'));assert.ok(summerAji.dataConfidence.meaning.includes('釣れる確率ではない'));
+process.stdout.write(JSON.stringify({ok:true,summerAji,winterKisu,hotAji,missing,wrongRegion},null,2));

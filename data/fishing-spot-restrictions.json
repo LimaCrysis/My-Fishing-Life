@@ -1,0 +1,94 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-08-30",
+  "holidayDates": [
+    "2026-01-01", "2026-01-12", "2026-02-11", "2026-02-23", "2026-03-20", "2026-04-29", "2026-05-03", "2026-05-04", "2026-05-05", "2026-05-06", "2026-07-20", "2026-08-11", "2026-09-21", "2026-09-22", "2026-09-23", "2026-10-12", "2026-11-03", "2026-11-23",
+    "2027-01-01", "2027-01-11", "2027-02-11", "2027-02-23", "2027-03-21", "2027-03-22", "2027-04-29", "2027-05-03", "2027-05-04", "2027-05-05", "2027-07-19", "2027-08-11", "2027-09-20", "2027-09-23", "2027-10-11", "2027-11-03", "2027-11-23"
+  ],
+  "spots": {
+    "ichihara": [
+      {
+        "id": "ichihara-summer-hours",
+        "type": "time_window",
+        "scope": "whole_spot",
+        "months": [4, 5, 6, 7, 8, 9, 10],
+        "blocked": [{ "start": "18:00", "end": "06:00" }],
+        "label": "営業時間外",
+        "reason": "4〜10月は6:00〜19:00（桟橋利用18:30まで）",
+        "source": "https://ichihara-umizuri.com/guide/",
+        "checked": "2026-08-30"
+      },
+      {
+        "id": "ichihara-winter-hours",
+        "type": "seasonal",
+        "scope": "whole_spot",
+        "months": [11, 12, 1, 2, 3],
+        "blocked": [{ "start": "16:00", "end": "07:00" }],
+        "label": "冬季営業時間外",
+        "reason": "11〜3月は7:00〜17:00（桟橋利用16:30まで）",
+        "source": "https://ichihara-umizuri.com/guide/",
+        "checked": "2026-08-30"
+      }
+    ],
+    "umikaze": [
+      {
+        "id": "umikaze-weekend-holiday",
+        "type": "full_day",
+        "scope": "whole_spot",
+        "daysOfWeek": [0, 6],
+        "publicHolidays": true,
+        "label": "本日は釣り禁止",
+        "reason": "うみかぜ公園の釣りは平日のみ。土日祝祭日は釣り禁止",
+        "source": "https://www.city.yokosuka.kanagawa.jp/5820/minato/amenity_kouen/umikaze/index.html",
+        "checked": "2026-08-30"
+      },
+      {
+        "id": "umikaze-observation-decks",
+        "type": "partial_area",
+        "scope": "partial_area",
+        "areas": ["展望台4か所"],
+        "label": "一部釣り禁止",
+        "reason": "展望台4か所は終日釣り禁止",
+        "source": "https://www.city.yokosuka.kanagawa.jp/5820/minato/amenity_kouen/umikaze/index.html",
+        "checked": "2026-08-30"
+      }
+    ],
+    "kemigawa_beach": [
+      {
+        "id": "kemigawa-little-tern-area",
+        "type": "seasonal",
+        "scope": "partial_area",
+        "months": [4, 5, 6, 7, 8, 9],
+        "areas": ["コアジサシ保護区域（ロープ内）"],
+        "label": "季節保護区域あり",
+        "reason": "4〜9月は繁殖状況を調査。保護区域のロープ内は立入禁止",
+        "source": "https://www.city.chiba.jp/kankyo/kankyohozen/hozen/shizen/sizen_koajisashi.html",
+        "checked": "2026-08-30"
+      }
+    ],
+    "tateyama_sunset": [
+      {
+        "id": "tateyama-prohibited-sides",
+        "type": "partial_area",
+        "scope": "partial_area",
+        "areas": ["歩道側", "桟橋先端部", "桟橋下"],
+        "label": "釣り禁止区画あり",
+        "reason": "歩道側・先端部・桟橋を降りての釣りは禁止",
+        "source": "https://www.city.tateyama.chiba.jp/minato/page100352.html",
+        "checked": "2026-08-30"
+      }
+    ],
+    "kashima": [
+      {
+        "id": "kashima-port-outside-park",
+        "type": "partial_area",
+        "scope": "partial_area",
+        "areas": ["魚釣園以外の鹿島港港湾施設"],
+        "label": "周辺港湾は釣り禁止",
+        "reason": "鹿島港は魚釣園以外釣り禁止。防波堤・護岸・岸壁等の港湾施設へ立ち入らない",
+        "source": "https://www.pref.ibaraki.jp/doboku/kako/tsuri.html",
+        "checked": "2026-08-30"
+      }
+    ]
+  }
+}

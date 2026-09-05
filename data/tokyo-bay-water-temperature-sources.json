@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-08-30",
+  "policy": "閲覧可能であることと機械・商用利用可能であることを分離する。採用条件が明確になるまで値は取得せず、東京湾9地点はmissingを維持する。",
+  "depthPolicy": {
+    "preferred": ["surface", "subsurface"],
+    "rejectedAsSurfaceSubstitute": ["bottom", "unknown"],
+    "classes": {"surface": "0-2m", "subsurface": ">2-10m", "bottom": ">10mまたは底層明記", "unknown": "深度不明"}
+  },
+  "sources": {
+    "mlit_tbeic_realtime": {
+      "provider": "国土交通省関東地方整備局 / 東京湾環境情報センター",
+      "url": "https://www.tbeic.go.jp/MonitoringPost/",
+      "format": "HTML表示・サイト内ダウンロード",
+      "stations": ["浦安沖", "検見川沖", "川崎人工島", "千葉港口第一号灯標", "中ノ瀬航路", "金田湾", "富浦湾"],
+      "depth": "上層・中層・下層（観測深度付き）",
+      "frequency": "連続観測・速報値",
+      "license": "サイト利用規約で商用目的の利用および転用を禁止",
+      "automation": "disabled",
+      "decision": "rejected",
+      "reason": "MFLでの保存・加工・派生評価への自動利用を許容する明示条件がなく、商用利用・転用禁止がある。"
+    },
+    "mlit_tokyo_bay_corrected_csv": {
+      "provider": "国土交通省関東地方整備局東京湾口航路事務所",
+      "url": "https://www.pa.ktr.mlit.go.jp/wankou/overview/monitoring/index4.htm",
+      "format": "月別CSV",
+      "stations": ["浦安沖", "検見川沖", "川崎人工島", "千葉港口第一号灯標"],
+      "depth": "層番号・観測深度を収録",
+      "frequency": "補正後に月単位公開",
+      "history": "2010年度以降",
+      "license": "個別注意事項で、引用・研究等は出典明記、利用目的・内容の窓口報告を要求",
+      "automation": "disabled_pending_permission",
+      "decision": "permission_required",
+      "reason": "一般的な公共データ規約より具体的な個別条件があり、無申請の継続自動取得・商用派生利用を明示許可していない。"
+    },
+    "chiba_public_water_quality_csv": {
+      "provider": "千葉県環境生活部水質保全課",
+      "url": "https://www.pref.chiba.lg.jp/suiho/kasentou/koukyouyousui/data/ichiran-kaiiki.html",
+      "format": "年度別PDF・CSV",
+      "stations": ["東京湾内湾", "東京湾内房"],
+      "depth": "個別CSV確認が必要",
+      "frequency": "年度単位",
+      "license": "千葉県ホームページ利用規約の対象範囲と個別CSVの権利表示を確認する必要あり",
+      "automation": "disabled_pending_dataset_review",
+      "decision": "reference_only",
+      "reason": "現在値には古く、観測深度・地点対応・個別データ条件の確認前に自動割当しない。将来の平年値候補。"
+    },
+    "chiba_fisheries_tokyo_bay_system": {
+      "provider": "千葉県水産総合研究センター",
+      "url": "https://wwwp.pref.chiba.lg.jp/pbcbsuishi/cbtkinfo/",
+      "format": "Web表示",
+      "frequency": "観測更新あり",
+      "license": "機械取得・保存・商用派生利用の明示条件を確認できず",
+      "automation": "disabled",
+      "decision": "permission_required",
+      "reason": "正式API/CSVと明確な二次利用条件を確認できない。"
+    },
+    "kanagawa_fisheries_water_temperature": {
+      "provider": "神奈川県水産技術センター",
+      "url": "https://www.pref.kanagawa.jp/docs/mx7/",
+      "format": "HTML・PDF等",
+      "frequency": "資料ごと",
+      "license": "機械取得対象データの個別条件が不明",
+      "automation": "disabled",
+      "decision": "reference_only",
+      "reason": "横浜港周辺へ直接対応する安定した機械可読観測と利用条件を確認できない。"
+    },
+    "jodc_jdoss_tokyo_bay": {
+      "provider": "日本海洋データセンター",
+      "url": "https://www.jodc.go.jp/jodcweb/JDOSS/",
+      "format": "検索・配布",
+      "license": "無断で複製し第三者へ提供することを制限",
+      "automation": "disabled",
+      "decision": "rejected",
+      "reason": "MFLの継続保存・派生利用には個別確認が必要。"
+    },
+    "mics_umishiru_api": {
+      "provider": "海上保安庁",
+      "url": "https://www.msil.go.jp/",
+      "format": "API（サブスクリプションキー）",
+      "license": "API利用条件・キー発行条件に従う",
+      "automation": "disabled_no_production_key",
+      "decision": "conditional",
+      "reason": "本番キーなし。試用キーを埋め込まず、正式契約後に再評価する。"
+    }
+  },
+  "spotAssignments": {
+    "kemigawa_beach": {"status":"missing","candidate":"検見川沖","reason":"候補観測は適合性が高いが利用条件上、自動転用不可"},
+    "urayasu_chidori": {"status":"missing","candidate":"浦安沖","reason":"候補観測は適合性が高いが利用条件上、自動転用不可"},
+    "edogawa_hosuiro": {"status":"missing","candidate":null,"reason":"汽水・河口専用の機械利用可能な公的水温を確認できず"},
+    "ichihara": {"status":"missing","candidate":"千葉港口第一号灯標","reason":"港内差と利用条件の確認が必要"},
+    "kisarazu_uchiko": {"status":"missing","candidate":null,"reason":"木更津港内へ安全に対応する観測なし"},
+    "honmoku": {"status":"missing","candidate":"中ノ瀬航路","reason":"距離・横浜港内差に加え利用条件上、自動転用不可"},
+    "isogo": {"status":"missing","candidate":"中ノ瀬航路","reason":"横浜港南部の局地差に加え利用条件上、自動転用不可"},
+    "daikoku": {"status":"missing","candidate":"川崎人工島","reason":"京浜港内差に加え利用条件上、自動転用不可"},
+    "higashiogishima": {"status":"missing","candidate":"川崎人工島","reason":"候補観測は近いが利用条件上、自動転用不可"}
+  }
+}

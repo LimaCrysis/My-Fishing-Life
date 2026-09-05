@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "records": [
+    {
+      "recordType": "effort_summary",
+      "spotId": "example_spot",
+      "date": "2026-01-01",
+      "species": null,
+      "count": 0,
+      "sizeMin": null,
+      "sizeMax": null,
+      "waterTemp": null,
+      "weather": null,
+      "tide": null,
+      "visitors": null,
+      "timeRange": {"start": null, "end": null},
+      "method": null,
+      "outcome": "not_caught",
+      "effortMinutes": null,
+      "conditions": {"windSpeed": null, "windDirection": null, "wave": null, "rain": null, "tidePhase": null},
+      "source": "MFL入力例（実績データではありません）",
+      "sourceType": "mfl_actual",
+      "sourceDate": null,
+      "dataQuality": {"level": "low", "verified": false, "permission": "allowed", "notes": ["ボウズもeffort_summaryとして保存する"]}
+    }
+  ]
+}

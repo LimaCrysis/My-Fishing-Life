@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-08-30",
+  "relationship": "spot -> marineRegion -> publicEnvironmentalData",
+  "regions": {
+    "tokyo_bay_inner": {"name":"東京湾奥","type":"enclosed_bay","habitats":["bay_inner","brackish","mud_sand"],"representativeTideStations":["CB","TK"]},
+    "tokyo_bay_central": {"name":"東京湾中央部","type":"enclosed_bay","habitats":["bay","pier","mud_sand"],"representativeTideStations":["CB","QS"]},
+    "tokyo_bay_mouth": {"name":"東京湾口","type":"bay_mouth","habitats":["bay_mouth","rocky","current"],"representativeTideStations":["TT","QS"]},
+    "uchibo": {"name":"内房","type":"semi_open_coast","habitats":["surf","rocky","sand"],"representativeTideStations":["TT","CB"]},
+    "sotobo": {"name":"外房","type":"open_coast","habitats":["surf","rocky","open_coast"],"representativeTideStations":["TT"]},
+    "kujukuri": {"name":"九十九里・銚子南部","type":"open_coast","habitats":["surf","sand","open_coast"],"representativeTideStations":["D2"]},
+    "kashimanada": {"name":"鹿島灘","type":"open_coast","habitats":["surf","sand","open_coast"],"representativeTideStations":["D2","D3"]},
+    "ibaraki_north": {"name":"茨城県北沿岸","type":"open_coast","habitats":["surf","rocky","open_coast"],"representativeTideStations":["D3"]},
+    "miura_tokyo_bay": {"name":"三浦半島東京湾側","type":"bay_mouth","habitats":["bay_mouth","rocky","pier","current"],"representativeTideStations":["QS"]},
+    "sagami_bay": {"name":"相模湾・三浦南西岸","type":"open_bay","habitats":["surf","rocky","open_coast"],"representativeTideStations":["TT"]}
+  },
+  "spots": {
+    "kemigawa_beach":{"marineRegion":"tokyo_bay_inner","matchQuality":"high","habitatOverrides":["bay","surf","sandyBottom","breakwater"]},
+    "urayasu_chidori":{"marineRegion":"tokyo_bay_inner","matchQuality":"high","habitatOverrides":["bay","port","breakwater","mud_sand"]},
+    "edogawa_hosuiro":{"marineRegion":"tokyo_bay_inner","matchQuality":"high","habitatOverrides":["estuary","brackish","mud_sand"]},
+    "ichihara":{"marineRegion":"tokyo_bay_central","matchQuality":"high","habitatOverrides":["bay","port","pier","breakwater","mud_sand"]},
+    "kisarazu_uchiko":{"marineRegion":"tokyo_bay_central","matchQuality":"high","habitatOverrides":["bay","port","breakwater","mud_sand"]},
+    "futtsu_area":{"marineRegion":"uchibo","matchQuality":"medium","habitatOverrides":["bay","surf","sandyBottom","weedBed"]},
+    "tateyama_sunset":{"marineRegion":"uchibo","matchQuality":"high","habitatOverrides":["bay","breakwater","rockyBottom","sandyBottom","weedBed"]},
+    "choshi-marina-coast":{"marineRegion":"kujukuri","matchQuality":"medium","habitatOverrides":["openOcean","port","breakwater","rockyBottom"]},
+    "choshi-nagasaki-coast":{"marineRegion":"kujukuri","matchQuality":"medium","habitatOverrides":["openOcean","rock","rockyBottom","breakwater"]},
+    "asahi-ioka-coast":{"marineRegion":"kujukuri","matchQuality":"high","habitatOverrides":["openOcean","surf","sandyBottom"]},
+    "onjuku-coast":{"marineRegion":"sotobo","matchQuality":"high","habitatOverrides":["openOcean","surf","sandyBottom","rock"]},
+    "kamogawa-coast":{"marineRegion":"sotobo","matchQuality":"high","habitatOverrides":["openOcean","surf","sandyBottom","rock"]},
+    "kashima":{"marineRegion":"kashimanada","matchQuality":"high","habitatOverrides":["openOcean","port","breakwater","sandyBottom"]},
+    "kawarago":{"marineRegion":"ibaraki_north","matchQuality":"high","habitatOverrides":["openOcean","surf","sandyBottom","breakwater"]},
+    "hiraiso":{"marineRegion":"ibaraki_north","matchQuality":"high","habitatOverrides":["openOcean","rock","rockyBottom","weedBed"]},
+    "honmoku":{"marineRegion":"tokyo_bay_central","matchQuality":"high","habitatOverrides":["bay","port","pier","breakwater","mud_sand"]},
+    "isogo":{"marineRegion":"tokyo_bay_central","matchQuality":"high","habitatOverrides":["bay","port","pier","breakwater","mud_sand"]},
+    "daikoku":{"marineRegion":"tokyo_bay_central","matchQuality":"high","habitatOverrides":["bay","port","pier","breakwater","current"]},
+    "higashiogishima":{"marineRegion":"tokyo_bay_central","matchQuality":"high","habitatOverrides":["bay","port","breakwater","rockyBottom"]},
+    "umibetsuri":{"marineRegion":"miura_tokyo_bay","matchQuality":"high","habitatOverrides":["bay_mouth","pier","breakwater","rockyBottom","current"]},
+    "umikaze":{"marineRegion":"miura_tokyo_bay","matchQuality":"high","habitatOverrides":["bay_mouth","breakwater","rockyBottom","sandyBottom","current"]},
+    "aicle":{"marineRegion":"miura_tokyo_bay","matchQuality":"high","habitatOverrides":["bay_mouth","port","breakwater","rockyBottom","current"]}
+  }
+}

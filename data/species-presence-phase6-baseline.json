@@ -1,0 +1,4901 @@
+{
+  "schemaVersion": "1.0.0",
+  "date": "2026-08-30",
+  "hour": 15,
+  "timeZone": "Asia/Tokyo",
+  "confidence": {
+    "before": {
+      "high": 248,
+      "medium": 280,
+      "low": 0
+    },
+    "after": {
+      "high": 78,
+      "medium": 428,
+      "low": 22
+    },
+    "speciesProfile": {
+      "high": 132,
+      "medium": 374,
+      "low": 22
+    },
+    "environmentData": {
+      "high": 288,
+      "medium": 24,
+      "low": 216
+    },
+    "spatialMatch": {
+      "high": 456,
+      "medium": 72,
+      "low": 0
+    },
+    "temporalFreshness": {
+      "high": 312,
+      "medium": 0,
+      "low": 216
+    },
+    "matrix": {
+      "high": {
+        "high": 40,
+        "medium": 265,
+        "low": 0
+      },
+      "medium": {
+        "high": 11,
+        "medium": 61,
+        "low": 0
+      },
+      "low": {
+        "high": 27,
+        "medium": 102,
+        "low": 22
+      }
+    }
+  },
+  "scoreDistribution": {
+    "histogram": [
+      {
+        "bin": "0.0-0.1",
+        "count": 0
+      },
+      {
+        "bin": "0.1-0.2",
+        "count": 1
+      },
+      {
+        "bin": "0.2-0.3",
+        "count": 20
+      },
+      {
+        "bin": "0.3-0.4",
+        "count": 35
+      },
+      {
+        "bin": "0.4-0.5",
+        "count": 98
+      },
+      {
+        "bin": "0.5-0.6",
+        "count": 42
+      },
+      {
+        "bin": "0.6-0.7",
+        "count": 39
+      },
+      {
+        "bin": "0.7-0.8",
+        "count": 20
+      },
+      {
+        "bin": "0.8-0.9",
+        "count": 78
+      },
+      {
+        "bin": "0.9-1.0",
+        "count": 195
+      }
+    ],
+    "overall": {
+      "count": 528,
+      "mean": 0.717,
+      "median": 0.845,
+      "min": 0.197,
+      "max": 0.975,
+      "standardDeviation": 0.239,
+      "range": 0.778
+    },
+    "bySpecies": {
+      "aji": {
+        "count": 22,
+        "mean": 0.922,
+        "median": 0.936,
+        "min": 0.65,
+        "max": 0.975,
+        "standardDeviation": 0.067,
+        "range": 0.325
+      },
+      "saba": {
+        "count": 22,
+        "mean": 0.843,
+        "median": 0.878,
+        "min": 0.45,
+        "max": 0.967,
+        "standardDeviation": 0.163,
+        "range": 0.517
+      },
+      "iwashi": {
+        "count": 22,
+        "mean": 0.907,
+        "median": 0.913,
+        "min": 0.65,
+        "max": 0.967,
+        "standardDeviation": 0.069,
+        "range": 0.317
+      },
+      "kisu": {
+        "count": 22,
+        "mean": 0.876,
+        "median": 0.945,
+        "min": 0.65,
+        "max": 0.967,
+        "standardDeviation": 0.123,
+        "range": 0.317
+      },
+      "mahaze": {
+        "count": 22,
+        "mean": 0.649,
+        "median": 0.45,
+        "min": 0.45,
+        "max": 0.967,
+        "standardDeviation": 0.24,
+        "range": 0.517
+      },
+      "seabass": {
+        "count": 22,
+        "mean": 0.872,
+        "median": 0.871,
+        "min": 0.845,
+        "max": 0.893,
+        "standardDeviation": 0.011,
+        "range": 0.048
+      },
+      "kurodai": {
+        "count": 22,
+        "mean": 0.946,
+        "median": 0.967,
+        "min": 0.65,
+        "max": 0.975,
+        "standardDeviation": 0.066,
+        "range": 0.325
+      },
+      "hirame": {
+        "count": 22,
+        "mean": 0.46,
+        "median": 0.376,
+        "min": 0.307,
+        "max": 0.667,
+        "standardDeviation": 0.118,
+        "range": 0.36
+      },
+      "magochi": {
+        "count": 22,
+        "mean": 0.811,
+        "median": 0.936,
+        "min": 0.45,
+        "max": 0.975,
+        "standardDeviation": 0.188,
+        "range": 0.525
+      },
+      "mebaru": {
+        "count": 22,
+        "mean": 0.477,
+        "median": 0.467,
+        "min": 0.242,
+        "max": 0.568,
+        "standardDeviation": 0.088,
+        "range": 0.326
+      },
+      "kasago": {
+        "count": 22,
+        "mean": 0.636,
+        "median": 0.652,
+        "min": 0.435,
+        "max": 0.71,
+        "standardDeviation": 0.071,
+        "range": 0.275
+      },
+      "ainame": {
+        "count": 22,
+        "mean": 0.346,
+        "median": 0.412,
+        "min": 0.24,
+        "max": 0.451,
+        "standardDeviation": 0.097,
+        "range": 0.211
+      },
+      "mejina": {
+        "count": 22,
+        "mean": 0.57,
+        "median": 0.686,
+        "min": 0.376,
+        "max": 0.778,
+        "standardDeviation": 0.167,
+        "range": 0.402
+      },
+      "tachiuo": {
+        "count": 22,
+        "mean": 0.887,
+        "median": 0.962,
+        "min": 0.45,
+        "max": 0.975,
+        "standardDeviation": 0.174,
+        "range": 0.525
+      },
+      "buri": {
+        "count": 22,
+        "mean": 0.731,
+        "median": 0.927,
+        "min": 0.45,
+        "max": 0.966,
+        "standardDeviation": 0.242,
+        "range": 0.516
+      },
+      "sawara": {
+        "count": 22,
+        "mean": 0.809,
+        "median": 0.853,
+        "min": 0.45,
+        "max": 0.891,
+        "standardDeviation": 0.144,
+        "range": 0.441
+      },
+      "akakamasu": {
+        "count": 22,
+        "mean": 0.631,
+        "median": 0.45,
+        "min": 0.45,
+        "max": 0.901,
+        "standardDeviation": 0.204,
+        "range": 0.451
+      },
+      "aoriika": {
+        "count": 22,
+        "mean": 0.554,
+        "median": 0.45,
+        "min": 0.376,
+        "max": 0.778,
+        "standardDeviation": 0.181,
+        "range": 0.402
+      },
+      "kouika": {
+        "count": 22,
+        "mean": 0.464,
+        "median": 0.518,
+        "min": 0.29,
+        "max": 0.568,
+        "standardDeviation": 0.113,
+        "range": 0.278
+      },
+      "madako": {
+        "count": 22,
+        "mean": 0.929,
+        "median": 0.948,
+        "min": 0.65,
+        "max": 0.975,
+        "standardDeviation": 0.067,
+        "range": 0.325
+      },
+      "kawahagi": {
+        "count": 22,
+        "mean": 0.819,
+        "median": 0.954,
+        "min": 0.45,
+        "max": 0.975,
+        "standardDeviation": 0.226,
+        "range": 0.525
+      },
+      "ishimochi": {
+        "count": 22,
+        "mean": 0.898,
+        "median": 0.966,
+        "min": 0.45,
+        "max": 0.975,
+        "standardDeviation": 0.156,
+        "range": 0.525
+      },
+      "maanago": {
+        "count": 22,
+        "mean": 0.752,
+        "median": 0.861,
+        "min": 0.45,
+        "max": 0.967,
+        "standardDeviation": 0.232,
+        "range": 0.517
+      },
+      "makogarei": {
+        "count": 22,
+        "mean": 0.426,
+        "median": 0.443,
+        "min": 0.197,
+        "max": 0.568,
+        "standardDeviation": 0.143,
+        "range": 0.371
+      }
+    },
+    "bySpot": {
+      "kemigawa_beach": {
+        "count": 24,
+        "mean": 0.639,
+        "median": 0.557,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.248,
+        "range": 0.727
+      },
+      "urayasu_chidori": {
+        "count": 24,
+        "mean": 0.644,
+        "median": 0.568,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.251,
+        "range": 0.727
+      },
+      "edogawa_hosuiro": {
+        "count": 24,
+        "mean": 0.573,
+        "median": 0.45,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.222,
+        "range": 0.727
+      },
+      "ichihara": {
+        "count": 24,
+        "mean": 0.746,
+        "median": 0.906,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.252,
+        "range": 0.727
+      },
+      "kisarazu_uchiko": {
+        "count": 24,
+        "mean": 0.745,
+        "median": 0.906,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.251,
+        "range": 0.727
+      },
+      "futtsu_area": {
+        "count": 24,
+        "mean": 0.747,
+        "median": 0.845,
+        "min": 0.412,
+        "max": 0.975,
+        "standardDeviation": 0.193,
+        "range": 0.563
+      },
+      "tateyama_sunset": {
+        "count": 24,
+        "mean": 0.78,
+        "median": 0.875,
+        "min": 0.45,
+        "max": 0.975,
+        "standardDeviation": 0.193,
+        "range": 0.525
+      },
+      "choshi-marina-coast": {
+        "count": 24,
+        "mean": 0.73,
+        "median": 0.831,
+        "min": 0.205,
+        "max": 0.975,
+        "standardDeviation": 0.235,
+        "range": 0.77
+      },
+      "choshi-nagasaki-coast": {
+        "count": 24,
+        "mean": 0.726,
+        "median": 0.827,
+        "min": 0.205,
+        "max": 0.975,
+        "standardDeviation": 0.23,
+        "range": 0.77
+      },
+      "asahi-ioka-coast": {
+        "count": 24,
+        "mean": 0.681,
+        "median": 0.85,
+        "min": 0.197,
+        "max": 0.951,
+        "standardDeviation": 0.259,
+        "range": 0.754
+      },
+      "onjuku-coast": {
+        "count": 24,
+        "mean": 0.706,
+        "median": 0.847,
+        "min": 0.205,
+        "max": 0.959,
+        "standardDeviation": 0.236,
+        "range": 0.754
+      },
+      "kamogawa-coast": {
+        "count": 24,
+        "mean": 0.706,
+        "median": 0.847,
+        "min": 0.205,
+        "max": 0.959,
+        "standardDeviation": 0.236,
+        "range": 0.754
+      },
+      "kashima": {
+        "count": 24,
+        "mean": 0.724,
+        "median": 0.811,
+        "min": 0.349,
+        "max": 0.975,
+        "standardDeviation": 0.236,
+        "range": 0.626
+      },
+      "kawarago": {
+        "count": 24,
+        "mean": 0.722,
+        "median": 0.811,
+        "min": 0.362,
+        "max": 0.975,
+        "standardDeviation": 0.236,
+        "range": 0.613
+      },
+      "hiraiso": {
+        "count": 24,
+        "mean": 0.674,
+        "median": 0.65,
+        "min": 0.25,
+        "max": 0.959,
+        "standardDeviation": 0.221,
+        "range": 0.709
+      },
+      "honmoku": {
+        "count": 24,
+        "mean": 0.746,
+        "median": 0.906,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.252,
+        "range": 0.727
+      },
+      "isogo": {
+        "count": 24,
+        "mean": 0.746,
+        "median": 0.906,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.252,
+        "range": 0.727
+      },
+      "daikoku": {
+        "count": 24,
+        "mean": 0.743,
+        "median": 0.891,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.25,
+        "range": 0.727
+      },
+      "higashiogishima": {
+        "count": 24,
+        "mean": 0.743,
+        "median": 0.891,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.249,
+        "range": 0.727
+      },
+      "umibetsuri": {
+        "count": 24,
+        "mean": 0.742,
+        "median": 0.857,
+        "min": 0.307,
+        "max": 0.966,
+        "standardDeviation": 0.211,
+        "range": 0.659
+      },
+      "umikaze": {
+        "count": 24,
+        "mean": 0.768,
+        "median": 0.875,
+        "min": 0.307,
+        "max": 0.966,
+        "standardDeviation": 0.213,
+        "range": 0.659
+      },
+      "aicle": {
+        "count": 24,
+        "mean": 0.751,
+        "median": 0.869,
+        "min": 0.307,
+        "max": 0.975,
+        "standardDeviation": 0.21,
+        "range": 0.668
+      }
+    },
+    "saturation": {
+      "gte090": 195,
+      "gte095": 115,
+      "gte099": 0,
+      "equal045": 65,
+      "equal065": 17
+    }
+  },
+  "caps": {
+    "marineRegionApplicable": 117,
+    "habitatApplicable": 56,
+    "bothApplicable": 31,
+    "totalEffective": 82,
+    "marineRegionEffective": 65,
+    "habitatEffective": 35,
+    "bothEffective": 18,
+    "labelChanged": 82,
+    "averageReduction": 0.175,
+    "maximumReduction": 0.279,
+    "top": [
+      {
+        "spotId": "futtsu_area",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "match",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "tateyama_sunset",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "match",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "choshi-marina-coast",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "choshi-nagasaki-coast",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "onjuku-coast",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "kamogawa-coast",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "kashima",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "kashima",
+        "speciesId": "kawahagi",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "match",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "kawarago",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "kawarago",
+        "speciesId": "kawahagi",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "match",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "hiraiso",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "hiraiso",
+        "speciesId": "kawahagi",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "match",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "umibetsuri",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "umikaze",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "aicle",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.729,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.279,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "asahi-ioka-coast",
+        "speciesId": "mahaze",
+        "rawPresenceScore": 0.721,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.271,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "onjuku-coast",
+        "speciesId": "ishimochi",
+        "rawPresenceScore": 0.72,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "match",
+        "marineRegionMatch": false,
+        "reduction": 0.27,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "kamogawa-coast",
+        "speciesId": "ishimochi",
+        "rawPresenceScore": 0.72,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "match",
+        "marineRegionMatch": false,
+        "reduction": 0.27,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "kawarago",
+        "speciesId": "maanago",
+        "rawPresenceScore": 0.705,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "match",
+        "marineRegionMatch": false,
+        "reduction": 0.255,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      },
+      {
+        "spotId": "hiraiso",
+        "speciesId": "maanago",
+        "rawPresenceScore": 0.705,
+        "finalPresenceScore": 0.45,
+        "capApplied": true,
+        "capType": [
+          "marine_region",
+          "habitat"
+        ],
+        "capValue": 0.45,
+        "habitatMatch": "mismatch",
+        "marineRegionMatch": false,
+        "reduction": 0.255,
+        "labelChanged": true,
+        "rawLabel": "期待できる環境",
+        "finalLabel": "やや条件外"
+      }
+    ],
+    "orderIndependent": true
+  },
+  "missing": {
+    "waterTemperatureAvailable": {
+      "count": 312,
+      "score": {
+        "count": 312,
+        "mean": 0.727,
+        "median": 0.853,
+        "min": 0.197,
+        "max": 0.975,
+        "standardDeviation": 0.226,
+        "range": 0.778
+      }
+    },
+    "waterTemperatureMissing": {
+      "count": 216,
+      "score": {
+        "count": 216,
+        "mean": 0.703,
+        "median": 0.774,
+        "min": 0.24,
+        "max": 0.967,
+        "standardDeviation": 0.255,
+        "range": 0.727
+      }
+    },
+    "potentialMissingDataInflation": {
+      "count": 93,
+      "top": [
+        {
+          "spotId": "kemigawa_beach",
+          "speciesId": "kisu",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "kemigawa_beach",
+          "speciesId": "madako",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "kemigawa_beach",
+          "speciesId": "ishimochi",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "kemigawa_beach",
+          "speciesId": "maanago",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "urayasu_chidori",
+          "speciesId": "aji",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "urayasu_chidori",
+          "speciesId": "iwashi",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "urayasu_chidori",
+          "speciesId": "kurodai",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "urayasu_chidori",
+          "speciesId": "madako",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "urayasu_chidori",
+          "speciesId": "ishimochi",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "urayasu_chidori",
+          "speciesId": "maanago",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "edogawa_hosuiro",
+          "speciesId": "mahaze",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "edogawa_hosuiro",
+          "speciesId": "kurodai",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "ichihara",
+          "speciesId": "aji",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "ichihara",
+          "speciesId": "saba",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "ichihara",
+          "speciesId": "iwashi",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "ichihara",
+          "speciesId": "kurodai",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "ichihara",
+          "speciesId": "tachiuo",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "ichihara",
+          "speciesId": "madako",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "ichihara",
+          "speciesId": "kawahagi",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        },
+        {
+          "spotId": "ichihara",
+          "speciesId": "ishimochi",
+          "score": 0.967,
+          "confidence": "medium",
+          "seasonScore": 1,
+          "regionScore": 1,
+          "marineConditionScore": 0.81,
+          "habitatMatch": "match",
+          "marineRegionMatch": true,
+          "missingCriticalInputs": [
+            "waterTemperature"
+          ]
+        }
+      ]
+    },
+    "bySpecies": {
+      "aji": {
+        "available": {
+          "count": 13,
+          "mean": 0.917,
+          "median": 0.92,
+          "min": 0.883,
+          "max": 0.975,
+          "standardDeviation": 0.028,
+          "range": 0.092
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.929,
+          "median": 0.967,
+          "min": 0.65,
+          "max": 0.967,
+          "standardDeviation": 0.099,
+          "range": 0.317
+        },
+        "meanDifference": 0.012
+      },
+      "saba": {
+        "available": {
+          "count": 13,
+          "mean": 0.877,
+          "median": 0.876,
+          "min": 0.839,
+          "max": 0.938,
+          "standardDeviation": 0.033,
+          "range": 0.099
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.795,
+          "median": 0.967,
+          "min": 0.45,
+          "max": 0.967,
+          "standardDeviation": 0.244,
+          "range": 0.517
+        },
+        "meanDifference": -0.082
+      },
+      "iwashi": {
+        "available": {
+          "count": 13,
+          "mean": 0.892,
+          "median": 0.892,
+          "min": 0.858,
+          "max": 0.946,
+          "standardDeviation": 0.029,
+          "range": 0.088
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.929,
+          "median": 0.967,
+          "min": 0.65,
+          "max": 0.967,
+          "standardDeviation": 0.099,
+          "range": 0.317
+        },
+        "meanDifference": 0.037
+      },
+      "kisu": {
+        "available": {
+          "count": 13,
+          "mean": 0.834,
+          "median": 0.936,
+          "min": 0.65,
+          "max": 0.966,
+          "standardDeviation": 0.145,
+          "range": 0.316
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.937,
+          "median": 0.945,
+          "min": 0.915,
+          "max": 0.967,
+          "standardDeviation": 0.017,
+          "range": 0.052
+        },
+        "meanDifference": 0.104
+      },
+      "mahaze": {
+        "available": {
+          "count": 13,
+          "mean": 0.45,
+          "median": 0.45,
+          "min": 0.45,
+          "max": 0.45,
+          "standardDeviation": 0,
+          "range": 0
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.937,
+          "median": 0.945,
+          "min": 0.915,
+          "max": 0.967,
+          "standardDeviation": 0.017,
+          "range": 0.052
+        },
+        "meanDifference": 0.487
+      },
+      "seabass": {
+        "available": {
+          "count": 13,
+          "mean": 0.877,
+          "median": 0.877,
+          "min": 0.854,
+          "max": 0.893,
+          "standardDeviation": 0.01,
+          "range": 0.039
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.865,
+          "median": 0.867,
+          "min": 0.845,
+          "max": 0.867,
+          "standardDeviation": 0.007,
+          "range": 0.022
+        },
+        "meanDifference": -0.013
+      },
+      "kurodai": {
+        "available": {
+          "count": 13,
+          "mean": 0.933,
+          "median": 0.959,
+          "min": 0.65,
+          "max": 0.975,
+          "standardDeviation": 0.083,
+          "range": 0.325
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.965,
+          "median": 0.967,
+          "min": 0.945,
+          "max": 0.967,
+          "standardDeviation": 0.007,
+          "range": 0.022
+        },
+        "meanDifference": 0.031
+      },
+      "hirame": {
+        "available": {
+          "count": 13,
+          "mean": 0.519,
+          "median": 0.553,
+          "min": 0.307,
+          "max": 0.667,
+          "standardDeviation": 0.123,
+          "range": 0.36
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.376,
+          "median": 0.376,
+          "min": 0.376,
+          "max": 0.376,
+          "standardDeviation": 0,
+          "range": 0
+        },
+        "meanDifference": -0.143
+      },
+      "magochi": {
+        "available": {
+          "count": 13,
+          "mean": 0.837,
+          "median": 0.936,
+          "min": 0.65,
+          "max": 0.975,
+          "standardDeviation": 0.148,
+          "range": 0.325
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.773,
+          "median": 0.915,
+          "min": 0.45,
+          "max": 0.945,
+          "standardDeviation": 0.229,
+          "range": 0.495
+        },
+        "meanDifference": -0.064
+      },
+      "mebaru": {
+        "available": {
+          "count": 13,
+          "mean": 0.436,
+          "median": 0.451,
+          "min": 0.242,
+          "max": 0.521,
+          "standardDeviation": 0.063,
+          "range": 0.279
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.536,
+          "median": 0.568,
+          "min": 0.299,
+          "max": 0.568,
+          "standardDeviation": 0.084,
+          "range": 0.269
+        },
+        "meanDifference": 0.1
+      },
+      "kasago": {
+        "available": {
+          "count": 13,
+          "mean": 0.624,
+          "median": 0.637,
+          "min": 0.442,
+          "max": 0.71,
+          "standardDeviation": 0.062,
+          "range": 0.268
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.654,
+          "median": 0.682,
+          "min": 0.435,
+          "max": 0.704,
+          "standardDeviation": 0.078,
+          "range": 0.269
+        },
+        "meanDifference": 0.029
+      },
+      "ainame": {
+        "available": {
+          "count": 13,
+          "mean": 0.419,
+          "median": 0.434,
+          "min": 0.242,
+          "max": 0.451,
+          "standardDeviation": 0.054,
+          "range": 0.209
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.24,
+          "median": 0.24,
+          "min": 0.24,
+          "max": 0.24,
+          "standardDeviation": 0,
+          "range": 0
+        },
+        "meanDifference": -0.179
+      },
+      "mejina": {
+        "available": {
+          "count": 13,
+          "mean": 0.704,
+          "median": 0.708,
+          "min": 0.53,
+          "max": 0.778,
+          "standardDeviation": 0.056,
+          "range": 0.248
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.376,
+          "median": 0.376,
+          "min": 0.376,
+          "max": 0.376,
+          "standardDeviation": 0,
+          "range": 0
+        },
+        "meanDifference": -0.328
+      },
+      "tachiuo": {
+        "available": {
+          "count": 13,
+          "mean": 0.951,
+          "median": 0.959,
+          "min": 0.926,
+          "max": 0.975,
+          "standardDeviation": 0.019,
+          "range": 0.049
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.795,
+          "median": 0.967,
+          "min": 0.45,
+          "max": 0.967,
+          "standardDeviation": 0.244,
+          "range": 0.517
+        },
+        "meanDifference": -0.156
+      },
+      "buri": {
+        "available": {
+          "count": 13,
+          "mean": 0.925,
+          "median": 0.959,
+          "min": 0.65,
+          "max": 0.966,
+          "standardDeviation": 0.081,
+          "range": 0.316
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.45,
+          "median": 0.45,
+          "min": 0.45,
+          "max": 0.45,
+          "standardDeviation": 0,
+          "range": 0
+        },
+        "meanDifference": -0.475
+      },
+      "sawara": {
+        "available": {
+          "count": 13,
+          "mean": 0.874,
+          "median": 0.884,
+          "min": 0.852,
+          "max": 0.891,
+          "standardDeviation": 0.016,
+          "range": 0.039
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.716,
+          "median": 0.845,
+          "min": 0.45,
+          "max": 0.867,
+          "standardDeviation": 0.188,
+          "range": 0.417
+        },
+        "meanDifference": -0.158
+      },
+      "akakamasu": {
+        "available": {
+          "count": 13,
+          "mean": 0.757,
+          "median": 0.853,
+          "min": 0.45,
+          "max": 0.901,
+          "standardDeviation": 0.178,
+          "range": 0.451
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.45,
+          "median": 0.45,
+          "min": 0.45,
+          "max": 0.45,
+          "standardDeviation": 0,
+          "range": 0
+        },
+        "meanDifference": -0.307
+      },
+      "aoriika": {
+        "available": {
+          "count": 13,
+          "mean": 0.677,
+          "median": 0.739,
+          "min": 0.45,
+          "max": 0.778,
+          "standardDeviation": 0.136,
+          "range": 0.328
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.376,
+          "median": 0.376,
+          "min": 0.376,
+          "max": 0.376,
+          "standardDeviation": 0,
+          "range": 0
+        },
+        "meanDifference": -0.301
+      },
+      "kouika": {
+        "available": {
+          "count": 13,
+          "mean": 0.397,
+          "median": 0.362,
+          "min": 0.29,
+          "max": 0.535,
+          "standardDeviation": 0.101,
+          "range": 0.245
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.562,
+          "median": 0.568,
+          "min": 0.516,
+          "max": 0.568,
+          "standardDeviation": 0.016,
+          "range": 0.052
+        },
+        "meanDifference": 0.166
+      },
+      "madako": {
+        "available": {
+          "count": 13,
+          "mean": 0.926,
+          "median": 0.922,
+          "min": 0.889,
+          "max": 0.975,
+          "standardDeviation": 0.025,
+          "range": 0.086
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.932,
+          "median": 0.967,
+          "min": 0.65,
+          "max": 0.967,
+          "standardDeviation": 0.1,
+          "range": 0.317
+        },
+        "meanDifference": 0.005
+      },
+      "kawahagi": {
+        "available": {
+          "count": 13,
+          "mean": 0.837,
+          "median": 0.949,
+          "min": 0.45,
+          "max": 0.975,
+          "standardDeviation": 0.212,
+          "range": 0.525
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.792,
+          "median": 0.967,
+          "min": 0.45,
+          "max": 0.967,
+          "standardDeviation": 0.242,
+          "range": 0.517
+        },
+        "meanDifference": -0.045
+      },
+      "ishimochi": {
+        "available": {
+          "count": 13,
+          "mean": 0.854,
+          "median": 0.949,
+          "min": 0.45,
+          "max": 0.975,
+          "standardDeviation": 0.191,
+          "range": 0.525
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.961,
+          "median": 0.967,
+          "min": 0.915,
+          "max": 0.967,
+          "standardDeviation": 0.016,
+          "range": 0.052
+        },
+        "meanDifference": 0.107
+      },
+      "maanago": {
+        "available": {
+          "count": 13,
+          "mean": 0.608,
+          "median": 0.45,
+          "min": 0.45,
+          "max": 0.878,
+          "standardDeviation": 0.2,
+          "range": 0.428
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.961,
+          "median": 0.967,
+          "min": 0.915,
+          "max": 0.967,
+          "standardDeviation": 0.016,
+          "range": 0.052
+        },
+        "meanDifference": 0.354
+      },
+      "makogarei": {
+        "available": {
+          "count": 13,
+          "mean": 0.332,
+          "median": 0.412,
+          "min": 0.197,
+          "max": 0.451,
+          "standardDeviation": 0.113,
+          "range": 0.254
+        },
+        "missing": {
+          "count": 9,
+          "mean": 0.562,
+          "median": 0.568,
+          "min": 0.516,
+          "max": 0.568,
+          "standardDeviation": 0.016,
+          "range": 0.052
+        },
+        "meanDifference": 0.23
+      }
+    }
+  },
+  "comparisonSummary": {
+    "total": 528,
+    "comparable": 180,
+    "notComparable": 348
+  },
+  "mismatchCounts": {
+    "existing_high_presence_low": 0,
+    "existing_low_presence_high": 49,
+    "season_water_conflict": 19,
+    "high_score_low_confidence": 0,
+    "missing_critical_environment": 216,
+    "water_temperature_outlier": 0,
+    "regional_mismatch": 0
+  },
+  "results": [
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "aji",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "saba",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "iwashi",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "kisu",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "mahaze",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "seabass",
+      "presenceScore": 0.867,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "kurodai",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "hirame",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "magochi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "mebaru",
+      "presenceScore": 0.546,
+      "label": "平常"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "kasago",
+      "presenceScore": 0.652,
+      "label": "平常"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "ainame",
+      "presenceScore": 0.24,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "mejina",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "buri",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "sawara",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "aoriika",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "kouika",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "madako",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "maanago",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kemigawa_beach",
+      "speciesId": "makogarei",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "aji",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "saba",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "iwashi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "kisu",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "mahaze",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "seabass",
+      "presenceScore": 0.867,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "kurodai",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "hirame",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "magochi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "mebaru",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "kasago",
+      "presenceScore": 0.682,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "ainame",
+      "presenceScore": 0.24,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "mejina",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "buri",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "sawara",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "aoriika",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "kouika",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "madako",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "maanago",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "urayasu_chidori",
+      "speciesId": "makogarei",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "aji",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "saba",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "iwashi",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "kisu",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "mahaze",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "seabass",
+      "presenceScore": 0.845,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "kurodai",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "hirame",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "magochi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "mebaru",
+      "presenceScore": 0.299,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "kasago",
+      "presenceScore": 0.435,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "ainame",
+      "presenceScore": 0.24,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "mejina",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "buri",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "sawara",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "aoriika",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "kouika",
+      "presenceScore": 0.516,
+      "label": "平常"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "madako",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "maanago",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "edogawa_hosuiro",
+      "speciesId": "makogarei",
+      "presenceScore": 0.516,
+      "label": "平常"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "aji",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "saba",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "iwashi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "kisu",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "mahaze",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "seabass",
+      "presenceScore": 0.867,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "kurodai",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "hirame",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "magochi",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "mebaru",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "kasago",
+      "presenceScore": 0.682,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "ainame",
+      "presenceScore": 0.24,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "mejina",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "buri",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "sawara",
+      "presenceScore": 0.845,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "aoriika",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "kouika",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "madako",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "maanago",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "ichihara",
+      "speciesId": "makogarei",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "aji",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "saba",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "iwashi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "kisu",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "mahaze",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "seabass",
+      "presenceScore": 0.867,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "kurodai",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "hirame",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "magochi",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "mebaru",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "kasago",
+      "presenceScore": 0.682,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "ainame",
+      "presenceScore": 0.24,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "mejina",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "buri",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "sawara",
+      "presenceScore": 0.845,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "aoriika",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "kouika",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "madako",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "maanago",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kisarazu_uchiko",
+      "speciesId": "makogarei",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "aji",
+      "presenceScore": 0.883,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "saba",
+      "presenceScore": 0.839,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "iwashi",
+      "presenceScore": 0.858,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "kisu",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "seabass",
+      "presenceScore": 0.876,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "kurodai",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "hirame",
+      "presenceScore": 0.536,
+      "label": "平常"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "magochi",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "mebaru",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "kasago",
+      "presenceScore": 0.598,
+      "label": "平常"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "ainame",
+      "presenceScore": 0.412,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "mejina",
+      "presenceScore": 0.686,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.926,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "buri",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "sawara",
+      "presenceScore": 0.852,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "aoriika",
+      "presenceScore": 0.739,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "kouika",
+      "presenceScore": 0.535,
+      "label": "平常"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "madako",
+      "presenceScore": 0.905,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.949,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "maanago",
+      "presenceScore": 0.861,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "futtsu_area",
+      "speciesId": "makogarei",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "aji",
+      "presenceScore": 0.905,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "saba",
+      "presenceScore": 0.861,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "iwashi",
+      "presenceScore": 0.881,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "kisu",
+      "presenceScore": 0.949,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "seabass",
+      "presenceScore": 0.876,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "kurodai",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "hirame",
+      "presenceScore": 0.514,
+      "label": "平常"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "magochi",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "mebaru",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "kasago",
+      "presenceScore": 0.637,
+      "label": "平常"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "ainame",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "mejina",
+      "presenceScore": 0.725,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.949,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "buri",
+      "presenceScore": 0.926,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "sawara",
+      "presenceScore": 0.874,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.852,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "aoriika",
+      "presenceScore": 0.778,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "kouika",
+      "presenceScore": 0.535,
+      "label": "平常"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "madako",
+      "presenceScore": 0.922,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "maanago",
+      "presenceScore": 0.878,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "tateyama_sunset",
+      "speciesId": "makogarei",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "aji",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "saba",
+      "presenceScore": 0.893,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "iwashi",
+      "presenceScore": 0.909,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "kisu",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "seabass",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "kurodai",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "hirame",
+      "presenceScore": 0.569,
+      "label": "平常"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "magochi",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "mebaru",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "kasago",
+      "presenceScore": 0.652,
+      "label": "平常"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "ainame",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "mejina",
+      "presenceScore": 0.722,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "buri",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "sawara",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.901,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "aoriika",
+      "presenceScore": 0.778,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "kouika",
+      "presenceScore": 0.303,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "madako",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "maanago",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-marina-coast",
+      "speciesId": "makogarei",
+      "presenceScore": 0.205,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "aji",
+      "presenceScore": 0.92,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "saba",
+      "presenceScore": 0.876,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "iwashi",
+      "presenceScore": 0.892,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "kisu",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "seabass",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "kurodai",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "hirame",
+      "presenceScore": 0.569,
+      "label": "平常"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "magochi",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "mebaru",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "kasago",
+      "presenceScore": 0.652,
+      "label": "平常"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "ainame",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "mejina",
+      "presenceScore": 0.739,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "buri",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "sawara",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "aoriika",
+      "presenceScore": 0.778,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "kouika",
+      "presenceScore": 0.303,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "madako",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "maanago",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "choshi-nagasaki-coast",
+      "speciesId": "makogarei",
+      "presenceScore": 0.205,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "aji",
+      "presenceScore": 0.889,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "saba",
+      "presenceScore": 0.846,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "iwashi",
+      "presenceScore": 0.862,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "kisu",
+      "presenceScore": 0.951,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "seabass",
+      "presenceScore": 0.854,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "kurodai",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "hirame",
+      "presenceScore": 0.6,
+      "label": "平常"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "magochi",
+      "presenceScore": 0.951,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "mebaru",
+      "presenceScore": 0.242,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "kasago",
+      "presenceScore": 0.442,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "ainame",
+      "presenceScore": 0.242,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "mejina",
+      "presenceScore": 0.53,
+      "label": "平常"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.928,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "buri",
+      "presenceScore": 0.928,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "sawara",
+      "presenceScore": 0.854,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.854,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "aoriika",
+      "presenceScore": 0.569,
+      "label": "平常"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "kouika",
+      "presenceScore": 0.295,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "madako",
+      "presenceScore": 0.889,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.928,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.951,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "maanago",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "asahi-ioka-coast",
+      "speciesId": "makogarei",
+      "presenceScore": 0.197,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "aji",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "saba",
+      "presenceScore": 0.84,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "iwashi",
+      "presenceScore": 0.859,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "kisu",
+      "presenceScore": 0.95,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "seabass",
+      "presenceScore": 0.877,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "kurodai",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "hirame",
+      "presenceScore": 0.553,
+      "label": "平常"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "magochi",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "mebaru",
+      "presenceScore": 0.412,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "kasago",
+      "presenceScore": 0.599,
+      "label": "平常"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "ainame",
+      "presenceScore": 0.412,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "mejina",
+      "presenceScore": 0.686,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.927,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "buri",
+      "presenceScore": 0.927,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "sawara",
+      "presenceScore": 0.853,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.853,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "aoriika",
+      "presenceScore": 0.739,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "kouika",
+      "presenceScore": 0.29,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "madako",
+      "presenceScore": 0.906,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.927,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "maanago",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "onjuku-coast",
+      "speciesId": "makogarei",
+      "presenceScore": 0.205,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "aji",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "saba",
+      "presenceScore": 0.84,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "iwashi",
+      "presenceScore": 0.859,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "kisu",
+      "presenceScore": 0.95,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "seabass",
+      "presenceScore": 0.877,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "kurodai",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "hirame",
+      "presenceScore": 0.553,
+      "label": "平常"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "magochi",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "mebaru",
+      "presenceScore": 0.412,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "kasago",
+      "presenceScore": 0.599,
+      "label": "平常"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "ainame",
+      "presenceScore": 0.412,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "mejina",
+      "presenceScore": 0.686,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.927,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "buri",
+      "presenceScore": 0.927,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "sawara",
+      "presenceScore": 0.853,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.853,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "aoriika",
+      "presenceScore": 0.739,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "kouika",
+      "presenceScore": 0.29,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "madako",
+      "presenceScore": 0.906,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.927,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "maanago",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kamogawa-coast",
+      "speciesId": "makogarei",
+      "presenceScore": 0.205,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "aji",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "saba",
+      "presenceScore": 0.938,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "iwashi",
+      "presenceScore": 0.946,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "kisu",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "seabass",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "kurodai",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "hirame",
+      "presenceScore": 0.637,
+      "label": "平常"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "magochi",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "mebaru",
+      "presenceScore": 0.491,
+      "label": "平常"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "kasago",
+      "presenceScore": 0.68,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "ainame",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "mejina",
+      "presenceScore": 0.739,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "buri",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "sawara",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "aoriika",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "kouika",
+      "presenceScore": 0.349,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "madako",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "maanago",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kashima",
+      "speciesId": "makogarei",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "aji",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "saba",
+      "presenceScore": 0.934,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "iwashi",
+      "presenceScore": 0.939,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "kisu",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "seabass",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "kurodai",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "hirame",
+      "presenceScore": 0.667,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "magochi",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "mebaru",
+      "presenceScore": 0.482,
+      "label": "平常"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "kasago",
+      "presenceScore": 0.671,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "ainame",
+      "presenceScore": 0.412,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "mejina",
+      "presenceScore": 0.739,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "buri",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "sawara",
+      "presenceScore": 0.884,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "aoriika",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "kouika",
+      "presenceScore": 0.362,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "madako",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "maanago",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "kawarago",
+      "speciesId": "makogarei",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "aji",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "saba",
+      "presenceScore": 0.912,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "iwashi",
+      "presenceScore": 0.917,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "kisu",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "seabass",
+      "presenceScore": 0.861,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "kurodai",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "hirame",
+      "presenceScore": 0.627,
+      "label": "平常"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "magochi",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "mebaru",
+      "presenceScore": 0.521,
+      "label": "平常"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "kasago",
+      "presenceScore": 0.71,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "ainame",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "mejina",
+      "presenceScore": 0.778,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "buri",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "sawara",
+      "presenceScore": 0.861,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "aoriika",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "kouika",
+      "presenceScore": 0.362,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "madako",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "maanago",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "hiraiso",
+      "speciesId": "makogarei",
+      "presenceScore": 0.25,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "aji",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "saba",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "iwashi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "kisu",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "mahaze",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "seabass",
+      "presenceScore": 0.867,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "kurodai",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "hirame",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "magochi",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "mebaru",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "kasago",
+      "presenceScore": 0.682,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "ainame",
+      "presenceScore": 0.24,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "mejina",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "buri",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "sawara",
+      "presenceScore": 0.845,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "aoriika",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "kouika",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "madako",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "maanago",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "honmoku",
+      "speciesId": "makogarei",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "aji",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "saba",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "iwashi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "kisu",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "mahaze",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "seabass",
+      "presenceScore": 0.867,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "kurodai",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "hirame",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "magochi",
+      "presenceScore": 0.945,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "mebaru",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "kasago",
+      "presenceScore": 0.682,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "ainame",
+      "presenceScore": 0.24,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "mejina",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "buri",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "sawara",
+      "presenceScore": 0.845,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "aoriika",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "kouika",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "madako",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "maanago",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "isogo",
+      "speciesId": "makogarei",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "aji",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "saba",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "iwashi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "kisu",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "mahaze",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "seabass",
+      "presenceScore": 0.867,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "kurodai",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "hirame",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "magochi",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "mebaru",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "kasago",
+      "presenceScore": 0.682,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "ainame",
+      "presenceScore": 0.24,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "mejina",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "buri",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "sawara",
+      "presenceScore": 0.867,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "aoriika",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "kouika",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "madako",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "maanago",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "daikoku",
+      "speciesId": "makogarei",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "aji",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "saba",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "iwashi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "kisu",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "mahaze",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "seabass",
+      "presenceScore": 0.867,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "kurodai",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "hirame",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "magochi",
+      "presenceScore": 0.915,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "mebaru",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "kasago",
+      "presenceScore": 0.704,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "ainame",
+      "presenceScore": 0.24,
+      "label": "季節・環境的に期待薄"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "mejina",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "buri",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "sawara",
+      "presenceScore": 0.845,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "aoriika",
+      "presenceScore": 0.376,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "kouika",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "madako",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "maanago",
+      "presenceScore": 0.967,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "higashiogishima",
+      "speciesId": "makogarei",
+      "presenceScore": 0.568,
+      "label": "平常"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "aji",
+      "presenceScore": 0.922,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "saba",
+      "presenceScore": 0.878,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "iwashi",
+      "presenceScore": 0.898,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "kisu",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "seabass",
+      "presenceScore": 0.876,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "kurodai",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "hirame",
+      "presenceScore": 0.307,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "magochi",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "mebaru",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "kasago",
+      "presenceScore": 0.62,
+      "label": "平常"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "ainame",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "mejina",
+      "presenceScore": 0.708,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "buri",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "sawara",
+      "presenceScore": 0.891,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.874,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "aoriika",
+      "presenceScore": 0.778,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "kouika",
+      "presenceScore": 0.496,
+      "label": "平常"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "madako",
+      "presenceScore": 0.905,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.926,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "maanago",
+      "presenceScore": 0.839,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umibetsuri",
+      "speciesId": "makogarei",
+      "presenceScore": 0.412,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "aji",
+      "presenceScore": 0.905,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "saba",
+      "presenceScore": 0.861,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "iwashi",
+      "presenceScore": 0.881,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "kisu",
+      "presenceScore": 0.926,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "seabass",
+      "presenceScore": 0.876,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "kurodai",
+      "presenceScore": 0.959,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "hirame",
+      "presenceScore": 0.307,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "magochi",
+      "presenceScore": 0.936,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "mebaru",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "kasago",
+      "presenceScore": 0.62,
+      "label": "平常"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "ainame",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "mejina",
+      "presenceScore": 0.708,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "buri",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "sawara",
+      "presenceScore": 0.891,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.874,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "aoriika",
+      "presenceScore": 0.778,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "kouika",
+      "presenceScore": 0.518,
+      "label": "平常"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "madako",
+      "presenceScore": 0.922,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.949,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "maanago",
+      "presenceScore": 0.861,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "umikaze",
+      "speciesId": "makogarei",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "aji",
+      "presenceScore": 0.922,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "saba",
+      "presenceScore": 0.878,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "iwashi",
+      "presenceScore": 0.898,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "kisu",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "mahaze",
+      "presenceScore": 0.45,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "seabass",
+      "presenceScore": 0.893,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "kurodai",
+      "presenceScore": 0.975,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "hirame",
+      "presenceScore": 0.307,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "magochi",
+      "presenceScore": 0.65,
+      "label": "平常"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "mebaru",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "kasago",
+      "presenceScore": 0.637,
+      "label": "平常"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "ainame",
+      "presenceScore": 0.451,
+      "label": "やや条件外"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "mejina",
+      "presenceScore": 0.708,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "tachiuo",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "buri",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "sawara",
+      "presenceScore": 0.891,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "akakamasu",
+      "presenceScore": 0.891,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "aoriika",
+      "presenceScore": 0.778,
+      "label": "期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "kouika",
+      "presenceScore": 0.518,
+      "label": "平常"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "madako",
+      "presenceScore": 0.922,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "kawahagi",
+      "presenceScore": 0.966,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "ishimochi",
+      "presenceScore": 0.949,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "maanago",
+      "presenceScore": 0.861,
+      "label": "かなり期待できる環境"
+    },
+    {
+      "spotId": "aicle",
+      "speciesId": "makogarei",
+      "presenceScore": 0.434,
+      "label": "やや条件外"
+    }
+  ]
+}

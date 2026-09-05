@@ -1,0 +1,24 @@
+{
+  "version":"1.1.0","updated":"2026-08-30",
+  "responsibilities":{"presence":"季節・海域・水温・生息環境から、その魚が海域に存在しやすい環境かを評価","currentForecast":"存在候補魚が、当該時刻に食いやすく安全に狙える条件かを評価"},
+  "features":[
+    {"feature":"month/season","source":"評価日＋魚種プロフィール / 地点別月別baseline","presenceWeight":0.34,"usedByPresenceBaseline":true,"usedByCurrentForecast":true,"overlap":"acceptable_overlap","reason":"presenceは魚種の季節的存在、現行は地点・魚種群の月別釣果傾向。ただし統合時は寄与説明を分離する。"},
+    {"feature":"marineRegion","source":"marine-regions.json / 地点別baseline","presenceWeight":0.28,"usedByPresenceBaseline":true,"usedByCurrentForecast":false,"overlap":"no_overlap","reason":"現行側は地点別モデルへ暗黙に含むが、明示的な海域特徴量ではない。"},
+    {"feature":"habitat","source":"marine-regions.json / species profiles","presenceWeight":"region 28%内","usedByPresenceBaseline":true,"usedByCurrentForecast":false,"overlap":"no_overlap","reason":"現行側は地点プロフィールに暗黙に含む可能性があるため将来の説明では留意。"},
+    {"feature":"waterTemperature","source":"OISST / 東京湾missing","presenceWeight":0.25,"usedByPresenceBaseline":true,"usedByCurrentForecast":false,"overlap":"no_overlap","reason":"presence固有の中期環境特徴。"},
+    {"feature":"tidePhase/presence","source":"気象庁天文潮位","presenceWeight":0,"usedByPresenceBaseline":false,"availableToPresenceObservation":true,"usedByCurrentForecast":true,"overlap":"no_overlap","reason":"取得・保持は継続するがpresenceScoreでは未使用。上げ下げ・満干距離は現行予測の短期biteability責務。"},
+    {"feature":"windSpeed","source":"気象庁/公開気象正規化・Open-Meteo","presenceWeight":0,"usedByPresenceBaseline":false,"availableToPresenceObservation":true,"usedByCurrentForecast":true,"overlap":"no_overlap","reason":"取得・保持は継続するがpresenceScoreでは未使用。現行予測と安全判定の責務。"},
+    {"feature":"waveHeight","source":"公開環境正規化・Open-Meteo marine","presenceWeight":0,"usedByPresenceBaseline":false,"availableToPresenceObservation":true,"usedByCurrentForecast":true,"overlap":"no_overlap","reason":"取得・保持は継続するがpresenceScoreでは未使用。現行予測と安全判定の責務。"},
+    {"feature":"weatherCode","source":"公開気象","presenceWeight":0,"usedByPresenceBaseline":false,"usedByCurrentForecast":false,"overlap":"no_overlap","reason":"両方で受け取るが、現行エンジンのスコア計算には直接使用していない。"},
+    {"feature":"precipitation/rain","source":"Open-Meteo hourly precipitation","presenceWeight":0,"usedByPresenceBaseline":false,"usedByCurrentForecast":true,"overlap":"no_overlap","reason":"現行側のみ短期降水減点。"},
+    {"feature":"pressure","source":"正規化構造のみ","presenceWeight":0,"usedByPresenceBaseline":false,"usedByCurrentForecast":false,"overlap":"no_overlap","reason":"取得可能構造はあるが両スコアで未使用。"},
+    {"feature":"airTemperature","source":"気象庁AMeDAS","presenceWeight":0,"usedByPresenceBaseline":false,"usedByCurrentForecast":false,"overlap":"no_overlap","reason":"環境レコードには保持するがスコア未使用。"},
+    {"feature":"hour/time","source":"評価時刻","presenceWeight":0,"usedByPresenceBaseline":false,"usedByCurrentForecast":true,"overlap":"no_overlap","reason":"現行の24時間baselineとマヅメ判定に使用。"},
+    {"feature":"sunrise/sunset","source":"Open-Meteo daily","presenceWeight":0,"usedByPresenceBaseline":false,"usedByCurrentForecast":true,"overlap":"no_overlap","reason":"朝夕マヅメ判定。"},
+    {"feature":"historical spot/species evidence","source":"fishing-forecast-baselines.json","presenceWeight":0,"usedByPresenceBaseline":false,"usedByCurrentForecast":true,"overlap":"no_overlap","reason":"地点別標本・時刻別傾向は現行側。実績レイヤーweightは0。"},
+    {"feature":"safety/restrictions","source":"weather safety / fishing-spot-restrictions.json","presenceWeight":0,"usedByPresenceBaseline":false,"usedByCurrentForecast":true,"overlap":"no_overlap","reason":"現行側でhard stop。presenceへ混ぜない。"}
+  ],
+  "futureMarineFeatures":[
+    {"feature":"海水温・平年差","classification":"presence_candidate"},{"feature":"黒潮位置","classification":"presence_candidate"},{"feature":"塩分","classification":"presence_candidate"},{"feature":"溶存酸素","classification":"presence_candidate"},{"feature":"赤潮・クロロフィル","classification":"presence_candidate"},{"feature":"海流・流向流速","classification":"both_with_separate_timescale","reason":"中期回遊環境はpresence、当時刻の流れはcurrent側へ分離"},{"feature":"短期風・波・降水","classification":"current_forecast_candidate"},{"feature":"気圧単独","classification":"not_recommended","reason":"魚種存在との因果根拠なしに単独投入しない"}
+  ]
+}

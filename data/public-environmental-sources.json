@@ -1,0 +1,117 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-08-30",
+  "policy": {
+    "productionCollection": false,
+    "bulkCollection": false,
+    "predictionWeight": 0,
+    "note": "公開データベースラインv1の出典追跡用。現行予測には接続しない。"
+  },
+  "sources": {
+    "jma_amedas_current": {
+      "provider": "気象庁",
+      "url": "https://www.jma.go.jp/bosai/amedas/",
+      "license": "公共データ利用規約 第1.0版（個別表示がある場合を除く）",
+      "attribution": "出典：気象庁ホームページ。MFLで正規化・地点割当を行った旨を表示する。",
+      "retrievedAt": "runtime",
+      "processed": true,
+      "raw": false,
+      "automation": "observation_mode",
+      "fields": ["airTemp", "windSpeed", "windDirection", "pressure", "precipitation"],
+      "notes": "最新アメダス観測JSON。海水温・波浪へ転用しない。"
+    },
+    "jma_public_data": {
+      "provider": "気象庁",
+      "url": "https://www.jma.go.jp/jma/kishou/info/coment.html",
+      "license": "公共データ利用規約 第1.0版（個別表示がある場合を除く）",
+      "attribution": "出典：気象庁ホームページ。加工時は加工した旨も表示する。",
+      "retrievedAt": "2026-08-30",
+      "processed": true,
+      "raw": false,
+      "automation": "future_review",
+      "notes": "本ファイルには実観測値を保存せず、テスト用固定値のみ別ファイルに保持する。"
+    },
+    "jma_tide": {
+      "provider": "気象庁",
+      "url": "https://www.data.jma.go.jp/kaiyou/db/tide/suisan/index.php",
+      "license": "公共データ利用規約 第1.0版（個別表示がある場合を除く）",
+      "attribution": "気象庁の潮位資料を加工して利用する場合は出典と加工表示が必要。",
+      "retrievedAt": "2026-08-30",
+      "processed": true,
+      "raw": false,
+      "automation": "future_review"
+    },
+    "nowphas_wave": {
+      "provider": "国土交通省港湾局",
+      "url": "https://www.mlit.go.jp/kowan/nowphas/",
+      "license": "国土交通省サイト利用条件および個別注意事項",
+      "attribution": "使用時は観測点・提供主体・加工内容を表示する。",
+      "retrievedAt": null,
+      "processed": false,
+      "raw": false,
+      "automation": "disabled_until_machine_interface_confirmed",
+      "fields": ["waveHeight", "wavePeriod", "tideLevel"],
+      "notes": "公式公開API・取得頻度条件を確認できるまで自動取得しない。"
+    },
+    "noaa_oisst_v21_nrt": {
+      "provider": "NOAA National Centers for Environmental Information",
+      "url": "https://coastwatch.pfeg.noaa.gov/erddap/griddap/ncdcOisst21NrtAgg.html",
+      "license": "Free use and redistribution; not intended for legal use and provided without warranty",
+      "attribution": "NOAA OISST v2.1 preliminary subsetをMFLが海域代表値へ加工。取得日と使用格子を表示する。",
+      "retrievedAt": "runtime",
+      "processed": true,
+      "raw": false,
+      "automation": "observation_mode_cached",
+      "fields": ["waterTemp"],
+      "spatialResolution": "0.25 degree",
+      "temporalResolution": "daily",
+      "notes": "衛星・船・ブイ等を統合・補間した解析海面水温。地点の直接実測ではない。"
+    },
+    "tokyo_bay_coastal_water_review": {
+      "provider": "国土交通省・千葉県・神奈川県等",
+      "url": "data/tokyo-bay-water-temperature-sources.json",
+      "license": "候補ごとに審査。許諾・機械利用条件が明確になるまで無取得",
+      "attribution": "採用時に提供主体、観測点、深度、観測日時、加工内容を表示する。",
+      "retrievedAt": "2026-08-30",
+      "processed": false,
+      "raw": false,
+      "automation": "disabled",
+      "fields": ["waterTemp", "observationDepth", "depthClass"],
+      "notes": "第4段階の調査台帳。現時点で9地点への自動接続は0件。"
+    },
+    "fra_species_reference": {
+      "provider": "水産庁・水産研究・教育機構",
+      "url": "https://abchan.fra.go.jp/",
+      "license": "公開資料。個別資料の利用条件と出典表示を適用する。",
+      "attribution": "魚種・海域別資源評価等をもとにMFLが一般化。",
+      "retrievedAt": "2026-08-30",
+      "processed": true,
+      "raw": false,
+      "automation": "manual_reference_only"
+    },
+    "fra_stock_assessment": {"provider":"水産研究・教育機構","url":"https://www.fra.go.jp/shigen/fisheries_resources/index.html","license":"公開資料。個別資料の利用条件を適用","attribution":"出典：水産研究・教育機構","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"分布・回遊・資源単位の根拠。岸釣り確率には直接転用しない。"},
+    "fra_pelagic_juvenile_temperature": {"provider":"水産研究・教育機構","url":"https://www.fra.go.jp/home/kenkyushokai/kseika/h13/nrifs01001.html","license":"公開研究成果","attribution":"出典：水産研究・教育機構","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"マイワシ・マサバ幼稚魚採集時水温。成魚好適水温とは区別。"},
+    "fra_drifting_seaweed_ecology": {"provider":"水産研究・教育機構","url":"https://www.fra.go.jp/home/kenkyushokai/book/fish_tech/files/17_2_03_nagasawa_250313.pdf","license":"公開研究資料","attribution":"出典：水産研究・教育機構","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"メバル科・アイナメ科・メジナ科・カワハギ科の流れ藻随伴と沿岸生態。"},
+    "fra_sargassum_ecology": {"provider":"水産研究・教育機構","url":"https://www.fra.go.jp/gijutsu/project/fisheries_ecosystems/sargasso/southsargasso.html","license":"公開研究解説","attribution":"出典：水産研究・教育機構","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"アオリイカ産卵と藻場の関係。"},
+    "ibaraki_important_species": {"provider":"茨城県水産試験場","url":"https://www.pref.ibaraki.jp/nourinsuisan/suishi/teichaku/juuyogyoshu-seitai-shigen.html","license":"茨城県ウェブサイト利用規約・個別資料条件","attribution":"出典：茨城県水産試験場","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"ヒラメ、マコガレイ、マダコ等の県別生態・資源情報。"},
+    "ibaraki_madako_migration": {"provider":"茨城県水産試験場","url":"https://www.pref.ibaraki.jp/nourinsuisan/suishi/gyogyo/data/gyokaikyo/documents/04-36f.pdf","license":"茨城県ウェブサイト利用規約","attribution":"出典：茨城県水産試験場 水産の窓","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"常磐の地ダコ・渡りダコ、12〜2月の盛漁期、水温と来遊の関係。"},
+    "ibaraki_ocean_fishery_study": {"provider":"茨城県水産試験場","url":"https://www.pref.ibaraki.jp/nourinsuisan/suishi/kanri/kenkyuhokoku/documents/kenkyuhoukoku49p1-11.pdf","license":"茨城県ウェブサイト利用規約","attribution":"出典：茨城県水産試験場研究報告","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"鹿島灘・常磐南部の海況とタチウオ、サワラ、ブリ等の漁況。"},
+    "kanagawa_resource_assessment": {"provider":"神奈川県水産技術センター","url":"https://www.pref.kanagawa.jp/docs/mx7/kikaku/r7doukou.html","license":"神奈川県ウェブサイト利用規約・個別PDF条件","attribution":"出典：神奈川県水産技術センター","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"県周辺のタチウオ、ブリ、マアナゴ、マコガレイ、アカカマス、カサゴ等の資源評価。"},
+    "kanagawa_fish_guide_kamasu": {"provider":"神奈川県水産技術センター","url":"https://www.pref.kanagawa.jp/docs/mx7/cnt/f430693/zukan-kamasu.html","license":"神奈川県ウェブサイト利用規約","attribution":"出典：神奈川県おさかな図鑑","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"アカカマスとヤマトカマスの区別、春秋の回遊。"},
+    "kanagawa_fisheries_overview": {"provider":"神奈川県","url":"https://www.pref.kanagawa.jp/docs/mx7/cnt/f430693/p550042.html","license":"神奈川県ウェブサイト利用規約","attribution":"出典：神奈川県おさかな図鑑・水産資料","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"東京湾・相模湾の主要魚介類と地域対象性。"},
+    "kanagawa_recreational_catch_study": {"provider":"神奈川県水産技術センター","url":"https://www.pref.kanagawa.jp/documents/11497/533837.pdf","license":"神奈川県公開研究資料","attribution":"出典：神奈川県水産技術センター","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"遊漁釣獲魚種構成。船釣りを岸釣り実績とは扱わず、地域対象性の補助のみ。"},
+    "chiba_fisheries_information": {"provider":"千葉県水産総合研究センター","url":"https://www.pref.chiba.lg.jp/lab-suisan/suisan/suisan/index.html","license":"千葉県ホームページ利用規約","attribution":"出典：千葉県水産総合研究センター","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"マサバ・ゴマサバ、マイワシ・カタクチイワシ等を種別管理する県資料。"},
+    "chiba_seasonal_fish": {"provider":"千葉県","url":"https://www.pref.chiba.lg.jp/suisan/sakana/karenda-/syuncalemdar.html","license":"千葉県ホームページ利用規約","attribution":"出典：千葉県 旬のさかなカレンダー","retrievedAt":"2026-08-30","processed":true,"raw":false,"automation":"manual_reference_only","notes":"県内漁獲季節の補助。食味の旬を接岸時期と同一視しない。"},
+    "prefectural_species_reference": {
+      "provider": "千葉県・茨城県・神奈川県の水産研究機関",
+      "url": "https://www.pref.chiba.lg.jp/lab-suisan/suisan/suisan/index.html",
+      "license": "個別資料の二次利用条件確認が必要",
+      "attribution": "各資料の提供主体・URLを個別に表示する。",
+      "retrievedAt": "2026-08-30",
+      "processed": true,
+      "raw": false,
+      "automation": "disabled",
+      "notes": "PDF・画像の自動抽出や大量保存は行わない。"
+    }
+  }
+}

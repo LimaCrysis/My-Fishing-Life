@@ -1,0 +1,11 @@
+{
+  "version":"1.0.0-test-fixture",
+  "production":false,
+  "note":"ロジック検証専用の固定サンプル。実観測・本番データとして表示しない。",
+  "observations":[
+    {"regionId":"tokyo_bay_central","month":8,"waterTemp":25,"quality":"regional","sourceId":"jma_public_data","observationDate":"2026-08-29","processed":true},
+    {"regionId":"tokyo_bay_central","month":1,"waterTemp":11,"quality":"climatology","sourceId":"jma_public_data","observationDate":null,"processed":true},
+    {"regionId":"kashimanada","month":8,"waterTemp":23,"quality":"regional","sourceId":"jma_public_data","observationDate":"2026-08-29","processed":true},
+    {"regionId":"sotobo","month":8,"waterTemp":24,"quality":"climatology","sourceId":"jma_public_data","observationDate":null,"processed":true}
+  ]
+}

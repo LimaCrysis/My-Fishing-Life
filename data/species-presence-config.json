@@ -1,0 +1,10 @@
+{
+  "version":"1.1.0",
+  "mode":"observation",
+  "connectedToForecast":false,
+  "forecastWeight":0,
+  "historicalPerformanceWeight":0,
+  "weights":{"season":0.34,"region":0.28,"waterTemperature":0.25,"marineCondition":0},
+  "weightPolicy":{"normalization":"available_presence_features","baseRatio":"34:28:25","excludedShortTermBiteability":["tidePhase","tideDirection","windSpeed","waveHeight","weather","precipitation","pressure","hour","sunriseSunset"],"note":"取得値は保持するがpresenceScoreへ使用しない。短期biteabilityは現行予測の責務。"},
+  "mismatchThresholds":{"existingHigh":3,"existingLow":1,"presenceHigh":0.66,"presenceLow":0.46,"seasonWaterDifference":0.55,"highScore":0.66,"lowConfidence":"low"}
+}
