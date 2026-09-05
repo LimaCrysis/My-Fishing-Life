@@ -3905,3 +3905,11 @@ html[data-theme="dark"] .storage-state.warning{background:#493c18;color:#ffe69b;
 .storage-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}.storage-summary div{padding:9px 10px;border:1px solid var(--surface-border);border-radius:10px;background:var(--soft)}.storage-summary dt{font-size:.75rem;color:var(--surface-muted)}.storage-summary dd{margin:3px 0 0;font-weight:800;color:var(--surface-ink)}.backup-status{display:block;min-height:1.4em;margin-top:8px;color:var(--surface-muted);font-size:.82rem;overflow-wrap:anywhere}
 .evaluation-time-fields{align-items:end}
 @media(max-width:350px){.target-species-picker{grid-template-columns:1fr}.evaluation-time-fields{grid-template-columns:1fr}}
+
+/* v14.30.2: iPhone readability for the keep-decision card only */
+.keep-system-intro{padding:11px 12px}
+.keep-system-intro strong{font-size:11px;line-height:1.4}
+.keep-system-intro span{margin-top:4px;font-size:10px;line-height:1.55}
+.keep-badge strong{font-size:11px;line-height:1.4}
+.keep-badge p{margin-top:4px;font-size:10px;line-height:1.55}
+.keep-badge span{margin-top:5px;font-size:10px;line-height:1.45}
