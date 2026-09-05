@@ -1,0 +1,2051 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "11-cm-robustness-validation",
+  "mode": "validation_only",
+  "generatedAt": "2026-09-05T08:37:21.449Z",
+  "fixedFormula": {
+    "timeFactor": "0.25 + 0.75 * CURRENT raw / 100",
+    "floor": 0.25,
+    "slope": 0.75,
+    "blend": 0.12,
+    "maxRawDelta": 8,
+    "changed": false
+  },
+  "actual": {
+    "date": "2026-08-30",
+    "rows": 4320,
+    "success": 4320,
+    "fallback": 2016,
+    "anomalies": 0
+  },
+  "multipleDates": {
+    "actualDates": [
+      "2026-08-30"
+    ],
+    "count": 1,
+    "status": "WARNING",
+    "note": "利用可能な実観測forecast比較日は2026-08-30のみ。複数実日頑健性は未検証で、fixtureを実測扱いしていない"
+  },
+  "missingInputs": {
+    "cases": 10,
+    "fallbackCount": 10,
+    "results": [
+      {
+        "name": "absent",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "name": "undefined",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "name": "primitive",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "name": "empty_object",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "name": "missing_reliability",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "name": "missing_score",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "name": "missing_source",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "name": "missing_critical",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "name": "missing_water_temperature",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "name": "malformed_range",
+        "status": "current_fallback",
+        "currentMaintained": true,
+        "valid": true
+      }
+    ]
+  },
+  "boundary": {
+    "cases": 200,
+    "success": 200,
+    "anomalies": 0,
+    "scoreChanges": 29,
+    "results": [
+      {
+        "currentRaw": 0,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 0.8,
+        "score": 0,
+        "delta": 0.8,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 1.5,
+        "score": 0,
+        "delta": 1.5,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 1.5,
+        "score": 0,
+        "delta": 1.5,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 3,
+        "score": 0,
+        "delta": 3,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 0,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 1.5,
+        "score": 0,
+        "delta": 1.5,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 0,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 3,
+        "score": 0,
+        "delta": 3,
+        "timeFactor": 0.25
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 1.8,
+        "score": 0,
+        "delta": 0.8,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 2.5,
+        "score": 0,
+        "delta": 1.5,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 2.5,
+        "score": 0,
+        "delta": 1.5,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 4,
+        "score": 0,
+        "delta": 3,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 1,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 2.5,
+        "score": 0,
+        "delta": 1.5,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 1,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 4.1,
+        "score": 0,
+        "delta": 3.1,
+        "timeFactor": 0.258
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 28.2,
+        "score": 0,
+        "delta": -0.8,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 27.4,
+        "score": 0,
+        "delta": -1.6,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 28.2,
+        "score": 0,
+        "delta": -0.8,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 27.4,
+        "score": 0,
+        "delta": -1.6,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 29.6,
+        "score": 0,
+        "delta": 0.6,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 30.2,
+        "score": 1,
+        "delta": 1.2,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 31,
+        "score": 1,
+        "delta": 2,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 32.9,
+        "score": 1,
+        "delta": 3.9,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 29,
+        "score": 0,
+        "delta": 0,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 31,
+        "score": 1,
+        "delta": 2,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 29,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 33,
+        "score": 1,
+        "delta": 4,
+        "timeFactor": 0.467
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 29.1,
+        "score": 0,
+        "delta": -0.9,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 28.3,
+        "score": 0,
+        "delta": -1.7,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 29.2,
+        "score": 0,
+        "delta": -0.8,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 28.3,
+        "score": 0,
+        "delta": -1.7,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 30.6,
+        "score": 1,
+        "delta": 0.6,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 31.1,
+        "score": 1,
+        "delta": 1.1,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 32,
+        "score": 1,
+        "delta": 2,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 33.9,
+        "score": 1,
+        "delta": 3.9,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 30,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 32,
+        "score": 1,
+        "delta": 2,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 30,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 34,
+        "score": 1,
+        "delta": 4,
+        "timeFactor": 0.475
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 47.2,
+        "score": 1,
+        "delta": -1.8,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 45.4,
+        "score": 1,
+        "delta": -3.6,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 47.2,
+        "score": 1,
+        "delta": -1.8,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 45.4,
+        "score": 1,
+        "delta": -3.6,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 49.1,
+        "score": 1,
+        "delta": 0.1,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 50.9,
+        "score": 2,
+        "delta": 1.9,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 52.7,
+        "score": 2,
+        "delta": 3.7,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 49,
+        "score": 1,
+        "delta": 0,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 50.9,
+        "score": 2,
+        "delta": 1.9,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 49,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 52.8,
+        "score": 2,
+        "delta": 3.8,
+        "timeFactor": 0.617
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 48.1,
+        "score": 1,
+        "delta": -1.9,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 46.2,
+        "score": 1,
+        "delta": -3.8,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 48.2,
+        "score": 1,
+        "delta": -1.8,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 46.3,
+        "score": 1,
+        "delta": -3.7,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 51.8,
+        "score": 2,
+        "delta": 1.8,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 53.7,
+        "score": 2,
+        "delta": 3.7,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 50,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 51.9,
+        "score": 2,
+        "delta": 1.9,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 50,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 53.8,
+        "score": 2,
+        "delta": 3.8,
+        "timeFactor": 0.625
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 71,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 70.9,
+        "score": 2,
+        "delta": -0.1,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 67.7,
+        "score": 2,
+        "delta": -3.3,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 64.3,
+        "score": 2,
+        "delta": -6.7,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 71,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 70.9,
+        "score": 2,
+        "delta": -0.1,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 67.7,
+        "score": 2,
+        "delta": -3.3,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 64.4,
+        "score": 2,
+        "delta": -6.6,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 71,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 71,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 70,
+        "score": 2,
+        "delta": -1,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 69,
+        "score": 2,
+        "delta": -2,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 71,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 71,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 72.3,
+        "score": 3,
+        "delta": 1.3,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 73.6,
+        "score": 3,
+        "delta": 2.6,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 71,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 71,
+        "score": 2,
+        "delta": 0,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 72.4,
+        "score": 3,
+        "delta": 1.4,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 71,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 73.7,
+        "score": 3,
+        "delta": 2.7,
+        "timeFactor": 0.782
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 72,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 71.9,
+        "score": 2,
+        "delta": -0.1,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 68.6,
+        "score": 2,
+        "delta": -3.4,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 65.2,
+        "score": 2,
+        "delta": -6.8,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 72,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 71.9,
+        "score": 2,
+        "delta": -0.1,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 68.6,
+        "score": 2,
+        "delta": -3.4,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 65.3,
+        "score": 2,
+        "delta": -6.7,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 72,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 72,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 71,
+        "score": 2,
+        "delta": -1,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 69.9,
+        "score": 2,
+        "delta": -2.1,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 72,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 72,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 73.3,
+        "score": 3,
+        "delta": 1.3,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 74.6,
+        "score": 3,
+        "delta": 2.6,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 72,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 72,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 73.3,
+        "score": 3,
+        "delta": 1.3,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 72,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 74.7,
+        "score": 3,
+        "delta": 2.7,
+        "timeFactor": 0.79
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 99,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 98.9,
+        "score": 3,
+        "delta": -0.1,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 93.1,
+        "score": 3,
+        "delta": -5.9,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 91,
+        "score": 3,
+        "delta": -8,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 99,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 98.9,
+        "score": 3,
+        "delta": -0.1,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 93.2,
+        "score": 3,
+        "delta": -5.8,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 91,
+        "score": 3,
+        "delta": -8,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 99,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 98.9,
+        "score": 3,
+        "delta": -0.1,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 96.1,
+        "score": 3,
+        "delta": -2.9,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 93.2,
+        "score": 3,
+        "delta": -5.8,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 99,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 99,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 99,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 99,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 99,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 99,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 99.1,
+        "score": 3,
+        "delta": 0.1,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 99,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 99.1,
+        "score": 3,
+        "delta": 0.1,
+        "timeFactor": 0.992
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0,
+        "reliability": 0,
+        "raw": 100,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "raw": 99.9,
+        "score": 3,
+        "delta": -0.1,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0,
+        "reliability": 0.5,
+        "raw": 94,
+        "score": 3,
+        "delta": -6,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0,
+        "reliability": 1,
+        "raw": 92,
+        "score": 3,
+        "delta": -8,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.01,
+        "reliability": 0,
+        "raw": 100,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.01,
+        "reliability": 0.01,
+        "raw": 99.9,
+        "score": 3,
+        "delta": -0.1,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.01,
+        "reliability": 0.5,
+        "raw": 94.1,
+        "score": 3,
+        "delta": -5.9,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.01,
+        "reliability": 1,
+        "raw": 92,
+        "score": 3,
+        "delta": -8,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.5,
+        "reliability": 0,
+        "raw": 100,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.5,
+        "reliability": 0.01,
+        "raw": 99.9,
+        "score": 3,
+        "delta": -0.1,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.5,
+        "reliability": 0.5,
+        "raw": 97,
+        "score": 3,
+        "delta": -3,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.5,
+        "reliability": 1,
+        "raw": 94,
+        "score": 3,
+        "delta": -6,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.99,
+        "reliability": 0,
+        "raw": 100,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.99,
+        "reliability": 0.01,
+        "raw": 100,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.99,
+        "reliability": 0.5,
+        "raw": 99.9,
+        "score": 3,
+        "delta": -0.1,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 0.99,
+        "reliability": 1,
+        "raw": 99.9,
+        "score": 3,
+        "delta": -0.1,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 1,
+        "reliability": 0,
+        "raw": 100,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "raw": 100,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 1,
+        "reliability": 0.5,
+        "raw": 100,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 1
+      },
+      {
+        "currentRaw": 100,
+        "presenceScore": 1,
+        "reliability": 1,
+        "raw": 100,
+        "score": 3,
+        "delta": 0,
+        "timeFactor": 1
+      }
+    ]
+  },
+  "safety": {
+    "cases": 4,
+    "passed": 4,
+    "results": [
+      {
+        "presenceScore": 0,
+        "reliability": 0.01,
+        "status": "safety_passthrough",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "presenceScore": 0,
+        "reliability": 1,
+        "status": "safety_passthrough",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "presenceScore": 1,
+        "reliability": 0.01,
+        "status": "safety_passthrough",
+        "currentMaintained": true,
+        "valid": true
+      },
+      {
+        "presenceScore": 1,
+        "reliability": 1,
+        "status": "safety_passthrough",
+        "currentMaintained": true,
+        "valid": true
+      }
+    ]
+  },
+  "mathematicalProperties": {
+    "timeFactorRange": true,
+    "timeFactorMonotonic": true,
+    "reliabilityMonotonic": true,
+    "deltaSignPreserved": true,
+    "clampRespected": true,
+    "deterministic": true
+  },
+  "boundaryStability": [
+    {
+      "threshold": 30,
+      "inputs": [
+        29.99,
+        30,
+        30.01
+      ],
+      "outputs": [
+        {
+          "raw": 32.3,
+          "score": 1,
+          "delta": 2.3
+        },
+        {
+          "raw": 32.3,
+          "score": 1,
+          "delta": 2.3
+        },
+        {
+          "raw": 32.3,
+          "score": 1,
+          "delta": 2.3
+        }
+      ],
+      "deterministic": true
+    },
+    {
+      "threshold": 50,
+      "inputs": [
+        49.99,
+        50,
+        50.01
+      ],
+      "outputs": [
+        {
+          "raw": 51.8,
+          "score": 2,
+          "delta": 1.8
+        },
+        {
+          "raw": 51.8,
+          "score": 2,
+          "delta": 1.8
+        },
+        {
+          "raw": 51.8,
+          "score": 2,
+          "delta": 1.8
+        }
+      ],
+      "deterministic": true
+    },
+    {
+      "threshold": 72,
+      "inputs": [
+        71.99,
+        72,
+        72.01
+      ],
+      "outputs": [
+        {
+          "raw": 72.6,
+          "score": 3,
+          "delta": 0.6
+        },
+        {
+          "raw": 72.6,
+          "score": 3,
+          "delta": 0.6
+        },
+        {
+          "raw": 72.6,
+          "score": 3,
+          "delta": 0.6
+        }
+      ],
+      "deterministic": true
+    }
+  ],
+  "randomValidation": {
+    "seed": 20260905,
+    "cases": 100000,
+    "success": 100000,
+    "anomalies": 0,
+    "scoreChanges": 3315,
+    "minRaw": 0,
+    "maxRaw": 100,
+    "minDelta": -8,
+    "maxDelta": 4
+  },
+  "summary": {
+    "executions": 105295,
+    "success": 105295,
+    "anomalies": 0,
+    "fallbackCount": 2026,
+    "durationMs": 126
+  },
+  "assessment": {
+    "status": "WARNING",
+    "robustness": "PASS",
+    "warning": "複数実観測日が不足",
+    "productionIntegration": "HOLD",
+    "accuracyEvaluated": false
+  },
+  "issues": []
+}

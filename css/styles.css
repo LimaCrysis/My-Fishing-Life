@@ -3889,3 +3889,19 @@ html[data-theme="dark"] .fish-touch.danger{background:#472329!important;border-c
 html[data-theme="dark"] .fish-touch.danger p{color:#f1c2bd!important}
 
 @media(max-width:390px){.theme-options{grid-template-columns:1fr}.theme-options label:last-child{grid-column:auto}.theme-options label>span{min-height:60px}}
+/* Phase 14: lightweight fishing-target and catch-time inputs */
+.target-species-field{margin:4px 0 12px;padding:12px;border:1px solid var(--surface-border);border-radius:14px;background:var(--surface-raised);color:var(--surface-ink)}
+.target-species-field summary{min-height:44px;display:flex;align-items:center;font-weight:800;cursor:pointer}
+.target-species-field>p{margin:0 0 10px;color:var(--surface-muted);font-size:.86rem}
+.target-species-picker{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:210px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.target-species-picker label{min-width:0;margin:0;position:relative}
+.target-species-picker input{position:absolute;opacity:0;pointer-events:none}
+.target-species-picker span{display:flex;align-items:center;justify-content:center;min-height:42px;padding:7px 8px;border:1px solid var(--surface-border);border-radius:11px;background:var(--surface);color:var(--surface-ink);font-size:.88rem;text-align:center}
+.target-species-picker input:checked+span{border-color:var(--accent);background:var(--soft);color:var(--surface-ink);font-weight:800;box-shadow:inset 0 0 0 1px var(--accent)}
+.evaluation-backup-card{background:var(--surface-raised);color:var(--surface-ink);border-color:var(--surface-border)}
+.storage-state{display:inline-flex;align-items:center;min-height:30px;padding:4px 10px;border:1px solid var(--surface-border);border-radius:999px;background:var(--soft);color:var(--surface-ink);font-size:.78rem;font-weight:800;white-space:nowrap}
+.storage-state.warning{background:#fff3cd;color:#6f4d00;border-color:#e9c760}.storage-state.critical,.storage-state.storage_failed{background:#ffe1de;color:#8d1e14;border-color:#e9a19a}
+html[data-theme="dark"] .storage-state.warning{background:#493c18;color:#ffe69b;border-color:#7e692d}html[data-theme="dark"] .storage-state.critical,html[data-theme="dark"] .storage-state.storage_failed{background:#522923;color:#ffd2cc;border-color:#875048}
+.storage-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}.storage-summary div{padding:9px 10px;border:1px solid var(--surface-border);border-radius:10px;background:var(--soft)}.storage-summary dt{font-size:.75rem;color:var(--surface-muted)}.storage-summary dd{margin:3px 0 0;font-weight:800;color:var(--surface-ink)}.backup-status{display:block;min-height:1.4em;margin-top:8px;color:var(--surface-muted);font-size:.82rem;overflow-wrap:anywhere}
+.evaluation-time-fields{align-items:end}
+@media(max-width:350px){.target-species-picker{grid-template-columns:1fr}.evaluation-time-fields{grid-template-columns:1fr}}

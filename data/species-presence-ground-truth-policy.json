@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "13-ground-truth-pre-registration",
+  "status": "pre_registered",
+  "lockedAt": "2026-09-05",
+  "purpose": "実釣結果を知る前にCURRENT/C-M共通の照合・除外・最低標本条件を固定する。",
+  "labels": {
+    "positive": "対象spot・date・speciesと照合できるcatchがあり、時刻品質がexactまたはapproximate。",
+    "negative": "対象魚種を含む明示的なfishing effortが60分以上あり、同じ評価窓で対象魚種catchがない。",
+    "unknown": "未釣行、対象魚不明、時間・場所・魚種・effort不足、または記録なし。UnknownをNegativeへ変換しない。"
+  },
+  "effort": {
+    "minimumMinutesForNegative": 60,
+    "requiresExplicitPerformed": true,
+    "requiresExplicitTargetSpecies": true,
+    "absenceIsNotEffort": true
+  },
+  "timeMatching": {
+    "exact": "記録時刻がexactの場合、その時刻を含む1時間だけ照合する。",
+    "approximate": "記録時刻がapproximateの場合、中心時刻±1時間を候補として別集計する。exactと混在させない。",
+    "fishingWindow": "適格negativeは明示されたstart以上end未満の各時間をfishing-window評価として扱う。",
+    "unknown": "時刻不明は評価対象外。"
+  },
+  "snapshot": {
+    "requiredMode": "pre_event",
+    "requiredFields": ["capturedAt", "targetDate", "spotId", "speciesId", "hour", "currentRaw", "currentStage", "cmRaw", "cmStage", "presence", "reliability", "fallback", "safety", "inputIdentifiers", "immutableHash"],
+    "rule": "capturedAtが実釣結果のrecordedAtより前で、保存済み値を再計算せず照合する。",
+    "retroactiveSnapshotsExcluded": true
+  },
+  "exclusions": [
+    "safety_stop",
+    "no_fishing_effort",
+    "spot_unmatched",
+    "species_unmatched",
+    "time_unmatched",
+    "snapshot_missing",
+    "snapshot_not_pre_event",
+    "snapshot_integrity_failed",
+    "target_effort_insufficient"
+  ],
+  "comparisonFairness": {
+    "sameLabels": true,
+    "sameTimeTolerance": true,
+    "sameSpeciesMapping": true,
+    "sameFallbackPolicy": true,
+    "outcomeDependentThresholdChanges": false
+  },
+  "metrics": {
+    "positiveStageDistribution": "positive時のCURRENT/C-M stage分布",
+    "missCandidate": "positiveだがstage 0または1だった件数。精度断定には使わない。",
+    "falseElevationCandidate": "適格negative窓でstage 2または3だった件数。false positiveとは断定しない。",
+    "stageCalibration": "stage 0〜3ごとのpositive率。最低標本到達後のみ。",
+    "withinTripRanking": "同一釣行日のpositive時間が各方式の上位時間帯に含まれた割合。"
+  },
+  "minimumSamplePolicy": {
+    "observedDays": 10,
+    "spots": 3,
+    "eligibleUnits": 100,
+    "positive": 30,
+    "adequateNegative": 30,
+    "species": 3,
+    "maximumSingleSpeciesShare": 0.6,
+    "preEventSnapshotRate": 1,
+    "decisionWhenBelow": "INSUFFICIENT_DATA"
+  },
+  "spotAliases": {
+    "kashima": ["kashima", "鹿島港魚釣園"],
+    "kemigawa_beach": ["kemigawa_beach", "検見川浜"],
+    "ichihara": ["ichihara", "市原海づり施設"],
+    "kisarazu_uchiko": ["kisarazu_uchiko", "木更津内港公園"],
+    "futtsu_area": ["futtsu_area", "富津地区"],
+    "urayasu_chidori": ["urayasu_chidori", "浦安千鳥"],
+    "edogawa_hosuiro": ["edogawa_hosuiro", "江戸川放水路"],
+    "tateyama_sunset": ["tateyama_sunset", "館山夕日桟橋"],
+    "choshi-marina-coast": ["choshi-marina-coast", "銚子マリーナ", "銚子マリーナ・名洗"],
+    "choshi-nagasaki-coast": ["choshi-nagasaki-coast", "長崎海岸"],
+    "asahi-ioka-coast": ["asahi-ioka-coast", "飯岡・旭海岸"],
+    "onjuku-coast": ["onjuku-coast", "御宿海岸"],
+    "kamogawa-coast": ["kamogawa-coast", "鴨川・前原海岸"],
+    "kawarago": ["kawarago", "河原子海岸"],
+    "hiraiso": ["hiraiso", "平磯周辺の岩場"],
+    "honmoku": ["honmoku", "本牧海づり施設"],
+    "isogo": ["isogo", "磯子海づり施設"],
+    "daikoku": ["daikoku", "大黒海づり施設"],
+    "higashiogishima": ["higashiogishima", "東扇島西公園"],
+    "umibetsuri": ["umibetsuri", "海辺つり公園"],
+    "umikaze": ["umikaze", "うみかぜ公園"],
+    "aicle": ["aicle", "アイクル海釣りコーナー"]
+  }
+}

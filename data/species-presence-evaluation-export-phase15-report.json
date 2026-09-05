@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "15-evaluation-export-and-capacity",
+  "generatedAt": "2026-09-05T10:21:29.760Z",
+  "storageAudit": {
+    "keys": [
+      "mfl_trips",
+      "mfl_catches",
+      "mfl_activeTrip",
+      "mfl_evaluation_forecast_snapshots_v1"
+    ],
+    "counts": {
+      "trips": 1,
+      "catches": 1,
+      "snapshots": 1
+    },
+    "sizes": {
+      "trips": 280,
+      "catches": 275,
+      "snapshots": 459,
+      "evaluationTotal": 1014,
+      "mflTotal": 1070
+    },
+    "sizeMethod": "TextEncoderによるUTF-8相当byte概算。ブラウザquotaそのものではない",
+    "mflTotalEstimated": true
+  },
+  "thresholds": {
+    "softLimitBytes": 4194304,
+    "warningBytes": 2516582,
+    "criticalBytes": 3565158,
+    "rationale": "ブラウザ固有quotaを断定せず、4MiBをMFL自主soft limitとして60%/85%で段階通知"
+  },
+  "quotaFailure": {
+    "results": [
+      {
+        "ok": false,
+        "key": "mfl_evaluation_forecast_snapshots_v1",
+        "kind": "mfl_evaluation_forecast_snapshots_v1",
+        "errorName": "QuotaExceededError",
+        "message": "quota"
+      },
+      {
+        "ok": false,
+        "key": "mfl_trips",
+        "kind": "mfl_trips",
+        "errorName": "QuotaExceededError",
+        "message": "quota"
+      },
+      {
+        "ok": false,
+        "key": "mfl_catches",
+        "kind": "mfl_catches",
+        "errorName": "QuotaExceededError",
+        "message": "quota"
+      }
+    ],
+    "snapshot": "非阻害。storage_failedを返し事前snapshot不足として除外",
+    "tripCatch": "成功画面へ進まず、明示的な保存失敗案内"
+  },
+  "export": {
+    "schema": "mfl-evaluation-export/1.0.0",
+    "filename": "mfl-evaluation-export-2026-09-05-1921.json",
+    "manifest": {
+      "exportSchemaVersion": "mfl-evaluation-export/1.0.0",
+      "exportedAt": "2026-09-05T10:21:29.698Z",
+      "appVersion": "14.30.1",
+      "timezone": "Asia/Tokyo",
+      "counts": {
+        "trips": 1,
+        "catches": 1,
+        "snapshots": 1
+      },
+      "sourceStorageKeys": [
+        "mfl_trips",
+        "mfl_catches",
+        "mfl_activeTrip",
+        "mfl_evaluation_forecast_snapshots_v1"
+      ],
+      "classification": {
+        "trips": {
+          "real": 0,
+          "fixture": 1,
+          "synthetic": 0
+        },
+        "catches": {
+          "real": 0,
+          "fixture": 1,
+          "synthetic": 0
+        },
+        "snapshots": {
+          "real": 1,
+          "fixture": 0,
+          "synthetic": 0
+        }
+      },
+      "integrity": {
+        "algorithm": "fnv1a-32-stable-json",
+        "snapshotHashesPreserved": true,
+        "payloadHash": "fnv1a:63ff11a4"
+      },
+      "localOnly": true
+    },
+    "targets": [
+      "mfl_trips",
+      "mfl_catches",
+      "mfl_evaluation_forecast_snapshots_v1",
+      "Phase13/14 schema metadata"
+    ],
+    "deletesSource": false,
+    "externalTransmission": false
+  },
+  "integrity": {
+    "snapshotHashesPreserved": true,
+    "exportPayloadHash": "fnv1a:63ff11a4",
+    "algorithm": "fnv1a-32-stable-json"
+  },
+  "duplicates": {
+    "strategy": [
+      "trip id",
+      "catch id",
+      "snapshot immutableHash、なければcompound key"
+    ],
+    "preview": {
+      "valid": true,
+      "writePerformed": false,
+      "duplicates": {
+        "trips": 1,
+        "catches": 1,
+        "snapshots": 1
+      },
+      "newItems": {
+        "trips": 0,
+        "catches": 0,
+        "snapshots": 0
+      }
+    }
+  },
+  "import": {
+    "status": "DESIGN_ONLY",
+    "writesExistingData": false,
+    "validates": [
+      "schema",
+      "structure",
+      "payload hash",
+      "snapshot hash",
+      "duplicates"
+    ],
+    "uiExposed": false
+  },
+  "endToEnd": {
+    "flow": [
+      "trip start",
+      "pre-event snapshot",
+      "catch",
+      "trip end",
+      "storage audit",
+      "Phase13 adapter",
+      "INSUFFICIENT_DATA",
+      "JSON export",
+      "export validation"
+    ],
+    "adapterIncluded": true,
+    "sampleStatus": "INSUFFICIENT_DATA",
+    "passed": true
+  },
+  "failurePath": {
+    "snapshotNonBlocking": true,
+    "tripFailureDetected": true,
+    "catchFailureDetected": true,
+    "missingSnapshotExcludedByPhase13": true
+  },
+  "performance": [
+    {
+      "tripCount": 10,
+      "snapshotCount": 100,
+      "exportBytes": 49312,
+      "exportMs": 3.894,
+      "sizeMs": 0.401,
+      "status": "normal"
+    },
+    {
+      "tripCount": 25,
+      "snapshotCount": 250,
+      "exportBytes": 122437,
+      "exportMs": 4.447,
+      "sizeMs": 0.449,
+      "status": "normal"
+    },
+    {
+      "tripCount": 50,
+      "snapshotCount": 500,
+      "exportBytes": 244312,
+      "exportMs": 9.512,
+      "sizeMs": 0.987,
+      "status": "normal"
+    },
+    {
+      "tripCount": 100,
+      "snapshotCount": 1000,
+      "exportBytes": 488068,
+      "exportMs": 17.545,
+      "sizeMs": 1.847,
+      "status": "normal"
+    }
+  ],
+  "ui": {
+    "location": "設定 > 釣行データのバックアップ",
+    "terms": "通常ユーザー向け",
+    "cmVisible": false,
+    "localFileOnly": true
+  },
+  "knownLimitations": [
+    "正確なブラウザquotaは取得できないため使用量と閾値は推定",
+    "Importは検証previewのみで書込み・merge UIなし",
+    "localStorageが完全に満杯の場合、snapshot失敗status自体も永続化できない可能性",
+    "iOSの保存先・共有UIはSafariと端末設定に依存"
+  ],
+  "assessment": {
+    "status": "READY",
+    "formalComparison": "INSUFFICIENT_DATA",
+    "productionIntegration": "HOLD",
+    "checkpointCandidate": "Phase 11-15 tests passing required",
+    "nextPhaseRequiresApproval": true
+  }
+}

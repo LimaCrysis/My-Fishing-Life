@@ -1,0 +1,302 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "14-evaluation-data-collection",
+  "mode": "local_collection",
+  "generatedAt": "2026-09-05T09:33:17.967Z",
+  "collectionSchema": {
+    "file": "data/species-presence-evaluation-collection-schema.json",
+    "version": "1.0.0",
+    "tripExtension": {
+      "fields": [
+        "spotId",
+        "startTimestamp",
+        "endTimestamp",
+        "timezone",
+        "evaluationSchemaVersion",
+        "targetSpeciesIds",
+        "targetSpeciesHistory",
+        "effortMinutes",
+        "effortQuality",
+        "forecastSnapshotStatus"
+      ]
+    },
+    "catchExtension": {
+      "fields": [
+        "spotId",
+        "speciesId",
+        "catchTimestamp",
+        "catchTimeQuality",
+        "timezone",
+        "evaluationSchemaVersion",
+        "recordedAt"
+      ]
+    },
+    "snapshot": {
+      "compact": true,
+      "required": [
+        "tripId",
+        "captureMode",
+        "capturedAt",
+        "targetDate",
+        "spotId",
+        "speciesId",
+        "hour",
+        "currentRaw",
+        "currentStage",
+        "cmRaw",
+        "cmStage",
+        "presence",
+        "reliability",
+        "fallback",
+        "safety",
+        "inputIdentifiers",
+        "immutableHash"
+      ]
+    }
+  },
+  "dataClassification": {
+    "automatic": [
+      "trip ID",
+      "selected spot ID",
+      "date",
+      "start/end timestamp",
+      "timezone",
+      "effort duration",
+      "catch ID",
+      "catch timestamp default",
+      "species ID normalization",
+      "schema version",
+      "pre-event CURRENT/C-M/Presence snapshot",
+      "integrity hash"
+    ],
+    "userInput": [
+      "fishing spot when not already selected",
+      "target species optional/multiple",
+      "catch species",
+      "catch time correction",
+      "exact/approximate/unknown"
+    ],
+    "neverInferred": [
+      "nearby spot assignment",
+      "unknown species assignment",
+      "missing effort as negative",
+      "forgotten end as completed effort",
+      "retroactive snapshot as pre-event"
+    ]
+  },
+  "tripLifecycle": {
+    "start": "既存tripへ任意追加field。先に保存しsnapshotは非同期",
+    "end": "endTimestampとdurationを自動計算",
+    "forgotten": "start/end不整合または18時間超はeffortQuality incomplete",
+    "targetSpecies": "任意・複数。初期版は釣行全体のみで変更履歴UIなし"
+  },
+  "catchLifecycle": {
+    "defaultTime": "登録時現在時刻・exact",
+    "correction": [
+      "approximate",
+      "unknown"
+    ],
+    "existingCatch": "専用時刻がない旧記録はunknown"
+  },
+  "snapshotFlow": {
+    "trigger": "釣行開始保存後",
+    "hours": "開始時点より後の未経過hourのみ",
+    "contents": [
+      "tripId",
+      "captureMode",
+      "capturedAt",
+      "targetDate",
+      "spotId",
+      "speciesId",
+      "hour",
+      "currentRaw",
+      "currentStage",
+      "cmRaw",
+      "cmStage",
+      "presence",
+      "reliability",
+      "fallback",
+      "safety",
+      "inputIdentifiers",
+      "immutableHash"
+    ],
+    "failure": "trip開始を妨げずunavailableを記録",
+    "storageKey": "mfl_evaluation_forecast_snapshots_v1",
+    "appendOnly": true,
+    "automaticDeletion": false,
+    "externalTransmission": false
+  },
+  "storageEstimate": {
+    "measuredCompactSnapshotBytes": 438,
+    "estimatedSnapshotsPerTrip": {
+      "min": 100,
+      "max": 300
+    },
+    "estimatedPerTripKB": {
+      "min": 43,
+      "max": 128
+    },
+    "estimated40TripsMB": {
+      "min": 1.67,
+      "max": 5.01
+    },
+    "quotaBehavior": "古い原本を削除せずstorage_failed。JSON exportは次段階候補"
+  },
+  "adapter": {
+    "flow": [
+      "mfl_trips/mfl_catches",
+      "Phase14 extension",
+      "Phase13 normalization",
+      "eligibility"
+    ],
+    "phase13RulesDuplicated": false,
+    "currentVsCmSameSnapshot": true,
+    "result": {
+      "records": 1,
+      "included": 1,
+      "excluded": 0,
+      "labels": {
+        "positive": 1,
+        "negative": 0,
+        "unknown": 0
+      },
+      "classifications": {
+        "real": 1,
+        "fixture": 0,
+        "synthetic": 0,
+        "unknown": 0
+      },
+      "exclusionReasons": {}
+    },
+    "status": "INSUFFICIENT_DATA"
+  },
+  "compatibility": {
+    "existingTripReadable": true,
+    "existingCatchReadable": true,
+    "missingFieldsBecomeUnknown": true,
+    "localStorageKeysPreserved": true,
+    "migrationRequired": false,
+    "repositoryRealRecords": 0
+  },
+  "ui": {
+    "changes": [
+      "登録済み釣り場の任意選択",
+      "狙う魚の任意複数選択",
+      "catch時刻と時刻目安"
+    ],
+    "researchTermsVisible": false,
+    "cmVisible": false,
+    "currentForecastChanged": false
+  },
+  "fixture": {
+    "classification": "fixture",
+    "cases": 11,
+    "checks": [
+      {
+        "name": "trip_start",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "target_species",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "target_optional",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "effort_duration",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "under_60_preserved",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "forgotten_end_incomplete",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "exact_catch",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "approximate_catch",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "snapshot_success",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "snapshot_failure_non_blocking",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "snapshot_hash",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "phase13_adapter",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "insufficient_data",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "fixture_separate",
+        "passed": true,
+        "detail": null
+      },
+      {
+        "name": "existing_records_untouched",
+        "passed": true,
+        "detail": null
+      }
+    ],
+    "passed": 15,
+    "failed": 0,
+    "realRecordsAdded": 0
+  },
+  "privacy": {
+    "localOnly": true,
+    "externalUpload": false,
+    "publicDataFetchOnly": true
+  },
+  "knownLimitations": [
+    "狙い魚種の途中変更UIは未実装（schemaにhistory受け皿のみ）",
+    "過去日開始では事前snapshotを取得しない",
+    "旧catchは専用時刻がないためunknown",
+    "localStorage容量到達時はexport未実装",
+    "履歴警報・施設状態はsnapshot再現入力に含められない場合がある"
+  ],
+  "protection": {
+    "currentFormulaChanged": false,
+    "cmFormulaChanged": false,
+    "presenceCalibrationChanged": false,
+    "stageThresholdChanged": false,
+    "cmShownInUi": false,
+    "productionIntegration": "HOLD",
+    "biasesChanged": false
+  },
+  "assessment": {
+    "status": "READY",
+    "formalComparison": "INSUFFICIENT_DATA",
+    "productionIntegration": "HOLD",
+    "nextPhaseRequiresApproval": true
+  }
+}

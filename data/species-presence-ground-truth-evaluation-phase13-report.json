@@ -1,0 +1,395 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase": "13-ground-truth-evaluation-pre-registration",
+  "mode": "research_only",
+  "generatedAt": "2026-09-05T09:08:18.709Z",
+  "policy": {
+    "file": "data/species-presence-ground-truth-policy.json",
+    "lockedAt": "2026-09-05",
+    "status": "pre_registered",
+    "labelDefinitions": {
+      "positive": "対象spot・date・speciesと照合できるcatchがあり、時刻品質がexactまたはapproximate。",
+      "negative": "対象魚種を含む明示的なfishing effortが60分以上あり、同じ評価窓で対象魚種catchがない。",
+      "unknown": "未釣行、対象魚不明、時間・場所・魚種・effort不足、または記録なし。UnknownをNegativeへ変換しない。"
+    },
+    "effort": {
+      "minimumMinutesForNegative": 60,
+      "requiresExplicitPerformed": true,
+      "requiresExplicitTargetSpecies": true,
+      "absenceIsNotEffort": true
+    },
+    "timeMatching": {
+      "exact": "記録時刻がexactの場合、その時刻を含む1時間だけ照合する。",
+      "approximate": "記録時刻がapproximateの場合、中心時刻±1時間を候補として別集計する。exactと混在させない。",
+      "fishingWindow": "適格negativeは明示されたstart以上end未満の各時間をfishing-window評価として扱う。",
+      "unknown": "時刻不明は評価対象外。"
+    },
+    "snapshot": {
+      "requiredMode": "pre_event",
+      "requiredFields": [
+        "capturedAt",
+        "targetDate",
+        "spotId",
+        "speciesId",
+        "hour",
+        "currentRaw",
+        "currentStage",
+        "cmRaw",
+        "cmStage",
+        "presence",
+        "reliability",
+        "fallback",
+        "safety",
+        "inputIdentifiers",
+        "immutableHash"
+      ],
+      "rule": "capturedAtが実釣結果のrecordedAtより前で、保存済み値を再計算せず照合する。",
+      "retroactiveSnapshotsExcluded": true
+    },
+    "exclusions": [
+      "safety_stop",
+      "no_fishing_effort",
+      "spot_unmatched",
+      "species_unmatched",
+      "time_unmatched",
+      "snapshot_missing",
+      "snapshot_not_pre_event",
+      "snapshot_integrity_failed",
+      "target_effort_insufficient"
+    ],
+    "comparisonFairness": {
+      "sameLabels": true,
+      "sameTimeTolerance": true,
+      "sameSpeciesMapping": true,
+      "sameFallbackPolicy": true,
+      "outcomeDependentThresholdChanges": false
+    },
+    "metrics": {
+      "positiveStageDistribution": "positive時のCURRENT/C-M stage分布",
+      "missCandidate": "positiveだがstage 0または1だった件数。精度断定には使わない。",
+      "falseElevationCandidate": "適格negative窓でstage 2または3だった件数。false positiveとは断定しない。",
+      "stageCalibration": "stage 0〜3ごとのpositive率。最低標本到達後のみ。",
+      "withinTripRanking": "同一釣行日のpositive時間が各方式の上位時間帯に含まれた割合。"
+    },
+    "minimumSamplePolicy": {
+      "observedDays": 10,
+      "spots": 3,
+      "eligibleUnits": 100,
+      "positive": 30,
+      "adequateNegative": 30,
+      "species": 3,
+      "maximumSingleSpeciesShare": 0.6,
+      "preEventSnapshotRate": 1,
+      "decisionWhenBelow": "INSUFFICIENT_DATA"
+    }
+  },
+  "existingStorageAudit": {
+    "mflTrips": {
+      "storage": "localStorage:mfl_trips",
+      "shape": "[{id,place,date,start,weather,note,ended,end?}]",
+      "readByPhase13": false,
+      "reason": "本番localStorageを研究処理から直接参照しない"
+    },
+    "mflCatches": {
+      "storage": "localStorage:mfl_catches",
+      "shape": "[{id,tripId,place,date,fishName,tackleId,size,count,method,rig,result,...,createdAt}]",
+      "readByPhase13": false,
+      "limitations": [
+        "catchTime専用項目なし",
+        "target species/effort minutesなし",
+        "記録なしをnegativeにできない"
+      ]
+    },
+    "fishingDays": {
+      "storage": "localStorage:mfl_fishingDays",
+      "use": "予定日",
+      "groundTruthEligible": false
+    },
+    "performanceSchema": {
+      "file": "data/fishing-performance-schema.json",
+      "records": 0,
+      "realRecords": 0
+    },
+    "experimentalFeedback": {
+      "file": "data/fishing-forecast-feedback-experimental.json",
+      "records": 3,
+      "classification": "experimentalFixture",
+      "realRecords": 0
+    },
+    "phase12Snapshots": {
+      "days": 5,
+      "groundTruthEligible": false,
+      "reason": "結果日後に取得した安定性検証用snapshotで、pre-event forecastではない"
+    }
+  },
+  "normalization": {
+    "spot": "policyの明示alias完全一致のみ。距離による自動割当なし",
+    "species": "data/species-name-mapping.jsonのID/canonical/alias完全一致。不明魚種はunmatched",
+    "mflAdapter": "明示的に渡された配列だけを読み取り、既存形式を変更しない"
+  },
+  "fixtureTest": {
+    "classification": "fixture",
+    "records": 9,
+    "snapshots": 8,
+    "passed": 9,
+    "failed": 0,
+    "summary": {
+      "records": 9,
+      "included": 3,
+      "excluded": 6,
+      "labels": {
+        "positive": 5,
+        "negative": 1,
+        "unknown": 3
+      },
+      "classifications": {
+        "real": 0,
+        "fixture": 9,
+        "synthetic": 0,
+        "unknown": 0
+      },
+      "exclusionReasons": {
+        "no_fishing_effort": 3,
+        "safety_stop": 1,
+        "snapshot_missing": 1,
+        "snapshot_not_pre_event": 1,
+        "species_unmatched": 1,
+        "spot_unmatched": 1,
+        "time_unmatched": 3
+      }
+    },
+    "expectations": [
+      {
+        "id": "exact-positive",
+        "passed": true,
+        "expected": {
+          "label": "positive",
+          "included": true,
+          "matchQuality": "exact_hour"
+        },
+        "actual": {
+          "label": "positive",
+          "included": true,
+          "matchQuality": "exact_hour",
+          "exclusionReasons": []
+        }
+      },
+      {
+        "id": "approximate-positive",
+        "passed": true,
+        "expected": {
+          "label": "positive",
+          "included": true,
+          "matchQuality": "approximate_pm1h"
+        },
+        "actual": {
+          "label": "positive",
+          "included": true,
+          "matchQuality": "approximate_pm1h",
+          "exclusionReasons": []
+        }
+      },
+      {
+        "id": "adequate-negative",
+        "passed": true,
+        "expected": {
+          "label": "negative",
+          "included": true,
+          "matchQuality": "fishing_window"
+        },
+        "actual": {
+          "label": "negative",
+          "included": true,
+          "matchQuality": "fishing_window",
+          "exclusionReasons": []
+        }
+      },
+      {
+        "id": "no-effort-unknown",
+        "passed": true,
+        "expected": {
+          "label": "unknown",
+          "included": false,
+          "reason": "no_fishing_effort"
+        },
+        "actual": {
+          "label": "unknown",
+          "included": false,
+          "matchQuality": "none",
+          "exclusionReasons": [
+            "no_fishing_effort",
+            "time_unmatched"
+          ]
+        }
+      },
+      {
+        "id": "unmatched-spot",
+        "passed": true,
+        "expected": {
+          "included": false,
+          "reason": "spot_unmatched"
+        },
+        "actual": {
+          "label": "unknown",
+          "included": false,
+          "matchQuality": "none",
+          "exclusionReasons": [
+            "spot_unmatched",
+            "no_fishing_effort",
+            "time_unmatched"
+          ]
+        }
+      },
+      {
+        "id": "unmatched-species",
+        "passed": true,
+        "expected": {
+          "included": false,
+          "reason": "species_unmatched"
+        },
+        "actual": {
+          "label": "unknown",
+          "included": false,
+          "matchQuality": "none",
+          "exclusionReasons": [
+            "species_unmatched",
+            "no_fishing_effort",
+            "time_unmatched"
+          ]
+        }
+      },
+      {
+        "id": "snapshot-missing",
+        "passed": true,
+        "expected": {
+          "included": false,
+          "reason": "snapshot_missing"
+        },
+        "actual": {
+          "label": "positive",
+          "included": false,
+          "matchQuality": "none",
+          "exclusionReasons": [
+            "snapshot_missing"
+          ]
+        }
+      },
+      {
+        "id": "safety-excluded",
+        "passed": true,
+        "expected": {
+          "included": false,
+          "reason": "safety_stop"
+        },
+        "actual": {
+          "label": "positive",
+          "included": false,
+          "matchQuality": "none",
+          "exclusionReasons": [
+            "safety_stop"
+          ]
+        }
+      },
+      {
+        "id": "post-event-leak",
+        "passed": true,
+        "expected": {
+          "included": false,
+          "reason": "snapshot_not_pre_event"
+        },
+        "actual": {
+          "label": "positive",
+          "included": false,
+          "matchQuality": "none",
+          "exclusionReasons": [
+            "snapshot_not_pre_event"
+          ]
+        }
+      }
+    ]
+  },
+  "realData": {
+    "repositoryRecordCount": 0,
+    "eligibleRecordCount": 0,
+    "status": "INSUFFICIENT_DATA",
+    "reasons": [
+      "observedDays samples too low",
+      "spots samples too low",
+      "eligibleUnits samples too low",
+      "positive samples too low",
+      "adequateNegative samples too low",
+      "species samples too low"
+    ],
+    "requirements": {
+      "observedDays": {
+        "actual": 0,
+        "required": 10
+      },
+      "spots": {
+        "actual": 0,
+        "required": 3
+      },
+      "eligibleUnits": {
+        "actual": 0,
+        "required": 100
+      },
+      "positive": {
+        "actual": 0,
+        "required": 30
+      },
+      "adequateNegative": {
+        "actual": 0,
+        "required": 30
+      },
+      "species": {
+        "actual": 0,
+        "required": 3
+      },
+      "maximumSingleSpeciesShare": {
+        "actual": 0,
+        "requiredMax": 0.6
+      }
+    },
+    "currentVsCmEvaluated": false
+  },
+  "dataLeakagePrevention": {
+    "snapshotMustPrecedeRecordedAt": true,
+    "retroactiveSnapshotExcluded": true,
+    "immutableHashRequired": true,
+    "forecastRecalculationDuringEvaluation": false,
+    "outcomeUsedByForecast": false,
+    "phase12SnapshotsExcluded": true
+  },
+  "protectedFiles": {
+    "hashAlgorithm": "sha256",
+    "hashes": {
+      "js/forecast/forecast-engine.js": "2ac6c59a55e8684203fe72c01570a4e8c8a2a1ffedd6aea49431085a4843fc33",
+      "js/forecast/forecast-features.js": "b5fa39ff03c34048b4572a8e664a15a7667366557e9a033096849fa021b02c7a",
+      "js/forecast/species-presence-timefactor-experiment.js": "9df093834f2cd79cbfe44175c7d5fe50ad9293231bbf198690498d1506f67c79",
+      "data/fishing-forecast-baselines.json": "575d591ae5ea482996004ec2bdbd3cc8736d077e62c77b1fd1857dc75ab7619f",
+      "data/fishing-forecast-spots.json": "51ccef02d8ca5c507657e5944a19bded6e3c9750f61596436970a82b650cae05",
+      "js/tides.js": "164bec547b394798bf531c5a6816422610bbbc1b1c3fdd32d0cb9e7d6bf63ab6",
+      "index.html": "10fff68bd8b57440224da5d62d9736a477d795751d9fcdfb29f003bb6e6e9431",
+      "sw.js": "f4202b1748cea0123d844994192bf6b61a608a83426cd32f7121d18fd2f75a67"
+    },
+    "changedByRunner": false
+  },
+  "production": {
+    "currentChanged": false,
+    "cmChanged": false,
+    "presenceChanged": false,
+    "uiConnected": false,
+    "cacheChanged": false,
+    "localStorageChanged": false,
+    "currentVsCmWinnerDeclared": false,
+    "accuracyClaimed": false,
+    "integration": "HOLD"
+  },
+  "assessment": {
+    "status": "READY",
+    "evaluationFramework": "READY",
+    "formalComparison": "INSUFFICIENT_DATA",
+    "productionIntegration": "HOLD",
+    "nextPhaseRequiresApproval": true
+  }
+}

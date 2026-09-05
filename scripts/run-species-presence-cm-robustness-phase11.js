@@ -1,0 +1,4 @@
+'use strict';
+const fs=require('fs'),path=require('path'),vm=require('vm'),root=path.resolve(__dirname,'..');global.window=global;
+for(const file of['species-presence-shadow-runner.js','species-presence-integration-experiment.js','species-presence-timefactor-experiment.js','species-presence-cm-robustness.js'])vm.runInThisContext(fs.readFileSync(path.join(root,'js/forecast',file),'utf8'),{filename:file});
+const phase7=JSON.parse(fs.readFileSync(path.join(root,'data/species-presence-shadow-phase7-report.json'),'utf8')),report=MFLSpeciesPresenceCMRobustness.validate(phase7),output=path.join(root,'data/species-presence-cm-robustness-phase11-report.json');fs.writeFileSync(output,JSON.stringify(report,null,2)+'\n');process.stdout.write(JSON.stringify({output,summary:report.summary,assessment:report.assessment,multipleDates:report.multipleDates,properties:report.mathematicalProperties,random:report.randomValidation,safety:report.safety},null,2));

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0.0",
+  "classification": "fixture",
+  "note": "Phase 14 lifecycle検証専用。real実績へ保存・集計しない。",
+  "cases": [
+    "trip_start_with_targets",
+    "trip_start_without_targets",
+    "exact_catch",
+    "approximate_catch",
+    "effort_60_or_more",
+    "effort_under_60",
+    "forgotten_end",
+    "snapshot_success",
+    "snapshot_failure",
+    "safety_snapshot",
+    "post_event_catch"
+  ],
+  "trip": {"id":"fixture-trip","place":"鹿島港魚釣園","date":"2026-09-10","start":"15:00","spotId":"kashima","startTimestamp":"2026-09-10T15:00:00+09:00","targetSpeciesIds":["aji"],"effortQuality":"complete","effortMinutes":120,"endTimestamp":"2026-09-10T17:00:00+09:00"},
+  "catch": {"id":"fixture-catch","tripId":"fixture-trip","place":"鹿島港魚釣園","date":"2026-09-10","fishName":"アジ","speciesId":"aji","count":1,"catchTimestamp":"2026-09-10T16:20:00+09:00","catchTimeQuality":"exact","recordedAt":"2026-09-10T17:05:00+09:00"}
+}

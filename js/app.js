@@ -1,4 +1,4 @@
-const APP_VERSION='14.27.1';
+const APP_VERSION='14.30.1';
 const fishMaster = [
   { name:'シロギス', emoji:'🐟', photo:'./assets/fish/kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 , where:'砂地の堤防・海岸。内房や湾内の砂底をちょい投げで探る。', methods:['ちょい投げ','投げ釣り'], bait:'イソメ類', season:'春〜秋', touch:'危険魚ではない。針を外す時は背びれに注意。' },
   { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' , where:'岩礁・テトラ・堤防際などの障害物周り。', methods:['胴突き','穴釣り','ジグヘッド'], bait:'イソメ・魚の切り身・ワーム', season:'通年', touch:'背びれのトゲに注意。' },
@@ -26,7 +26,8 @@ const state = {
   calendarMonth: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
   selectedDate: todayString(),
   lastTackleId: localStorage.getItem('mfl_lastTackleId') || '',
-  lastMethod: localStorage.getItem('mfl_lastMethod') || 'ちょい投げ'
+  lastMethod: localStorage.getItem('mfl_lastMethod') || 'ちょい投げ',
+  selectedFishingSpotId: null
 };
 
 const app = document.getElementById('app');
@@ -38,15 +39,19 @@ const tripForm = document.getElementById('tripForm');
 const tackleDialog = document.getElementById('tackleDialog');
 const tackleForm = document.getElementById('tackleForm');
 
-function save() {
-  localStorage.setItem('mfl_trips', JSON.stringify(state.trips));
-  localStorage.setItem('mfl_catches', JSON.stringify(state.catches));
-  localStorage.setItem('mfl_gear', JSON.stringify(state.gear));
-  localStorage.setItem('mfl_activeTrip', JSON.stringify(state.activeTrip));
-  localStorage.setItem('mfl_tackles', JSON.stringify(state.tackles));
-  localStorage.setItem('mfl_fishingDays', JSON.stringify(state.fishingDays));
-  localStorage.setItem('mfl_lastTackleId', state.lastTackleId || '');
-  localStorage.setItem('mfl_lastMethod', state.lastMethod || 'ちょい投げ');
+function save({criticalKeys=[],notify=false}={}) {
+  const values={mfl_trips:JSON.stringify(state.trips),mfl_catches:JSON.stringify(state.catches),mfl_gear:JSON.stringify(state.gear),mfl_activeTrip:JSON.stringify(state.activeTrip),mfl_tackles:JSON.stringify(state.tackles),mfl_fishingDays:JSON.stringify(state.fishingDays),mfl_lastTackleId:state.lastTackleId||'',mfl_lastMethod:state.lastMethod||'ちょい投げ'},previous={},results=[];
+  for(const[key,value]of Object.entries(values)){
+    previous[key]=localStorage.getItem(key);
+    const result=window.MFLPhase15Export?.safeSetItem(localStorage,key,value,key)||(()=>{try{localStorage.setItem(key,value);return{ok:true,key}}catch(error){return{ok:false,key,errorName:error?.name||'storage_error'}}})();
+    results.push(result);
+  }
+  const criticalFailure=results.find(item=>!item.ok&&criticalKeys.includes(item.key));
+  if(criticalFailure){
+    for(const result of results.filter(item=>item.ok)){try{previous[result.key]===null?localStorage.removeItem(result.key):localStorage.setItem(result.key,previous[result.key])}catch(_){}}
+    if(notify)window.alert('記録を保存できませんでした。端末の空き容量を確認し、設定からバックアップを保存してください。');
+  }
+  return{ok:results.every(item=>item.ok),criticalOk:!criticalFailure,failures:results.filter(item=>!item.ok)};
 }
 let bodyScrollLockCount=0;
 let bodyScrollLockState=null;
@@ -1638,6 +1643,7 @@ function openSeawallFullscreen(s){
 
 
 function showFishingSpot(id,options={}){
+  state.selectedFishingSpotId=id;
   const s=kantoFishingSpots.find(x=>x.id===id);
   if(!s)return;
   const forecastOnly=options.view==='forecast';
@@ -2159,9 +2165,11 @@ function renderGear() {
 
 function renderSettings() {
   const themeChoice=window.MFLTheme?.getChoice?.()||'light';
-  app.innerHTML = `<section class="card"><h2>My Fishing Life</h2><p>釣りに行く前、釣りの最中、帰宅後まで使える自分専用の釣り手帳です。</p></section><section class="card appearance-card"><div class="settings-card-heading"><div><small>APPEARANCE</small><h3>外観</h3></div><span aria-hidden="true">🌊</span></div><p>夜の釣り場でも読みやすい表示を選べます。</p><div class="theme-options" role="radiogroup" aria-label="外観"><label><input type="radio" name="mflTheme" value="light" ${themeChoice==='light'?'checked':''}><span><b>☀️</b><strong>ライト</strong></span></label><label><input type="radio" name="mflTheme" value="dark" ${themeChoice==='dark'?'checked':''}><span><b>🌙</b><strong>ダーク</strong></span></label><label><input type="radio" name="mflTheme" value="system" ${themeChoice==='system'?'checked':''}><span><b>📱</b><strong>端末設定に合わせる</strong></span></label></div><small class="theme-help">「端末設定に合わせる」はiPhoneの外観変更に自動で追従します。</small></section><section class="card app-update-card"><div><small>INSTALLED VERSION</small><h3>v${APP_VERSION}</h3><p>PCとiPhoneで表示が違う時は、ここから最新版を確認できます。</p></div><button class="primary-button" id="updateApp">最新版を確認して更新</button><span id="updateAppStatus" aria-live="polite"></span></section><section class="card"><h3>データ保存</h3><p>記録はこの端末のブラウザ内に保存されます。更新操作では釣行・釣果・設定を削除しません。</p></section><button class="danger-button" id="deleteAll">すべての記録を削除</button>`;
+  const audit=window.MFLPhase15Export?.audit(localStorage),formatBytes=value=>value<1024?`${value} B`:value<1048576?`${(value/1024).toFixed(1)} KB`:`${(value/1048576).toFixed(2)} MB`,statusLabel={normal:'正常',warning:'使用量に注意',critical:'高使用量',storage_failed:'保存失敗'}[audit?.status]||'確認できません';
+  app.innerHTML = `<section class="card"><h2>My Fishing Life</h2><p>釣りに行く前、釣りの最中、帰宅後まで使える自分専用の釣り手帳です。</p></section><section class="card appearance-card"><div class="settings-card-heading"><div><small>APPEARANCE</small><h3>外観</h3></div><span aria-hidden="true">🌊</span></div><p>夜の釣り場でも読みやすい表示を選べます。</p><div class="theme-options" role="radiogroup" aria-label="外観"><label><input type="radio" name="mflTheme" value="light" ${themeChoice==='light'?'checked':''}><span><b>☀️</b><strong>ライト</strong></span></label><label><input type="radio" name="mflTheme" value="dark" ${themeChoice==='dark'?'checked':''}><span><b>🌙</b><strong>ダーク</strong></span></label><label><input type="radio" name="mflTheme" value="system" ${themeChoice==='system'?'checked':''}><span><b>📱</b><strong>端末設定に合わせる</strong></span></label></div><small class="theme-help">「端末設定に合わせる」はiPhoneの外観変更に自動で追従します。</small></section><section class="card app-update-card"><div><small>INSTALLED VERSION</small><h3>v${APP_VERSION}</h3><p>PCとiPhoneで表示が違う時は、ここから最新版を確認できます。</p></div><button class="primary-button" id="updateApp">最新版を確認して更新</button><span id="updateAppStatus" aria-live="polite"></span></section><section class="card evaluation-backup-card"><div class="settings-card-heading"><div><small>LOCAL BACKUP</small><h3>釣行データのバックアップ</h3></div><span class="storage-state ${escapeHtml(audit?.status||'unknown')}">${escapeHtml(statusLabel)}</span></div><p>釣行記録・釣果記録・予測検証用データを、この端末からJSONファイルへ保存します。外部へは送信しません。</p><dl class="storage-summary"><div><dt>釣行</dt><dd>${audit?.counts.trips||0}件</dd></div><div><dt>釣果</dt><dd>${audit?.counts.catches||0}件</dd></div><div><dt>予測記録</dt><dd>${audit?.counts.snapshots||0}件</dd></div><div><dt>評価データ</dt><dd>${audit?formatBytes(audit.sizes.evaluationTotal):'―'}</dd></div><div><dt>MFL全体</dt><dd>${audit?`${formatBytes(audit.sizes.mflTotal)}（推定）`:'―'}</dd></div></dl><button class="primary-button" id="exportEvaluationData" ${audit?'':'disabled'}>JSONバックアップを保存</button><span id="exportEvaluationStatus" class="backup-status" aria-live="polite"></span></section><section class="card"><h3>データ保存</h3><p>記録はこの端末のブラウザ内に保存されます。更新操作では釣行・釣果・設定を削除しません。</p></section><button class="danger-button" id="deleteAll">すべての記録を削除</button>`;
   document.querySelectorAll('input[name="mflTheme"]').forEach(input=>input.onchange=()=>window.MFLTheme?.setChoice(input.value));
   document.getElementById('updateApp').onclick=refreshMFLApp;
+  const exportButton=document.getElementById('exportEvaluationData');if(exportButton)exportButton.onclick=()=>{const status=document.getElementById('exportEvaluationStatus');try{exportButton.disabled=true;status.textContent='バックアップを作成中…';const data=window.MFLPhase15Export.buildExport({storage:localStorage,appVersion:APP_VERSION}),result=window.MFLPhase15Export.download(data);status.textContent=`${result.filename} を保存しました。端末内の原本は残っています。`}catch(_){status.textContent='バックアップを作成できませんでした。時間をおいて再度お試しください。'}finally{exportButton.disabled=false}};
   document.getElementById('deleteAll').onclick = () => {
     if (confirm('すべての釣行・釣果・持ち物チェックを削除しますか？')) {
       if (!confirmDestructiveAction('本当にすべてのMFLデータを削除しますか？', '釣行記録・釣果・写真・タックル・Ocean Rank・予定・設定がすべて消えます。')) return;
@@ -2205,15 +2213,34 @@ function endTrip() {
   const catches = state.catches.filter(c => c.tripId === state.activeTrip.id);
   const count = catches.reduce((n,c) => n + Number(c.count || 0), 0);
   if (!confirm(`${state.activeTrip.place}の釣行を終了しますか？\\n今日の釣果：${count}匹`)) return;
-  if (trip) { trip.ended = true; trip.end = timeString(); }
+  const previousTrip=trip?JSON.parse(JSON.stringify(trip)):null,previousActive=state.activeTrip;
+  if (trip) {
+    trip.ended = true;
+    trip.end = timeString();
+    if(window.MFLPhase14Collection)Object.assign(trip,window.MFLPhase14Collection.finishTripFields(trip));
+  }
   state.activeTrip = null;
-  save(); render();
+  const result=save({criticalKeys:['mfl_trips','mfl_activeTrip'],notify:true});
+  if(!result.criticalOk){if(trip&&previousTrip)Object.assign(trip,previousTrip);state.activeTrip=previousActive;return}
+  render();
 }
 
-function openTrip() {
+async function openTrip() {
   document.getElementById('tripDate').value = todayString();
   document.getElementById('tripStart').value = timeString();
-  tripDialog.showModal();
+  const spotSelect=document.getElementById('tripSpotId');
+  if(spotSelect){
+    spotSelect.innerHTML='<option value="">指定しない</option>'+kantoFishingSpots.map(spot=>`<option value="${escapeHtml(spot.id)}">${escapeHtml(spot.name)}</option>`).join('');
+    if(state.selectedFishingSpotId&&kantoFishingSpots.some(spot=>spot.id===state.selectedFishingSpotId))spotSelect.value=state.selectedFishingSpotId;
+    const syncPlace=()=>{const spot=kantoFishingSpots.find(item=>item.id===spotSelect.value);if(spot)document.getElementById('tripPlace').value=spot.name};spotSelect.onchange=syncPlace;syncPlace();
+  }
+  const targetRoot=document.getElementById('tripTargetSpecies');
+  if(targetRoot){
+    targetRoot.innerHTML='<span class="note">魚種を準備中…</span>';
+    tripDialog.showModal();
+    try{const options=await window.MFLPhase14Collection?.speciesOptions();targetRoot.innerHTML=(options||[]).map(item=>`<label><input type="checkbox" value="${escapeHtml(item.id)}"><span>${escapeHtml(item.name)}</span></label>`).join('')||'<span class="note">魚種を取得できませんでした</span>'}catch(_){targetRoot.innerHTML='<span class="note">魚種を取得できませんでした</span>'}
+  }
+  if(!tripDialog.open)tripDialog.showModal();
 }
 function openTackle() {
   tackleForm.reset();
@@ -2231,6 +2258,9 @@ function openCatch() {
   document.getElementById('method').value = state.lastMethod;
   document.getElementById('fishCount').value = 1;
   document.getElementById('keep').checked = true;
+  const catchIsToday=state.activeTrip.date===todayString();
+  document.getElementById('catchTime').value=catchIsToday?timeString():'';
+  document.getElementById('catchTimeQuality').value=catchIsToday?'exact':'unknown';
   renderQuickFish();
   
   const methodSelect=document.getElementById('method');
@@ -2289,8 +2319,12 @@ tackleForm.addEventListener('submit', e => {
 
 tripForm.addEventListener('submit', e => {
   e.preventDefault();
-  const trip = { id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), place: tripPlace.value.trim(), date: tripDate.value, start: tripStart.value, weather: tripWeather.value, note: tripNote.value.trim(), ended: false };
-  state.trips.unshift(trip); state.activeTrip = trip; save(); tripDialog.close(); tripForm.reset(); render();
+  const id=crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),spotId=document.getElementById('tripSpotId')?.value||null,targetSpeciesIds=[...document.querySelectorAll('#tripTargetSpecies input:checked')].map(input=>input.value),startTimestamp=new Date(`${tripDate.value}T${tripStart.value}:00+09:00`).toISOString(),evaluation=window.MFLPhase14Collection?.startTripFields({spotId,startTimestamp,targetSpeciesIds})||{};
+  const trip = { id, place: tripPlace.value.trim(), date: tripDate.value, start: tripStart.value, weather: tripWeather.value, note: tripNote.value.trim(), ended: false, ...evaluation };
+  const previousActive=state.activeTrip;state.trips.unshift(trip);state.activeTrip=trip;const result=save({criticalKeys:['mfl_trips','mfl_activeTrip'],notify:true});
+  if(!result.criticalOk){state.trips=state.trips.filter(item=>item.id!==trip.id);state.activeTrip=previousActive;return}
+  tripDialog.close();tripForm.reset();render();
+  if(window.MFLPhase14Collection&&spotId)window.MFLPhase14Collection.captureTripSnapshot(trip).then(status=>{const saved=state.trips.find(item=>item.id===trip.id);if(!saved)return;saved.forecastSnapshotStatus=status.status;saved.forecastSnapshotReason=status.reason||null;saved.forecastSnapshotCount=status.added||0;if(state.activeTrip?.id===saved.id)Object.assign(state.activeTrip,{forecastSnapshotStatus:saved.forecastSnapshotStatus,forecastSnapshotReason:saved.forecastSnapshotReason,forecastSnapshotCount:saved.forecastSnapshotCount});const persisted=save({criticalKeys:['mfl_trips','mfl_activeTrip']});if(!persisted.criticalOk){saved.forecastSnapshotStatus='storage_failed';saved.forecastSnapshotReason='trip_status_storage_failed'}});
 });
 
 catchForm.addEventListener('submit', async e => {
@@ -2306,6 +2340,7 @@ catchForm.addEventListener('submit', async e => {
     const file = fishPhoto.files[0];
     if (file) photo = await compressImage(file);
     const result = new FormData(catchForm).get('result');
+    const timeQuality=document.getElementById('catchTimeQuality')?.value||'unknown',timeValue=document.getElementById('catchTime')?.value||'',catchTimestamp=timeQuality==='unknown'||!timeValue?null:new Date(`${state.activeTrip.date}T${timeValue}:00+09:00`).toISOString(),speciesId=window.MFLPhase14Collection?await window.MFLPhase14Collection.speciesIdForName(fishName.value).catch(()=>null):null,evaluation=window.MFLPhase14Collection?.catchFields({spotId:state.activeTrip.spotId,speciesId,catchTimestamp,catchTimeQuality:timeQuality,recordedAt:new Date().toISOString()})||{};
     const catchItem = {
       id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()), tripId: state.activeTrip.id,
       place: state.activeTrip.place, date: state.activeTrip.date, fishName: fishName.value,
@@ -2315,12 +2350,13 @@ catchForm.addEventListener('submit', async e => {
       bait: document.getElementById('fieldBait')?.value.trim() || '',
       hitZone: document.getElementById('hitZone')?.value || '',
       tidePhase: document.getElementById('fieldTide')?.value || '',
-      note: catchNote.value.trim(), photo, createdAt: new Date().toISOString()
+      note: catchNote.value.trim(), photo, createdAt: new Date().toISOString(), ...evaluation
     };
-    state.catches.unshift(catchItem);
+    const previousTackleId=state.lastTackleId,previousMethod=state.lastMethod;state.catches.unshift(catchItem);
     state.lastTackleId = tackleId;
     state.lastMethod = method.value;
-    save();
+    const saveResult=save({criticalKeys:['mfl_catches'],notify:true});
+    if(!saveResult.criticalOk){state.catches=state.catches.filter(item=>item.id!==catchItem.id);state.lastTackleId=previousTackleId;state.lastMethod=previousMethod;return}
     const afterRank = tackleId ? oceanRankFor(tackleFishCount(tackleId)) : null;
     catchDialog.close(); catchForm.reset(); fishCount.value = 1; keep.checked = true;
     render();

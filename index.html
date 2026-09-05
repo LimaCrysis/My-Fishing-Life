@@ -45,7 +45,7 @@
   </script>
   <title>My Fishing Life</title>
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="stylesheet" href="css/styles.css?v=14.26.2" />
+  <link rel="stylesheet" href="css/styles.css?v=14.30.1" />
   <link rel="stylesheet" href="css/conditions.css?v=14.26.2" />
   <link rel="stylesheet" href="css/forecast.css?v=14.27.1" />
   <link rel="stylesheet" href="css/realmap.css?v=14.26.2" />
@@ -90,6 +90,18 @@
       <label>魚種
         <select id="fishName" required></select>
       </label>
+      <div class="two-cols evaluation-time-fields">
+        <label>釣れた時刻
+          <input id="catchTime" type="time" />
+        </label>
+        <label>時刻の目安
+          <select id="catchTimeQuality">
+            <option value="exact">その場で記録</option>
+            <option value="approximate">だいたいの時刻</option>
+            <option value="unknown">時刻不明</option>
+          </select>
+        </label>
+      </div>
       <div id="quickFish" class="quick-fish" aria-label="最近釣った魚"></div>
       <div class="two-cols">
         <label>サイズ（cm）
@@ -190,6 +202,7 @@
         <div><p class="eyebrow">NEW TRIP</p><h2>釣行を始める</h2></div>
         <button type="button" class="close-button" data-close>×</button>
       </div>
+      <label>登録済みの釣り場（任意）<select id="tripSpotId"><option value="">指定しない</option></select></label>
       <label>釣り場<input id="tripPlace" type="text" placeholder="例：大洗港" required /></label>
       <div class="two-cols">
         <label>日付<input id="tripDate" type="date" required /></label>
@@ -198,6 +211,11 @@
       <label>天気
         <select id="tripWeather"><option>晴れ</option><option>くもり</option><option>雨</option><option>風が強い</option></select>
       </label>
+      <details class="target-species-field">
+        <summary>狙う魚を選ぶ（任意）</summary>
+        <p>未設定でも開始できます。複数選択できます。</p>
+        <div id="tripTargetSpecies" class="target-species-picker"></div>
+      </details>
       <label>メモ<textarea id="tripNote" rows="3" placeholder="狙う魚や今日試したいこと"></textarea></label>
       <button class="primary-button" value="save">釣行を開始</button>
     </form>
@@ -243,7 +261,16 @@
   <script src="js/forecast/forecast-features.js?v=14.27.0"></script>
   <script src="js/forecast/forecast-engine.js?v=14.27.0"></script>
   <script src="js/forecast/forecast-ui.js?v=14.27.1"></script>
+  <script src="js/forecast/species-presence-baseline.js?v=14.30.1"></script>
+  <script src="js/forecast/public-environmental-observation.js?v=14.30.1"></script>
+  <script src="js/forecast/species-presence-observation.js?v=14.30.1"></script>
+  <script src="js/forecast/species-presence-shadow-runner.js?v=14.30.1"></script>
+  <script src="js/forecast/species-presence-integration-experiment.js?v=14.30.1"></script>
+  <script src="js/forecast/species-presence-timefactor-experiment.js?v=14.30.1"></script>
+  <script src="js/forecast/species-presence-ground-truth-evaluation.js?v=14.30.1"></script>
+  <script src="js/forecast/evaluation-collection.js?v=14.30.1"></script>
+  <script src="js/forecast/evaluation-export.js?v=14.30.1"></script>
   <script src="js/conditions-ui.js?v=14.26.2"></script>
-  <script src="js/app.js?v=14.27.1"></script>
+  <script src="js/app.js?v=14.30.1"></script>
 </body>
 </html>
