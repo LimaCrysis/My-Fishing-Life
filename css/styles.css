@@ -3913,3 +3913,56 @@ html[data-theme="dark"] .storage-state.warning{background:#493c18;color:#ffe69b;
 .keep-badge strong{font-size:11px;line-height:1.4}
 .keep-badge p{margin-top:4px;font-size:10px;line-height:1.55}
 .keep-badge span{margin-top:5px;font-size:10px;line-height:1.45}
+
+/* AREA TROUT stage 1: scoped skeleton, using the existing theme tokens. */
+.fishing-map-scene [data-map-face][hidden] { display: none !important; }
+.fishing-map-scene, .fishing-map-rotator, .fishing-map-face { min-width: 0; }
+.fishing-map-rotator { position: relative; z-index: 0; }
+.fishing-mode-switch { display: flex; gap: 4px; margin: 0 0 18px; padding: 4px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.fishing-mode-switch button { flex: 1; min-width: 0; min-height: 48px; padding: 10px 8px; border: 1px solid transparent; border-radius: 10px; background: transparent; color: var(--ink); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; -webkit-appearance: none; appearance: none; touch-action: manipulation; }
+.fishing-mode-switch button[aria-pressed="true"] { background: var(--soft); border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); color: var(--accent-dark); }
+.fishing-mode-switch button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.area-trout-view { display: grid; gap: 16px; }
+.area-trout-heading h2 { margin: 0; font-size: 22px; color: var(--ink); }
+.area-trout-heading p, .area-trout-placeholder p { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+.area-trout-placeholder { padding: 20px; border: 1px dashed var(--line); border-radius: var(--radius); background: var(--surface); }
+.area-trout-placeholder h3 { margin: 0; color: var(--ink); font-size: 16px; }
+.area-trout-map { min-height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: var(--surface-raised); }
+.area-trout-preparing { display: inline-block; margin-top: 14px; padding: 4px 10px; border-radius: 8px; background: var(--soft); color: var(--muted); font-size: 12px; }
+
+/* Full-screen, directional water sweep; mounted on body only during map switching. */
+.fishing-map-wave-overlay { position: fixed; inset: 0; z-index: 10000; overflow: hidden; pointer-events: none; }
+.fishing-map-wave-overlay[hidden] { display: none !important; }
+.fishing-map-wave-overlay .fishing-map-wave { position: absolute; top: -8%; height: 116%; width: var(--wave-band-width); transform: translateX(-50%); pointer-events: none; }
+.fishing-map-wave-overlay svg { position: absolute; inset: 0; width: 100%; height: 100%; fill: currentColor; overflow: visible; -webkit-mask-image: linear-gradient(90deg, transparent, #000 38%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 38%, #000 88%, transparent); }
+.fishing-map-wave-overlay .wave-back { color: #5eafbd; opacity: .34; }
+.fishing-map-wave-overlay .wave-middle { color: #238ba1; opacity: .59; }
+.fishing-map-wave-overlay .wave-front { color: #146d83; opacity: .88; }
+html[data-theme="dark"] .fishing-map-wave-overlay .wave-front { color: #1b7186; }
+.fishing-map-scene .is-wave-passing { overflow: hidden; height: var(--wave-stage-height); }
+.fishing-map-scene .is-wave-passing > [data-map-face] { position: absolute; inset: 0; height: 100%; overflow: hidden; align-content: start; }
+.fishing-map-scene .is-wave-passing [data-wave-face="outgoing"] { animation: mfl-water-right-side 1000ms linear both; }
+.fishing-map-scene .is-wave-passing [data-wave-face="incoming"] { animation: mfl-water-left-side 1000ms linear both; }
+.fishing-map-scene .is-wave-passing[data-wave-direction="left"] [data-wave-face="outgoing"] { animation: mfl-water-left-side 1000ms linear both reverse; }
+.fishing-map-scene .is-wave-passing[data-wave-direction="left"] [data-wave-face="incoming"] { animation: mfl-water-right-side 1000ms linear both reverse; }
+.fishing-map-wave-overlay.is-wave-passing .fishing-map-wave { animation: mfl-water-travel 1000ms linear both; }
+.fishing-map-wave-overlay.is-wave-passing[data-wave-direction="left"] .fishing-map-wave { animation-direction: reverse; }
+.fishing-map-wave-overlay.is-wave-passing .wave-back { animation: mfl-water-back 1000ms ease-in-out both; }
+.fishing-map-wave-overlay.is-wave-passing .wave-middle { animation: mfl-water-middle 1000ms ease-out both; }
+.fishing-map-wave-overlay.is-wave-passing .wave-front { animation: mfl-water-front 1000ms ease-in both; }
+.fishing-map-wave-overlay[data-wave-direction="left"] svg { scale: -1 1; }
+.fishing-map-scene .fishing-mode-switch button:disabled { cursor: default; opacity: 1; }
+@keyframes mfl-water-travel { from { left: var(--wave-screen-from); } to { left: var(--wave-screen-to); } }
+@keyframes mfl-water-right-side { from { clip-path: polygon(var(--wave-from) 0,100% 0,100% 100%,var(--wave-from) 100%); } to { clip-path: polygon(var(--wave-to) 0,100% 0,100% 100%,var(--wave-to) 100%); } }
+@keyframes mfl-water-left-side { from { clip-path: polygon(0 0,var(--wave-from) 0,var(--wave-from) 100%,0 100%); } to { clip-path: polygon(0 0,var(--wave-to) 0,var(--wave-to) 100%,0 100%); } }
+@keyframes mfl-water-back { from { transform: translate(2%, -2%); } to { transform: translate(-1%, 1%); } }
+@keyframes mfl-water-middle { from { transform: translate(-3%, 3%); } to { transform: translate(4%, -3%); } }
+@keyframes mfl-water-front { from { transform: translate(-8%, -5%); } to { transform: translate(10%, 5%); } }
+@media (prefers-reduced-motion: reduce) {
+  .fishing-map-wave-overlay { display: none !important; }
+  .fishing-map-scene .is-wave-passing > [data-map-face], .fishing-map-wave-overlay.is-wave-passing .fishing-map-wave, .fishing-map-wave-overlay.is-wave-passing svg { animation: none !important; }
+}
+
+/* Subtle tinted crest light, without foam, blur or filter passes. */
+.fishing-map-wave-overlay .wave-crest-highlight { fill: none; stroke: #a2dee1; stroke-width: 1.1; stroke-opacity: .16; vector-effect: non-scaling-stroke; }
+.fishing-map-wave-overlay .wave-front .wave-crest-highlight { stroke-opacity: .24; }

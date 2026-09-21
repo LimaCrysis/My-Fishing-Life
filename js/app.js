@@ -17,6 +17,7 @@ const fishMaster = [
 const defaultGear = ['ロッド', 'リール', '仕掛け', 'オモリ・ジグヘッド', 'エサ・ワーム', 'ハサミ・プライヤー', 'フィッシュグリップ', 'ライフジャケット', 'クーラーボックス', '氷・保冷剤', 'タオル', '飲み物'];
 const state = {
   view: 'home',
+  fishingMapMode: 'sea',
   trips: JSON.parse(localStorage.getItem('mfl_trips') || '[]'),
   catches: JSON.parse(localStorage.getItem('mfl_catches') || '[]'),
   gear: JSON.parse(localStorage.getItem('mfl_gear') || 'null') || defaultGear.map(name => ({ name, checked: false })),
@@ -1043,8 +1044,121 @@ function setupGlobalFishingSpotClicks(){
   });
 }
 
+// Scene / rotator / sibling faces provide a future 3D flip boundary.
+// For now hidden removes the inactive face from layout and keyboard navigation.
+function syncFishingMapMode() {
+  const scene = document.getElementById('fishingMapScene');
+  if (!scene) return;
+  scene.dataset.mode = state.fishingMapMode;
+  scene.querySelectorAll('[data-map-face]').forEach(face => {
+    face.hidden = face.dataset.mapFace !== state.fishingMapMode;
+  });
+  scene.querySelectorAll('[data-fishing-mode]').forEach(button => {
+    button.setAttribute('aria-pressed', String(button.dataset.fishingMode === state.fishingMapMode));
+  });
+}
+
+function setupFishingMapTransition(scene) {
+  const overlay = scene.querySelector('.fishing-map-wave-overlay');
+  const wave = overlay.querySelector('.fishing-map-wave');
+  const rotator = scene.querySelector('.fishing-map-rotator');
+  const buttons = scene.querySelectorAll('[data-fishing-mode]');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let busy = false;
+  const animate = () => new Promise(resolve => {
+    let timer;
+    const finish = () => {
+      clearTimeout(timer);
+      navigationObserver.disconnect();
+      wave.removeEventListener('animationend', onEnd);
+      wave.removeEventListener('animationcancel', finish);
+      reducedMotion.removeEventListener('change', onPreference);
+      resolve();
+    };
+    const navigationObserver = new MutationObserver(() => { if (!scene.isConnected) finish(); });
+    navigationObserver.observe(app, { childList: true });
+    const onEnd = event => { if (event.target === wave) finish(); };
+    const onPreference = () => { if (reducedMotion.matches) finish(); };
+    wave.addEventListener('animationend', onEnd);
+    wave.addEventListener('animationcancel', finish);
+    reducedMotion.addEventListener('change', onPreference);
+    // A bounded fallback also releases the controls if an animation is interrupted.
+    timer = setTimeout(finish, 1100);
+    rotator.classList.add('is-wave-passing');
+    overlay.classList.add('is-wave-passing');
+  });
+  buttons.forEach(button => button.addEventListener('click', async () => {
+    const mode = button.dataset.fishingMode;
+    if (busy || mode === state.fishingMapMode) return;
+    if (reducedMotion.matches) {
+      state.fishingMapMode = mode;
+      syncFishingMapMode();
+      return;
+    }
+    busy = true;
+    buttons.forEach(item => { item.disabled = true; });
+    const outgoing = scene.querySelector('[data-map-face="' + state.fishingMapMode + '"]');
+    const incoming = scene.querySelector('[data-map-face="' + mode + '"]');
+    const bounds = rotator.getBoundingClientRect();
+    const bandWidth = Math.min(600, Math.max(260, window.innerWidth * .68));
+    incoming.hidden = false;
+    rotator.style.setProperty('--wave-stage-height', Math.max(bounds.height, incoming.getBoundingClientRect().height) + 'px');
+    rotator.style.setProperty('--wave-from', (-bandWidth - bounds.left) + 'px');
+    rotator.style.setProperty('--wave-to', (window.innerWidth + bandWidth - bounds.left) + 'px');
+    const direction = mode === 'trout' ? 'right' : 'left';
+    rotator.dataset.waveDirection = direction;
+    overlay.dataset.waveDirection = direction;
+    overlay.style.setProperty('--wave-band-width', bandWidth + 'px');
+    overlay.style.setProperty('--wave-screen-from', -bandWidth + 'px');
+    overlay.style.setProperty('--wave-screen-to', (window.innerWidth + bandWidth) + 'px');
+    // A temporary body-level overlay can wash over the header and bottom tabs.
+    document.body.appendChild(overlay);
+    incoming.inert = true;
+    outgoing.dataset.waveFace = 'outgoing';
+    incoming.dataset.waveFace = 'incoming';
+    incoming.setAttribute('aria-hidden', 'true');
+    overlay.hidden = false;
+    try {
+      await animate();
+      if (!scene.isConnected) return;
+      state.fishingMapMode = mode;
+    } finally {
+      overlay.hidden = true;
+      rotator.classList.remove('is-wave-passing');
+      overlay.classList.remove('is-wave-passing');
+      delete rotator.dataset.waveDirection;
+      delete overlay.dataset.waveDirection;
+      overlay.removeAttribute('style');
+      if (scene.isConnected) rotator.prepend(overlay);
+      else overlay.remove();
+      ['--wave-stage-height', '--wave-from', '--wave-to'].forEach(key => rotator.style.removeProperty(key));
+      incoming.inert = false;
+      delete outgoing.dataset.waveFace;
+      delete incoming.dataset.waveFace;
+      incoming.removeAttribute('aria-hidden');
+      if (scene.isConnected) syncFishingMapMode();
+      buttons.forEach(item => { item.disabled = false; });
+      busy = false;
+    }
+  }));
+}
+
 function renderFishingMap(){
   app.innerHTML = `
+    <section id="fishingMapScene" class="fishing-map-scene" aria-label="釣地図">
+      <div class="fishing-mode-switch" role="group" aria-label="釣地図の種類">
+        <button type="button" data-fishing-mode="sea" aria-pressed="true" aria-controls="seaFishingMapView areaTroutView">海釣り</button>
+        <button type="button" data-fishing-mode="trout" aria-pressed="false" aria-controls="seaFishingMapView areaTroutView">AREA TROUT</button>
+      </div>
+      <div class="fishing-map-rotator">
+        <div class="fishing-map-wave-overlay" aria-hidden="true" hidden>
+          <div class="fishing-map-wave">
+            <svg class="wave-back" viewBox="0 0 300 1000" preserveAspectRatio="none" focusable="false" aria-hidden="true"><defs><linearGradient id="mfl-water-back" x1="0" y1="0" x2="1" y2=".25"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".42" stop-color="currentColor" stop-opacity=".68"/><stop offset=".7" stop-color="currentColor" stop-opacity=".94"/><stop offset="1" stop-color="currentColor" stop-opacity=".45"/></linearGradient></defs><path fill="url(#mfl-water-back)" d="M0 0 L164 0 C238 48 248 106 186 178 C130 249 157 285 214 326 C260 359 249 448 188 496 C127 566 173 630 220 665 C264 711 209 763 183 820 C152 895 253 938 204 1000 L0 1000 Z"/><path class="wave-crest-highlight" d="M164 0 C238 48 248 106 186 178 C130 249 157 285 214 326 C260 359 249 448 188 496 C127 566 173 630 220 665 C264 711 209 763 183 820 C152 895 253 938 204 1000"/></svg>
+            <svg class="wave-middle" viewBox="0 0 300 1000" preserveAspectRatio="none" focusable="false" aria-hidden="true"><defs><linearGradient id="mfl-water-middle" x1="0" y1="0" x2="1" y2=".25"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".42" stop-color="currentColor" stop-opacity=".68"/><stop offset=".7" stop-color="currentColor" stop-opacity=".94"/><stop offset="1" stop-color="currentColor" stop-opacity=".45"/></linearGradient></defs><path fill="url(#mfl-water-middle)" d="M0 0 L189 0 C128 33 170 94 219 126 C253 159 210 201 181 218 C145 265 230 309 236 376 C244 431 153 454 176 510 C206 547 266 598 217 664 C167 702 151 757 212 793 C265 826 209 919 190 1000 L0 1000 Z"/><path class="wave-crest-highlight" d="M189 0 C128 33 170 94 219 126 C253 159 210 201 181 218 C145 265 230 309 236 376 C244 431 153 454 176 510 C206 547 266 598 217 664 C167 702 151 757 212 793 C265 826 209 919 190 1000"/></svg>
+            <svg class="wave-front" viewBox="0 0 300 1000" preserveAspectRatio="none" focusable="false" aria-hidden="true"><defs><linearGradient id="mfl-water-front" x1="0" y1="0" x2="1" y2=".25"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".42" stop-color="currentColor" stop-opacity=".68"/><stop offset=".7" stop-color="currentColor" stop-opacity=".94"/><stop offset="1" stop-color="currentColor" stop-opacity=".45"/></linearGradient></defs><path fill="url(#mfl-water-front)" d="M0 0 L174 0 C239 35 265 85 228 111 C246 78 183 85 173 134 C148 201 224 217 237 254 C261 300 204 340 183 352 C143 402 156 464 213 487 C272 521 254 575 221 596 C246 553 185 568 174 625 C156 684 222 732 239 749 C276 793 207 845 180 889 C151 939 222 964 204 1000 L0 1000 Z"/><path class="wave-crest-highlight" d="M174 0 C239 35 265 85 228 111 C246 78 183 85 173 134 C148 201 224 217 237 254 C261 300 204 340 183 352 C143 402 156 464 213 487 C272 521 254 575 221 596 C246 553 185 568 174 625 C156 684 222 732 239 749 C276 793 207 845 180 889 C151 939 222 964 204 1000"/></svg>
+          </div>
+        </div>
+    <section id="seaFishingMapView" class="fishing-map-face fishing-map-face-front" data-map-face="sea" aria-label="海釣り地図">
     <section class="fishing-map-view">
       <div class="map-top-stack">
         <section class="map-view-switcher">
@@ -1097,6 +1211,29 @@ function renderFishingMap(){
         ${recentFishingSpotsHTML()}
         ${renderKantoMap()}
       </section>
+    </section>
+    </section>
+    <section id="areaTroutView" class="fishing-map-face fishing-map-face-back area-trout-view" data-map-face="trout" aria-labelledby="areaTroutTitle" hidden>
+      <header class="area-trout-heading">
+        <h2 id="areaTroutTitle">AREA TROUT</h2>
+        <p>自分に合った管理釣り場を選ぶ</p>
+      </header>
+      <section class="area-trout-placeholder" aria-labelledby="areaTroutFilterTitle">
+        <h3 id="areaTroutFilterTitle">条件で探す</h3>
+        <p>釣り方や設備で絞り込めるようになります。</p>
+        <span class="area-trout-preparing">準備中</span>
+      </section>
+      <section class="area-trout-placeholder area-trout-map" aria-labelledby="areaTroutMapTitle">
+        <h3 id="areaTroutMapTitle">地図から探す</h3>
+        <p>ここに管理釣り場の地図を表示します。</p>
+        <span class="area-trout-preparing">準備中</span>
+      </section>
+      <section id="areaTroutFacilities" aria-labelledby="areaTroutFacilitiesTitle">
+        <h3 id="areaTroutFacilitiesTitle">管理釣り場</h3>
+        <p role="status">施設一覧を読み込んでいます…</p>
+      </section>
+    </section>
+      </div>
     </section>`;
   setupKantoMap();
   document.querySelectorAll('.map-priority-card[data-fishing-spot]').forEach(btn=>{
@@ -1114,6 +1251,9 @@ function renderFishingMap(){
   setupMapFilterPanel();
 
   setupGlobalFishingSpotClicks();
+  window.MFLTroutCards?.mountMaster(document.getElementById('areaTroutFacilities'));
+  setupFishingMapTransition(document.getElementById('fishingMapScene'));
+  syncFishingMapMode();
 }
 
 function renderGuide() {

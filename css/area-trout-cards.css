@@ -1,0 +1,21 @@
+/* Scoped to AREA TROUT: no changes to shared cards or sea map styles. */
+#areaTroutView .trout-facility-list-heading { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px; }
+#areaTroutView .trout-facility-list-heading h3 { margin:0; color:var(--ink); font-size:18px; }
+#areaTroutView .trout-facility-list-heading > span { color:var(--muted); font-size:13px; white-space:nowrap; }
+#areaTroutView .trout-facility-list { list-style:none; display:grid; gap:14px; margin:0; padding:0; }
+#areaTroutView .trout-facility-list > li { min-width:0; }
+#areaTroutView .trout-facility-card { border:1px solid var(--line); border-radius:18px; padding:18px; background:var(--surface); color:var(--ink); overflow-wrap:anywhere; }
+#areaTroutView .trout-facility-card h4 { margin:0; font-size:18px; line-height:1.5; }
+#areaTroutView .trout-facility-prefecture { margin:4px 0 0; color:var(--muted); font-size:13px; }
+#areaTroutView .trout-facility-tags { display:flex; flex-wrap:wrap; gap:6px; list-style:none; padding:0; margin:12px 0; }
+#areaTroutView .trout-facility-tags li { border-radius:8px; padding:5px 8px; background:var(--soft); color:var(--ink); font-size:12px; line-height:1.4; }
+#areaTroutView .trout-facility-facts { display:flex; flex-wrap:wrap; gap:8px 18px; margin:14px 0; font-size:14px; }
+#areaTroutView .trout-facility-facts div { display:flex; gap:8px; }
+#areaTroutView .trout-facility-facts dt { color:var(--muted); }
+#areaTroutView .trout-facility-facts dd { margin:0; font-weight:700; }
+#areaTroutView .trout-facility-notices { display:flex; gap:8px; padding:10px 12px; border-left:3px solid #a78c4d; border-radius:7px; background:var(--surface-raised); font-size:13px; line-height:1.65; }
+#areaTroutView .trout-facility-notices > span { color:#a78c4d; }
+#areaTroutView .trout-facility-notices ul { list-style:none; margin:0; padding:0; }
+#areaTroutView .trout-facility-details { display:block; width:100%; min-height:48px; margin-top:14px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; background:var(--soft); color:var(--accent-dark); font:inherit; font-size:14px; font-weight:700; cursor:pointer; touch-action:manipulation; }
+#areaTroutView .trout-facility-details:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+#areaTroutView .trout-facility-feedback { margin:10px 0 0; color:var(--muted); font-size:13px; }
