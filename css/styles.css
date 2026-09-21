@@ -3966,3 +3966,498 @@ html[data-theme="dark"] .fishing-map-wave-overlay .wave-front { color: #1b7186; 
 /* Subtle tinted crest light, without foam, blur or filter passes. */
 .fishing-map-wave-overlay .wave-crest-highlight { fill: none; stroke: #a2dee1; stroke-width: 1.1; stroke-opacity: .16; vector-effect: non-scaling-stroke; }
 .fishing-map-wave-overlay .wave-front .wave-crest-highlight { stroke-opacity: .24; }
+
+/* MFL v15.0.0 - SURFACE DEPTH / LESS BOXED UI
+   Reduce repeated hard outlines and create hierarchy with tone, depth and spacing. */
+:root{
+  --line:rgba(44,91,101,.12);
+  --surface-border:rgba(44,91,101,.14);
+  --shadow:0 12px 30px rgba(15,58,66,.08);
+  --shadow-soft:0 7px 20px rgba(15,58,66,.055);
+  --shadow-float:0 18px 44px rgba(15,58,66,.13);
+  --surface-highlight:inset 0 1px 0 rgba(255,255,255,.78);
+}
+
+html[data-theme="dark"]{
+  --line:rgba(116,168,181,.15);
+  --surface-border:rgba(116,168,181,.18);
+  --shadow:0 14px 34px rgba(0,7,12,.25);
+  --shadow-soft:0 8px 22px rgba(0,7,12,.19);
+  --shadow-float:0 22px 52px rgba(0,7,12,.38);
+  --surface-highlight:inset 0 1px 0 rgba(255,255,255,.045);
+}
+
+/* The app chrome should frame the content, not outline it. */
+.topbar{
+  border-bottom:0;
+  box-shadow:0 10px 28px rgba(15,58,66,.045);
+}
+.bottom-nav{
+  border-top:0;
+  box-shadow:0 -12px 32px rgba(15,58,66,.08);
+}
+html[data-theme="dark"] .topbar{
+  border-bottom:0;
+  box-shadow:0 12px 32px rgba(0,7,12,.22);
+}
+html[data-theme="dark"] .bottom-nav{
+  border-top:0;
+  box-shadow:0 -14px 36px rgba(0,7,12,.3);
+}
+
+/* Main content surfaces: use elevation instead of a visible rectangle outline. */
+:where(
+  .stat-card,
+  .card,
+  .calendar-card,
+  .schedule-card,
+  .empty-state.compact,
+  .home-tools,
+  .tackle-home-card,
+  .tackle-card,
+  .assist-home-card,
+  .assist-spec,
+  .assist-overall,
+  .guide-menu-card,
+  .guide-welcome,
+  .guide-article,
+  .trip-fold-card,
+  .area-spot-button,
+  .filter-spot-card,
+  .map-filter-panel-toggle
+){
+  border-color:transparent;
+  box-shadow:var(--shadow-soft),var(--surface-highlight);
+}
+
+html[data-theme="dark"] :where(
+  .stat-card,
+  .card,
+  .calendar-card,
+  .schedule-card,
+  .empty-state.compact,
+  .home-tools,
+  .tackle-home-card,
+  .tackle-card,
+  .assist-home-card,
+  .assist-spec,
+  .assist-overall,
+  .guide-menu-card,
+  .guide-welcome,
+  .guide-article,
+  .trip-fold-card,
+  .area-spot-button,
+  .filter-spot-card,
+  .map-filter-panel-toggle
+){
+  background:linear-gradient(180deg,#112d39 0%,#0f2935 100%)!important;
+  border-color:transparent!important;
+  box-shadow:var(--shadow-soft),var(--surface-highlight)!important;
+}
+
+/* Secondary controls sit one level lower than cards. */
+:where(
+  .segmented label,
+  .quick-fish button,
+  .map-view-switcher button,
+  .map-filter-panel,
+  .line-sim-result,
+  .target-result
+){
+  border-color:transparent;
+  box-shadow:var(--surface-highlight);
+}
+
+/* Active states get a restrained luminous edge only when it communicates state. */
+.nav-item.active,
+.segmented input:checked + label,
+.map-view-switcher button.active,
+.map-filter-panel-toggle.active{
+  box-shadow:inset 0 0 0 1px rgba(53,191,210,.32),var(--surface-highlight);
+}
+
+/* Sheets should feel like a layer above the app rather than another bordered card. */
+.sheet,
+.fish-detail-sheet{
+  box-shadow:0 -18px 52px rgba(15,58,66,.14),var(--surface-highlight);
+}
+html[data-theme="dark"] .sheet,
+html[data-theme="dark"] .fish-detail-sheet{
+  box-shadow:0 -20px 58px rgba(0,7,12,.42),var(--surface-highlight);
+}
+
+/* Inputs retain a boundary for usability, but make it quieter. */
+input,select,textarea{
+  border-color:rgba(44,91,101,.16);
+}
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{
+  border-color:rgba(116,168,181,.2);
+}
+
+/* Keep semantic warnings explicit; they are intentionally not flattened. */
+.note,
+.fish-safety-banner,
+.danger-stop,
+.spot-warning,
+.guide-warning,
+.assist-warning{
+  box-shadow:none;
+}
+
+/* MFL v15.1.0 - DEEP CONTROL SURFACES
+   Add restrained carved / tactile depth only to interactive controls.
+   Content cards remain flatter so interaction hierarchy stays clear. */
+:root{
+  --control-rim:rgba(255,255,255,.72);
+  --control-groove:rgba(34,81,91,.16);
+  --control-drop:rgba(20,66,75,.13);
+  --control-drop-strong:rgba(20,66,75,.2);
+}
+html[data-theme="dark"]{
+  --control-rim:rgba(255,255,255,.085);
+  --control-groove:rgba(0,8,13,.5);
+  --control-drop:rgba(0,6,10,.38);
+  --control-drop-strong:rgba(0,5,9,.52);
+}
+
+/* Tactile controls: raised rim + deeper lower groove. */
+:where(
+  .nav-item,
+  .home-tools,
+  .schedule-card,
+  .tackle-home-card,
+  .assist-home-card,
+  .guide-menu-card,
+  .smart-tool-toggle,
+  .region-card,
+  .area-select-card,
+  .area-spot-button,
+  .map-filter-panel-toggle,
+  .map-view-switcher button,
+  .spot-filter,
+  .fishing-mode-switch button,
+  .primary-button,
+  .secondary-button,
+  .icon-button,
+  .close-button
+){
+  border-color:rgba(56,111,122,.16)!important;
+  background-image:linear-gradient(180deg,rgba(255,255,255,.055),rgba(0,0,0,.025));
+  box-shadow:
+    inset 0 1px 0 var(--control-rim),
+    inset 0 -3px 0 var(--control-groove),
+    0 5px 0 rgba(32,83,93,.07),
+    0 10px 22px var(--control-drop)!important;
+  transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;
+}
+
+html[data-theme="dark"] :where(
+  .nav-item,
+  .home-tools,
+  .schedule-card,
+  .tackle-home-card,
+  .assist-home-card,
+  .guide-menu-card,
+  .smart-tool-toggle,
+  .region-card,
+  .area-select-card,
+  .area-spot-button,
+  .map-filter-panel-toggle,
+  .map-view-switcher button,
+  .spot-filter,
+  .fishing-mode-switch button,
+  .primary-button,
+  .secondary-button,
+  .close-button
+){
+  border-color:rgba(91,166,180,.16)!important;
+  background-image:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.08));
+  box-shadow:
+    inset 0 1px 0 var(--control-rim),
+    inset 0 -3px 0 var(--control-groove),
+    0 5px 0 rgba(0,8,13,.28),
+    0 11px 24px var(--control-drop)!important;
+}
+
+/* Selected controls sit deeper, like a pressed inset switch. */
+:where(
+  .nav-item.active,
+  .segmented input:checked + label,
+  .map-view-switcher button.active,
+  .map-filter-panel-toggle.active,
+  .spot-filter.active,
+  .area-select-card.selected,
+  .fishing-mode-switch button[aria-pressed="true"]
+){
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 3px 8px var(--control-groove),
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 1px 0 rgba(255,255,255,.025)!important;
+}
+
+/* Physical press feedback without scaling the layout. */
+:where(
+  .nav-item,
+  .home-tools,
+  .schedule-card,
+  .tackle-home-card,
+  .assist-home-card,
+  .guide-menu-card,
+  .smart-tool-toggle,
+  .region-card,
+  .area-select-card,
+  .area-spot-button,
+  .map-filter-panel-toggle,
+  .map-view-switcher button,
+  .spot-filter,
+  .fishing-mode-switch button,
+  .primary-button,
+  .secondary-button,
+  .icon-button,
+  .close-button
+):active{
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 3px 8px var(--control-groove),
+    inset 0 1px 0 rgba(255,255,255,.03),
+    0 1px 0 rgba(0,0,0,.08)!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  :where(
+    .nav-item,.home-tools,.schedule-card,.tackle-home-card,.assist-home-card,
+    .guide-menu-card,.smart-tool-toggle,.region-card,.area-select-card,
+    .area-spot-button,.map-filter-panel-toggle,.map-view-switcher button,
+    .spot-filter,.fishing-mode-switch button,.primary-button,.secondary-button,
+    .icon-button,.close-button
+  ){transition:none!important;}
+}
+
+/* MFL v15.2.0 - UNIFIED 3D DESIGN SYSTEM
+   One visual language across the app: tactile controls use deeper relief,
+   informational surfaces use softer relief. Light mode stays airy; dark mode stays deep. */
+:root{
+  --mfl3d-control-top:#ffffff;
+  --mfl3d-control-bottom:#edf4f5;
+  --mfl3d-surface-top:#ffffff;
+  --mfl3d-surface-bottom:#f1f6f7;
+  --mfl3d-rim:rgba(255,255,255,.96);
+  --mfl3d-groove:rgba(49,91,100,.14);
+  --mfl3d-step:rgba(33,76,85,.09);
+  --mfl3d-shadow:rgba(20,60,68,.11);
+  --mfl3d-shadow-soft:rgba(20,60,68,.075);
+}
+html[data-theme="dark"]{
+  --mfl3d-control-top:#173944;
+  --mfl3d-control-bottom:#102b36;
+  --mfl3d-surface-top:#12313d;
+  --mfl3d-surface-bottom:#0d2732;
+  --mfl3d-rim:rgba(255,255,255,.075);
+  --mfl3d-groove:rgba(0,7,12,.48);
+  --mfl3d-step:rgba(0,8,13,.28);
+  --mfl3d-shadow:rgba(0,6,10,.34);
+  --mfl3d-shadow-soft:rgba(0,6,10,.22);
+}
+
+/* Strong relief = anything that reads as a control, tab or selectable card. */
+:where(
+  .nav-item,
+  .home-tools,
+  .schedule-card,
+  .tackle-home-card,
+  .assist-home-card,
+  .guide-menu-card,
+  .smart-tool-toggle,
+  .region-card,
+  .area-select-card,
+  .area-spot-button,
+  .bay-spot,
+  .fishing-pin,
+  .map-filter-panel-toggle,
+  .map-view-switcher button,
+  .spot-filter,
+  .fishing-mode-switch button,
+  .segmented label,
+  .primary-button,
+  .secondary-button,
+  .icon-button,
+  .close-button,
+  .guide-back-top,
+  .beginner-map-results-list button,
+  .map-search-list button,
+  .map-style-result-list button,
+  .facility-result-list button
+){
+  border-color:rgba(50,96,106,.13)!important;
+  background-color:transparent;
+  background-image:linear-gradient(180deg,var(--mfl3d-control-top),var(--mfl3d-control-bottom))!important;
+  box-shadow:
+    inset 0 1px 0 var(--mfl3d-rim),
+    inset 0 -3px 0 var(--mfl3d-groove),
+    0 4px 0 var(--mfl3d-step),
+    0 10px 22px var(--mfl3d-shadow)!important;
+}
+
+/* Keep accent/hero buttons colored, but give them the same physical depth. */
+.primary-button,
+.icon-button,
+.fishing-pin,
+.bay-spot{
+  background-image:linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.10))!important;
+  background-color:var(--accent)!important;
+  color:#fff!important;
+}
+.secondary-button{
+  color:var(--accent-dark)!important;
+}
+
+/* Selected controls should look seated into the interface, not merely recolored. */
+:where(
+  .nav-item.active,
+  .segmented input:checked + label,
+  .map-view-switcher button.active,
+  .map-filter-panel-toggle.active,
+  .spot-filter.active,
+  .area-select-card.selected,
+  .fishing-mode-switch button[aria-pressed="true"],
+  .guide-menu-card.active
+){
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 4px 10px var(--mfl3d-groove),
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 1px 0 rgba(0,0,0,.05)!important;
+}
+
+/* Softer relief = informational panels. They share the 3D language without pretending to be buttons. */
+:where(
+  .stat-card,
+  .card,
+  .calendar-card,
+  .empty-state.compact,
+  .tackle-card,
+  .assist-spec,
+  .assist-overall,
+  .guide-welcome,
+  .guide-article,
+  .trip-fold-card,
+  .filter-spot-card,
+  .map-filter-panel,
+  .tokyo-bay-panel,
+  .spot-area-panel,
+  .beginner-map-results,
+  .map-progress,
+  .accuracy-note,
+  .guide-section-summary>div
+){
+  border-color:rgba(50,96,106,.10)!important;
+  background-image:linear-gradient(180deg,var(--mfl3d-surface-top),var(--mfl3d-surface-bottom))!important;
+  box-shadow:
+    inset 0 1px 0 var(--mfl3d-rim),
+    0 8px 20px var(--mfl3d-shadow-soft)!important;
+}
+
+/* Field guide summary was visually cramped on real devices. Give the 3 tiles breathing room. */
+.guide-section-summary{
+  gap:12px!important;
+  margin:12px 0 22px!important;
+}
+.guide-section-summary>div{
+  min-height:96px!important;
+  padding:16px 10px!important;
+  border-radius:17px!important;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.guide-section-summary span{font-size:27px!important;line-height:1.1}
+.guide-section-summary strong{margin-top:8px!important;font-size:14px!important;line-height:1.35}
+.guide-section-summary small{margin-top:5px!important;font-size:10px!important;line-height:1.45}
+.guide-grid-compact{gap:12px!important}
+.guide-grid-compact .guide-menu-card{
+  min-height:94px!important;
+  padding:15px 16px!important;
+}
+
+/* Chiba-area selectors are genuine navigation controls; make that obvious. */
+.mfl-area-grid{gap:12px!important}
+.area-select-card{
+  min-height:104px!important;
+  padding:16px!important;
+  border-radius:18px!important;
+}
+.region-card{min-height:92px}
+.area-select-card:active,
+.region-card:active,
+.area-spot-button:active{
+  transform:translateY(2px)!important;
+  box-shadow:
+    inset 0 4px 10px var(--mfl3d-groove),
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 1px 0 rgba(0,0,0,.05)!important;
+}
+
+/* Light mode must feel carved and premium, not like heavy dark blocks on white. */
+html:not([data-theme="dark"]) :where(
+  .nav-item,
+  .home-tools,
+  .schedule-card,
+  .tackle-home-card,
+  .assist-home-card,
+  .guide-menu-card,
+  .smart-tool-toggle,
+  .region-card,
+  .area-select-card,
+  .area-spot-button,
+  .map-filter-panel-toggle,
+  .map-view-switcher button,
+  .spot-filter,
+  .fishing-mode-switch button,
+  .segmented label,
+  .secondary-button,
+  .guide-back-top
+){
+  color:var(--ink)!important;
+  border-color:rgba(67,111,120,.12)!important;
+  background-image:linear-gradient(180deg,#ffffff 0%,#edf4f5 100%)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,1),
+    inset 0 -2px 0 rgba(53,92,100,.11),
+    0 3px 0 rgba(47,88,96,.07),
+    0 8px 17px rgba(29,68,76,.09)!important;
+}
+html:not([data-theme="dark"]) .nav-item.active,
+html:not([data-theme="dark"]) .map-view-switcher button.active,
+html:not([data-theme="dark"]) .spot-filter.active{
+  background-image:linear-gradient(180deg,#dff5f7,#ccebed)!important;
+  color:#075b69!important;
+}
+
+@media(max-width:430px){
+  .guide-section-summary{gap:9px!important}
+  .guide-section-summary>div{min-height:92px!important;padding:14px 7px!important}
+  .guide-section-summary span{font-size:25px!important}
+  .guide-section-summary strong{font-size:13px!important}
+  .guide-section-summary small{font-size:9px!important}
+}
+
+/* MFL v15.3.0 - light theme finishing pass */
+html:not([data-theme="dark"]) .fishing-map-hero{
+  background:linear-gradient(135deg,#287b87 0%,#3f96a1 100%)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 5px 0 rgba(35,91,100,.07),
+    0 14px 28px rgba(20,60,68,.10)!important;
+}
+html:not([data-theme="dark"]) .fishing-map-hero .eyebrow,
+html:not([data-theme="dark"]) .fishing-map-hero p:not(.eyebrow){
+  color:rgba(255,255,255,.90)!important;
+}
+html:not([data-theme="dark"]) .fishing-map-hero .fishing-map-count{
+  background:rgba(255,255,255,.15)!important;
+  color:#fff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18)!important;
+}

@@ -19,3 +19,340 @@
 #areaTroutView .trout-facility-details { display:block; width:100%; min-height:48px; margin-top:14px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; background:var(--soft); color:var(--accent-dark); font:inherit; font-size:14px; font-weight:700; cursor:pointer; touch-action:manipulation; }
 #areaTroutView .trout-facility-details:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
 #areaTroutView .trout-facility-feedback { margin:10px 0 0; color:var(--muted); font-size:13px; }
+/* County groups and compact, independent filters. */
+#areaTroutView .trout-filter-chips { display:flex; flex-wrap:wrap; gap:6px; }
+#areaTroutView .trout-filter-chips button { min-height:44px; padding:8px 10px; border:1px solid var(--line); border-radius:12px; color:var(--ink); background:var(--surface); font:inherit; font-size:13px; }
+#areaTroutView .trout-filter-chips button[aria-pressed="true"] { background:var(--soft); border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); }
+#areaTroutView .trout-prefectures { display:grid; gap:10px; }
+#areaTroutView .trout-prefecture { min-width:0; border:1px solid var(--line); border-radius:14px; background:var(--surface); }
+#areaTroutView .trout-prefecture > summary { min-height:52px; padding:14px; cursor:pointer; color:var(--ink); font-weight:700; }
+#areaTroutView .trout-prefecture-count { float:right; color:var(--muted); font-size:13px; font-weight:400; }
+#areaTroutView .trout-prefecture > ul { padding:0 8px 8px; gap:8px; }
+#areaTroutView .trout-facility-card { padding:12px; border-radius:12px; }
+#areaTroutView .trout-facility-card header { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+#areaTroutView .trout-facility-card h4 { font-size:16px; }
+#areaTroutView .trout-facility-prefecture { flex-shrink:0; margin:0; font-size:12px; }
+#areaTroutView .trout-facility-tags { margin:8px 0; gap:4px; }
+#areaTroutView .trout-facility-tags li { padding:3px 7px; }
+#areaTroutView .trout-facility-facts { margin:8px 0; gap:6px 12px; font-size:13px; }
+#areaTroutView .trout-facility-notices { padding:6px 8px; font-size:12px; }
+#areaTroutView .trout-facility-details { margin-top:8px; min-height:44px; padding:8px 12px; }
+#areaTroutView .trout-filter-chips button:focus-visible, #areaTroutView summary:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+.trout-detail-sheet { box-sizing:border-box; position:fixed; inset:auto 0 0; margin:0 auto; width:min(100%, 680px); max-width:100%; max-height:88vh; max-height:88dvh; padding:0; border:1px solid var(--line); border-radius:22px 22px 0 0; background:var(--surface); color:var(--ink); overflow:hidden; }
+.trout-detail-sheet[open] { display:flex; flex-direction:column; }
+.trout-detail-sheet::backdrop { background:rgba(0,12,20,.65); }
+.trout-detail-sheet > header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:18px 18px 12px; border-bottom:1px solid var(--line); flex-shrink:0; }
+.trout-detail-sheet h2 { margin:0; font-size:19px; line-height:1.5; overflow-wrap:anywhere; }
+.trout-detail-sheet header p { margin:4px 0 0; color:var(--muted); font-size:13px; }
+.trout-detail-sheet .trout-detail-close { min-width:60px; min-height:44px; flex-shrink:0; border:1px solid var(--line); border-radius:10px; color:var(--ink); background:var(--soft); font:inherit; font-size:13px; }
+.trout-detail-content { min-height:0; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:14px 18px calc(24px + env(safe-area-inset-bottom)); overflow-wrap:anywhere; }
+.trout-detail-tags { display:flex; flex-wrap:wrap; gap:6px; list-style:none; padding:0; margin:0 0 12px; }
+.trout-detail-tags li { padding:4px 8px; border-radius:8px; background:var(--soft); font-size:12px; }
+.trout-detail-content dl { margin:0; }
+.trout-detail-content dl > div { padding:10px 0; border-bottom:1px solid var(--line); }
+.trout-detail-content dt { font-size:12px; color:var(--muted); }
+.trout-detail-content dd { margin:4px 0 0; font-size:14px; line-height:1.7; white-space:pre-wrap; }
+.trout-detail-content aside { margin-top:14px; padding:10px 12px; border-left:3px solid #a78c4d; background:var(--surface-raised); border-radius:8px; }
+.trout-detail-content aside ul { list-style:none; padding:0; margin:0; font-size:13px; line-height:1.7; }
+.trout-detail-content h3 { font-size:14px; margin:18px 0 8px; }
+.trout-detail-content section p { margin:0; line-height:1.8; font-size:14px; white-space:pre-wrap; }
+.trout-detail-sheet button:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+@media(prefers-reduced-motion:no-preference) { .trout-detail-sheet[open] { animation:trout-sheet-enter 180ms ease-out; } }
+@keyframes trout-sheet-enter { from { transform:translateY(24px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+
+/* AREA TROUT filter entry point. Keep the page compact even as filters grow. */
+#areaTroutView .trout-filter-actions { display:flex; align-items:center; gap:8px; }
+#areaTroutView .trout-filter-actions button { min-height:44px; padding:8px 12px; border:1px solid var(--line); border-radius:12px; color:var(--ink); background:var(--surface); font:inherit; font-size:13px; font-weight:700; touch-action:manipulation; }
+#areaTroutView .trout-filter-settings { flex:1 1 auto; text-align:center; }
+#areaTroutView .trout-filter-clear { flex:0 0 auto; }
+#areaTroutView .trout-filter-clear:disabled { opacity:.45; cursor:default; }
+#areaTroutView .trout-filter-actions button:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+
+.trout-filter-sheet { box-sizing:border-box; position:fixed; inset:auto 0 0; margin:0 auto; width:min(100%, 680px); max-width:100%; max-height:82vh; max-height:82dvh; padding:0; border:1px solid var(--line); border-radius:22px 22px 0 0; background:var(--surface); color:var(--ink); overflow:hidden; }
+.trout-filter-sheet[open] { display:flex; flex-direction:column; }
+.trout-filter-sheet::backdrop { background:rgba(0,12,20,.65); }
+.trout-filter-sheet > header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:18px 18px 12px; border-bottom:1px solid var(--line); flex-shrink:0; }
+.trout-filter-sheet h2 { margin:0; font-size:19px; line-height:1.4; }
+.trout-filter-sheet header p { margin:4px 0 0; color:var(--muted); font-size:13px; }
+.trout-filter-close { min-width:60px; min-height:44px; flex-shrink:0; border:1px solid var(--line); border-radius:10px; color:var(--ink); background:var(--soft); font:inherit; font-size:13px; }
+.trout-filter-sheet-content { min-height:0; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; padding:16px 18px calc(24px + env(safe-area-inset-bottom)); }
+.trout-filter-options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.trout-filter-options button { min-height:48px; padding:10px 12px; border:1px solid var(--line); border-radius:12px; color:var(--ink); background:var(--surface-raised); font:inherit; font-size:13px; text-align:left; touch-action:manipulation; }
+.trout-filter-options button[aria-pressed="true"] { background:var(--soft); border-color:var(--accent); box-shadow:inset 0 0 0 1px var(--accent); color:var(--accent-dark); font-weight:700; }
+.trout-filter-options button:focus-visible, .trout-filter-close:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+.trout-filter-sheet-hint { margin:12px 0 0; color:var(--muted); font-size:12px; }
+@media(max-width:420px) { .trout-filter-options { grid-template-columns:1fr; } }
+@media(prefers-reduced-motion:no-preference) { .trout-filter-sheet[open] { animation:trout-filter-sheet-enter 180ms ease-out; } }
+@keyframes trout-filter-sheet-enter { from { transform:translateY(24px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+
+/* AREA TROUT v3 - visual hierarchy polish: fewer outlines, stronger depth. */
+#areaTroutView .trout-filter-actions button{
+  border-color:transparent;
+  background:linear-gradient(180deg,var(--surface-raised),var(--surface));
+  box-shadow:var(--shadow-soft),var(--surface-highlight);
+}
+#areaTroutView .trout-filter-clear{
+  box-shadow:none!important;
+  background:transparent!important;
+  color:var(--muted)!important;
+}
+#areaTroutView .trout-filter-clear:not(:disabled){
+  color:var(--accent-dark)!important;
+}
+
+#areaTroutView .trout-prefecture{
+  border-color:transparent;
+  background:linear-gradient(180deg,var(--surface-raised),var(--surface));
+  box-shadow:var(--shadow-soft),var(--surface-highlight);
+  overflow:hidden;
+}
+#areaTroutView .trout-prefecture[open]{
+  box-shadow:var(--shadow),var(--surface-highlight);
+}
+#areaTroutView .trout-prefecture > summary{
+  position:relative;
+}
+#areaTroutView .trout-prefecture[open] > summary::after{
+  content:"";
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:0;
+  height:1px;
+  background:var(--line);
+}
+
+#areaTroutView .trout-facility-card{
+  border-color:transparent;
+  background:var(--surface-raised);
+  box-shadow:var(--surface-highlight);
+}
+#areaTroutView .trout-facility-details{
+  border-color:transparent;
+  background:var(--soft);
+  box-shadow:var(--surface-highlight);
+}
+
+.trout-detail-sheet,
+.trout-filter-sheet{
+  border:0;
+  box-shadow:0 -22px 60px rgba(0,12,20,.22),var(--surface-highlight);
+}
+.trout-detail-sheet > header,
+.trout-filter-sheet > header{
+  border-bottom-color:var(--line);
+}
+.trout-detail-content dl > div{
+  border-bottom-color:var(--line);
+}
+.trout-filter-options button{
+  border-color:transparent;
+  background:var(--surface-raised);
+  box-shadow:var(--surface-highlight);
+}
+.trout-filter-options button[aria-pressed="true"]{
+  border-color:transparent;
+  box-shadow:inset 0 0 0 1px rgba(53,191,210,.42),var(--surface-highlight);
+}
+
+html[data-theme="dark"] #areaTroutView .trout-prefecture{
+  background:linear-gradient(180deg,#12313d 0%,#102b37 100%);
+}
+html[data-theme="dark"] #areaTroutView .trout-facility-card{
+  background:#0d2632;
+}
+html[data-theme="dark"] #areaTroutView .trout-facility-details{
+  background:#173e4a;
+}
+html[data-theme="dark"] .trout-detail-sheet,
+html[data-theme="dark"] .trout-filter-sheet{
+  box-shadow:0 -24px 64px rgba(0,7,12,.5),var(--surface-highlight);
+}
+
+/* AREA TROUT v3.1 - carved tactile controls.
+   Only controls/accordion headers get the deeper 3D treatment; data cards stay calm. */
+#areaTroutView .trout-filter-settings,
+#areaTroutView .trout-facility-details,
+#areaTroutView .trout-prefecture > summary,
+.trout-filter-options button,
+.trout-filter-close,
+.trout-detail-sheet .trout-detail-close{
+  position:relative;
+  border:1px solid rgba(91,166,180,.15)!important;
+  background-image:linear-gradient(180deg,rgba(255,255,255,.045),rgba(0,0,0,.07));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.075),
+    inset 0 -3px 0 rgba(0,8,13,.34),
+    0 4px 0 rgba(0,8,13,.2),
+    0 9px 18px rgba(0,7,12,.22)!important;
+  transition:transform .12s ease,box-shadow .12s ease,filter .12s ease;
+}
+
+#areaTroutView .trout-prefecture{
+  /* Make the accordion body read as a recessed housing around its tactile header. */
+  background:linear-gradient(180deg,#102b37 0%,#0d2631 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    inset 0 0 0 1px rgba(91,166,180,.06),
+    0 10px 22px rgba(0,7,12,.2);
+}
+
+#areaTroutView .trout-prefecture > summary{
+  border:0!important;
+  border-radius:13px;
+  background-color:#123541;
+}
+
+#areaTroutView .trout-prefecture[open] > summary{
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 4px 10px rgba(0,7,12,.4),
+    inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+
+#areaTroutView .trout-filter-settings:active,
+#areaTroutView .trout-facility-details:active,
+.trout-filter-options button:active,
+.trout-filter-close:active,
+.trout-detail-sheet .trout-detail-close:active{
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 4px 10px rgba(0,7,12,.42),
+    inset 0 1px 0 rgba(255,255,255,.025)!important;
+}
+
+.trout-filter-options button[aria-pressed="true"]{
+  transform:translateY(2px);
+  background:linear-gradient(180deg,#174653,#143946)!important;
+  box-shadow:
+    inset 0 4px 11px rgba(0,7,12,.4),
+    inset 0 0 0 1px rgba(70,199,216,.4)!important;
+}
+
+/* Clear stays visually secondary and intentionally flat. */
+#areaTroutView .trout-filter-clear{
+  border:0!important;
+  box-shadow:none!important;
+  background:none!important;
+  transform:none!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  #areaTroutView .trout-filter-settings,
+  #areaTroutView .trout-facility-details,
+  #areaTroutView .trout-prefecture > summary,
+  .trout-filter-options button,
+  .trout-filter-close,
+  .trout-detail-sheet .trout-detail-close{
+    transition:none!important;
+  }
+}
+
+/* AREA TROUT v3.2 - theme-aware unified 3D surfaces. */
+#areaTroutView .trout-filter-settings,
+#areaTroutView .trout-facility-details,
+#areaTroutView .trout-prefecture > summary,
+.trout-filter-options button,
+.trout-filter-close,
+.trout-detail-sheet .trout-detail-close{
+  background-image:linear-gradient(180deg,var(--mfl3d-control-top),var(--mfl3d-control-bottom))!important;
+  color:var(--ink)!important;
+  border-color:rgba(50,96,106,.13)!important;
+  box-shadow:
+    inset 0 1px 0 var(--mfl3d-rim),
+    inset 0 -3px 0 var(--mfl3d-groove),
+    0 4px 0 var(--mfl3d-step),
+    0 10px 22px var(--mfl3d-shadow)!important;
+}
+#areaTroutView .trout-prefecture{
+  color:var(--ink)!important;
+  background:linear-gradient(180deg,var(--mfl3d-surface-top),var(--mfl3d-surface-bottom))!important;
+  border-color:rgba(50,96,106,.09)!important;
+  box-shadow:
+    inset 0 1px 0 var(--mfl3d-rim),
+    0 9px 20px var(--mfl3d-shadow-soft)!important;
+}
+#areaTroutView .trout-prefecture > summary{
+  background-color:transparent!important;
+}
+#areaTroutView .trout-prefecture > summary,
+#areaTroutView .trout-prefecture > summary *{
+  color:var(--ink)!important;
+}
+#areaTroutView .trout-prefecture-count{
+  color:var(--accent-dark)!important;
+}
+
+/* Light mode: shallow relief, readable ink, no dark slab effect. */
+html:not([data-theme="dark"]) #areaTroutView .trout-prefecture{
+  background:linear-gradient(180deg,#ffffff 0%,#eff5f6 100%)!important;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 3px 0 rgba(47,88,96,.055),
+    0 8px 18px rgba(29,68,76,.08)!important;
+}
+html:not([data-theme="dark"]) #areaTroutView .trout-prefecture > summary,
+html:not([data-theme="dark"]) #areaTroutView .trout-filter-settings,
+html:not([data-theme="dark"]) #areaTroutView .trout-facility-details,
+html:not([data-theme="dark"]) .trout-filter-options button,
+html:not([data-theme="dark"]) .trout-filter-close,
+html:not([data-theme="dark"]) .trout-detail-sheet .trout-detail-close{
+  background-image:linear-gradient(180deg,#ffffff 0%,#edf4f5 100%)!important;
+  color:#17313a!important;
+  border-color:rgba(67,111,120,.12)!important;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -2px 0 rgba(53,92,100,.10),
+    0 3px 0 rgba(47,88,96,.065),
+    0 8px 17px rgba(29,68,76,.085)!important;
+}
+html:not([data-theme="dark"]) #areaTroutView .trout-prefecture > summary *,
+html:not([data-theme="dark"]) #areaTroutView .trout-prefecture-count{
+  color:#17313a!important;
+}
+html:not([data-theme="dark"]) #areaTroutView .trout-prefecture-count{
+  color:#0b7285!important;
+}
+
+/* Dark mode keeps the deeper carved treatment. */
+html[data-theme="dark"] #areaTroutView .trout-prefecture > summary,
+html[data-theme="dark"] #areaTroutView .trout-filter-settings,
+html[data-theme="dark"] #areaTroutView .trout-facility-details,
+html[data-theme="dark"] .trout-filter-options button,
+html[data-theme="dark"] .trout-filter-close,
+html[data-theme="dark"] .trout-detail-sheet .trout-detail-close{
+  color:var(--ink)!important;
+}
+
+/* AREA TROUT v3.2 - light-mode hierarchy polish */
+html:not([data-theme="dark"]) #areaTroutView .trout-facility-card{
+  background:linear-gradient(180deg,#f8fbfc 0%,#eef5f6 100%)!important;
+  border-color:rgba(67,111,120,.10)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 2px 0 rgba(49,91,100,.06),
+    0 8px 20px rgba(20,60,68,.075)!important;
+}
+html:not([data-theme="dark"]) #areaTroutView .trout-facility-notices{
+  background:linear-gradient(180deg,#eaf2f3 0%,#e3edef 100%)!important;
+  box-shadow:
+    inset 0 2px 7px rgba(33,76,85,.09),
+    inset 0 1px 0 rgba(255,255,255,.72)!important;
+}
+html:not([data-theme="dark"]) #areaTroutView .trout-facility-details{
+  background-image:linear-gradient(180deg,#f0f7f8 0%,#dfeaec 100%)!important;
+  border-color:rgba(67,111,120,.14)!important;
+  color:#0a6070!important;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    inset 0 -2px 0 rgba(53,92,100,.11),
+    0 3px 0 rgba(47,88,96,.075),
+    0 8px 16px rgba(29,68,76,.09)!important;
+}
+html:not([data-theme="dark"]) #areaTroutView .trout-facility-details:active{
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 3px 8px rgba(53,92,100,.13),
+    inset 0 1px 0 rgba(255,255,255,.6),
+    0 1px 0 rgba(47,88,96,.05)!important;
+}

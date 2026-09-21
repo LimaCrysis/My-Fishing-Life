@@ -1218,11 +1218,7 @@ function renderFishingMap(){
         <h2 id="areaTroutTitle">AREA TROUT</h2>
         <p>自分に合った管理釣り場を選ぶ</p>
       </header>
-      <section class="area-trout-placeholder" aria-labelledby="areaTroutFilterTitle">
-        <h3 id="areaTroutFilterTitle">条件で探す</h3>
-        <p>釣り方や設備で絞り込めるようになります。</p>
-        <span class="area-trout-preparing">準備中</span>
-      </section>
+      <div id="areaTroutFilters"></div>
       <section class="area-trout-placeholder area-trout-map" aria-labelledby="areaTroutMapTitle">
         <h3 id="areaTroutMapTitle">地図から探す</h3>
         <p>ここに管理釣り場の地図を表示します。</p>
