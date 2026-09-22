@@ -1056,6 +1056,9 @@ function syncFishingMapMode() {
   scene.querySelectorAll('[data-fishing-mode]').forEach(button => {
     button.setAttribute('aria-pressed', String(button.dataset.fishingMode === state.fishingMapMode));
   });
+  if (state.fishingMapMode === 'trout') {
+    requestAnimationFrame(() => window.MFLTroutCards?.refreshMap?.());
+  }
 }
 
 function setupFishingMapTransition(scene) {
@@ -1219,11 +1222,25 @@ function renderFishingMap(){
         <p>自分に合った管理釣り場を選ぶ</p>
       </header>
       <div id="areaTroutFilters"></div>
-      <section class="area-trout-placeholder area-trout-map" aria-labelledby="areaTroutMapTitle">
-        <h3 id="areaTroutMapTitle">地図から探す</h3>
-        <p>ここに管理釣り場の地図を表示します。</p>
-        <span class="area-trout-preparing">準備中</span>
+      <section class="area-trout-map" aria-labelledby="areaTroutMapTitle">
+        <div class="area-trout-map-head">
+          <div>
+            <p class="eyebrow">AREA TROUT MAP</p>
+            <h3 id="areaTroutMapTitle">管理釣り場マップ</h3>
+            <p>6県のピンから選ぶと、その県の施設ピンだけを表示します。</p>
+          </div>
+          <span class="area-trout-map-count" id="areaTroutMapCount">48 SPOTS</span>
+        </div>
+        <div id="areaTroutRealMap" class="area-trout-real-map" aria-label="AREA TROUT 施設地図"></div>
+        <div class="area-trout-map-meta">
+          <p id="areaTroutMapPinStatus" class="area-trout-map-pin-status" role="status" aria-live="polite">地図を読み込んでいます…</p>
+          <p class="area-trout-map-location-note">単一点にしない区間型と、正確なピン確認中の施設は別表示します。</p>
+        </div>
+        <div id="areaTroutMapExceptions" class="trout-map-exceptions" hidden></div>
+        <div class="area-trout-prefecture-head"><strong>県から絞る</strong><span>選ぶとこの下に施設一覧</span></div>
+        <div id="areaTroutPrefectureMap" class="trout-prefecture-map" aria-label="AREA TROUT 県別絞り込み"></div>
       </section>
+      <section id="areaTroutMapResults" class="trout-map-results" aria-live="polite" hidden></section>
       <section id="areaTroutFacilities" aria-labelledby="areaTroutFacilitiesTitle">
         <h3 id="areaTroutFacilitiesTitle">管理釣り場</h3>
         <p role="status">施設一覧を読み込んでいます…</p>

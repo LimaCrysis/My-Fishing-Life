@@ -356,3 +356,423 @@ html:not([data-theme="dark"]) #areaTroutView .trout-facility-details:active{
     inset 0 1px 0 rgba(255,255,255,.6),
     0 1px 0 rgba(47,88,96,.05)!important;
 }
+
+/* AREA TROUT v3.3 - safe prefecture map (no unverified facility coordinates). */
+#areaTroutView .area-trout-map{
+  margin:18px 0 22px;
+  padding:18px;
+  border-radius:22px;
+  background:linear-gradient(180deg,var(--mfl3d-surface-top),var(--mfl3d-surface-bottom));
+  box-shadow:inset 0 1px 0 var(--mfl3d-rim),0 10px 24px var(--mfl3d-shadow-soft);
+}
+#areaTroutView .area-trout-map-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;
+}
+#areaTroutView .area-trout-map-head .eyebrow{margin:0 0 3px;color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.12em;}
+#areaTroutView .area-trout-map-head h3{margin:0 0 5px;font-size:20px;color:var(--ink);}
+#areaTroutView .area-trout-map-head p{margin:0;color:var(--muted);font-size:12px;}
+#areaTroutView .area-trout-map-count{
+  flex:0 0 auto;padding:7px 9px;border-radius:999px;background:var(--soft);color:var(--accent-dark);font-size:11px;font-weight:800;
+}
+#areaTroutView .trout-prefecture-map{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,64px);gap:8px;position:relative;
+}
+#areaTroutView .trout-prefecture-map-cell{
+  grid-column:var(--map-col);grid-row:var(--map-row);min-width:0;border:1px solid rgba(50,96,106,.11);border-radius:14px;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;padding:10px 12px;text-align:left;color:var(--ink);
+  background-image:linear-gradient(180deg,var(--mfl3d-control-top),var(--mfl3d-control-bottom));
+  box-shadow:inset 0 1px 0 var(--mfl3d-rim),inset 0 -3px 0 var(--mfl3d-groove),0 4px 0 var(--mfl3d-step),0 10px 20px var(--mfl3d-shadow-soft);
+  cursor:pointer;touch-action:manipulation;transition:transform .12s ease,box-shadow .12s ease;
+}
+#areaTroutView .trout-prefecture-map-cell strong{font-size:15px;line-height:1.2;}
+#areaTroutView .trout-prefecture-map-cell span{font-size:11px;color:var(--muted);}
+#areaTroutView .trout-prefecture-map-cell:active,
+#areaTroutView .trout-prefecture-map-cell.is-active{
+  transform:translateY(2px);
+  box-shadow:inset 0 4px 10px var(--mfl3d-shadow),inset 0 1px 0 var(--mfl3d-rim),0 1px 0 var(--mfl3d-step);
+}
+#areaTroutView .trout-prefecture-map-cell:focus-visible{outline:3px solid var(--accent);outline-offset:2px;}
+#areaTroutView .area-trout-map-note{margin:12px 2px 0;color:var(--muted);font-size:11px;}
+@media(max-width:520px){
+  #areaTroutView .area-trout-map{padding:14px;border-radius:18px;}
+  #areaTroutView .trout-prefecture-map{grid-template-rows:repeat(4,58px);gap:7px;}
+  #areaTroutView .trout-prefecture-map-cell{padding:8px 10px;border-radius:12px;}
+  #areaTroutView .trout-prefecture-map-cell strong{font-size:14px;}
+  #areaTroutView .area-trout-map-head h3{font-size:18px;}
+}
+html:not([data-theme="dark"]) #areaTroutView .area-trout-map{
+  background:linear-gradient(180deg,#f9fcfc 0%,#edf4f5 100%);
+  box-shadow:inset 0 1px 0 #fff,0 4px 0 rgba(47,88,96,.045),0 12px 24px rgba(29,68,76,.07);
+}
+html:not([data-theme="dark"]) #areaTroutView .trout-prefecture-map-cell{
+  background-image:linear-gradient(180deg,#fff 0%,#e9f2f3 100%);
+  color:#17313a;
+  box-shadow:inset 0 1px 0 #fff,inset 0 -2px 0 rgba(53,92,100,.09),0 3px 0 rgba(47,88,96,.055),0 8px 16px rgba(29,68,76,.08);
+}
+html:not([data-theme="dark"]) #areaTroutView .trout-prefecture-map-cell span{color:#56747c;}
+@media(prefers-reduced-motion:reduce){#areaTroutView .trout-prefecture-map-cell{transition:none;}}
+
+
+/* AREA TROUT v3.4 - prefecture quick results directly below the map. */
+#areaTroutView .trout-map-results{
+  margin:-8px 0 22px;
+  padding:16px;
+  border-radius:20px;
+  background:linear-gradient(180deg,var(--mfl3d-surface-top),var(--mfl3d-surface-bottom));
+  box-shadow:inset 0 1px 0 var(--mfl3d-rim),0 10px 24px var(--mfl3d-shadow-soft);
+}
+#areaTroutView .trout-map-results[hidden]{display:none!important;}
+#areaTroutView .trout-map-results-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px;}
+#areaTroutView .trout-map-results-head .eyebrow{margin:0 0 2px;color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.12em;}
+#areaTroutView .trout-map-results-head h3{margin:0;color:var(--ink);font-size:19px;}
+#areaTroutView .trout-map-results-head p:not(.eyebrow){margin:3px 0 0;color:var(--muted);font-size:12px;}
+
+#areaTroutView .trout-map-results-count{display:flex;align-items:baseline;gap:3px;margin:5px 0 0!important;color:var(--muted)!important;line-height:1;}
+#areaTroutView .trout-map-results-count strong{color:var(--ink);font-size:18px;font-weight:800;letter-spacing:.01em;}
+#areaTroutView .trout-map-results-count span{font-size:12px;font-weight:700;}
+#areaTroutView .trout-map-results-close{
+  flex:0 0 auto;min-width:64px;min-height:42px;padding:8px 12px;border:1px solid rgba(50,96,106,.13);border-radius:11px;
+  color:var(--ink);font:inherit;font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation;
+  background-image:linear-gradient(180deg,var(--mfl3d-control-top),var(--mfl3d-control-bottom));
+  box-shadow:inset 0 1px 0 var(--mfl3d-rim),inset 0 -2px 0 var(--mfl3d-groove),0 3px 0 var(--mfl3d-step),0 8px 16px var(--mfl3d-shadow-soft);
+}
+#areaTroutView .trout-map-results-close:active{transform:translateY(2px);box-shadow:inset 0 3px 8px var(--mfl3d-shadow),inset 0 1px 0 var(--mfl3d-rim);}
+#areaTroutView .trout-map-results-list{margin:0;padding:0;display:grid;gap:10px;}
+#areaTroutView .trout-map-results-empty{margin:0;padding:14px;border-radius:12px;background:var(--surface-raised);color:var(--muted);font-size:13px;}
+html:not([data-theme="dark"]) #areaTroutView .trout-map-results{background:linear-gradient(180deg,#f9fcfc 0%,#edf4f5 100%);box-shadow:inset 0 1px 0 #fff,0 4px 0 rgba(47,88,96,.045),0 12px 24px rgba(29,68,76,.07);}
+html:not([data-theme="dark"]) #areaTroutView .trout-map-results-close{background-image:linear-gradient(180deg,#fff 0%,#e9f2f3 100%);color:#17313a;box-shadow:inset 0 1px 0 #fff,inset 0 -2px 0 rgba(53,92,100,.09),0 3px 0 rgba(47,88,96,.055),0 8px 16px rgba(29,68,76,.08);}
+@media(max-width:520px){#areaTroutView .trout-map-results{padding:14px;border-radius:18px;}#areaTroutView .trout-map-results-head h3{font-size:18px;}}
+
+/* AREA TROUT v3.9 - verified Leaflet facility map. */
+#areaTroutView .area-trout-real-map{
+  width:100%;
+  height:330px;
+  margin:2px 0 10px;
+  border:1px solid rgba(50,96,106,.16);
+  border-radius:18px;
+  overflow:hidden;
+  background:var(--surface-raised);
+  box-shadow:
+    inset 0 3px 10px var(--mfl3d-shadow),
+    inset 0 1px 0 var(--mfl3d-rim),
+    0 6px 16px var(--mfl3d-shadow-soft);
+  isolation:isolate;
+}
+#areaTroutView .area-trout-real-map .leaflet-control-zoom a{
+  color:var(--ink);
+  background:var(--surface);
+  border-color:rgba(50,96,106,.13);
+}
+#areaTroutView .area-trout-real-map .leaflet-control-attribution{
+  font-size:9px;
+  background:color-mix(in srgb,var(--surface) 82%,transparent);
+}
+html[data-theme="dark"] #areaTroutView .area-trout-real-map .leaflet-tile{
+  filter:brightness(.72) contrast(1.07) saturate(.68);
+}
+#areaTroutView .area-trout-map-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:4px 2px 14px;
+}
+#areaTroutView .area-trout-map-meta p{margin:0;}
+#areaTroutView .area-trout-map-pin-status{
+  display:flex;
+  align-items:baseline;
+  gap:4px;
+  color:var(--muted);
+  font-size:11px;
+}
+#areaTroutView .area-trout-map-pin-status strong{
+  color:var(--ink);
+  font-size:16px;
+  font-weight:900;
+}
+#areaTroutView .area-trout-map-location-note{
+  color:var(--muted);
+  font-size:10px;
+  text-align:right;
+}
+#areaTroutView .area-trout-prefecture-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:10px;
+  margin:0 2px 8px;
+}
+#areaTroutView .area-trout-prefecture-head strong{color:var(--ink);font-size:13px;}
+#areaTroutView .area-trout-prefecture-head span{color:var(--muted);font-size:10px;}
+#areaTroutView .trout-prefecture-map{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-rows:none;
+  grid-auto-rows:minmax(56px,auto);
+  gap:8px;
+}
+#areaTroutView .trout-prefecture-map-cell{
+  grid-column:auto;
+  grid-row:auto;
+}
+#areaTroutView .mfl-trout-map-pin-wrap{
+  background:transparent;
+  border:0;
+}
+#areaTroutView .mfl-trout-province-pin-wrap{
+  background:transparent;
+  border:0;
+}
+#areaTroutView .mfl-trout-province-pin{
+  position:absolute;
+  left:4px;
+  top:4px;
+  width:64px;
+  height:54px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1px;
+  border:2px solid rgba(255,255,255,.92);
+  border-radius:18px 18px 18px 7px;
+  transform:rotate(-4deg);
+  color:#f5ffff;
+  background:linear-gradient(145deg,#4fd0d6 0%,#0d788b 58%,#075363 100%);
+  box-shadow:0 4px 0 rgba(4,51,60,.38),0 10px 20px rgba(2,32,39,.34),inset 2px 2px 7px rgba(255,255,255,.3);
+  text-shadow:0 1px 2px rgba(0,31,37,.6);
+}
+#areaTroutView .mfl-trout-province-pin::after{
+  content:"";
+  position:absolute;
+  left:25px;
+  bottom:-10px;
+  width:14px;
+  height:14px;
+  border-right:2px solid rgba(255,255,255,.92);
+  border-bottom:2px solid rgba(255,255,255,.92);
+  background:#075363;
+  transform:rotate(45deg);
+  box-shadow:4px 4px 7px rgba(2,32,39,.18);
+}
+#areaTroutView .mfl-trout-province-pin strong{position:relative;z-index:1;font-size:14px;font-weight:900;line-height:1.05;letter-spacing:.03em;}
+#areaTroutView .mfl-trout-province-pin small{position:relative;z-index:1;font-size:9px;font-weight:800;opacity:.94;}
+#areaTroutView .mfl-trout-province-pin.is-empty{filter:saturate(.45);opacity:.62;}
+#areaTroutView .trout-map-back-control-wrap{border:0!important;background:transparent!important;box-shadow:none!important;}
+#areaTroutView .trout-map-back-control{
+  min-width:72px;
+  min-height:34px;
+  padding:5px 9px;
+  border:1px solid rgba(50,96,106,.18);
+  border-radius:10px;
+  color:var(--ink);
+  background:var(--surface);
+  box-shadow:0 3px 10px rgba(2,32,39,.2),inset 0 1px 0 var(--mfl3d-rim);
+  font:inherit;
+  font-size:11px;
+  font-weight:900;
+  cursor:pointer;
+}
+#areaTroutView .trout-map-back-control:active{transform:translateY(1px);}
+#areaTroutView .mfl-trout-map-pin{
+  position:absolute;
+  left:5px;
+  top:3px;
+  width:24px;
+  height:24px;
+  border:2px solid rgba(255,255,255,.9);
+  border-radius:50% 50% 50% 8px;
+  transform:rotate(-45deg);
+  background:linear-gradient(145deg,#51c4ca 0%,#0b7285 62%,#075363 100%);
+  box-shadow:0 3px 0 rgba(4,51,60,.34),0 7px 14px rgba(2,32,39,.28),inset 2px 2px 5px rgba(255,255,255,.36);
+}
+#areaTroutView .mfl-trout-map-pin::after{
+  content:"";
+  position:absolute;
+  width:7px;
+  height:7px;
+  left:6px;
+  top:6px;
+  border-radius:50%;
+  background:#eaffff;
+  box-shadow:0 0 0 2px rgba(6,74,86,.28);
+}
+#areaTroutView .mfl-trout-map-pin.is-representative{
+  background:linear-gradient(145deg,#8ec9b5 0%,#477d70 62%,#315c53 100%);
+  border-style:dashed;
+}
+#areaTroutView .mfl-trout-leaflet-popup .leaflet-popup-content-wrapper,
+#areaTroutView .mfl-trout-leaflet-popup .leaflet-popup-tip{
+  color:var(--ink);
+  background:var(--surface);
+}
+#areaTroutView .mfl-trout-leaflet-popup .leaflet-popup-content-wrapper{
+  border:1px solid rgba(50,96,106,.14);
+  border-radius:14px;
+  box-shadow:0 8px 22px rgba(5,38,45,.22),inset 0 1px 0 var(--mfl3d-rim);
+}
+#areaTroutView .trout-map-popup{display:grid;gap:4px;min-width:150px;}
+#areaTroutView .trout-map-popup strong{color:var(--ink);font-size:13px;line-height:1.35;}
+#areaTroutView .trout-map-popup small{color:var(--muted);font-size:10px;}
+#areaTroutView .trout-map-popup-note{
+  width:max-content;
+  margin-top:2px;
+  padding:2px 6px;
+  border-radius:999px;
+  color:#315c53;
+  background:rgba(103,177,151,.16);
+  font-size:9px;
+  font-weight:800;
+}
+#areaTroutView .trout-map-popup-note.is-verified{color:var(--accent-dark);background:var(--soft);}
+#areaTroutView .trout-map-popup button{
+  min-height:36px;
+  margin-top:5px;
+  border:1px solid rgba(50,96,106,.14);
+  border-radius:9px;
+  color:var(--ink);
+  background-image:linear-gradient(180deg,var(--mfl3d-control-top),var(--mfl3d-control-bottom));
+  box-shadow:inset 0 1px 0 var(--mfl3d-rim),inset 0 -2px 0 var(--mfl3d-groove),0 2px 0 var(--mfl3d-step),0 5px 12px var(--mfl3d-shadow-soft);
+  font:inherit;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+}
+#areaTroutView .trout-real-map-unavailable{
+  display:grid;
+  place-items:center;
+  height:100%;
+  margin:0;
+  padding:20px;
+  color:var(--muted);
+  text-align:center;
+  font-size:12px;
+}
+@media(max-width:520px){
+  #areaTroutView .area-trout-real-map{height:295px;border-radius:15px;}
+  #areaTroutView .area-trout-map-meta{align-items:flex-start;}
+  #areaTroutView .area-trout-map-location-note{max-width:48%;}
+  #areaTroutView .trout-prefecture-map{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:none;grid-auto-rows:minmax(54px,auto);}
+}
+
+
+/* AREA TROUT v4.0 - non-point locations (river sections / exact pin pending). */
+#areaTroutView .trout-map-exceptions{
+  margin:-3px 2px 14px;
+  padding:10px;
+  border:1px solid rgba(50,96,106,.13);
+  border-radius:14px;
+  background:color-mix(in srgb,var(--surface-raised) 92%,transparent);
+  box-shadow:inset 0 1px 0 var(--mfl3d-rim),0 5px 12px var(--mfl3d-shadow-soft);
+}
+#areaTroutView .trout-map-exceptions-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 7px;color:var(--muted);font-size:10px;}
+#areaTroutView .trout-map-exceptions-head strong{color:var(--ink);font-size:11px;}
+#areaTroutView .trout-map-exceptions-list{display:grid;gap:7px;}
+#areaTroutView .trout-map-exception-item{
+  width:100%;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:9px;text-align:left;
+  min-height:50px;padding:8px 10px;border:1px solid rgba(50,96,106,.12);border-radius:11px;color:var(--ink);font:inherit;cursor:pointer;
+  background-image:linear-gradient(180deg,var(--mfl3d-control-top),var(--mfl3d-control-bottom));
+  box-shadow:inset 0 1px 0 var(--mfl3d-rim),inset 0 -2px 0 var(--mfl3d-groove),0 2px 0 var(--mfl3d-step),0 5px 11px var(--mfl3d-shadow-soft);
+}
+#areaTroutView .trout-map-exception-item:active{transform:translateY(1px);box-shadow:inset 0 3px 8px var(--mfl3d-shadow),inset 0 1px 0 var(--mfl3d-rim);}
+#areaTroutView .trout-map-exception-badge{display:inline-flex;align-items:center;justify-content:center;min-width:54px;min-height:24px;padding:4px 7px;border-radius:999px;background:rgba(45,163,178,.13);color:var(--accent,#2da3b2);font-size:10px;font-weight:850;white-space:nowrap;}
+#areaTroutView .trout-map-exception-item.is-river .trout-map-exception-badge{background:rgba(47,143,188,.14);}
+#areaTroutView .trout-map-exception-item.is-pending .trout-map-exception-badge{background:rgba(219,160,58,.15);color:#b27612;}
+#areaTroutView .trout-map-exception-copy{min-width:0;display:grid;gap:2px;}
+#areaTroutView .trout-map-exception-copy strong{font-size:12px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#areaTroutView .trout-map-exception-copy small{font-size:9px;line-height:1.3;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#areaTroutView .trout-map-exception-arrow{font-size:20px;line-height:1;color:var(--muted);}
+html:not([data-theme="dark"]) #areaTroutView .trout-map-exceptions{background:#f5fafb;box-shadow:inset 0 1px 0 #fff,0 5px 12px rgba(29,68,76,.06);}
+html:not([data-theme="dark"]) #areaTroutView .trout-map-exception-item{background-image:linear-gradient(180deg,#fff,#edf4f5);box-shadow:inset 0 1px 0 #fff,inset 0 -2px 0 rgba(53,92,100,.07),0 2px 0 rgba(47,88,96,.045),0 5px 11px rgba(29,68,76,.06);}
+
+/* AREA TROUT v16.3 - detail sheet decision hierarchy. Map UI is intentionally unchanged. */
+.trout-detail-summary{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  margin:0 0 14px;
+}
+.trout-detail-summary-item{
+  min-width:0;
+  padding:10px 12px;
+  border-radius:12px;
+  background:var(--surface-raised);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 4px 12px rgba(0,8,13,.08);
+}
+.trout-detail-summary-item span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.3;
+}
+.trout-detail-summary-item strong{
+  display:block;
+  margin-top:4px;
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+.trout-detail-summary-item.is-good strong{color:var(--accent-dark);}
+.trout-detail-summary-item.is-check strong{color:#a87816;}
+.trout-detail-summary-item.is-ng strong{color:#b75b5b;}
+.trout-detail-alert{
+  margin:0 0 14px!important;
+  padding:11px 12px!important;
+  border-left:3px solid #a78c4d!important;
+  border-radius:10px!important;
+}
+.trout-detail-alert > strong{
+  display:block;
+  margin-bottom:4px;
+  font-size:12px;
+  color:var(--ink);
+}
+.trout-detail-section{
+  margin:0;
+  padding:2px 0 4px;
+}
+.trout-detail-section + .trout-detail-section{
+  margin-top:8px;
+  padding-top:10px;
+  border-top:1px solid var(--line);
+}
+.trout-detail-content .trout-detail-section h3{
+  margin:0 0 5px;
+  color:var(--ink);
+  font-size:14px;
+  letter-spacing:.01em;
+}
+.trout-detail-section dl{
+  display:grid;
+  grid-template-columns:1fr;
+}
+.trout-detail-section dl > div{
+  padding:8px 0;
+}
+.trout-detail-section dl > div:last-child{
+  border-bottom:0;
+}
+.trout-detail-empty{
+  margin:0;
+  padding:8px 0;
+  color:var(--muted);
+  font-size:13px;
+}
+.trout-detail-notes p{
+  padding:10px 12px;
+  border-radius:10px;
+  background:var(--surface-raised);
+}
+html[data-theme="dark"] .trout-detail-summary-item{
+  background:#0d2632;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 6px 14px rgba(0,7,12,.18);
+}
+html[data-theme="dark"] .trout-detail-summary-item.is-good strong{color:#7ed5df;}
+html[data-theme="dark"] .trout-detail-summary-item.is-check strong{color:#e0bb67;}
+html[data-theme="dark"] .trout-detail-summary-item.is-ng strong{color:#ef9292;}
+@media(max-width:380px){
+  .trout-detail-summary{grid-template-columns:1fr 1fr;gap:6px;}
+  .trout-detail-summary-item{padding:9px 10px;}
+  .trout-detail-summary-item strong{font-size:14px;}
+}
