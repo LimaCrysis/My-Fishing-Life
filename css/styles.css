@@ -4614,3 +4614,5 @@ html[data-theme="dark"] .fishing-map-ripple-fill{background:linear-gradient(145d
   .fishing-map-ripple-overlay{display:none!important}
   .fishing-map-ripple-overlay *{animation:none!important}
 }
+
+.lake-mode-summary-lower{margin-top:14px}
