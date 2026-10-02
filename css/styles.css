@@ -4616,3 +4616,27 @@ html[data-theme="dark"] .fishing-map-ripple-fill{background:linear-gradient(145d
 }
 
 .lake-mode-summary-lower{margin-top:14px}
+
+/* Kasumigaura lake detail template */
+button.lake-seed-card{width:100%;border:0;text-align:left;font:inherit;cursor:pointer}
+.lake-seed-card.is-ready{outline:1px solid rgba(29,128,149,.18)}
+.lake-seed-card.is-ready:hover{transform:translateY(-1px)}
+.lake-seed-card.is-ready>span{background:rgba(29,128,149,.12);color:var(--accent-dark)}
+.lake-spot-sheet{max-width:620px}
+.lake-detail-glance{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}
+.lake-detail-glance>div{min-width:0;padding:12px;border-radius:14px;background:var(--surface);box-shadow:var(--surface-highlight)}
+.lake-detail-glance span{display:block;margin-bottom:5px;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.04em}
+.lake-detail-glance strong{display:block;color:var(--ink);font-size:12px;line-height:1.45}
+.lake-rule-grid{display:grid;gap:8px}
+.lake-rule-grid>div{padding:12px 13px;border-radius:14px;background:var(--surface);box-shadow:var(--surface-highlight)}
+.lake-rule-grid strong{display:block;margin-bottom:4px;color:var(--accent-dark);font-size:12px}
+.lake-rule-grid p{margin:0;color:var(--ink);font-size:12px;line-height:1.65}
+.lake-detail-list{margin:0;padding-left:20px;color:var(--ink)}
+.lake-detail-list li{margin:6px 0;font-size:12px;line-height:1.6}
+.lake-detail-warning{margin:14px 0;padding:14px 15px;border-radius:16px;background:rgba(183,116,38,.10);box-shadow:var(--surface-highlight)}
+.lake-detail-warning strong{display:block;margin-bottom:5px;color:#9a5d17;font-size:12px}
+.lake-detail-warning p{margin:0;color:var(--ink);font-size:12px;line-height:1.65}
+.lake-official-links{display:grid;gap:8px;margin-top:10px}
+@media(max-width:560px){
+  .lake-detail-glance{grid-template-columns:1fr}
+}
