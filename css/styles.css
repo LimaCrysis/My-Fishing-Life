@@ -4586,10 +4586,10 @@ html[data-theme="dark"] :where(.tackle-home-card,.settings-home-card,.stat-card)
 .fishing-map-ripple-fill{background:linear-gradient(145deg,#6fb6c2,#2a7f92);opacity:0}
 html[data-theme="dark"] .fishing-map-ripple-fill{background:linear-gradient(145deg,#194f60,#0d3443)}
 .fishing-map-ripple-ring{border:2px solid rgba(220,250,252,.72);opacity:0}
-.fishing-map-ripple-overlay.is-ripple-passing .fishing-map-ripple-fill{animation:mfl-ripple-fill 780ms cubic-bezier(.2,.72,.2,1) both}
-.fishing-map-ripple-overlay.is-ripple-passing .ripple-ring-one{animation:mfl-ripple-ring 700ms ease-out 0ms both}
-.fishing-map-ripple-overlay.is-ripple-passing .ripple-ring-two{animation:mfl-ripple-ring 700ms ease-out 90ms both}
-.fishing-map-ripple-overlay.is-ripple-passing .ripple-ring-three{animation:mfl-ripple-ring 700ms ease-out 180ms both}
+.fishing-map-ripple-overlay.is-ripple-passing .fishing-map-ripple-fill{animation:mfl-ripple-fill 1400ms cubic-bezier(.18,.72,.18,1) both}
+.fishing-map-ripple-overlay.is-ripple-passing .ripple-ring-one{animation:mfl-ripple-ring 1280ms ease-out 0ms both}
+.fishing-map-ripple-overlay.is-ripple-passing .ripple-ring-two{animation:mfl-ripple-ring 1280ms ease-out 180ms both}
+.fishing-map-ripple-overlay.is-ripple-passing .ripple-ring-three{animation:mfl-ripple-ring 1280ms ease-out 360ms both}
 @keyframes mfl-ripple-fill{
   0%{transform:translate(-50%,-50%) scale(.02);opacity:0}
   18%{opacity:.88}
@@ -4598,7 +4598,7 @@ html[data-theme="dark"] .fishing-map-ripple-fill{background:linear-gradient(145d
 }
 @keyframes mfl-ripple-ring{
   0%{transform:translate(-50%,-50%) scale(.02);opacity:0}
-  15%{opacity:.72}
+  18%{opacity:.5}
   100%{transform:translate(-50%,-50%) scale(1.03);opacity:0}
 }
 @media(max-width:390px){
