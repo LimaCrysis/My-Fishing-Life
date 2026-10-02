@@ -1121,7 +1121,7 @@ function setupFishingMapTransition(scene) {
     rippleOverlay.hidden = false;
     rippleOverlay.classList.add('is-ripple-passing');
 
-    await wait(900);
+    await wait(1550);
     if (!scene.isConnected) return;
     state.fishingMapMode = mode;
     syncFishingMapMode();
@@ -1137,7 +1137,7 @@ function setupFishingMapTransition(scene) {
       const onEnd = event => { if (event.target === rippleFill) finish(); };
       rippleFill.addEventListener('animationend', onEnd);
       rippleFill.addEventListener('animationcancel', finish);
-      timer = setTimeout(finish, 1500);
+      timer = setTimeout(finish, 2450);
     });
   };
 
