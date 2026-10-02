@@ -26,6 +26,41 @@ const lakeModeSeed = [
   { id:'harunako', name:'榛名湖', pref:'群馬', state:'candidate' },
   { id:'akagionuma', name:'赤城大沼', pref:'群馬', state:'candidate' }
 ];
+const lakeSpotDetails = {
+  kasumigaura: {
+    id:'kasumigaura',
+    name:'霞ヶ浦',
+    pref:'茨城県',
+    area:'霞ヶ浦北浦海区',
+    ticket:'不要',
+    season:'通年 ※魚種ごとの採捕禁止期間あり',
+    methods:'竿釣り・手釣り可（まき餌釣りは禁止）',
+    targets:['チャネルキャットフィッシュ（アメリカナマズ）','ブラックバス','コイ','ワカサギ'],
+    ruleHighlights:[
+      ['遊漁券','霞ヶ浦・北浦では対象魚に関わらず不要。流入河川は別ルールの場合あり。'],
+      ['まき餌','まき餌釣りは禁止。'],
+      ['外来魚','ブラックバス・ブルーギル・チャネルキャットフィッシュ等は、生きたまま湖外へ持ち出さない。キャッチ＆リリースは可。'],
+      ['放置','釣った魚を堤防などへ放置・廃棄しない。']
+    ],
+    closedSeasons:[
+      'ワカサギ：1/21〜2月末、5/1〜7/20',
+      'シラウオ：3/1〜3/31',
+      'コイ：5/11〜6/10'
+    ],
+    sizeLimits:[
+      'コイ：全長15cm以下は採捕禁止',
+      'ウナギ：全長23cm以下は採捕禁止'
+    ],
+    tripNotes:[
+      '釣行地点ごとに駐車可否・立入可否を現地表示で確認',
+      '河川へ入る場合は霞ヶ浦本湖と遊漁券ルールが変わることがある',
+      '外来魚を持ち帰るなら、生体のまま湖外へ運ばない'
+    ],
+    checked:'2026-10-03',
+    officialRules:'https://www.pref.ibaraki.jp/nourinsuisan/kasui/contents/ruleandmanner.html',
+    officialQa:'https://www.pref.ibaraki.jp/nourinsuisan/kasui/contents/tsuriqa.html'
+  }
+};
 const state = {
   view: 'home',
   fishingMapMode: 'sea',
@@ -1333,7 +1368,12 @@ function renderFishingMap(){
           <div><small>RESEARCH SET</small><h3>9水域</h3></div>
           <span>詳細ルールは順次接続</span>
         </div>
-        <div class="lake-seed-grid">${lakeModeSeed.map(spot => `<article class="lake-seed-card ${spot.state === 'hold' ? 'is-hold' : ''}"><div class="lake-seed-place"><strong><span class="lake-seed-pref">${spot.pref}県</span><span class="lake-seed-name">${spot.name}</span></strong></div><span>${spot.state === 'hold' ? '保留' : '掲載候補'}</span></article>`).join('')}</div>
+        <div class="lake-seed-grid">${lakeModeSeed.map(spot => {
+          const inner=`<div class="lake-seed-place"><strong><span class="lake-seed-pref">${spot.pref}県</span><span class="lake-seed-name">${spot.name}</span></strong></div><span>${spot.id === 'kasumigaura' ? '詳細を見る' : (spot.state === 'hold' ? '保留' : '掲載候補')}</span>`;
+          return spot.id === 'kasumigaura'
+            ? `<button type="button" class="lake-seed-card is-ready" data-lake-spot="${spot.id}">${inner}</button>`
+            : `<article class="lake-seed-card ${spot.state === 'hold' ? 'is-hold' : ''}">${inner}</article>`;
+        }).join('')}</div>
       </section>
       <section class="lake-mode-summary lake-mode-summary-lower" aria-label="湖・沼モード方針">
         <div><strong>9</strong><span>調査水域</span></div>
@@ -1363,6 +1403,7 @@ function renderFishingMap(){
   setupMapFilterPanel();
 
   setupGlobalFishingSpotClicks();
+  setupLakeSpotClicks();
   window.MFLTroutCards?.mountMaster(document.getElementById('areaTroutFacilities'));
   setupFishingMapTransition(document.getElementById('fishingMapScene'));
   syncFishingMapMode();
@@ -1963,6 +2004,95 @@ function showFishingSpot(id,options={}){
 }
 
 
+
+function showLakeSpot(id){
+  const s=lakeSpotDetails[id];
+  if(!s)return;
+
+  const existing=document.getElementById('lakeSpotOverlay');
+  if(existing)existing._mflDispose?.();
+
+  const overlay=document.createElement('div');
+  overlay.id='lakeSpotOverlay';
+  overlay.className='fishing-spot-overlay lake-spot-overlay';
+  overlay.innerHTML=`
+    <div class="fishing-spot-sheet lake-spot-sheet" role="dialog" aria-modal="true" aria-label="${escapeHtml(s.name)}の詳細">
+      <div class="fishing-spot-sheet-head">
+        <button type="button" class="fishing-spot-close" aria-label="閉じる">×</button>
+        <div>
+          <small>LAKE / MARSH · ${escapeHtml(s.pref)}</small>
+          <h3>${escapeHtml(s.name)}</h3>
+          <span class="mfl-verified-badge">✓ 公式ルール確認済み</span>
+        </div>
+      </div>
+
+      <section class="lake-detail-glance" aria-label="霞ヶ浦の基本情報">
+        <div><span>遊漁券</span><strong>${escapeHtml(s.ticket)}</strong></div>
+        <div><span>シーズン</span><strong>${escapeHtml(s.season)}</strong></div>
+        <div><span>基本釣法</span><strong>${escapeHtml(s.methods)}</strong></div>
+      </section>
+
+      <section class="fishing-spot-section">
+        <h4>🐟 主な対象魚</h4>
+        <div class="fishing-spot-tags">${s.targets.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div>
+      </section>
+
+      <section class="fishing-spot-section lake-rule-section">
+        <h4>⚖️ まず見るルール</h4>
+        <div class="lake-rule-grid">${s.ruleHighlights.map(([label,text])=>`<div><strong>${escapeHtml(label)}</strong><p>${escapeHtml(text)}</p></div>`).join('')}</div>
+      </section>
+
+      <section class="fishing-spot-section">
+        <h4>📅 魚種別の採捕禁止期間</h4>
+        <ul class="lake-detail-list">${s.closedSeasons.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>
+      </section>
+
+      <section class="fishing-spot-section">
+        <h4>📏 サイズ制限</h4>
+        <ul class="lake-detail-list">${s.sizeLimits.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>
+      </section>
+
+      <section class="fishing-spot-section">
+        <h4>🚗 遠征前チェック</h4>
+        <ul class="lake-detail-list">${s.tripNotes.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>
+      </section>
+
+      <section class="lake-detail-warning">
+        <strong>アメリカナマズ狙いで重要</strong>
+        <p>チャネルキャットフィッシュは特定外来生物。再放流は可能ですが、生きたまま霞ヶ浦の外へ持ち出すことはできません。</p>
+      </section>
+
+      <div class="fishing-spot-checked">公式確認: ${escapeHtml(s.checked)}</div>
+      <div class="lake-official-links">
+        <a class="fishing-spot-official" href="${s.officialRules}" target="_blank" rel="noopener">茨城県「釣りのルールとマナー」 ↗</a>
+        <a class="fishing-spot-official" href="${s.officialQa}" target="_blank" rel="noopener">茨城県「釣りQ&A」 ↗</a>
+      </div>
+    </div>`;
+
+  document.body.appendChild(overlay);
+  const unlockBody=lockBodyScroll();
+  let closed=false;
+  const close=(immediate=false)=>{
+    if(closed)return;
+    closed=true;
+    if(immediate===true){overlay.remove();unlockBody();return;}
+    overlay.classList.add('closing');
+    setTimeout(()=>{overlay.remove();unlockBody();},160);
+  };
+  overlay._mflDispose=()=>close(true);
+  overlay.querySelector('.fishing-spot-close').onclick=close;
+  overlay.onclick=(e)=>{if(e.target===overlay)close();};
+  requestAnimationFrame(()=>overlay.classList.add('open'));
+}
+
+function setupLakeSpotClicks(){
+  document.querySelectorAll('[data-lake-spot]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      const id=button.dataset.lakeSpot;
+      if(id)showLakeSpot(id);
+    });
+  });
+}
 
 function setupPartsQuickAnswer(){
   const box=document.getElementById('partsQuickAnswer'); if(!box)return;
