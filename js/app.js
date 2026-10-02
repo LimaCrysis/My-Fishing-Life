@@ -1,4 +1,4 @@
-const APP_VERSION='14.30.2';
+const APP_VERSION='14.31.0';
 const fishMaster = [
   { name:'シロギス', emoji:'🐟', photo:'./assets/fish/kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 , where:'砂地の堤防・海岸。内房や湾内の砂底をちょい投げで探る。', methods:['ちょい投げ','投げ釣り'], bait:'イソメ類', season:'春〜秋', touch:'危険魚ではない。針を外す時は背びれに注意。' },
   { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' , where:'岩礁・テトラ・堤防際などの障害物周り。', methods:['胴突き','穴釣り','ジグヘッド'], bait:'イソメ・魚の切り身・ワーム', season:'通年', touch:'背びれのトゲに注意。' },
@@ -15,6 +15,17 @@ const fishMaster = [
 ];
 
 const defaultGear = ['ロッド', 'リール', '仕掛け', 'オモリ・ジグヘッド', 'エサ・ワーム', 'ハサミ・プライヤー', 'フィッシュグリップ', 'ライフジャケット', 'クーラーボックス', '氷・保冷剤', 'タオル', '飲み物'];
+const lakeModeSeed = [
+  { id:'ashinoko', name:'芦ノ湖', pref:'神奈川', state:'candidate' },
+  { id:'kasumigaura', name:'霞ヶ浦', pref:'茨城', state:'candidate' },
+  { id:'yamanakako', name:'山中湖', pref:'山梨', state:'candidate' },
+  { id:'saiko', name:'西湖', pref:'山梨', state:'hold' },
+  { id:'chuzenjiko', name:'中禅寺湖', pref:'栃木', state:'candidate' },
+  { id:'kawaguchiko', name:'河口湖', pref:'山梨', state:'candidate' },
+  { id:'motosuko', name:'本栖湖', pref:'山梨', state:'hold' },
+  { id:'harunako', name:'榛名湖', pref:'群馬', state:'candidate' },
+  { id:'akagionuma', name:'赤城大沼', pref:'群馬', state:'candidate' }
+];
 const state = {
   view: 'home',
   fishingMapMode: 'sea',
@@ -1064,11 +1075,16 @@ function syncFishingMapMode() {
 function setupFishingMapTransition(scene) {
   const overlay = scene.querySelector('.fishing-map-wave-overlay');
   const wave = overlay.querySelector('.fishing-map-wave');
+  const rippleOverlay = scene.querySelector('.fishing-map-ripple-overlay');
+  const rippleFill = rippleOverlay.querySelector('.fishing-map-ripple-fill');
   const rotator = scene.querySelector('.fishing-map-rotator');
   const buttons = scene.querySelectorAll('[data-fishing-mode]');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let busy = false;
-  const animate = () => new Promise(resolve => {
+
+  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+  const animateWave = () => new Promise(resolve => {
     let timer;
     const finish = () => {
       clearTimeout(timer);
@@ -1085,11 +1101,46 @@ function setupFishingMapTransition(scene) {
     wave.addEventListener('animationend', onEnd);
     wave.addEventListener('animationcancel', finish);
     reducedMotion.addEventListener('change', onPreference);
-    // A bounded fallback also releases the controls if an animation is interrupted.
     timer = setTimeout(finish, 1100);
     rotator.classList.add('is-wave-passing');
     overlay.classList.add('is-wave-passing');
   });
+
+  const animateRipple = async (button, mode) => {
+    const rect = button.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const farX = Math.max(x, window.innerWidth - x);
+    const farY = Math.max(y, window.innerHeight - y);
+    const radius = Math.ceil(Math.hypot(farX, farY) * 1.12);
+
+    rippleOverlay.style.setProperty('--ripple-x', x + 'px');
+    rippleOverlay.style.setProperty('--ripple-y', y + 'px');
+    rippleOverlay.style.setProperty('--ripple-size', (radius * 2) + 'px');
+    document.body.appendChild(rippleOverlay);
+    rippleOverlay.hidden = false;
+    rippleOverlay.classList.add('is-ripple-passing');
+
+    await wait(360);
+    if (!scene.isConnected) return;
+    state.fishingMapMode = mode;
+    syncFishingMapMode();
+
+    await new Promise(resolve => {
+      let timer;
+      const finish = () => {
+        clearTimeout(timer);
+        rippleFill.removeEventListener('animationend', onEnd);
+        rippleFill.removeEventListener('animationcancel', finish);
+        resolve();
+      };
+      const onEnd = event => { if (event.target === rippleFill) finish(); };
+      rippleFill.addEventListener('animationend', onEnd);
+      rippleFill.addEventListener('animationcancel', finish);
+      timer = setTimeout(finish, 520);
+    });
+  };
+
   buttons.forEach(button => button.addEventListener('click', async () => {
     const mode = button.dataset.fishingMode;
     if (busy || mode === state.fishingMapMode) return;
@@ -1098,9 +1149,28 @@ function setupFishingMapTransition(scene) {
       syncFishingMapMode();
       return;
     }
+
     busy = true;
     buttons.forEach(item => { item.disabled = true; });
-    const outgoing = scene.querySelector('[data-map-face="' + state.fishingMapMode + '"]');
+    const fromMode = state.fishingMapMode;
+    const useRipple = fromMode === 'lake' || mode === 'lake';
+
+    if (useRipple) {
+      try {
+        await animateRipple(button, mode);
+      } finally {
+        rippleOverlay.hidden = true;
+        rippleOverlay.classList.remove('is-ripple-passing');
+        rippleOverlay.removeAttribute('style');
+        if (scene.isConnected) rotator.prepend(rippleOverlay);
+        else rippleOverlay.remove();
+        buttons.forEach(item => { item.disabled = false; });
+        busy = false;
+      }
+      return;
+    }
+
+    const outgoing = scene.querySelector('[data-map-face="' + fromMode + '"]');
     const incoming = scene.querySelector('[data-map-face="' + mode + '"]');
     const bounds = rotator.getBoundingClientRect();
     const bandWidth = Math.min(600, Math.max(260, window.innerWidth * .68));
@@ -1114,7 +1184,6 @@ function setupFishingMapTransition(scene) {
     overlay.style.setProperty('--wave-band-width', bandWidth + 'px');
     overlay.style.setProperty('--wave-screen-from', -bandWidth + 'px');
     overlay.style.setProperty('--wave-screen-to', (window.innerWidth + bandWidth) + 'px');
-    // A temporary body-level overlay can wash over the header and bottom tabs.
     document.body.appendChild(overlay);
     incoming.inert = true;
     outgoing.dataset.waveFace = 'outgoing';
@@ -1122,7 +1191,7 @@ function setupFishingMapTransition(scene) {
     incoming.setAttribute('aria-hidden', 'true');
     overlay.hidden = false;
     try {
-      await animate();
+      await animateWave();
       if (!scene.isConnected) return;
       state.fishingMapMode = mode;
     } finally {
@@ -1150,8 +1219,9 @@ function renderFishingMap(){
   app.innerHTML = `
     <section id="fishingMapScene" class="fishing-map-scene" aria-label="釣地図">
       <div class="fishing-mode-switch" role="group" aria-label="釣地図の種類">
-        <button type="button" data-fishing-mode="sea" aria-pressed="true" aria-controls="seaFishingMapView areaTroutView">海釣り</button>
-        <button type="button" data-fishing-mode="trout" aria-pressed="false" aria-controls="seaFishingMapView areaTroutView">AREA TROUT</button>
+        <button type="button" data-fishing-mode="sea" aria-pressed="true" aria-controls="seaFishingMapView areaTroutView lakeFishingMapView">海釣り</button>
+        <button type="button" data-fishing-mode="trout" aria-pressed="false" aria-controls="seaFishingMapView areaTroutView lakeFishingMapView">AREA TROUT</button>
+        <button type="button" data-fishing-mode="lake" aria-pressed="false" aria-controls="seaFishingMapView areaTroutView lakeFishingMapView">湖・沼</button>
       </div>
       <div class="fishing-map-rotator">
         <div class="fishing-map-wave-overlay" aria-hidden="true" hidden>
@@ -1160,6 +1230,12 @@ function renderFishingMap(){
             <svg class="wave-middle" viewBox="0 0 300 1000" preserveAspectRatio="none" focusable="false" aria-hidden="true"><defs><linearGradient id="mfl-water-middle" x1="0" y1="0" x2="1" y2=".25"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".42" stop-color="currentColor" stop-opacity=".68"/><stop offset=".7" stop-color="currentColor" stop-opacity=".94"/><stop offset="1" stop-color="currentColor" stop-opacity=".45"/></linearGradient></defs><path fill="url(#mfl-water-middle)" d="M0 0 L189 0 C128 33 170 94 219 126 C253 159 210 201 181 218 C145 265 230 309 236 376 C244 431 153 454 176 510 C206 547 266 598 217 664 C167 702 151 757 212 793 C265 826 209 919 190 1000 L0 1000 Z"/><path class="wave-crest-highlight" d="M189 0 C128 33 170 94 219 126 C253 159 210 201 181 218 C145 265 230 309 236 376 C244 431 153 454 176 510 C206 547 266 598 217 664 C167 702 151 757 212 793 C265 826 209 919 190 1000"/></svg>
             <svg class="wave-front" viewBox="0 0 300 1000" preserveAspectRatio="none" focusable="false" aria-hidden="true"><defs><linearGradient id="mfl-water-front" x1="0" y1="0" x2="1" y2=".25"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".42" stop-color="currentColor" stop-opacity=".68"/><stop offset=".7" stop-color="currentColor" stop-opacity=".94"/><stop offset="1" stop-color="currentColor" stop-opacity=".45"/></linearGradient></defs><path fill="url(#mfl-water-front)" d="M0 0 L174 0 C239 35 265 85 228 111 C246 78 183 85 173 134 C148 201 224 217 237 254 C261 300 204 340 183 352 C143 402 156 464 213 487 C272 521 254 575 221 596 C246 553 185 568 174 625 C156 684 222 732 239 749 C276 793 207 845 180 889 C151 939 222 964 204 1000 L0 1000 Z"/><path class="wave-crest-highlight" d="M174 0 C239 35 265 85 228 111 C246 78 183 85 173 134 C148 201 224 217 237 254 C261 300 204 340 183 352 C143 402 156 464 213 487 C272 521 254 575 221 596 C246 553 185 568 174 625 C156 684 222 732 239 749 C276 793 207 845 180 889 C151 939 222 964 204 1000"/></svg>
           </div>
+        </div>
+        <div class="fishing-map-ripple-overlay" aria-hidden="true" hidden>
+          <div class="fishing-map-ripple-fill"></div>
+          <div class="fishing-map-ripple-ring ripple-ring-one"></div>
+          <div class="fishing-map-ripple-ring ripple-ring-two"></div>
+          <div class="fishing-map-ripple-ring ripple-ring-three"></div>
         </div>
     <section id="seaFishingMapView" class="fishing-map-face fishing-map-face-front" data-map-face="sea" aria-label="海釣り地図">
     <section class="fishing-map-view">
@@ -1244,6 +1320,29 @@ function renderFishingMap(){
       <section id="areaTroutFacilities" aria-labelledby="areaTroutFacilitiesTitle">
         <h3 id="areaTroutFacilitiesTitle">管理釣り場</h3>
         <p role="status">施設一覧を読み込んでいます…</p>
+      </section>
+    </section>
+    <section id="lakeFishingMapView" class="fishing-map-face lake-fishing-view" data-map-face="lake" aria-labelledby="lakeFishingTitle" hidden>
+      <header class="lake-fishing-heading">
+        <p class="eyebrow">LAKE / MARSH</p>
+        <h2 id="lakeFishingTitle">湖・沼</h2>
+        <p>自然湖・湖沼は「釣れる」だけでなく、遊漁券・禁漁・持ち帰り・リリース・外来魚の扱いまで確認してから掲載します。</p>
+      </header>
+      <section class="lake-mode-summary" aria-label="湖・沼モード方針">
+        <div><strong>9</strong><span>初期調査水域</span></div>
+        <div><strong>${lakeModeSeed.filter(spot => spot.state !== 'hold').length}</strong><span>掲載候補</span></div>
+        <div><strong>${lakeModeSeed.filter(spot => spot.state === 'hold').length}</strong><span>保留</span></div>
+      </section>
+      <section class="lake-seed-section">
+        <div class="lake-seed-head">
+          <div><small>FIRST RESEARCH SET</small><h3>初期9水域</h3></div>
+          <span>詳細ルールは順次接続</span>
+        </div>
+        <div class="lake-seed-grid">${lakeModeSeed.map(spot => `<article class="lake-seed-card ${spot.state === 'hold' ? 'is-hold' : ''}"><div><small>${spot.pref}</small><strong>${spot.name}</strong></div><span>${spot.state === 'hold' ? '保留' : '掲載候補'}</span></article>`).join('')}</div>
+      </section>
+      <section class="lake-mode-note">
+        <strong>掲載基準</strong>
+        <p>公式情報で重要ルールを確認できない水域は、無理に「要確認」で出さず保留。MFLでは「掲載＝安心して準備できる」を優先します。</p>
       </section>
     </section>
       </div>
