@@ -1338,7 +1338,7 @@ function renderFishingMap(){
           <div><small>FIRST RESEARCH SET</small><h3>初期9水域</h3></div>
           <span>詳細ルールは順次接続</span>
         </div>
-        <div class="lake-seed-grid">${lakeModeSeed.map(spot => `<article class="lake-seed-card ${spot.state === 'hold' ? 'is-hold' : ''}"><div><small>${spot.pref}</small><strong>${spot.name}</strong></div><span>${spot.state === 'hold' ? '保留' : '掲載候補'}</span></article>`).join('')}</div>
+        <div class="lake-seed-grid">${lakeModeSeed.map(spot => `<article class="lake-seed-card ${spot.state === 'hold' ? 'is-hold' : ''}"><div class="lake-seed-place"><strong><span class="lake-seed-pref">${spot.pref}県</span><span class="lake-seed-name">${spot.name}</span></strong></div><span>${spot.state === 'hold' ? '保留' : '掲載候補'}</span></article>`).join('')}</div>
       </section>
       <section class="lake-mode-note">
         <strong>掲載基準</strong>
