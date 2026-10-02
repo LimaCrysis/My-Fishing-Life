@@ -4568,9 +4568,9 @@ html[data-theme="dark"] :where(.tackle-home-card,.settings-home-card,.stat-card)
 .lake-seed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .lake-seed-card{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;padding:12px;border-radius:14px;background:var(--surface);box-shadow:var(--surface-highlight)}
 .lake-seed-card div{min-width:0}
-.lake-seed-card small,.lake-seed-card strong{display:block}
-.lake-seed-card small{color:var(--muted);font-size:9px;font-weight:800}
-.lake-seed-card strong{margin-top:2px;overflow:hidden;color:var(--ink);font-size:13px;text-overflow:ellipsis;white-space:nowrap}
+.lake-seed-card strong{display:flex;align-items:baseline;gap:7px;min-width:0;overflow:hidden;white-space:nowrap}
+.lake-seed-pref{flex:0 0 auto;color:var(--accent);font-size:14px;font-weight:950;letter-spacing:.01em}
+.lake-seed-name{min-width:0;overflow:hidden;color:var(--ink);font-size:14px;font-weight:900;text-overflow:ellipsis;white-space:nowrap}
 .lake-seed-card>span{flex:0 0 auto;padding:4px 7px;border-radius:999px;background:var(--soft);color:var(--accent-dark);font-size:9px;font-weight:900}
 .lake-seed-card.is-hold{opacity:.72}
 .lake-seed-card.is-hold>span{background:rgba(183,116,38,.12);color:#9a5d17}
