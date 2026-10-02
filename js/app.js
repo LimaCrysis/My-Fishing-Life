@@ -1328,17 +1328,17 @@ function renderFishingMap(){
         <h2 id="lakeFishingTitle">湖・沼</h2>
         <p>自然湖・湖沼は「釣れる」だけでなく、遊漁券・禁漁・持ち帰り・リリース・外来魚の扱いまで確認してから掲載します。</p>
       </header>
-      <section class="lake-mode-summary" aria-label="湖・沼モード方針">
-        <div><strong>9</strong><span>初期調査水域</span></div>
-        <div><strong>${lakeModeSeed.filter(spot => spot.state !== 'hold').length}</strong><span>掲載候補</span></div>
-        <div><strong>${lakeModeSeed.filter(spot => spot.state === 'hold').length}</strong><span>保留</span></div>
-      </section>
       <section class="lake-seed-section">
         <div class="lake-seed-head">
-          <div><small>FIRST RESEARCH SET</small><h3>初期9水域</h3></div>
+          <div><small>RESEARCH SET</small><h3>9水域</h3></div>
           <span>詳細ルールは順次接続</span>
         </div>
         <div class="lake-seed-grid">${lakeModeSeed.map(spot => `<article class="lake-seed-card ${spot.state === 'hold' ? 'is-hold' : ''}"><div class="lake-seed-place"><strong><span class="lake-seed-pref">${spot.pref}県</span><span class="lake-seed-name">${spot.name}</span></strong></div><span>${spot.state === 'hold' ? '保留' : '掲載候補'}</span></article>`).join('')}</div>
+      </section>
+      <section class="lake-mode-summary lake-mode-summary-lower" aria-label="湖・沼モード方針">
+        <div><strong>9</strong><span>調査水域</span></div>
+        <div><strong>${lakeModeSeed.filter(spot => spot.state !== 'hold').length}</strong><span>掲載候補</span></div>
+        <div><strong>${lakeModeSeed.filter(spot => spot.state === 'hold').length}</strong><span>保留</span></div>
       </section>
       <section class="lake-mode-note">
         <strong>掲載基準</strong>
