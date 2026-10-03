@@ -4723,3 +4723,52 @@ button.lake-seed-card:active{
 .lake-spot-sheet .fishing-spot-official{
   font-size:13px;
 }
+
+
+/* Lake detail text clarity pass */
+.lake-spot-sheet{
+  -webkit-font-smoothing:antialiased;
+}
+.lake-spot-sheet .fishing-spot-section h4{
+  color:#f2fbfd;
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:.01em;
+}
+.lake-detail-glance span{
+  color:#9fdce6;
+  font-size:11px;
+  font-weight:900;
+}
+.lake-detail-glance strong{
+  color:#f1fbfd;
+  font-size:14px;
+  font-weight:800;
+}
+.lake-rule-grid strong{
+  color:#63e0f0;
+  font-size:14px;
+  font-weight:900;
+}
+.lake-rule-grid p,
+.lake-detail-list li,
+.lake-detail-warning p{
+  color:#eef8fa;
+  font-size:14px;
+  font-weight:650;
+  line-height:1.8;
+  letter-spacing:.01em;
+}
+.lake-detail-warning strong{
+  font-size:14px;
+  font-weight:900;
+}
+.lake-spot-sheet .fishing-spot-tags span{
+  color:#ecfbfd;
+  font-size:12px;
+  font-weight:800;
+}
+.lake-spot-sheet .fishing-spot-checked,
+.lake-spot-sheet .fishing-spot-official{
+  font-weight:800;
+}
