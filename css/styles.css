@@ -4802,3 +4802,21 @@ button.lake-seed-card:active{
     padding:6px 9px;
   }
 }
+
+
+/* Lake detail border clarity pass */
+html[data-theme="dark"] .lake-spot-sheet .fishing-spot-section{
+  border-color:rgba(113,181,198,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+html[data-theme="dark"] .lake-detail-glance>div{
+  border:1px solid rgba(113,181,198,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+html[data-theme="dark"] .lake-rule-grid>div{
+  border:1px solid rgba(113,181,198,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
+}
+html[data-theme="dark"] .lake-detail-warning{
+  border:1px solid rgba(199,151,74,.34);
+}
