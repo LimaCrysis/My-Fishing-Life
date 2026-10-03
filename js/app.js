@@ -19,10 +19,8 @@ const lakeModeSeed = [
   { id:'ashinoko', name:'芦ノ湖', pref:'神奈川', state:'candidate' },
   { id:'kasumigaura', name:'霞ヶ浦', pref:'茨城', state:'candidate' },
   { id:'yamanakako', name:'山中湖', pref:'山梨', state:'candidate' },
-  { id:'saiko', name:'西湖', pref:'山梨', state:'hold' },
   { id:'chuzenjiko', name:'中禅寺湖', pref:'栃木', state:'candidate' },
   { id:'kawaguchiko', name:'河口湖', pref:'山梨', state:'candidate' },
-  { id:'motosuko', name:'本栖湖', pref:'山梨', state:'hold' },
   { id:'harunako', name:'榛名湖', pref:'群馬', state:'candidate' },
   { id:'akagionuma', name:'赤城大沼', pref:'群馬', state:'candidate' }
 ];
@@ -1567,11 +1565,11 @@ function renderFishingMap(){
       <header class="lake-fishing-heading">
         <p class="eyebrow">LAKE / MARSH</p>
         <h2 id="lakeFishingTitle">湖・沼</h2>
-        <p>自然湖・湖沼は「釣れる」だけでなく、遊漁券・禁漁・持ち帰り・リリース・外来魚の扱いまで確認してから掲載します。</p>
+        <p>自然湖・湖沼は「釣れる」だけでなく、遊漁券・禁漁・持ち帰り・リリース・外来魚の扱いまで確認できた水域だけ掲載します。</p>
       </header>
       <section class="lake-seed-section">
         <div class="lake-seed-head">
-          <div><small>RESEARCH SET</small><h3>9水域</h3></div>
+          <div><small>FINAL SET</small><h3>7水域</h3></div>
           <span>詳細ルールは順次接続</span>
         </div>
         <div class="lake-seed-grid">${lakeModeSeed.map(spot => {
@@ -1582,10 +1580,9 @@ function renderFishingMap(){
             : `<article class="lake-seed-card ${spot.state === 'hold' ? 'is-hold' : ''}">${inner}</article>`;
         }).join('')}</div>
       </section>
-      <section class="lake-mode-summary lake-mode-summary-lower" aria-label="湖・沼モード方針">
-        <div><strong>9</strong><span>調査水域</span></div>
-        <div><strong>${lakeModeSeed.filter(spot => spot.state !== 'hold').length}</strong><span>掲載候補</span></div>
-        <div><strong>${lakeModeSeed.filter(spot => spot.state === 'hold').length}</strong><span>保留</span></div>
+      <section class="lake-mode-summary lake-mode-summary-lower is-final" aria-label="湖・沼モード掲載状況">
+        <div><strong>${lakeModeSeed.length}</strong><span>掲載水域</span></div>
+        <div><strong>${lakeModeSeed.filter(spot => lakeSpotDetails[spot.id]).length}</strong><span>詳細接続</span></div>
       </section>
       <section class="lake-mode-note">
         <strong>掲載基準</strong>
