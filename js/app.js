@@ -27,11 +27,43 @@ const lakeModeSeed = [
   { id:'akagionuma', name:'赤城大沼', pref:'群馬', state:'candidate' }
 ];
 const lakeSpotDetails = {
+  ashinoko: {
+    id:'ashinoko',
+    name:'芦ノ湖',
+    pref:'神奈川県',
+    ticket:'必要',
+    season:'3/1〜12/31を基本に、魚種・漁法ごとに漁協が公示',
+    methods:'手釣り・竿釣り・曳縄釣り（条件あり）',
+    targets:['ニジマス','ブラウントラウト','ヒメマス','ワカサギ','オオクチバス'],
+    ruleHighlights:[
+      ['遊漁券','芦ノ湖での遊漁は遊漁料の納付が必要。'],
+      ['夜釣り','遊漁時間は日の出1時間前〜日没1時間後。夜間は禁止。'],
+      ['禁止区域','百貫の鼻突端と立岩突端を結ぶ線より西側の湖面は遊漁禁止。'],
+      ['サイズ','マス類・コイは18cm以下、オオクチバスは25cm以下を採捕しない。']
+    ],
+    periodNotes:[
+      '解禁期間は魚種・漁法ごとに異なり、漁協が公示する期間が優先',
+      '岸からの餌釣りは仕掛けの長さなどで利用できる期間が分かれる'
+    ],
+    sizeLimits:[
+      'ヤマメ・イワナ・ヒメマス・ニジマス・ブラウントラウト・コイ：18cm以下は採捕禁止',
+      'オオクチバス：25cm以下は採捕禁止'
+    ],
+    tripNotes:[
+      '出発前に芦之湖漁協の当年公示で解禁日・区域を確認',
+      'ボート利用時は漁法・運航ルールも確認',
+      '湖畔の駐車・立入は現地掲示を優先'
+    ],
+    checked:'2026-10-03',
+    officialLinks:[
+      ['神奈川県「川・湖のルール」','https://www.pref.kanagawa.jp/docs/kb2/cnt/f790/p504690.html'],
+      ['芦之湖漁業協同組合 遊漁規則','https://www.pref.kanagawa.jp/documents/31525/20231201ashinoko_kisoku.pdf']
+    ]
+  },
   kasumigaura: {
     id:'kasumigaura',
     name:'霞ヶ浦',
     pref:'茨城県',
-    area:'霞ヶ浦北浦海区',
     ticket:'不要',
     season:'通年 ※魚種ごとの採捕禁止期間あり',
     methods:'竿釣り・手釣り可（まき餌釣りは禁止）',
@@ -42,10 +74,10 @@ const lakeSpotDetails = {
       ['外来魚','ブラックバス・ブルーギル・チャネルキャットフィッシュ等は、生きたまま湖外へ持ち出さない。キャッチ＆リリースは可。'],
       ['放置','釣った魚を堤防などへ放置・廃棄しない。']
     ],
-    closedSeasons:[
-      'ワカサギ：1/21〜2月末、5/1〜7/20',
-      'シラウオ：3/1〜3/31',
-      'コイ：5/11〜6/10'
+    periodNotes:[
+      'ワカサギ：1/21〜2月末、5/1〜7/20は採捕禁止',
+      'シラウオ：3/1〜3/31は採捕禁止',
+      'コイ：5/11〜6/10は採捕禁止'
     ],
     sizeLimits:[
       'コイ：全長15cm以下は採捕禁止',
@@ -56,11 +88,185 @@ const lakeSpotDetails = {
       '河川へ入る場合は霞ヶ浦本湖と遊漁券ルールが変わることがある',
       '外来魚を持ち帰るなら、生体のまま湖外へ運ばない'
     ],
+    warningTitle:'アメリカナマズ狙いで重要',
+    warningText:'チャネルキャットフィッシュは特定外来生物。再放流は可能ですが、生きたまま霞ヶ浦の外へ持ち出すことはできません。',
     checked:'2026-10-03',
-    officialRules:'https://www.pref.ibaraki.jp/nourinsuisan/kasui/contents/ruleandmanner.html',
-    officialQa:'https://www.pref.ibaraki.jp/nourinsuisan/kasui/contents/tsuriqa.html'
+    officialLinks:[
+      ['茨城県「釣りのルールとマナー」','https://www.pref.ibaraki.jp/nourinsuisan/kasui/contents/ruleandmanner.html'],
+      ['茨城県「釣りQ&A」','https://www.pref.ibaraki.jp/nourinsuisan/kasui/contents/tsuriqa.html']
+    ]
+  },
+  yamanakako: {
+    id:'yamanakako',
+    name:'山中湖',
+    pref:'山梨県',
+    ticket:'必要',
+    season:'ワカサギ 9/1〜翌6/30／その他対象魚は周年',
+    methods:'竿釣り',
+    targets:['ワカサギ','オオクチバス','コイ','フナ','ウナギ','ウグイ','オイカワ'],
+    ruleHighlights:[
+      ['遊漁券','山中湖で対象魚を竿釣りする場合は遊漁料の納付が必要。'],
+      ['ワカサギ','9/1〜翌6/30、日の出〜日没。'],
+      ['その他対象魚','コイ・フナ・ウナギ・ウグイ・オイカワ・オオクチバスは周年、日の出〜日没。'],
+      ['現地指示','資源保護や危険防止のため漁協が出す指示を優先。']
+    ],
+    periodNotes:[
+      'ワカサギ：9/1〜翌6/30',
+      'その他の対象魚：周年',
+      '遊漁時間：日の出〜日没'
+    ],
+    sizeLimits:[],
+    tripNotes:[
+      'コンビニ・漁協事務所・指定販売所・オンライン等で遊漁券を購入可能',
+      'ドーム船・ボート利用時は各事業者の受付時間と安全ルールも確認',
+      '湖畔の駐車場所は利用施設の案内を優先'
+    ],
+    checked:'2026-10-03',
+    officialLinks:[
+      ['山梨県「漁協ごとの遊漁規則」','https://www.pref.yamanashi.jp/shokusui/gyojyouzuyuugyokisoku.html'],
+      ['山中湖漁業協同組合 遊漁規則','https://www.pref.yamanashi.jp/documents/57627/naikyou13yuugyokisoku.pdf']
+    ]
+  },
+  chuzenjiko: {
+    id:'chuzenjiko',
+    name:'中禅寺湖',
+    pref:'栃木県',
+    ticket:'必要',
+    season:'解禁日〜9/19を基本 ※ワカサギ等は10/31まで',
+    methods:'手釣り・竿釣り・ひき縄釣り',
+    targets:['レイクトラウト','ブラウントラウト','ニジマス','ヒメマス','ホンマス','ワカサギ'],
+    ruleHighlights:[
+      ['遊漁券','遊漁には漁協の承認と遊漁料の納付が必要。'],
+      ['竿数','岸釣りは1人2本以内。船釣りはひき縄を含め1隻4本以内。'],
+      ['シーズン','通常は組合公示の解禁日から9/19まで。ワカサギ・ウグイ・カジカは10/31まで。'],
+      ['西側区域','岸ヶ淵と松ヶ崎を結ぶ線より西側などは原則禁止区域。特例区域・期間は漁協公示を確認。']
+    ],
+    periodNotes:[
+      'マス類など：組合公示の解禁日〜9/19',
+      'ワカサギ・ウグイ・カジカ：解禁日〜10/31',
+      '特例区域・特例期間は当年の漁協公示が優先'
+    ],
+    sizeLimits:[],
+    tripNotes:[
+      '遊漁券と当年の解禁・持ち帰り公示を出発前に確認',
+      'ボート利用は漁協の承認と水上安全ルールを確認',
+      'ブラウントラウト・レイクトラウトは生きたまま湖外へ持ち出さない'
+    ],
+    warningTitle:'持ち帰り・再放流は魚種別ルール',
+    warningText:'中禅寺湖では魚種ごとの持ち帰り・キャッチ＆リリース運用が漁協公示で定められます。ブラウントラウトとレイクトラウトは生きたまま採捕水域外へ持ち出せません。',
+    checked:'2026-10-03',
+    officialLinks:[
+      ['栃木県「県内の漁業権」','https://www.pref.tochigi.lg.jp/g02/suisan/r6gyogyouken.html'],
+      ['中禅寺湖漁業協同組合 遊漁規則','https://www.pref.tochigi.lg.jp/g02/suisan/documents/20231227140634.pdf'],
+      ['ブラウン・レイクトラウト取扱い','https://www.pref.tochigi.lg.jp/g02/iinkai/brown-lake2024.html']
+    ]
+  },
+  kawaguchiko: {
+    id:'kawaguchiko',
+    name:'河口湖',
+    pref:'山梨県',
+    ticket:'必要',
+    season:'魚種別。オオクチバス等は周年、ワカサギは漁協提示期間',
+    methods:'竿釣り（原則1人2本以内）',
+    targets:['オオクチバス','ワカサギ','コイ','フナ','ウナギ','オイカワ'],
+    ruleHighlights:[
+      ['遊漁券','対象魚を竿釣りする場合は遊漁料の納付が必要。'],
+      ['竿数','釣竿は1人2本以内。'],
+      ['ワーム類','軟質プラスチック製疑似餌・合成素材付け餌は使用制限あり。天然素材等の例外規定あり。'],
+      ['禁漁区域','船津浜・浅川浜は通年禁止。産卵保護ワンドには季節禁漁あり。']
+    ],
+    periodNotes:[
+      'ワカサギ：1/1〜5/15、10/1〜12/31の間で組合が提示する期間',
+      '寺屋敷前ワンド・久保井ワンド：4/1〜6/30は禁漁',
+      '船津浜・浅川浜：通年禁漁'
+    ],
+    sizeLimits:[
+      'オオクチバス：25cm以上',
+      'コイ：18cm以上',
+      'フナ：15cm以上',
+      'オイカワ：10cm以上'
+    ],
+    tripNotes:[
+      'バス狙いは使用できる疑似餌素材を必ず事前確認',
+      '禁漁ワンド・観光客の多い浜は現地標柱も確認',
+      '遊漁時間は日の出1時間前〜日没1時間後'
+    ],
+    checked:'2026-10-03',
+    officialLinks:[
+      ['山梨県「漁協ごとの遊漁規則」','https://www.pref.yamanashi.jp/shokusui/gyojyouzuyuugyokisoku.html'],
+      ['河口湖漁業協同組合 遊漁規則','https://www.pref.yamanashi.jp/documents/57627/naikyou14yuugyokisoku.pdf']
+    ]
+  },
+  harunako: {
+    id:'harunako',
+    name:'榛名湖',
+    pref:'群馬県',
+    ticket:'必要',
+    season:'マス・コイ・フナは周年／ワカサギは9/1〜漁協が定める日',
+    methods:'手釣り1本／竿釣り3本以下',
+    targets:['ワカサギ','マス類','コイ','フナ'],
+    ruleHighlights:[
+      ['遊漁券','遊漁は漁協の承認と遊漁料の納付が必要。中学生以下は規則上免除。'],
+      ['竿数','手釣り1人1本、竿釣り1人3本以下。'],
+      ['時間','岸釣り・船釣りとも季節別の夜間禁止時間あり。'],
+      ['禁止区域','簡易水道施設周辺など通年禁止区域あり。']
+    ],
+    periodNotes:[
+      'マス・コイ・フナ：1/1〜12/31',
+      'ワカサギ：9/1〜漁協が定める日',
+      '氷上穴釣りは穴径・使用穴数の制限あり'
+    ],
+    sizeLimits:[
+      'マス・コイ・フナ：15cm以下は採捕禁止'
+    ],
+    tripNotes:[
+      '1日遊漁料は規則上700円。現場納付は加算あり',
+      '船・カヌー等は時期や利用申込の条件を別途確認',
+      'ワカサギは現在持ち帰り可能。最新検査・現地案内も確認'
+    ],
+    checked:'2026-10-03',
+    officialLinks:[
+      ['群馬県「遊漁に関するルール」','https://www.pref.gunma.jp/page/217085.html'],
+      ['榛名湖漁業協同組合 遊漁規則','https://www.pref.gunma.jp/uploaded/attachment/602167.pdf'],
+      ['榛名湖 カヌー等持ち込み案内','https://www.pref.gunma.jp/page/1255.html']
+    ]
+  },
+  akagionuma: {
+    id:'akagionuma',
+    name:'赤城大沼',
+    pref:'群馬県',
+    ticket:'必要',
+    season:'魚種・釣法ごとに設定。ワカサギはボート・氷上が中心',
+    methods:'手釣り・竿釣り ※ルアー・フライ・テンカラ禁止',
+    targets:['ワカサギ','コイ','フナ','ウグイ'],
+    ruleHighlights:[
+      ['遊漁券','遊漁には漁協の承認と遊漁料の納付が必要。'],
+      ['ルアー等','ルアー釣り・フライ釣り・テンカラ釣りは全域・通年禁止。'],
+      ['まき餌・照明','撒餌漁法と照明器具を使う漁法は全域・通年禁止。'],
+      ['禁止区域','小鳥ヶ島周辺など通年禁止区域、覚満川は4/1〜5/31禁漁。']
+    ],
+    periodNotes:[
+      '船使用の漁法・氷上穴釣りは16時〜翌7時禁止',
+      '氷上穴釣りは穴径・使用穴数・穴間隔に制限あり',
+      'ワカサギのボート・氷上シーズンは当年の漁協案内を確認'
+    ],
+    sizeLimits:[],
+    tripNotes:[
+      'ルアー系タックル前提では釣り方が合わないため要注意',
+      'ワカサギ日釣券はFish PASSでも取扱いあり',
+      'ワカサギは現在持ち帰り可能。最新検査・現地案内も確認'
+    ],
+    warningTitle:'MFLで特に注意',
+    warningText:'赤城大沼はルアー・フライ・テンカラが通年禁止。海ルアー感覚で道具を持って行く場所ではなく、ワカサギ等の餌・仕掛け釣り前提で計画する。',
+    checked:'2026-10-03',
+    officialLinks:[
+      ['群馬県「遊漁に関するルール」','https://www.pref.gunma.jp/page/217085.html'],
+      ['赤城大沼漁業協同組合 遊漁規則','https://www.pref.gunma.jp/uploaded/attachment/602166.pdf'],
+      ['県立赤城公園','https://www.pref.gunma.jp/page/1222.html']
+    ]
   }
 };
+
 const state = {
   view: 'home',
   fishingMapMode: 'sea',
@@ -1369,8 +1575,9 @@ function renderFishingMap(){
           <span>詳細ルールは順次接続</span>
         </div>
         <div class="lake-seed-grid">${lakeModeSeed.map(spot => {
-          const inner=`<div class="lake-seed-place"><strong><span class="lake-seed-pref">${spot.pref}県</span><span class="lake-seed-name">${spot.name}</span></strong></div><span>${spot.id === 'kasumigaura' ? '詳細を見る' : (spot.state === 'hold' ? '保留' : '掲載候補')}</span>`;
-          return spot.id === 'kasumigaura'
+          const hasDetail=Boolean(lakeSpotDetails[spot.id]);
+          const inner=`<div class="lake-seed-place"><strong><span class="lake-seed-pref">${spot.pref}県</span><span class="lake-seed-name">${spot.name}</span></strong></div><span>${hasDetail ? '詳細を見る' : (spot.state === 'hold' ? '保留' : '掲載候補')}</span>`;
+          return hasDetail
             ? `<button type="button" class="lake-seed-card is-ready" data-lake-spot="${spot.id}">${inner}</button>`
             : `<article class="lake-seed-card ${spot.state === 'hold' ? 'is-hold' : ''}">${inner}</article>`;
         }).join('')}</div>
@@ -2012,6 +2219,10 @@ function showLakeSpot(id){
   const existing=document.getElementById('lakeSpotOverlay');
   if(existing)existing._mflDispose?.();
 
+  const listSection=(title,items)=>Array.isArray(items)&&items.length
+    ? `<section class="fishing-spot-section"><h4>${title}</h4><ul class="lake-detail-list">${items.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></section>`
+    : '';
+
   const overlay=document.createElement('div');
   overlay.id='lakeSpotOverlay';
   overlay.className='fishing-spot-overlay lake-spot-overlay';
@@ -2026,7 +2237,7 @@ function showLakeSpot(id){
         </div>
       </div>
 
-      <section class="lake-detail-glance" aria-label="霞ヶ浦の基本情報">
+      <section class="lake-detail-glance" aria-label="${escapeHtml(s.name)}の基本情報">
         <div><span>遊漁券</span><strong>${escapeHtml(s.ticket)}</strong></div>
         <div><span>シーズン</span><strong>${escapeHtml(s.season)}</strong></div>
         <div><span>基本釣法</span><strong>${escapeHtml(s.methods)}</strong></div>
@@ -2042,30 +2253,15 @@ function showLakeSpot(id){
         <div class="lake-rule-grid">${s.ruleHighlights.map(([label,text])=>`<div><strong>${escapeHtml(label)}</strong><p>${escapeHtml(text)}</p></div>`).join('')}</div>
       </section>
 
-      <section class="fishing-spot-section">
-        <h4>📅 魚種別の採捕禁止期間</h4>
-        <ul class="lake-detail-list">${s.closedSeasons.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>
-      </section>
+      ${listSection('📅 期間・区域',s.periodNotes)}
+      ${listSection('📏 サイズ制限',s.sizeLimits)}
+      ${listSection('🚗 遠征前チェック',s.tripNotes)}
 
-      <section class="fishing-spot-section">
-        <h4>📏 サイズ制限</h4>
-        <ul class="lake-detail-list">${s.sizeLimits.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>
-      </section>
-
-      <section class="fishing-spot-section">
-        <h4>🚗 遠征前チェック</h4>
-        <ul class="lake-detail-list">${s.tripNotes.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul>
-      </section>
-
-      <section class="lake-detail-warning">
-        <strong>アメリカナマズ狙いで重要</strong>
-        <p>チャネルキャットフィッシュは特定外来生物。再放流は可能ですが、生きたまま霞ヶ浦の外へ持ち出すことはできません。</p>
-      </section>
+      ${s.warningText?`<section class="lake-detail-warning"><strong>${escapeHtml(s.warningTitle||'重要')}</strong><p>${escapeHtml(s.warningText)}</p></section>`:''}
 
       <div class="fishing-spot-checked">公式確認: ${escapeHtml(s.checked)}</div>
       <div class="lake-official-links">
-        <a class="fishing-spot-official" href="${s.officialRules}" target="_blank" rel="noopener">茨城県「釣りのルールとマナー」 ↗</a>
-        <a class="fishing-spot-official" href="${s.officialQa}" target="_blank" rel="noopener">茨城県「釣りQ&A」 ↗</a>
+        ${(s.officialLinks||[]).map(([label,url])=>`<a class="fishing-spot-official" href="${url}" target="_blank" rel="noopener">${escapeHtml(label)} ↗</a>`).join('')}
       </div>
     </div>`;
 
