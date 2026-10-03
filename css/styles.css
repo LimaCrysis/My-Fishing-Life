@@ -4772,3 +4772,33 @@ button.lake-seed-card:active{
 .lake-spot-sheet .fishing-spot-official{
   font-weight:800;
 }
+
+
+/* Lake mobile layout pass */
+@media(max-width:700px){
+  .lake-seed-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .lake-seed-card{
+    min-height:64px;
+    padding:14px 16px;
+  }
+  .lake-seed-card strong{
+    gap:10px;
+    overflow:visible;
+  }
+  .lake-seed-pref,
+  .lake-seed-name{
+    font-size:17px;
+  }
+  .lake-seed-name{
+    overflow:visible;
+    text-overflow:clip;
+    white-space:normal;
+  }
+  .lake-seed-card>span{
+    font-size:10px;
+    padding:6px 9px;
+  }
+}
