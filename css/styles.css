@@ -4820,3 +4820,5 @@ html[data-theme="dark"] .lake-rule-grid>div{
 html[data-theme="dark"] .lake-detail-warning{
   border:1px solid rgba(199,151,74,.34);
 }
+
+.lake-mode-summary.is-final{grid-template-columns:repeat(2,minmax(0,1fr))}
