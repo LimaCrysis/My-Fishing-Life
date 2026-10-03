@@ -4546,3 +4546,279 @@ html[data-theme="dark"] :where(.tackle-home-card,.settings-home-card,.stat-card)
     0 4px 0 rgba(0,7,12,.28),
     0 11px 24px rgba(0,7,12,.28)!important;
 }
+
+
+/* MFL v14.31.0 - LAKE / MARSH MODE */
+.fishing-mode-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.fishing-mode-switch button{font-size:13px;padding-inline:6px}
+
+.lake-fishing-view{display:grid;gap:16px}
+.lake-fishing-heading{padding:2px 2px 0}
+.lake-fishing-heading h2{margin:0;font-size:26px;color:var(--ink);letter-spacing:-.02em}
+.lake-fishing-heading>p:last-child{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.75}
+.lake-mode-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.lake-mode-summary div{padding:14px 8px;border-radius:16px;background:var(--surface);box-shadow:var(--shadow-soft),var(--surface-highlight);text-align:center}
+.lake-mode-summary strong{display:block;color:var(--accent-dark);font-size:22px;line-height:1.1}
+.lake-mode-summary span{display:block;margin-top:5px;color:var(--muted);font-size:10px;font-weight:800;line-height:1.35}
+.lake-seed-section{padding:18px;border-radius:22px;background:var(--surface-raised);box-shadow:var(--shadow-soft),var(--surface-highlight)}
+.lake-seed-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:12px}
+.lake-seed-head small{display:block;color:var(--accent);font-size:10px;font-weight:900;letter-spacing:.12em}
+.lake-seed-head h3{margin:3px 0 0;font-size:18px}
+.lake-seed-head>span{color:var(--muted);font-size:10px;font-weight:700;text-align:right}
+.lake-seed-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.lake-seed-card{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;padding:15px 14px;border-radius:14px;background:var(--surface);box-shadow:var(--surface-highlight)}
+.lake-seed-card div{min-width:0}
+.lake-seed-card strong{display:flex;align-items:baseline;gap:7px;min-width:0;overflow:hidden;white-space:nowrap}
+.lake-seed-pref{flex:0 0 auto;color:var(--accent);font-size:18px;font-weight:950;letter-spacing:.01em}
+.lake-seed-name{min-width:0;overflow:hidden;color:var(--ink);font-size:18px;font-weight:900;text-overflow:ellipsis;white-space:nowrap}
+.lake-seed-card>span{flex:0 0 auto;padding:4px 7px;border-radius:999px;background:var(--soft);color:var(--accent-dark);font-size:9px;font-weight:900}
+.lake-seed-card.is-hold{opacity:.72}
+.lake-seed-card.is-hold>span{background:rgba(183,116,38,.12);color:#9a5d17}
+.lake-mode-note{padding:16px 17px;border-radius:18px;background:linear-gradient(145deg,rgba(11,114,133,.08),rgba(11,114,133,.03));box-shadow:var(--surface-highlight)}
+.lake-mode-note strong{display:block;margin-bottom:5px;color:var(--accent-dark);font-size:13px}
+.lake-mode-note p{margin:0;color:var(--muted);font-size:12px;line-height:1.7}
+
+/* Lake transitions use a light CSS-only ripple instead of the sea/trout sweep. */
+.fishing-map-ripple-overlay{position:fixed;inset:0;z-index:10001;overflow:hidden;pointer-events:none}
+.fishing-map-ripple-overlay[hidden]{display:none!important}
+.fishing-map-ripple-fill,
+.fishing-map-ripple-ring{position:absolute;left:var(--ripple-x);top:var(--ripple-y);width:var(--ripple-size);height:var(--ripple-size);border-radius:50%;transform:translate(-50%,-50%) scale(0);will-change:transform,opacity}
+.fishing-map-ripple-fill{background:linear-gradient(145deg,#6fb6c2,#2a7f92);opacity:0}
+html[data-theme="dark"] .fishing-map-ripple-fill{background:linear-gradient(145deg,#194f60,#0d3443)}
+.fishing-map-ripple-ring{border-style:solid;border-color:rgba(220,250,252,.72);opacity:0}
+.fishing-map-ripple-overlay.is-ripple-passing .fishing-map-ripple-fill{animation:mfl-ripple-fill 3600ms cubic-bezier(.16,.64,.2,1) both}
+.ripple-ring-one{border-width:3px}
+.ripple-ring-two{border-width:2.4px}
+.ripple-ring-three{border-width:1.8px}
+.fishing-map-ripple-overlay.is-ripple-passing .ripple-ring-one{animation:mfl-ripple-ring 3300ms cubic-bezier(.12,.58,.2,1) 0ms both}
+.fishing-map-ripple-overlay.is-ripple-passing .ripple-ring-two{animation:mfl-ripple-ring 3300ms cubic-bezier(.12,.58,.2,1) 520ms both}
+.fishing-map-ripple-overlay.is-ripple-passing .ripple-ring-three{animation:mfl-ripple-ring 3300ms cubic-bezier(.12,.58,.2,1) 1040ms both}
+@keyframes mfl-ripple-fill{
+  0%{transform:translate(-50%,-50%) scale(.015);opacity:0}
+  12%{opacity:.24}
+  48%{transform:translate(-50%,-50%) scale(.72);opacity:.34}
+  78%{transform:translate(-50%,-50%) scale(1);opacity:.2}
+  100%{transform:translate(-50%,-50%) scale(1.05);opacity:0}
+}
+@keyframes mfl-ripple-ring{
+  0%{transform:translate(-50%,-50%) scale(.015);opacity:0}
+  10%{opacity:.52}
+  38%{opacity:.34}
+  100%{transform:translate(-50%,-50%) scale(1.03);opacity:0}
+}
+@media(max-width:390px){
+  .fishing-mode-switch button{font-size:12px}
+  .lake-seed-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .fishing-map-ripple-overlay{display:none!important}
+  .fishing-map-ripple-overlay *{animation:none!important}
+}
+
+.lake-mode-summary-lower{margin-top:14px}
+
+/* Kasumigaura lake detail template */
+button.lake-seed-card{width:100%;border:0;text-align:left;font:inherit;cursor:pointer}
+.lake-seed-card.is-ready{outline:1px solid rgba(29,128,149,.18)}
+.lake-seed-card.is-ready:hover{transform:translateY(-1px)}
+.lake-seed-card.is-ready>span{background:rgba(29,128,149,.12);color:var(--accent-dark)}
+.lake-spot-sheet{max-width:620px}
+.lake-detail-glance{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0}
+.lake-detail-glance>div{min-width:0;padding:12px;border-radius:14px;background:var(--surface);box-shadow:var(--surface-highlight)}
+.lake-detail-glance span{display:block;margin-bottom:5px;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.04em}
+.lake-detail-glance strong{display:block;color:var(--ink);font-size:12px;line-height:1.45}
+.lake-rule-grid{display:grid;gap:8px}
+.lake-rule-grid>div{padding:12px 13px;border-radius:14px;background:var(--surface);box-shadow:var(--surface-highlight)}
+.lake-rule-grid strong{display:block;margin-bottom:4px;color:var(--accent-dark);font-size:12px}
+.lake-rule-grid p{margin:0;color:var(--ink);font-size:12px;line-height:1.65}
+.lake-detail-list{margin:0;padding-left:20px;color:var(--ink)}
+.lake-detail-list li{margin:6px 0;font-size:12px;line-height:1.6}
+.lake-detail-warning{margin:14px 0;padding:14px 15px;border-radius:16px;background:rgba(183,116,38,.10);box-shadow:var(--surface-highlight)}
+.lake-detail-warning strong{display:block;margin-bottom:5px;color:#9a5d17;font-size:12px}
+.lake-detail-warning p{margin:0;color:var(--ink);font-size:12px;line-height:1.65}
+.lake-official-links{display:grid;gap:8px;margin-top:10px}
+@media(max-width:560px){
+  .lake-detail-glance{grid-template-columns:1fr}
+}
+
+
+/* Lake cards + detail readability pass */
+.lake-seed-card{
+  border:1px solid rgba(73,190,214,.16);
+  background:linear-gradient(145deg,rgba(17,70,84,.96),rgba(11,48,61,.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 4px 0 rgba(4,28,36,.72),
+    0 8px 16px rgba(0,0,0,.16);
+}
+button.lake-seed-card{
+  transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease,background .14s ease;
+}
+button.lake-seed-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(79,210,234,.34);
+  background:linear-gradient(145deg,rgba(20,82,98,.98),rgba(12,56,70,.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 6px 0 rgba(4,28,36,.74),
+    0 12px 20px rgba(0,0,0,.19);
+}
+button.lake-seed-card:active{
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 2px 0 rgba(4,28,36,.74),
+    0 5px 10px rgba(0,0,0,.15);
+}
+.lake-seed-card.is-hold{
+  opacity:.86;
+  background:linear-gradient(145deg,rgba(56,58,54,.92),rgba(38,43,42,.92));
+}
+.lake-seed-card>span{
+  font-size:10px;
+  padding:5px 9px;
+}
+.lake-seed-card.is-ready>span{
+  background:rgba(64,202,228,.15);
+  color:#7be7f7;
+  box-shadow:inset 0 0 0 1px rgba(82,213,236,.12);
+}
+
+.lake-spot-sheet .fishing-spot-section h4{
+  font-size:15px;
+  line-height:1.45;
+}
+.lake-detail-glance span{
+  font-size:11px;
+}
+.lake-detail-glance strong{
+  font-size:14px;
+  line-height:1.55;
+}
+.lake-rule-grid strong{
+  font-size:14px;
+}
+.lake-rule-grid p{
+  font-size:14px;
+  line-height:1.75;
+}
+.lake-detail-list li{
+  font-size:14px;
+  line-height:1.75;
+}
+.lake-detail-warning strong{
+  font-size:14px;
+}
+.lake-detail-warning p{
+  font-size:14px;
+  line-height:1.75;
+}
+.lake-spot-sheet .fishing-spot-tags span{
+  font-size:12px;
+  padding:7px 10px;
+}
+.lake-spot-sheet .fishing-spot-checked{
+  font-size:11px;
+}
+.lake-spot-sheet .fishing-spot-official{
+  font-size:13px;
+}
+
+
+/* Lake detail text clarity pass */
+.lake-spot-sheet{
+  -webkit-font-smoothing:antialiased;
+}
+.lake-spot-sheet .fishing-spot-section h4{
+  color:#f2fbfd;
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:.01em;
+}
+.lake-detail-glance span{
+  color:#9fdce6;
+  font-size:11px;
+  font-weight:900;
+}
+.lake-detail-glance strong{
+  color:#f1fbfd;
+  font-size:14px;
+  font-weight:800;
+}
+.lake-rule-grid strong{
+  color:#63e0f0;
+  font-size:14px;
+  font-weight:900;
+}
+.lake-rule-grid p,
+.lake-detail-list li,
+.lake-detail-warning p{
+  color:#eef8fa;
+  font-size:14px;
+  font-weight:650;
+  line-height:1.8;
+  letter-spacing:.01em;
+}
+.lake-detail-warning strong{
+  font-size:14px;
+  font-weight:900;
+}
+.lake-spot-sheet .fishing-spot-tags span{
+  color:#ecfbfd;
+  font-size:12px;
+  font-weight:800;
+}
+.lake-spot-sheet .fishing-spot-checked,
+.lake-spot-sheet .fishing-spot-official{
+  font-weight:800;
+}
+
+
+/* Lake mobile layout pass */
+@media(max-width:700px){
+  .lake-seed-grid{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .lake-seed-card{
+    min-height:64px;
+    padding:14px 16px;
+  }
+  .lake-seed-card strong{
+    gap:10px;
+    overflow:visible;
+  }
+  .lake-seed-pref,
+  .lake-seed-name{
+    font-size:17px;
+  }
+  .lake-seed-name{
+    overflow:visible;
+    text-overflow:clip;
+    white-space:normal;
+  }
+  .lake-seed-card>span{
+    font-size:10px;
+    padding:6px 9px;
+  }
+}
+
+
+/* Lake detail border clarity pass */
+html[data-theme="dark"] .lake-spot-sheet .fishing-spot-section{
+  border-color:rgba(113,181,198,.42);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+html[data-theme="dark"] .lake-detail-glance>div{
+  border:1px solid rgba(113,181,198,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+html[data-theme="dark"] .lake-rule-grid>div{
+  border:1px solid rgba(113,181,198,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.02);
+}
+html[data-theme="dark"] .lake-detail-warning{
+  border:1px solid rgba(199,151,74,.34);
+}
+
+.lake-mode-summary.is-final{grid-template-columns:repeat(2,minmax(0,1fr))}

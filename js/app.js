@@ -1,4 +1,4 @@
-const APP_VERSION='14.30.2';
+const APP_VERSION='14.31.0';
 const fishMaster = [
   { name:'シロギス', emoji:'🐟', photo:'./assets/fish/kisu.jpg', edible:'天ぷら・塩焼き', guide:'15cm以上を持ち帰り目安に', danger:'特別な危険は少ない', dangerLevel:0 , where:'砂地の堤防・海岸。内房や湾内の砂底をちょい投げで探る。', methods:['ちょい投げ','投げ釣り'], bait:'イソメ類', season:'春〜秋', touch:'危険魚ではない。針を外す時は背びれに注意。' },
   { name:'カサゴ', emoji:'🐠', photo:'./assets/fish/kasago.jpg', edible:'煮付け・唐揚げ', guide:'15cm以上を目安に', danger:'背びれ・エラ周辺の鋭いトゲに注意', dangerLevel:1, dangerAction:'フィッシュグリップやプライヤーを使い、ヒレを握り込まない。' , where:'岩礁・テトラ・堤防際などの障害物周り。', methods:['胴突き','穴釣り','ジグヘッド'], bait:'イソメ・魚の切り身・ワーム', season:'通年', touch:'背びれのトゲに注意。' },
@@ -15,6 +15,256 @@ const fishMaster = [
 ];
 
 const defaultGear = ['ロッド', 'リール', '仕掛け', 'オモリ・ジグヘッド', 'エサ・ワーム', 'ハサミ・プライヤー', 'フィッシュグリップ', 'ライフジャケット', 'クーラーボックス', '氷・保冷剤', 'タオル', '飲み物'];
+const lakeModeSeed = [
+  { id:'ashinoko', name:'芦ノ湖', pref:'神奈川', state:'candidate' },
+  { id:'kasumigaura', name:'霞ヶ浦', pref:'茨城', state:'candidate' },
+  { id:'yamanakako', name:'山中湖', pref:'山梨', state:'candidate' },
+  { id:'chuzenjiko', name:'中禅寺湖', pref:'栃木', state:'candidate' },
+  { id:'kawaguchiko', name:'河口湖', pref:'山梨', state:'candidate' },
+  { id:'harunako', name:'榛名湖', pref:'群馬', state:'candidate' },
+  { id:'akagionuma', name:'赤城大沼', pref:'群馬', state:'candidate' }
+];
+const lakeSpotDetails = {
+  ashinoko: {
+    id:'ashinoko',
+    name:'芦ノ湖',
+    pref:'神奈川県',
+    ticket:'必要',
+    season:'3/1〜12/31を基本に、魚種・漁法ごとに漁協が公示',
+    methods:'手釣り・竿釣り・曳縄釣り（条件あり）',
+    targets:['ニジマス','ブラウントラウト','ヒメマス','ワカサギ','オオクチバス'],
+    ruleHighlights:[
+      ['遊漁券','芦ノ湖での遊漁は遊漁料の納付が必要。'],
+      ['夜釣り','遊漁時間は日の出1時間前〜日没1時間後。夜間は禁止。'],
+      ['禁止区域','百貫の鼻突端と立岩突端を結ぶ線より西側の湖面は遊漁禁止。'],
+      ['サイズ','マス類・コイは18cm以下、オオクチバスは25cm以下を採捕しない。']
+    ],
+    periodNotes:[
+      '解禁期間は魚種・漁法ごとに異なり、漁協が公示する期間が優先',
+      '岸からの餌釣りは仕掛けの長さなどで利用できる期間が分かれる'
+    ],
+    sizeLimits:[
+      'ヤマメ・イワナ・ヒメマス・ニジマス・ブラウントラウト・コイ：18cm以下は採捕禁止',
+      'オオクチバス：25cm以下は採捕禁止'
+    ],
+    tripNotes:[
+      '出発前に芦之湖漁協の当年公示で解禁日・区域を確認',
+      'ボート利用時は漁法・運航ルールも確認',
+      '湖畔の駐車・立入は現地掲示を優先'
+    ],
+    checked:'2026-10-03',
+    officialLinks:[
+      ['神奈川県「川・湖のルール」','https://www.pref.kanagawa.jp/docs/kb2/cnt/f790/p504690.html'],
+      ['芦之湖漁業協同組合 遊漁規則','https://www.pref.kanagawa.jp/documents/31525/20231201ashinoko_kisoku.pdf']
+    ]
+  },
+  kasumigaura: {
+    id:'kasumigaura',
+    name:'霞ヶ浦',
+    pref:'茨城県',
+    ticket:'不要',
+    season:'通年 ※魚種ごとの採捕禁止期間あり',
+    methods:'竿釣り・手釣り可（まき餌釣りは禁止）',
+    targets:['チャネルキャットフィッシュ（アメリカナマズ）','ブラックバス','コイ','ワカサギ'],
+    ruleHighlights:[
+      ['遊漁券','霞ヶ浦・北浦では対象魚に関わらず不要。流入河川は別ルールの場合あり。'],
+      ['まき餌','まき餌釣りは禁止。'],
+      ['外来魚','ブラックバス・ブルーギル・チャネルキャットフィッシュ等は、生きたまま湖外へ持ち出さない。キャッチ＆リリースは可。'],
+      ['放置','釣った魚を堤防などへ放置・廃棄しない。']
+    ],
+    periodNotes:[
+      'ワカサギ：1/21〜2月末、5/1〜7/20は採捕禁止',
+      'シラウオ：3/1〜3/31は採捕禁止',
+      'コイ：5/11〜6/10は採捕禁止'
+    ],
+    sizeLimits:[
+      'コイ：全長15cm以下は採捕禁止',
+      'ウナギ：全長23cm以下は採捕禁止'
+    ],
+    tripNotes:[
+      '釣行地点ごとに駐車可否・立入可否を現地表示で確認',
+      '河川へ入る場合は霞ヶ浦本湖と遊漁券ルールが変わることがある',
+      '外来魚を持ち帰るなら、生体のまま湖外へ運ばない'
+    ],
+    warningTitle:'アメリカナマズ狙いで重要',
+    warningText:'チャネルキャットフィッシュは特定外来生物。再放流は可能ですが、生きたまま霞ヶ浦の外へ持ち出すことはできません。',
+    checked:'2026-10-03',
+    officialLinks:[
+      ['茨城県「釣りのルールとマナー」','https://www.pref.ibaraki.jp/nourinsuisan/kasui/contents/ruleandmanner.html'],
+      ['茨城県「釣りQ&A」','https://www.pref.ibaraki.jp/nourinsuisan/kasui/contents/tsuriqa.html']
+    ]
+  },
+  yamanakako: {
+    id:'yamanakako',
+    name:'山中湖',
+    pref:'山梨県',
+    ticket:'必要',
+    season:'ワカサギ 9/1〜翌6/30／その他対象魚は周年',
+    methods:'竿釣り',
+    targets:['ワカサギ','オオクチバス','コイ','フナ','ウナギ','ウグイ','オイカワ'],
+    ruleHighlights:[
+      ['遊漁券','山中湖で対象魚を竿釣りする場合は遊漁料の納付が必要。'],
+      ['ワカサギ','9/1〜翌6/30、日の出〜日没。'],
+      ['その他対象魚','コイ・フナ・ウナギ・ウグイ・オイカワ・オオクチバスは周年、日の出〜日没。'],
+      ['現地指示','資源保護や危険防止のため漁協が出す指示を優先。']
+    ],
+    periodNotes:[
+      'ワカサギ：9/1〜翌6/30',
+      'その他の対象魚：周年',
+      '遊漁時間：日の出〜日没'
+    ],
+    sizeLimits:[],
+    tripNotes:[
+      'コンビニ・漁協事務所・指定販売所・オンライン等で遊漁券を購入可能',
+      'ドーム船・ボート利用時は各事業者の受付時間と安全ルールも確認',
+      '湖畔の駐車場所は利用施設の案内を優先'
+    ],
+    checked:'2026-10-03',
+    officialLinks:[
+      ['山梨県「漁協ごとの遊漁規則」','https://www.pref.yamanashi.jp/shokusui/gyojyouzuyuugyokisoku.html'],
+      ['山中湖漁業協同組合 遊漁規則','https://www.pref.yamanashi.jp/documents/57627/naikyou13yuugyokisoku.pdf']
+    ]
+  },
+  chuzenjiko: {
+    id:'chuzenjiko',
+    name:'中禅寺湖',
+    pref:'栃木県',
+    ticket:'必要',
+    season:'解禁日〜9/19を基本 ※ワカサギ等は10/31まで',
+    methods:'手釣り・竿釣り・ひき縄釣り',
+    targets:['レイクトラウト','ブラウントラウト','ニジマス','ヒメマス','ホンマス','ワカサギ'],
+    ruleHighlights:[
+      ['遊漁券','遊漁には漁協の承認と遊漁料の納付が必要。'],
+      ['竿数','岸釣りは1人2本以内。船釣りはひき縄を含め1隻4本以内。'],
+      ['シーズン','通常は組合公示の解禁日から9/19まで。ワカサギ・ウグイ・カジカは10/31まで。'],
+      ['西側区域','岸ヶ淵と松ヶ崎を結ぶ線より西側などは原則禁止区域。特例区域・期間は漁協公示を確認。']
+    ],
+    periodNotes:[
+      'マス類など：組合公示の解禁日〜9/19',
+      'ワカサギ・ウグイ・カジカ：解禁日〜10/31',
+      '特例区域・特例期間は当年の漁協公示が優先'
+    ],
+    sizeLimits:[],
+    tripNotes:[
+      '遊漁券と当年の解禁・持ち帰り公示を出発前に確認',
+      'ボート利用は漁協の承認と水上安全ルールを確認',
+      'ブラウントラウト・レイクトラウトは生きたまま湖外へ持ち出さない'
+    ],
+    warningTitle:'持ち帰り・再放流は魚種別ルール',
+    warningText:'中禅寺湖では魚種ごとの持ち帰り・キャッチ＆リリース運用が漁協公示で定められます。ブラウントラウトとレイクトラウトは生きたまま採捕水域外へ持ち出せません。',
+    checked:'2026-10-03',
+    officialLinks:[
+      ['栃木県「県内の漁業権」','https://www.pref.tochigi.lg.jp/g02/suisan/r6gyogyouken.html'],
+      ['中禅寺湖漁業協同組合 遊漁規則','https://www.pref.tochigi.lg.jp/g02/suisan/documents/20231227140634.pdf'],
+      ['ブラウン・レイクトラウト取扱い','https://www.pref.tochigi.lg.jp/g02/iinkai/brown-lake2024.html']
+    ]
+  },
+  kawaguchiko: {
+    id:'kawaguchiko',
+    name:'河口湖',
+    pref:'山梨県',
+    ticket:'必要',
+    season:'魚種別。オオクチバス等は周年、ワカサギは漁協提示期間',
+    methods:'竿釣り（原則1人2本以内）',
+    targets:['オオクチバス','ワカサギ','コイ','フナ','ウナギ','オイカワ'],
+    ruleHighlights:[
+      ['遊漁券','対象魚を竿釣りする場合は遊漁料の納付が必要。'],
+      ['竿数','釣竿は1人2本以内。'],
+      ['ワーム類','軟質プラスチック製疑似餌・合成素材付け餌は使用制限あり。天然素材等の例外規定あり。'],
+      ['禁漁区域','船津浜・浅川浜は通年禁止。産卵保護ワンドには季節禁漁あり。']
+    ],
+    periodNotes:[
+      'ワカサギ：1/1〜5/15、10/1〜12/31の間で組合が提示する期間',
+      '寺屋敷前ワンド・久保井ワンド：4/1〜6/30は禁漁',
+      '船津浜・浅川浜：通年禁漁'
+    ],
+    sizeLimits:[
+      'オオクチバス：25cm以上',
+      'コイ：18cm以上',
+      'フナ：15cm以上',
+      'オイカワ：10cm以上'
+    ],
+    tripNotes:[
+      'バス狙いは使用できる疑似餌素材を必ず事前確認',
+      '禁漁ワンド・観光客の多い浜は現地標柱も確認',
+      '遊漁時間は日の出1時間前〜日没1時間後'
+    ],
+    checked:'2026-10-03',
+    officialLinks:[
+      ['山梨県「漁協ごとの遊漁規則」','https://www.pref.yamanashi.jp/shokusui/gyojyouzuyuugyokisoku.html'],
+      ['河口湖漁業協同組合 遊漁規則','https://www.pref.yamanashi.jp/documents/57627/naikyou14yuugyokisoku.pdf']
+    ]
+  },
+  harunako: {
+    id:'harunako',
+    name:'榛名湖',
+    pref:'群馬県',
+    ticket:'必要',
+    season:'マス・コイ・フナは周年／ワカサギは9/1〜漁協が定める日',
+    methods:'手釣り1本／竿釣り3本以下',
+    targets:['ワカサギ','マス類','コイ','フナ'],
+    ruleHighlights:[
+      ['遊漁券','遊漁は漁協の承認と遊漁料の納付が必要。中学生以下は規則上免除。'],
+      ['竿数','手釣り1人1本、竿釣り1人3本以下。'],
+      ['時間','岸釣り・船釣りとも季節別の夜間禁止時間あり。'],
+      ['禁止区域','簡易水道施設周辺など通年禁止区域あり。']
+    ],
+    periodNotes:[
+      'マス・コイ・フナ：1/1〜12/31',
+      'ワカサギ：9/1〜漁協が定める日',
+      '氷上穴釣りは穴径・使用穴数の制限あり'
+    ],
+    sizeLimits:[
+      'マス・コイ・フナ：15cm以下は採捕禁止'
+    ],
+    tripNotes:[
+      '1日遊漁料は規則上700円。現場納付は加算あり',
+      '船・カヌー等は時期や利用申込の条件を別途確認',
+      'ワカサギは現在持ち帰り可能。最新検査・現地案内も確認'
+    ],
+    checked:'2026-10-03',
+    officialLinks:[
+      ['群馬県「遊漁に関するルール」','https://www.pref.gunma.jp/page/217085.html'],
+      ['榛名湖漁業協同組合 遊漁規則','https://www.pref.gunma.jp/uploaded/attachment/602167.pdf'],
+      ['榛名湖 カヌー等持ち込み案内','https://www.pref.gunma.jp/page/1255.html']
+    ]
+  },
+  akagionuma: {
+    id:'akagionuma',
+    name:'赤城大沼',
+    pref:'群馬県',
+    ticket:'必要',
+    season:'魚種・釣法ごとに設定。ワカサギはボート・氷上が中心',
+    methods:'手釣り・竿釣り ※ルアー・フライ・テンカラ禁止',
+    targets:['ワカサギ','コイ','フナ','ウグイ'],
+    ruleHighlights:[
+      ['遊漁券','遊漁には漁協の承認と遊漁料の納付が必要。'],
+      ['ルアー等','ルアー釣り・フライ釣り・テンカラ釣りは全域・通年禁止。'],
+      ['まき餌・照明','撒餌漁法と照明器具を使う漁法は全域・通年禁止。'],
+      ['禁止区域','小鳥ヶ島周辺など通年禁止区域、覚満川は4/1〜5/31禁漁。']
+    ],
+    periodNotes:[
+      '船使用の漁法・氷上穴釣りは16時〜翌7時禁止',
+      '氷上穴釣りは穴径・使用穴数・穴間隔に制限あり',
+      'ワカサギのボート・氷上シーズンは当年の漁協案内を確認'
+    ],
+    sizeLimits:[],
+    tripNotes:[
+      'ルアー系タックル前提では釣り方が合わないため要注意',
+      'ワカサギ日釣券はFish PASSでも取扱いあり',
+      'ワカサギは現在持ち帰り可能。最新検査・現地案内も確認'
+    ],
+    warningTitle:'MFLで特に注意',
+    warningText:'赤城大沼はルアー・フライ・テンカラが通年禁止。海ルアー感覚で道具を持って行く場所ではなく、ワカサギ等の餌・仕掛け釣り前提で計画する。',
+    checked:'2026-10-03',
+    officialLinks:[
+      ['群馬県「遊漁に関するルール」','https://www.pref.gunma.jp/page/217085.html'],
+      ['赤城大沼漁業協同組合 遊漁規則','https://www.pref.gunma.jp/uploaded/attachment/602166.pdf'],
+      ['県立赤城公園','https://www.pref.gunma.jp/page/1222.html']
+    ]
+  }
+};
+
 const state = {
   view: 'home',
   fishingMapMode: 'sea',
@@ -1064,11 +1314,16 @@ function syncFishingMapMode() {
 function setupFishingMapTransition(scene) {
   const overlay = scene.querySelector('.fishing-map-wave-overlay');
   const wave = overlay.querySelector('.fishing-map-wave');
+  const rippleOverlay = scene.querySelector('.fishing-map-ripple-overlay');
+  const rippleFill = rippleOverlay.querySelector('.fishing-map-ripple-fill');
   const rotator = scene.querySelector('.fishing-map-rotator');
   const buttons = scene.querySelectorAll('[data-fishing-mode]');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let busy = false;
-  const animate = () => new Promise(resolve => {
+
+  const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+  const animateWave = () => new Promise(resolve => {
     let timer;
     const finish = () => {
       clearTimeout(timer);
@@ -1085,11 +1340,46 @@ function setupFishingMapTransition(scene) {
     wave.addEventListener('animationend', onEnd);
     wave.addEventListener('animationcancel', finish);
     reducedMotion.addEventListener('change', onPreference);
-    // A bounded fallback also releases the controls if an animation is interrupted.
     timer = setTimeout(finish, 1100);
     rotator.classList.add('is-wave-passing');
     overlay.classList.add('is-wave-passing');
   });
+
+  const animateRipple = async (button, mode) => {
+    const rect = button.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    const farX = Math.max(x, window.innerWidth - x);
+    const farY = Math.max(y, window.innerHeight - y);
+    const radius = Math.ceil(Math.hypot(farX, farY) * 1.12);
+
+    rippleOverlay.style.setProperty('--ripple-x', x + 'px');
+    rippleOverlay.style.setProperty('--ripple-y', y + 'px');
+    rippleOverlay.style.setProperty('--ripple-size', (radius * 2) + 'px');
+    document.body.appendChild(rippleOverlay);
+    rippleOverlay.hidden = false;
+    rippleOverlay.classList.add('is-ripple-passing');
+
+    await wait(1550);
+    if (!scene.isConnected) return;
+    state.fishingMapMode = mode;
+    syncFishingMapMode();
+
+    await new Promise(resolve => {
+      let timer;
+      const finish = () => {
+        clearTimeout(timer);
+        rippleFill.removeEventListener('animationend', onEnd);
+        rippleFill.removeEventListener('animationcancel', finish);
+        resolve();
+      };
+      const onEnd = event => { if (event.target === rippleFill) finish(); };
+      rippleFill.addEventListener('animationend', onEnd);
+      rippleFill.addEventListener('animationcancel', finish);
+      timer = setTimeout(finish, 2450);
+    });
+  };
+
   buttons.forEach(button => button.addEventListener('click', async () => {
     const mode = button.dataset.fishingMode;
     if (busy || mode === state.fishingMapMode) return;
@@ -1098,9 +1388,28 @@ function setupFishingMapTransition(scene) {
       syncFishingMapMode();
       return;
     }
+
     busy = true;
     buttons.forEach(item => { item.disabled = true; });
-    const outgoing = scene.querySelector('[data-map-face="' + state.fishingMapMode + '"]');
+    const fromMode = state.fishingMapMode;
+    const useRipple = fromMode === 'lake' || mode === 'lake';
+
+    if (useRipple) {
+      try {
+        await animateRipple(button, mode);
+      } finally {
+        rippleOverlay.hidden = true;
+        rippleOverlay.classList.remove('is-ripple-passing');
+        rippleOverlay.removeAttribute('style');
+        if (scene.isConnected) rotator.prepend(rippleOverlay);
+        else rippleOverlay.remove();
+        buttons.forEach(item => { item.disabled = false; });
+        busy = false;
+      }
+      return;
+    }
+
+    const outgoing = scene.querySelector('[data-map-face="' + fromMode + '"]');
     const incoming = scene.querySelector('[data-map-face="' + mode + '"]');
     const bounds = rotator.getBoundingClientRect();
     const bandWidth = Math.min(600, Math.max(260, window.innerWidth * .68));
@@ -1114,7 +1423,6 @@ function setupFishingMapTransition(scene) {
     overlay.style.setProperty('--wave-band-width', bandWidth + 'px');
     overlay.style.setProperty('--wave-screen-from', -bandWidth + 'px');
     overlay.style.setProperty('--wave-screen-to', (window.innerWidth + bandWidth) + 'px');
-    // A temporary body-level overlay can wash over the header and bottom tabs.
     document.body.appendChild(overlay);
     incoming.inert = true;
     outgoing.dataset.waveFace = 'outgoing';
@@ -1122,7 +1430,7 @@ function setupFishingMapTransition(scene) {
     incoming.setAttribute('aria-hidden', 'true');
     overlay.hidden = false;
     try {
-      await animate();
+      await animateWave();
       if (!scene.isConnected) return;
       state.fishingMapMode = mode;
     } finally {
@@ -1150,8 +1458,9 @@ function renderFishingMap(){
   app.innerHTML = `
     <section id="fishingMapScene" class="fishing-map-scene" aria-label="釣地図">
       <div class="fishing-mode-switch" role="group" aria-label="釣地図の種類">
-        <button type="button" data-fishing-mode="sea" aria-pressed="true" aria-controls="seaFishingMapView areaTroutView">海釣り</button>
-        <button type="button" data-fishing-mode="trout" aria-pressed="false" aria-controls="seaFishingMapView areaTroutView">AREA TROUT</button>
+        <button type="button" data-fishing-mode="sea" aria-pressed="true" aria-controls="seaFishingMapView areaTroutView lakeFishingMapView">海釣り</button>
+        <button type="button" data-fishing-mode="trout" aria-pressed="false" aria-controls="seaFishingMapView areaTroutView lakeFishingMapView">AREA TROUT</button>
+        <button type="button" data-fishing-mode="lake" aria-pressed="false" aria-controls="seaFishingMapView areaTroutView lakeFishingMapView">湖・沼</button>
       </div>
       <div class="fishing-map-rotator">
         <div class="fishing-map-wave-overlay" aria-hidden="true" hidden>
@@ -1160,6 +1469,12 @@ function renderFishingMap(){
             <svg class="wave-middle" viewBox="0 0 300 1000" preserveAspectRatio="none" focusable="false" aria-hidden="true"><defs><linearGradient id="mfl-water-middle" x1="0" y1="0" x2="1" y2=".25"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".42" stop-color="currentColor" stop-opacity=".68"/><stop offset=".7" stop-color="currentColor" stop-opacity=".94"/><stop offset="1" stop-color="currentColor" stop-opacity=".45"/></linearGradient></defs><path fill="url(#mfl-water-middle)" d="M0 0 L189 0 C128 33 170 94 219 126 C253 159 210 201 181 218 C145 265 230 309 236 376 C244 431 153 454 176 510 C206 547 266 598 217 664 C167 702 151 757 212 793 C265 826 209 919 190 1000 L0 1000 Z"/><path class="wave-crest-highlight" d="M189 0 C128 33 170 94 219 126 C253 159 210 201 181 218 C145 265 230 309 236 376 C244 431 153 454 176 510 C206 547 266 598 217 664 C167 702 151 757 212 793 C265 826 209 919 190 1000"/></svg>
             <svg class="wave-front" viewBox="0 0 300 1000" preserveAspectRatio="none" focusable="false" aria-hidden="true"><defs><linearGradient id="mfl-water-front" x1="0" y1="0" x2="1" y2=".25"><stop offset="0" stop-color="currentColor" stop-opacity=".12"/><stop offset=".42" stop-color="currentColor" stop-opacity=".68"/><stop offset=".7" stop-color="currentColor" stop-opacity=".94"/><stop offset="1" stop-color="currentColor" stop-opacity=".45"/></linearGradient></defs><path fill="url(#mfl-water-front)" d="M0 0 L174 0 C239 35 265 85 228 111 C246 78 183 85 173 134 C148 201 224 217 237 254 C261 300 204 340 183 352 C143 402 156 464 213 487 C272 521 254 575 221 596 C246 553 185 568 174 625 C156 684 222 732 239 749 C276 793 207 845 180 889 C151 939 222 964 204 1000 L0 1000 Z"/><path class="wave-crest-highlight" d="M174 0 C239 35 265 85 228 111 C246 78 183 85 173 134 C148 201 224 217 237 254 C261 300 204 340 183 352 C143 402 156 464 213 487 C272 521 254 575 221 596 C246 553 185 568 174 625 C156 684 222 732 239 749 C276 793 207 845 180 889 C151 939 222 964 204 1000"/></svg>
           </div>
+        </div>
+        <div class="fishing-map-ripple-overlay" aria-hidden="true" hidden>
+          <div class="fishing-map-ripple-fill"></div>
+          <div class="fishing-map-ripple-ring ripple-ring-one"></div>
+          <div class="fishing-map-ripple-ring ripple-ring-two"></div>
+          <div class="fishing-map-ripple-ring ripple-ring-three"></div>
         </div>
     <section id="seaFishingMapView" class="fishing-map-face fishing-map-face-front" data-map-face="sea" aria-label="海釣り地図">
     <section class="fishing-map-view">
@@ -1246,6 +1561,34 @@ function renderFishingMap(){
         <p role="status">施設一覧を読み込んでいます…</p>
       </section>
     </section>
+    <section id="lakeFishingMapView" class="fishing-map-face lake-fishing-view" data-map-face="lake" aria-labelledby="lakeFishingTitle" hidden>
+      <header class="lake-fishing-heading">
+        <p class="eyebrow">LAKE / MARSH</p>
+        <h2 id="lakeFishingTitle">湖・沼</h2>
+        <p>自然湖・湖沼は「釣れる」だけでなく、遊漁券・禁漁・持ち帰り・リリース・外来魚の扱いまで確認できた水域だけ掲載します。</p>
+      </header>
+      <section class="lake-seed-section">
+        <div class="lake-seed-head">
+          <div><small>FINAL SET</small><h3>7水域</h3></div>
+          <span>詳細ルールは順次接続</span>
+        </div>
+        <div class="lake-seed-grid">${lakeModeSeed.map(spot => {
+          const hasDetail=Boolean(lakeSpotDetails[spot.id]);
+          const inner=`<div class="lake-seed-place"><strong><span class="lake-seed-pref">${spot.pref}県</span><span class="lake-seed-name">${spot.name}</span></strong></div><span>${hasDetail ? '詳細を見る' : (spot.state === 'hold' ? '保留' : '掲載候補')}</span>`;
+          return hasDetail
+            ? `<button type="button" class="lake-seed-card is-ready" data-lake-spot="${spot.id}">${inner}</button>`
+            : `<article class="lake-seed-card ${spot.state === 'hold' ? 'is-hold' : ''}">${inner}</article>`;
+        }).join('')}</div>
+      </section>
+      <section class="lake-mode-summary lake-mode-summary-lower is-final" aria-label="湖・沼モード掲載状況">
+        <div><strong>${lakeModeSeed.length}</strong><span>掲載水域</span></div>
+        <div><strong>${lakeModeSeed.filter(spot => lakeSpotDetails[spot.id]).length}</strong><span>詳細接続</span></div>
+      </section>
+      <section class="lake-mode-note">
+        <strong>掲載基準</strong>
+        <p>公式情報で重要ルールを確認できない水域は、無理に「要確認」で出さず保留。MFLでは「掲載＝安心して準備できる」を優先します。</p>
+      </section>
+    </section>
       </div>
     </section>`;
   setupKantoMap();
@@ -1264,6 +1607,7 @@ function renderFishingMap(){
   setupMapFilterPanel();
 
   setupGlobalFishingSpotClicks();
+  setupLakeSpotClicks();
   window.MFLTroutCards?.mountMaster(document.getElementById('areaTroutFacilities'));
   setupFishingMapTransition(document.getElementById('fishingMapScene'));
   syncFishingMapMode();
@@ -1864,6 +2208,84 @@ function showFishingSpot(id,options={}){
 }
 
 
+
+function showLakeSpot(id){
+  const s=lakeSpotDetails[id];
+  if(!s)return;
+
+  const existing=document.getElementById('lakeSpotOverlay');
+  if(existing)existing._mflDispose?.();
+
+  const listSection=(title,items)=>Array.isArray(items)&&items.length
+    ? `<section class="fishing-spot-section"><h4>${title}</h4><ul class="lake-detail-list">${items.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></section>`
+    : '';
+
+  const overlay=document.createElement('div');
+  overlay.id='lakeSpotOverlay';
+  overlay.className='fishing-spot-overlay lake-spot-overlay';
+  overlay.innerHTML=`
+    <div class="fishing-spot-sheet lake-spot-sheet" role="dialog" aria-modal="true" aria-label="${escapeHtml(s.name)}の詳細">
+      <div class="fishing-spot-sheet-head">
+        <button type="button" class="fishing-spot-close" aria-label="閉じる">×</button>
+        <div>
+          <small>LAKE / MARSH · ${escapeHtml(s.pref)}</small>
+          <h3>${escapeHtml(s.name)}</h3>
+          <span class="mfl-verified-badge">✓ 公式ルール確認済み</span>
+        </div>
+      </div>
+
+      <section class="lake-detail-glance" aria-label="${escapeHtml(s.name)}の基本情報">
+        <div><span>遊漁券</span><strong>${escapeHtml(s.ticket)}</strong></div>
+        <div><span>シーズン</span><strong>${escapeHtml(s.season)}</strong></div>
+        <div><span>基本釣法</span><strong>${escapeHtml(s.methods)}</strong></div>
+      </section>
+
+      <section class="fishing-spot-section">
+        <h4>🐟 主な対象魚</h4>
+        <div class="fishing-spot-tags">${s.targets.map(x=>`<span>${escapeHtml(x)}</span>`).join('')}</div>
+      </section>
+
+      <section class="fishing-spot-section lake-rule-section">
+        <h4>⚖️ まず見るルール</h4>
+        <div class="lake-rule-grid">${s.ruleHighlights.map(([label,text])=>`<div><strong>${escapeHtml(label)}</strong><p>${escapeHtml(text)}</p></div>`).join('')}</div>
+      </section>
+
+      ${listSection('📅 期間・区域',s.periodNotes)}
+      ${listSection('📏 サイズ制限',s.sizeLimits)}
+      ${listSection('🚗 遠征前チェック',s.tripNotes)}
+
+      ${s.warningText?`<section class="lake-detail-warning"><strong>${escapeHtml(s.warningTitle||'重要')}</strong><p>${escapeHtml(s.warningText)}</p></section>`:''}
+
+      <div class="fishing-spot-checked">公式確認: ${escapeHtml(s.checked)}</div>
+      <div class="lake-official-links">
+        ${(s.officialLinks||[]).map(([label,url])=>`<a class="fishing-spot-official" href="${url}" target="_blank" rel="noopener">${escapeHtml(label)} ↗</a>`).join('')}
+      </div>
+    </div>`;
+
+  document.body.appendChild(overlay);
+  const unlockBody=lockBodyScroll();
+  let closed=false;
+  const close=(immediate=false)=>{
+    if(closed)return;
+    closed=true;
+    if(immediate===true){overlay.remove();unlockBody();return;}
+    overlay.classList.add('closing');
+    setTimeout(()=>{overlay.remove();unlockBody();},160);
+  };
+  overlay._mflDispose=()=>close(true);
+  overlay.querySelector('.fishing-spot-close').onclick=close;
+  overlay.onclick=(e)=>{if(e.target===overlay)close();};
+  requestAnimationFrame(()=>overlay.classList.add('open'));
+}
+
+function setupLakeSpotClicks(){
+  document.querySelectorAll('[data-lake-spot]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      const id=button.dataset.lakeSpot;
+      if(id)showLakeSpot(id);
+    });
+  });
+}
 
 function setupPartsQuickAnswer(){
   const box=document.getElementById('partsQuickAnswer'); if(!box)return;
