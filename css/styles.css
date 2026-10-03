@@ -4640,3 +4640,86 @@ button.lake-seed-card{width:100%;border:0;text-align:left;font:inherit;cursor:po
 @media(max-width:560px){
   .lake-detail-glance{grid-template-columns:1fr}
 }
+
+
+/* Lake cards + detail readability pass */
+.lake-seed-card{
+  border:1px solid rgba(73,190,214,.16);
+  background:linear-gradient(145deg,rgba(17,70,84,.96),rgba(11,48,61,.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 4px 0 rgba(4,28,36,.72),
+    0 8px 16px rgba(0,0,0,.16);
+}
+button.lake-seed-card{
+  transition:transform .14s ease,box-shadow .14s ease,border-color .14s ease,background .14s ease;
+}
+button.lake-seed-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(79,210,234,.34);
+  background:linear-gradient(145deg,rgba(20,82,98,.98),rgba(12,56,70,.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    0 6px 0 rgba(4,28,36,.74),
+    0 12px 20px rgba(0,0,0,.19);
+}
+button.lake-seed-card:active{
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 2px 0 rgba(4,28,36,.74),
+    0 5px 10px rgba(0,0,0,.15);
+}
+.lake-seed-card.is-hold{
+  opacity:.86;
+  background:linear-gradient(145deg,rgba(56,58,54,.92),rgba(38,43,42,.92));
+}
+.lake-seed-card>span{
+  font-size:10px;
+  padding:5px 9px;
+}
+.lake-seed-card.is-ready>span{
+  background:rgba(64,202,228,.15);
+  color:#7be7f7;
+  box-shadow:inset 0 0 0 1px rgba(82,213,236,.12);
+}
+
+.lake-spot-sheet .fishing-spot-section h4{
+  font-size:15px;
+  line-height:1.45;
+}
+.lake-detail-glance span{
+  font-size:11px;
+}
+.lake-detail-glance strong{
+  font-size:14px;
+  line-height:1.55;
+}
+.lake-rule-grid strong{
+  font-size:14px;
+}
+.lake-rule-grid p{
+  font-size:14px;
+  line-height:1.75;
+}
+.lake-detail-list li{
+  font-size:14px;
+  line-height:1.75;
+}
+.lake-detail-warning strong{
+  font-size:14px;
+}
+.lake-detail-warning p{
+  font-size:14px;
+  line-height:1.75;
+}
+.lake-spot-sheet .fishing-spot-tags span{
+  font-size:12px;
+  padding:7px 10px;
+}
+.lake-spot-sheet .fishing-spot-checked{
+  font-size:11px;
+}
+.lake-spot-sheet .fishing-spot-official{
+  font-size:13px;
+}
