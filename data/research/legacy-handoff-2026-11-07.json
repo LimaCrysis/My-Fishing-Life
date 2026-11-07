@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "archive_type": "legacy_handoff_recovery",
+  "captured_on": "2026-11-07",
+  "origin": "MFL開発2へのユーザー引き継ぎ文（過去調査結果の要約）",
+  "IMPORTANT": "過去の個別日次報告全文ではない。地点名・注意事項を保全するためのスナップショット。公式の現況確認・GitHub正本との照合は未実施。",
+  "prior_reports_fully_recovered": false,
+  "reported_site_coverage_approximate": "以前約1割と概算されたが正確な台帳なし",
+  "potential_sites": [
+    {
+      "legacy_id": "handoff-candidate-01",
+      "name": "京浜運河・昭和島 / 大森",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-02",
+      "name": "木更津内港公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-03",
+      "name": "多摩川河口・キングスカイフロント",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-04",
+      "name": "鳥居崎海浜公園・矢那川河口",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-05",
+      "name": "富津みなと公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-06",
+      "name": "木更津潮浜公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-07",
+      "name": "菊田川・茜浜緑道",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-08",
+      "name": "観音崎",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-09",
+      "name": "杉田臨海緑地",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-10",
+      "name": "ソラムナード羽田緑地",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-11",
+      "name": "養老川臨海公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-12",
+      "name": "船橋港親水公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-13",
+      "name": "習志野市海浜公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-14",
+      "name": "暁ふ頭公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-15",
+      "name": "金沢水際線緑地",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-16",
+      "name": "葛西海浜公園 西なぎさ",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-17",
+      "name": "大井ふ頭中央海浜公園 なぎさの森",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-18",
+      "name": "京浜島つばさ公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-19",
+      "name": "豊洲ぐるり公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-20",
+      "name": "東海ふ頭公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-21",
+      "name": "高洲海浜公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-22",
+      "name": "海の公園・八景島側",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-23",
+      "name": "末広水際線プロムナード",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-24",
+      "name": "浦安市総合公園前護岸",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-25",
+      "name": "旧江戸川河口・西岸",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-26",
+      "name": "大津港新堤防",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-27",
+      "name": "上総湊港海浜公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-28",
+      "name": "野島公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    },
+    {
+      "legacy_id": "handoff-candidate-29",
+      "name": "塩浜三番瀬公園",
+      "classification": "unresolved_legacy_candidate",
+      "note": "過去に新規候補・有望候補等として調査。正式採用/HOLD/除外/既存補足の状態は未確定",
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "needs_verification": true
+    }
+  ],
+  "critical_legacy_findings": [
+    {
+      "legacy_id": "handoff-regulation-01",
+      "name": "夢の島緑道公園",
+      "suggested_status": "temporarily_closed",
+      "findings": [
+        "旧MFLでは釣り可能扱い",
+        "過去調査の公式告知では護岸工事による釣りエリア閉鎖、再開時期未定"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-02",
+      "name": "本牧海づり施設",
+      "suggested_status": "existing_supplement",
+      "findings": [
+        "定員7割超でルアー・エギ・テンヤ・投げサビキ等はアンダースローのみ（当日解除なし）",
+        "渡り桟橋は投げ釣り・ルアー等終日禁止"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-03",
+      "name": "大黒海づり施設",
+      "suggested_status": "existing_supplement",
+      "findings": [
+        "見学者含め180人超で釣法制限",
+        "150人未満でスタッフ確認後に解除可能",
+        "土日祝予約制度あり",
+        "11月以降冬季営業時間"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-04",
+      "name": "オリジナルメーカー海づり公園（市原）",
+      "suggested_status": "existing_supplement",
+      "findings": [
+        "11月18日まで桟橋工事規制（年・現況再確認）",
+        "土日祝竿数制限",
+        "混雑時投げ方制限",
+        "施設内で魚の内臓処理・ウロコ取り禁止",
+        "冬季営業時間"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-05",
+      "name": "若洲海浜公園",
+      "suggested_status": "existing_supplement",
+      "findings": [
+        "防波堤6:00〜21:00、人工磯・護岸は終日（過去報告）",
+        "撒き餌禁止",
+        "混雑時竿2本まで",
+        "駐車場複数・営業時間相違",
+        "改修工事あり"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-06",
+      "name": "東扇島西公園",
+      "suggested_status": "existing_supplement",
+      "findings": [
+        "第1・第2駐車場合計172台",
+        "24時間利用可能",
+        "竿2本まで",
+        "道具放置で場所取り禁止",
+        "指定場所以外禁煙",
+        "アイゴ注意",
+        "イガイ採取ルールあり"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-07",
+      "name": "城南島海浜公園",
+      "suggested_status": "existing_supplement",
+      "findings": [
+        "第一航路側のみなと広場のみ釣り可",
+        "ほかの海岸は原則釣り禁止",
+        "駐車場は21時以降出庫不可"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-08",
+      "name": "うみかぜ公園",
+      "suggested_status": "existing_supplement",
+      "findings": [
+        "平日のみ釣り可能、土日祝禁止（過去調査時点）",
+        "駐車場料金・イベント期間の規制あり"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-09",
+      "name": "浦安海岸 千鳥地区",
+      "suggested_status": "existing_supplement",
+      "findings": [
+        "2025年4月から護岸開放",
+        "無料公共駐車場 第1約25台、第2約82台",
+        "第2に多目的トイレ",
+        "テトラ・敷石で根掛かり多い",
+        "大型魚の取り込み注意"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-10",
+      "name": "金沢水際線緑地",
+      "suggested_status": "existing_supplement",
+      "findings": [
+        "公式に釣り可能",
+        "投げる行為自体が禁止：アンダースロー・ちょい投げ・ルアーキャストも禁止対象",
+        "違反継続で釣り自体の禁止を公式警告",
+        "足元釣り中心",
+        "海面まで約5.5〜7.5m"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    },
+    {
+      "legacy_id": "handoff-regulation-11",
+      "name": "新左近川親水公園",
+      "suggested_status": "hold",
+      "findings": [
+        "旧MFLで釣り可能扱い",
+        "公式の一般規則には魚介類捕獲禁止の記載",
+        "釣りの例外規定が公式確認できず、釣り可否再確認必須"
+      ],
+      "source_recovery": "handoff_summary_only",
+      "official_url": null,
+      "original_review_date": null,
+      "valid_as_of_today": false,
+      "recheck_required": true
+    }
+  ],
+  "research_policy": {
+    "sources_priority": [
+      "公式",
+      "自治体",
+      "港湾管理者",
+      "公園管理者",
+      "現地記事・動画",
+      "その他民間"
+    ],
+    "status_values": [
+      "new_candidate",
+      "existing_supplement",
+      "hold",
+      "excluded",
+      "temporarily_closed",
+      "needs_verification"
+    ],
+    "safety_exclusions": [
+      "路上駐車前提",
+      "立入可否不明",
+      "港湾作業区域との境界が不明",
+      "テトラへの降下が前提",
+      "公式規制と矛盾"
+    ],
+    "required_fields": [
+      "釣り可否",
+      "駐車場",
+      "トイレ",
+      "柵・足場",
+      "夜釣り",
+      "投げ釣り可否",
+      "主な魚種",
+      "ハゼ適性",
+      "現地動画",
+      "工事・立入規制",
+      "営業時間",
+      "公式URL",
+      "確認日"
+    ],
+    "record_rule": "民間情報で釣りをしている事実を公式許可とみなさない。既存地点は差分記録。"
+  }
+}
