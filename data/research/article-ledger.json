@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
+  "legacy_history_imported": false,
+  "unique_confirmed_articles_in_this_ledger": 0,
+  "site_total_articles": null,
+  "site_coverage_percent": null,
+  "articles": []
+}
