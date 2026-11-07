@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-11-07",
+  "scope": {
+    "first_report_date": "2026-10-01",
+    "last_legacy_report_date": "2026-11-06",
+    "note": "日付範囲は過去会話で報告された調査運用期間。毎日成功したことを保証しない。"
+  },
+  "status": "partial_recovery",
+  "source_access": {
+    "old_automation": "disabled but retained",
+    "latest_report": "retrieved verbatim",
+    "older_daily_reports": "not returned by available automation retrieval",
+    "old_chat": "summaries accessible, entire daily transcript not available through current retrieval",
+    "library": "relevant summary files found; not original daily fishing reports"
+  },
+  "preserved": [
+    {
+      "type": "verbatim_daily_report",
+      "date": "2026-11-06",
+      "path": "data/research/daily/2026-11-06-original-report.md"
+    },
+    {
+      "type": "structured_extract",
+      "date": "2026-11-06",
+      "path": "data/research/sea-fishing-research.json",
+      "count": 2
+    },
+    {
+      "type": "legacy_handoff_summary",
+      "date": "2026-11-07",
+      "path": "data/research/legacy-handoff-2026-11-07.json",
+      "candidate_mentions": 29,
+      "critical_finding_mentions": 11
+    }
+  ],
+  "gaps": [
+    {
+      "start": "2026-10-01",
+      "end": "2026-11-05",
+      "issue": "individual daily reports not recovered as raw text",
+      "confirmed_lost": false
+    }
+  ],
+  "recovery_guidance": "元の会話全文が後で入手できれば日付別に原文を保管し、URLと確認日を抽出して既存レコードと突合する。未回収を消失確定・調査0件と扱わない。"
+}
