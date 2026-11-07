@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "description": "MFL海釣り場調査候補・根拠台帳。MFL本番未反映",
+  "legacy_history_imported": false,
+  "records": [
+    {
+      "id": "chiba-port-park-central-wharf-2026-11-06",
+      "name": "千葉ポートパーク・千葉港中央埠頭",
+      "region": "千葉県千葉市中央区",
+      "status": "existing_supplement",
+      "review_state": "requires_cross_check_against_mfl",
+      "verified_on": "2026-11-06",
+      "findings": {
+        "parking_capacity": 250,
+        "parking_hours_summer": "6〜9月 9:00〜21:00",
+        "parking_hours_winter": "10〜5月 9:00〜19:00",
+        "parking_after_hours": "施錠・翌日まで出庫不可",
+        "toilets": "公園内あり（利用時間未確認）",
+        "fence": "民間現地記事で確認",
+        "fishing_permission": null,
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "haze_suitability": "民間釣り場記事では対象魚とされる",
+        "field_video": null
+      },
+      "sources": [
+        {
+          "name": "千葉県・千葉ポートパーク",
+          "url": "https://www.pref.chiba.lg.jp/",
+          "type": "official",
+          "note": "2026-11-06自動調査報告で公式確認済みと記載。正確な資料URLの再回収が必要"
+        }
+      ],
+      "notes": "旧自動調査の2026-11-06報告から復元。GitHub正本との差分未確定。駐車場時間外の出庫不可が重要。",
+      "integrated_into_mfl": false
+    },
+    {
+      "id": "funabashi-sambanze-east-breakwater-2026-11-06",
+      "name": "ふなばし三番瀬海浜公園・東突堤",
+      "region": "千葉県船橋市",
+      "status": "excluded",
+      "review_state": "legacy_report_only",
+      "verified_on": "2026-11-06",
+      "findings": {
+        "fishing_permission": null,
+        "accessible_area": "東突堤の立入可能区域と釣り成立範囲に制約あり（旧調査報告）",
+        "parking": "あり（旧報告約400台、要再確認）",
+        "toilets": "あり（旧報告、要再確認）"
+      },
+      "sources": [],
+      "notes": "旧自動調査では安全性と立入制限のため新規採用見送り。公式情報再確認前に採用しない。",
+      "integrated_into_mfl": false
+    }
+  ]
+}
