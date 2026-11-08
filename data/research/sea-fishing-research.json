@@ -50,6 +50,131 @@
       "sources": [],
       "notes": "旧自動調査では安全性と立入制限のため新規採用見送り。公式情報再確認前に採用しない。",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "hanamigawa-traffic-park-riverside-terrace",
+      "name": "花見川緑地交通公園横テラス",
+      "region": "千葉県千葉市美浜区・花見川河口付近",
+      "status": "hold",
+      "review_state": "official_permission_not_verified",
+      "verified_on": "2026-11-08",
+      "findings": {
+        "fishing_permission": null,
+        "parking": "近隣有料コインパーキング徒歩約5分（民間記事2022年時点）",
+        "parking_price": "記事内料金が複数記載・古いので現行料金未確認",
+        "parking_hours": "民間記事記載の周辺駐車場は24時間入出庫、現況未確認",
+        "parking_traffic_park": "交通公園の駐車場は釣り目的で使わない（記事注意）",
+        "toilets": "交通公園トイレ9〜16時利用可能との旧記事記述、現況未確認",
+        "fence": "川沿いコンクリート柵（旧現地記事）",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "シーバス（推定）",
+          "クロダイ（推定）"
+        ],
+        "haze_suitability": "記事はハゼ釣りを紹介。水面まで高くリール竿推奨",
+        "field_video": "記事にYouTube埋め込み画像あり・動画URL未回収",
+        "construction_restrictions": null
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/fishingstyle/toilet/%E8%8A%B1%E8%A6%8B%E5%B7%9D%E7%B7%91%E5%9C%B0%E4%BA%A4%E9%80%9A%E5%85%AC%E5%9C%92%E6%A8%AA%E3%83%86%E3%83%A9%E3%82%B9/",
+          "type": "private_field_report",
+          "note": "2022年の記事。公式釣り許可ではない",
+          "checked_on": "2026-11-08"
+        },
+        {
+          "url": "https://www.city.chiba.jp/hanamigawa/somu/hanamigawa.html",
+          "type": "official",
+          "note": "千葉市は花見川沿いでハゼ釣りの様子を紹介するが当該テラスの釣り許可とは別",
+          "checked_on": "2026-11-08"
+        }
+      ],
+      "notes": "安全な柵付きテラスの可能性があるが管理者による釣り可否の明示を未確認。正式採用は保留。",
+      "integrated_into_mfl": false
+    },
+    {
+      "id": "kemigawahama-west-jetty",
+      "name": "検見川浜西突堤（花見川河口側）",
+      "region": "千葉県千葉市美浜区",
+      "status": "hold",
+      "review_state": "current_access_limits_unverified",
+      "verified_on": "2026-11-08",
+      "findings": {
+        "fishing_permission": null,
+        "access": "2022年に部分開放との2023年記事。2026年の開放範囲未確認。フェンスより先には入らない",
+        "parking": "旧記事では近隣有料駐車場12台、土日祝最大料金なし。現況未確認",
+        "toilets": "近隣にはなく中央突堤裏との旧記事",
+        "fence": "部分開放境界にフェンスあり。先端側老朽柵の旧写真",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "シーバス"
+        ],
+        "haze_suitability": "河口隣接の民間記事による",
+        "field_video": "記事にYouTube埋め込み画像あり・動画URL未回収",
+        "construction_restrictions": "最新の立入規制と護岸管理者を再確認"
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%8D%83%E8%91%89%E5%B8%82%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E9%80%94%E4%B8%AD%E8%A7%A3%E6%94%BE%E3%81%95%E3%82%8C%E3%81%9F%E6%A4%9C%E8%A6%8B%E5%B7%9D%E6%B5%9C%E8%A5%BF%E7%AA%81%E5%A0%A4%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/",
+          "type": "private_field_report",
+          "note": "2023年2月の記事。部分開放は当時の記述",
+          "checked_on": "2026-11-08"
+        }
+      ],
+      "notes": "部分開放情報が古く、立入可能範囲と釣り許可が確定できないためHOLD。",
+      "integrated_into_mfl": false
+    },
+    {
+      "id": "makuhari-beach-g-block-hamadagawa",
+      "name": "幕張の浜・幕張海浜公園Gブロック／浜田川河口",
+      "region": "千葉県千葉市美浜区",
+      "status": "hold",
+      "review_state": "jurisdiction_and_fishing_rules_unverified",
+      "verified_on": "2026-11-08",
+      "findings": {
+        "fishing_permission": null,
+        "access": "突堤立入禁止の民間情報あり。公園内と海岸の管理区分が異なる可能性",
+        "parking": "A〜Cブロック駐車場あり、海岸からの距離と営業時間未確認",
+        "toilets": "公園内にあり、海岸側の最寄りは未確認",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "シーバス",
+          "クロダイ",
+          "ハゼ",
+          "シロギス",
+          "マゴチ"
+        ],
+        "haze_suitability": "過去の民間情報のみ",
+        "field_video": null,
+        "construction_restrictions": "突堤立入禁止と公園内釣り禁止との民間記載。公式による個別地点の適用確認待ち"
+      },
+      "sources": [
+        {
+          "url": "https://www.city.chiba.jp/bayside/makuhari-hama.html",
+          "type": "official",
+          "note": "海岸利用の案内。釣り許可は記載なし",
+          "checked_on": "2026-11-08"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/kouen/toshikouen/guidemap/makuhari.html",
+          "type": "official",
+          "note": "公園の区分・施設情報。釣り許可は記載なし",
+          "checked_on": "2026-11-08"
+        },
+        {
+          "url": "https://www.bonjourphoto.yokohama/makuhari-kaihin-park.html",
+          "type": "private_guide",
+          "note": "公園内釣り不可・突堤立入禁止と記載。一次根拠未確認",
+          "checked_on": "2026-11-08"
+        }
+      ],
+      "notes": "県管理一般海岸の自由使用原則をこの公園・港湾・突堤に一律適用しない。正式採用保留。",
+      "integrated_into_mfl": false
     }
   ]
 }
