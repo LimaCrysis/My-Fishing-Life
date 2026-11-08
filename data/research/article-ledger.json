@@ -2,8 +2,36 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 0,
+  "unique_confirmed_articles_in_this_ledger": 3,
   "site_total_articles": null,
   "site_coverage_percent": null,
-  "articles": []
+  "articles": [
+    {
+      "url": "https://tokyoinnerbayfishing.net/fishingstyle/toilet/%E8%8A%B1%E8%A6%8B%E5%B7%9D%E7%B7%91%E5%9C%B0%E4%BA%A4%E9%80%9A%E5%85%AC%E5%9C%92%E6%A8%AA%E3%83%86%E3%83%A9%E3%82%B9/",
+      "title": "花見川緑地交通公園横テラス",
+      "published_on": "2022-06-27",
+      "place_id": "hanamigawa-traffic-park-riverside-terrace",
+      "checked_on": "2026-11-08",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%8D%83%E8%91%89%E5%B8%82%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E9%80%94%E4%B8%AD%E8%A7%A3%E6%94%BE%E3%81%95%E3%82%8C%E3%81%9F%E6%A4%9C%E8%A6%8B%E5%B7%9D%E6%B5%9C%E8%A5%BF%E7%AA%81%E5%A0%A4%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/",
+      "title": "途中解放された検見川浜西突堤",
+      "published_on": "2023-02-10",
+      "place_id": "kemigawahama-west-jetty",
+      "checked_on": "2026-11-08",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://www.bonjourphoto.yokohama/makuhari-kaihin-park.html",
+      "title": "幕張海浜公園の釣り場・釣り禁止情報",
+      "published_on": null,
+      "place_id": "makuhari-beach-g-block-hamadagawa",
+      "checked_on": "2026-11-08",
+      "source_type": "private",
+      "status": "read"
+    }
+  ]
 }
