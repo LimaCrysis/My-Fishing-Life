@@ -175,6 +175,58 @@
       ],
       "notes": "県管理一般海岸の自由使用原則をこの公園・港湾・突堤に一律適用しない。正式採用保留。",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "kemigawahama-east-jetty",
+      "name": "検見川浜東突堤（稲毛ヨットハーバー隣）",
+      "region": "千葉県千葉市美浜区",
+      "status": "hold",
+      "review_state": "official_fishing_permission_and_2026_access_not_verified",
+      "verified_on": "2026-11-09",
+      "findings": {
+        "fishing_permission": null,
+        "access": "2021年現地状況を記述する民間記事では立入可能。2026年現行開放範囲と管理者による釣り可否は未確認",
+        "parking": "稲毛ヨットハーバー277台・普通車1回500円",
+        "parking_hours": "7:30-22:00、7-8月6:30-22:00、留置不可（管理者掲載）",
+        "toilets": "ヨットハーバー管理棟の利用可否・時間は釣り目的では未確認",
+        "fence": "民間記事で柵あり。形状はロッドホルダー固定しづらい",
+        "safety": "強風時の波被りに注意（民間記事）",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "シーバス",
+          "アジ",
+          "イワシ",
+          "サバ",
+          "青物",
+          "タチウオ"
+        ],
+        "haze_suitability": "未確認",
+        "field_video": "民間記事にYouTube埋込、直接URL未回収",
+        "construction_restrictions": "現況の立入規制未確認"
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/fishingstyle/toilet/%E6%A4%9C%E8%A6%8B%E5%B7%9D%E6%B5%9C%E3%81%AE%E6%9D%B1%E7%AA%81%E5%A0%A4/",
+          "type": "private_field_report",
+          "checked_on": "2026-11-09",
+          "note": "2026-04-03更新表示だが現地記述は2021年時点。釣り許可の公式根拠ではない"
+        },
+        {
+          "url": "https://www.city.chiba.jp/toshi/koenryokuchi/kanri/chuo-mihama/inagekaihinkoenaccess.html",
+          "type": "official",
+          "checked_on": "2026-11-09",
+          "note": "ヨットハーバー駐車場料金・営業時間"
+        },
+        {
+          "url": "https://chibacity.spo-sin.or.jp/shisetu/yacht-top/",
+          "type": "official_operator",
+          "checked_on": "2026-11-09",
+          "note": "駐車場277台、7・8月は6:30開場、留置不可"
+        }
+      ],
+      "notes": "民間記事の路上駐車案内はMFL採用せず。駐車場営業時間を夜釣り禁止の根拠と混同しない。",
+      "integrated_into_mfl": false
     }
   ]
 }
