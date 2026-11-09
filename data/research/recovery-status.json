@@ -2,16 +2,16 @@
   "schema_version": 1,
   "created_at": "2026-11-07",
   "scope": {
-    "first_report_date": "2026-10-01",
+    "first_report_date": "2026-09-30",
     "last_legacy_report_date": "2026-11-06",
-    "note": "日付範囲は過去会話で報告された調査運用期間。毎日成功したことを保証しない。"
+    "note": "ChatGPTエクスポート内で識別された一般海釣り場調査報告38件を保管。日付ごとに報告1件として確認したが、会話内のすべての関連文章を網羅した保証はない。"
   },
-  "status": "partial_recovery",
+  "status": "extracted_reports_archived",
   "source_access": {
     "old_automation": "disabled but retained",
     "latest_report": "retrieved verbatim",
-    "older_daily_reports": "not returned by available automation retrieval",
-    "old_chat": "summaries accessible, entire daily transcript not available through current retrieval",
+    "older_daily_reports": "2026-11-08エクスポートZIPから38件の抽出原文を回収しGitHub保存済み",
+    "old_chat": "旧MFL開発の海釣り場日次報告を抽出。全文の他の関連調査会話は未照合",
     "library": "relevant summary files found; not original daily fishing reports"
   },
   "preserved": [
@@ -32,15 +32,24 @@
       "path": "data/research/legacy-handoff-2026-11-07.json",
       "candidate_mentions": 29,
       "critical_finding_mentions": 11
+    },
+    {
+      "type": "export_extracted_daily_reports",
+      "count": 38,
+      "first_date": "2026-09-30",
+      "last_date": "2026-11-06",
+      "location": "data/research/daily/legacy/",
+      "file_pattern": "YYYY-MM-DD-legacy-report-NN.md",
+      "github_verified_count": 38,
+      "notes": "抽出ファイルをそのまま保管。別途1件の11/6 reportがあり重複可能性あり。"
     }
   ],
   "gaps": [
     {
-      "start": "2026-10-01",
-      "end": "2026-11-05",
-      "issue": "individual daily reports not recovered as raw text",
+      "issue": "旧会話中の日次報告以外の調査発言、資料リンクの解決、構造化台帳への統合は未完了。過去38件の調査原文ファイルは保管済み。",
       "confirmed_lost": false
     }
   ],
-  "recovery_guidance": "元の会話全文が後で入手できれば日付別に原文を保管し、URLと確認日を抽出して既存レコードと突合する。未回収を消失確定・調査0件と扱わない。"
+  "recovery_guidance": "日次報告原文38件は data/research/daily/legacy/ に保存済み。次に報告の地点・URL・ルールを正本と比較し、重複排除のうえ構造化台帳に反映する。抽出文中の古い出典参照記号は必要に応じて再調査する。",
+  "updated_at": "2026-11-09"
 }
