@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 3,
+  "unique_confirmed_articles_in_this_ledger": 4,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -30,6 +30,16 @@
       "published_on": null,
       "place_id": "makuhari-beach-g-block-hamadagawa",
       "checked_on": "2026-11-08",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://tokyoinnerbayfishing.net/fishingstyle/toilet/%E6%A4%9C%E8%A6%8B%E5%B7%9D%E6%B5%9C%E3%81%AE%E6%9D%B1%E7%AA%81%E5%A0%A4/",
+      "title": "稲毛・検見川浜東突堤｜釣り場・トイレ・そして朝マヅメに使える駐車場も徹底解説",
+      "published_on": "2021-04-18",
+      "updated_on": "2026-04-03",
+      "place_id": "kemigawahama-east-jetty",
+      "checked_on": "2026-11-09",
       "source_type": "private",
       "status": "read"
     }
