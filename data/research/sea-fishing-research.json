@@ -227,6 +227,50 @@
       ],
       "notes": "民間記事の路上駐車案内はMFL採用せず。駐車場営業時間を夜釣り禁止の根拠と混同しない。",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "aqualink-chiba-rear-seawall",
+      "name": "アクアリンクちば裏（旧わんぱくランド前）護岸",
+      "region": "千葉県千葉市美浜区新港",
+      "status": "excluded",
+      "review_state": "private_report_access_prohibited_official_site_specific_confirmation_pending",
+      "verified_on": "2026-11-10",
+      "findings": {
+        "fishing_permission": null,
+        "access": "2025年の民間記事で全面立入禁止・釣り禁止と報告。現地の立入防止壁も別記事で報告。立入を推奨しない。",
+        "parking": "釣り用駐車場未確認（立入禁止報告のため採用対象外）",
+        "parking_hours": null,
+        "parking_price": null,
+        "toilets": null,
+        "fence": "約2mの壁があるとの民間現地記事",
+        "safety": "立入規制の疑いが強く除外",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [],
+        "haze_suitability": "対象外",
+        "field_video": "記事にYouTubeサムネイルあり・直接動画URL未確認",
+        "construction_restrictions": "民間記事による全面立入禁止。千葉県公式は新港234番地先等の国際水域施設制限水域を掲載するが当該陸上護岸との一致は未確認"
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%8D%83%E8%91%89%E5%B8%82%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E3%80%90%E9%87%8D%E8%A6%81%E3%80%91%E3%82%A2%E3%82%AF%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%AF%E3%81%A1%E3%81%B0%E8%A3%8F%EF%BC%88%E6%97%A7%E3%82%8F%E3%82%93%E3%81%B1%E3%81%8F%E3%83%A9%E3%83%B3%E3%83%89/",
+          "type": "private_field_report",
+          "checked_on": "2026-11-10"
+        },
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%8D%83%E8%91%89%E5%B8%82%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E3%82%A2%E3%82%AF%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%AF%E3%81%A1%E3%81%B0%E8%A3%8F/",
+          "type": "private_field_report",
+          "checked_on": "2026-11-10"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/kouwan/hoantaisaku/suiiki.html",
+          "type": "official",
+          "checked_on": "2026-11-10",
+          "note": "千葉港の制限水域一覧。個別護岸の立入禁止を直接立証するものではない"
+        }
+      ],
+      "notes": "旧記事の『唯一釣れるポイント』を現行許可とみなさない。公式の陸上護岸境界・告示は未確定。",
+      "integrated_into_mfl": false
     }
   ]
 }
