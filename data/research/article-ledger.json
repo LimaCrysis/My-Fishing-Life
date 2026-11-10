@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 4,
+  "unique_confirmed_articles_in_this_ledger": 6,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -40,6 +40,26 @@
       "updated_on": "2026-04-03",
       "place_id": "kemigawahama-east-jetty",
       "checked_on": "2026-11-09",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%8D%83%E8%91%89%E5%B8%82%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E3%80%90%E9%87%8D%E8%A6%81%E3%80%91%E3%82%A2%E3%82%AF%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%AF%E3%81%A1%E3%81%B0%E8%A3%8F%EF%BC%88%E6%97%A7%E3%82%8F%E3%82%93%E3%81%B1%E3%81%8F%E3%83%A9%E3%83%B3%E3%83%89/",
+      "title": "【重要】アクアリンクちば裏（旧わんぱくランド前）全面立入禁止",
+      "published_on": "2025-10-21",
+      "updated_on": "2025-11-01",
+      "place_id": "aqualink-chiba-rear-seawall",
+      "checked_on": "2026-11-10",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%8D%83%E8%91%89%E5%B8%82%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E3%82%A2%E3%82%AF%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%AF%E3%81%A1%E3%81%B0%E8%A3%8F/",
+      "title": "アクアリンクちば下は釣り禁止？唯一釣りができるポイントはココ！",
+      "published_on": "2024-02-25",
+      "updated_on": "2026-01-07",
+      "place_id": "aqualink-chiba-rear-seawall",
+      "checked_on": "2026-11-10",
       "source_type": "private",
       "status": "read"
     }
