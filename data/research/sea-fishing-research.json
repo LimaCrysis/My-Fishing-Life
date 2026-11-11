@@ -271,6 +271,64 @@
       ],
       "notes": "旧記事の『唯一釣れるポイント』を現行許可とみなさない。公式の陸上護岸境界・告示は未確定。",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "yorogawa-rinkai-park-riverbank",
+      "name": "養老川臨海公園（一般護岸）",
+      "region": "千葉県市原市五井南海岸",
+      "status": "hold",
+      "review_state": "official_fishing_permission_and_restricted_boundary_unverified",
+      "verified_on": "2026-11-11",
+      "findings": {
+        "fishing_permission": null,
+        "access": "民間記事で護岸一部立入禁止。現地フェンス外や工業用地へ入らない",
+        "parking": "県公式観光案内：公園87台・野球場117台、無料",
+        "parking_hours": "公式確認不可。民間記事では9〜17時・夜間閉鎖との記述あり、現況未確定",
+        "parking_price": "無料（県公式観光案内）",
+        "toilets": "公園内あり（民間記事）、時間未確認",
+        "fence": "民間記事で展望広場付近に手すり、部分的に立入防止柵",
+        "safety": "河口護岸は潮位変化・滑落に注意。岩場への降下は推奨しない",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "シーバス",
+          "クロダイ",
+          "キビレ",
+          "マゴチ"
+        ],
+        "haze_suitability": "民間記事で河口護岸の近距離ハゼ釣り紹介。許可・安全な釣り座確認前は採用保留",
+        "field_video": "https://www.youtube.com/watch?v=P_Bggi4wKwE （2020-12-05公開、現況証明不可）",
+        "construction_restrictions": "民間記事で一部立入禁止。2026年現行の公式境界告知は未確認"
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%B8%82%E5%8E%9F%E5%B8%82%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E9%A4%8A%E8%80%81%E5%B7%9D%E8%87%A8%E6%B5%B7%E5%85%AC%E5%9C%92/",
+          "type": "private_field_report",
+          "checked_on": "2026-11-11",
+          "note": "2021年記事。現況の釣り許可とはみなさない"
+        },
+        {
+          "url": "https://maruchiba.jp/spot/detail_10273.html",
+          "type": "official_tourism",
+          "checked_on": "2026-11-11",
+          "note": "所在地・無料駐車場87台と117台を確認。釣り許可の記載なし"
+        },
+        {
+          "url": "https://www.bonjourphoto.yokohama/yrg-park.html",
+          "type": "private_guide",
+          "checked_on": "2026-11-11",
+          "note": "護岸の一部立入禁止、トイレ・柵・魚種。現地公式確認必要"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=P_Bggi4wKwE",
+          "type": "private_field_video",
+          "checked_on": "2026-11-11",
+          "note": "2020年撮影の参考映像"
+        }
+      ],
+      "notes": "有料の市原海づり施設とは別地点。県観光案内の公園紹介は釣り許可を意味しない。夜釣り・投げ釣り・工事状況未確認。",
+      "integrated_into_mfl": false
     }
   ]
 }
