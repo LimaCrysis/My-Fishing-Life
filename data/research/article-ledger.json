@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 6,
+  "unique_confirmed_articles_in_this_ledger": 7,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -60,6 +60,15 @@
       "updated_on": "2026-01-07",
       "place_id": "aqualink-chiba-rear-seawall",
       "checked_on": "2026-11-10",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%B8%82%E5%8E%9F%E5%B8%82%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E9%A4%8A%E8%80%81%E5%B7%9D%E8%87%A8%E6%B5%B7%E5%85%AC%E5%9C%92/",
+      "title": "養老川臨海公園｜無料駐車場のある河口の釣り場",
+      "published_on": "2021-04-16",
+      "place_id": "yorogawa-rinkai-park-riverbank",
+      "checked_on": "2026-11-11",
       "source_type": "private",
       "status": "read"
     }
