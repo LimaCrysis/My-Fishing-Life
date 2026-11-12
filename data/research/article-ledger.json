@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 7,
+  "unique_confirmed_articles_in_this_ledger": 8,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -69,6 +69,15 @@
       "published_on": "2021-04-16",
       "place_id": "yorogawa-rinkai-park-riverbank",
       "checked_on": "2026-11-11",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://www.bonjourphoto.yokohama/sodegaura-kaihin-park-fishing.html",
+      "title": "袖ケ浦海浜公園の釣り場｜現在は釣り禁止・過去のポイント・駐車場・トイレ",
+      "published_on": null,
+      "place_id": "sodegaura-kaihin-park-fishing-prohibited",
+      "checked_on": "2026-11-12",
       "source_type": "private",
       "status": "read"
     }
