@@ -329,6 +329,57 @@
       ],
       "notes": "有料の市原海づり施設とは別地点。県観光案内の公園紹介は釣り許可を意味しない。夜釣り・投げ釣り・工事状況未確認。",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "sodegaura-kaihin-park-fishing-prohibited",
+      "name": "袖ケ浦海浜公園",
+      "region": "千葉県袖ケ浦市南袖",
+      "status": "excluded",
+      "review_state": "multiple_private_reports_fishing_prohibited_primary_manager_notice_not_directly_retrieved",
+      "verified_on": "2026-11-12",
+      "findings": {
+        "fishing_permission": "公園内釣り禁止との複数民間報告。管理者の禁止告知原文は今回直接取得できず",
+        "access": "公園の散策利用と釣り許可は別。テトラへの立入は禁止との民間報告",
+        "parking": "無料の公園駐車場あり。普通車245台との二次資料、現況公式未照合",
+        "parking_hours": null,
+        "parking_price": "無料（二次資料）",
+        "toilets": "公園内あり（二次資料）",
+        "fence": "護岸に柵・下部にテトラ（旧現地資料）",
+        "safety": "テトラ立入禁止報告。釣り場として案内しない",
+        "night_fishing_permission": false,
+        "casting_permission": false,
+        "fish_species": [
+          "ハゼ",
+          "シロギス",
+          "カレイ",
+          "シーバス"
+        ],
+        "haze_suitability": "過去の釣果対象として記述あり。現在釣り禁止のため対象外",
+        "field_video": null,
+        "construction_restrictions": "公園内釣り禁止の報告。現況の公式管理者告知原文は未回収"
+      },
+      "sources": [
+        {
+          "url": "https://www.bonjourphoto.yokohama/sodegaura-kaihin-park-fishing.html",
+          "type": "private_guide",
+          "checked_on": "2026-11-12",
+          "note": "園内全域釣り禁止・テトラ立入禁止と明記"
+        },
+        {
+          "url": "https://chiba.turihiroba.com/turiba/tibasodegaurakaihinnkouenn.html",
+          "type": "private_guide",
+          "checked_on": "2026-11-12",
+          "note": "現在釣り禁止、過去情報と明確に分離"
+        },
+        {
+          "url": "https://www.city.sodegaura.lg.jp/life/16/143/1235/",
+          "type": "official",
+          "checked_on": "2026-11-12",
+          "note": "市公式の公園案内ページ。釣り禁止の原文はここでは未確認"
+        }
+      ],
+      "notes": "旧釣り場紹介を現行の釣り許可と誤認しない。管理者一次告知未取得のため禁止範囲の厳密な一次照合は今後の課題。公園名が似る内陸の袖ケ浦公園とは別。",
+      "integrated_into_mfl": false
     }
   ]
 }
