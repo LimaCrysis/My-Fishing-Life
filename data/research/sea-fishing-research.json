@@ -380,6 +380,71 @@
       ],
       "notes": "旧釣り場紹介を現行の釣り許可と誤認しない。管理者一次告知未取得のため禁止範囲の厳密な一次照合は今後の課題。公園名が似る内陸の袖ケ浦公園とは別。",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "nagaura-port-north-sode-chiba",
+      "name": "長浦港（袖ケ浦港・北袖岸壁）",
+      "region": "千葉県袖ケ浦市北袖",
+      "status": "hold",
+      "review_state": "conflicting_private_access_reports_no_site_specific_official_fishing_permission",
+      "verified_on": "2026-11-13",
+      "findings": {
+        "fishing_permission": null,
+        "access": "民間情報に港全域閉鎖と先端側のみ利用可の相反する記述。公式の釣り許可・立入可能区画未確認。釣行案内不可",
+        "parking": "長浦駅臨海駐車場は市公式で69台、24時間、非市民1暦日500円。ただし港岸壁までの徒歩距離・釣行利用の実用性未確認。岸壁横付けは推奨しない",
+        "parking_hours": "市営長浦駅臨海駐車場24時間（港の開放時間ではない）",
+        "parking_price": "市外者1暦日500円（市公式）",
+        "toilets": "民間記事であり/なしが矛盾。未確定",
+        "fence": "閉鎖柵の民間報告。テトラ先端には進入しない",
+        "safety": "港湾荷役・車両動線・テトラ・強風に注意。立入境界不明のためHOLD",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "シロギス",
+          "カレイ",
+          "シーバス",
+          "イワシ",
+          "サヨリ"
+        ],
+        "haze_suitability": "過去の民間魚種情報のみ。立入不明につき釣行候補外",
+        "field_video": null,
+        "construction_restrictions": "港湾管理者の現行規制図・現地掲示未確認。県公式は袖ヶ浦地区の公共ふ頭・荷役利用を記載"
+      },
+      "sources": [
+        {
+          "url": "https://www.jpcmap.com/fishing/map/chiba/tokyowan/sodegaura-port",
+          "type": "private_guide",
+          "checked_on": "2026-11-13",
+          "note": "全域閉鎖・立入禁止との報告"
+        },
+        {
+          "url": "https://higashimaru.net/sodegaura-imai/",
+          "type": "private_guide",
+          "checked_on": "2026-11-13",
+          "note": "先端側のみ可能との主張。前者と矛盾し公式根拠なし"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/kouwan/futou/chiba/sodegaura-03.html",
+          "type": "official",
+          "checked_on": "2026-11-13",
+          "note": "今井A-E岸壁の荷役施設。釣り許可ではない"
+        },
+        {
+          "url": "https://www.city.sodegaura.lg.jp/soshiki/toshi/sieityuusyajounoriyouhouhou.html",
+          "type": "official",
+          "checked_on": "2026-11-13",
+          "note": "市営駐車場料金と時間"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/cs-chiba-k/index.html",
+          "type": "official",
+          "checked_on": "2026-11-13",
+          "note": "千葉港湾事務所袖ケ浦支所、管理確認先"
+        }
+      ],
+      "notes": "東京湾奥釣り場探検隊の長浦港個別記事は今回発見できず。民間資料の矛盾を解消できないためHOLD。MFL本番未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
