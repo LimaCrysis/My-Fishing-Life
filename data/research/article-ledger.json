@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 8,
+  "unique_confirmed_articles_in_this_ledger": 10,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -78,6 +78,24 @@
       "published_on": null,
       "place_id": "sodegaura-kaihin-park-fishing-prohibited",
       "checked_on": "2026-11-12",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://www.jpcmap.com/fishing/map/chiba/tokyowan/sodegaura-port",
+      "title": "袖ヶ浦港（長浦港）の現在と過去",
+      "published_on": null,
+      "place_id": "nagaura-port-north-sode-chiba",
+      "checked_on": "2026-11-13",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://higashimaru.net/sodegaura-imai/",
+      "title": "袖ヶ浦港の今井岸壁は2020年から釣り禁止",
+      "published_on": null,
+      "place_id": "nagaura-port-north-sode-chiba",
+      "checked_on": "2026-11-13",
       "source_type": "private",
       "status": "read"
     }
