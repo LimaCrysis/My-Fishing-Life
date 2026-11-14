@@ -445,6 +445,60 @@
       ],
       "notes": "東京湾奥釣り場探検隊の長浦港個別記事は今回発見できず。民間資料の矛盾を解消できないためHOLD。MFL本番未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "kisarazu-naiko-park-2026-11-14",
+      "name": "木更津内港公園（一般護岸）",
+      "region": "千葉県木更津市内港1",
+      "status": "new_candidate",
+      "review_state": "city_explicitly_mentions_fishing_at_park_specific_boundaries_and_casting_rules_unverified",
+      "verified_on": "2026-11-14",
+      "findings": {
+        "fishing_permission": "木更津市消防本部公式が『内港公園や堤防で1年を通じて海釣りを楽しむことができます』と明記。ただし立入禁止区域は除外。",
+        "access": "公園の一般護岸のみ候補。先端の細い区画・船着場奥・防波堤は民間記事に立入禁止の記述があり入らない",
+        "parking": "公園内無料駐車場あり（民間現地記事）・収容台数未確認",
+        "parking_hours": "民間2021年記事では24時間・非常時閉鎖あり。2026年の管理者営業時間未確認",
+        "parking_price": "無料（民間記事、公式現況未確認）",
+        "toilets": "公園駐車場付近にトイレあり（民間現地記事、利用時間未確認）",
+        "fence": "一般護岸は柵あり（民間現地記事）。立入禁止柵より奥へ進まない",
+        "safety": "木更津市公式はライフジャケット着用、悪天候時中止、立入禁止区域への進入禁止を明記。浅場・根掛かり・滑落注意",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "アナゴ",
+          "シーバス",
+          "クロダイ",
+          "キス",
+          "カレイ",
+          "イワシ"
+        ],
+        "haze_suitability": "2026年1月民間実釣でハゼ2匹。浅場・根掛かりあり。ちょい投げ向きだがキャスト可否は管理者未確認",
+        "field_video": "https://fish.boy.jp/sf-facilities/chiba/kisarazu-naikoukouen.html に現地動画へのリンクあり（動画本体は未検証）",
+        "construction_restrictions": "現行工事規制は未確認。民間記事に先端立入禁止、非常時駐車場閉鎖あり"
+      },
+      "sources": [
+        {
+          "url": "https://www.city.kisarazu.lg.jp/soshiki/shobo/keibo/1/4060.html",
+          "type": "official",
+          "checked_on": "2026-11-14",
+          "note": "木更津市が内港公園での通年海釣りを明記。ライフジャケットと立入禁止区域遵守"
+        },
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/kisarazu-shi/%E6%9C%A8%E6%9B%B4%E6%B4%A5%E5%86%85%E6%B8%AF%E5%85%AC%E5%9C%92/",
+          "type": "private_field_report",
+          "checked_on": "2026-11-14",
+          "note": "2021年現地・2022年更新。無料駐車場、トイレ、柵、浅場、船着場手前の柵"
+        },
+        {
+          "url": "https://tsuriba-guide.com/tsuriba-guide/uchibo/kisarazu-naiko-park/",
+          "type": "private_field_report",
+          "checked_on": "2026-11-14",
+          "note": "2026年1月実釣。ハゼ、アナゴ、根掛かり、浅場、夜間駐車場利用報告"
+        }
+      ],
+      "notes": "市公式の明示的な釣り紹介があり新規登録候補。ただし正式公開前に開放区画・夜釣り・投げ釣り・駐車場営業時間を再確認。過去アーカイブの木更津潮浜公園・鳥居崎海浜公園とは別地点。",
+      "integrated_into_mfl": false
     }
   ]
 }
