@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 10,
+  "unique_confirmed_articles_in_this_ledger": 11,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -96,6 +96,15 @@
       "published_on": null,
       "place_id": "nagaura-port-north-sode-chiba",
       "checked_on": "2026-11-13",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://tokyoinnerbayfishing.net/chiba-ken/kisarazu-shi/%E6%9C%A8%E6%9B%B4%E6%B4%A5%E5%86%85%E6%B8%AF%E5%85%AC%E5%9C%92/",
+      "title": "木更津内港公園｜柵・トイレ・無料駐車場完備のファミリー向け良釣り場",
+      "published_on": "2021-03-05",
+      "place_id": "kisarazu-naiko-park-2026-11-14",
+      "checked_on": "2026-11-14",
       "source_type": "private",
       "status": "read"
     }
