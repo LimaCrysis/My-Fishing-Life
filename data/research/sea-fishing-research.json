@@ -499,6 +499,55 @@
       ],
       "notes": "市公式の明示的な釣り紹介があり新規登録候補。ただし正式公開前に開放区画・夜釣り・投げ釣り・駐車場営業時間を再確認。過去アーカイブの木更津潮浜公園・鳥居崎海浜公園とは別地点。",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "kuzuma-beach-shellfish-area-2026-11-15",
+      "name": "久津間海岸（潮干狩り場）",
+      "region": "千葉県木更津市久津間2265-3",
+      "status": "excluded",
+      "review_state": "official_tourism_says_closed_off_season_fishing_permission_not_established",
+      "verified_on": "2026-11-15",
+      "findings": {
+        "fishing_permission": null,
+        "access": "千葉県公式観光案内は潮干狩りシーズン外の海岸入口封鎖と閉鎖中の立入禁止を明記。2026年11月の釣行先として不採用。隣接する久津間漁港・小櫃川河口とは別地点",
+        "parking": "県公式観光案内に潮干狩り客用無料駐車場約1000台。ただし閉鎖期間の利用不可・釣行用としての利用可否未確認",
+        "parking_hours": "潮干狩り営業日・潮見表による。閉鎖期間の利用不可",
+        "parking_price": "潮干狩り利用者用無料（釣行目的の利用可否未確認）",
+        "toilets": "潮干狩り営業中の休憩所・トイレは民間情報あり。閉鎖期間は利用未確認",
+        "fence": "遠浅の干潟。立入規制ゲートあり、釣り用の安全柵未確認",
+        "safety": "干潟の潮位変化・泥濘・帰路遮断に注意。閉鎖区域に入らない",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "シロギス"
+        ],
+        "haze_suitability": "民間釣り場情報ではハゼ・シロギスを紹介。ただし公式閉鎖中のため釣行候補外",
+        "field_video": null,
+        "construction_restrictions": "2026年潮干狩り営業3月20日〜6月28日。公式観光案内は期間外入口封鎖・立入禁止を明記。工事情報未確認"
+      },
+      "sources": [
+        {
+          "url": "https://maruchiba.jp/event/detail_10851.html",
+          "type": "official_tourism",
+          "checked_on": "2026-11-15",
+          "note": "2026年営業期間・無料駐車場約1000台・期間外入口封鎖"
+        },
+        {
+          "url": "https://maruchiba.jp/spot/detail_10653.html",
+          "type": "official_tourism",
+          "checked_on": "2026-11-15",
+          "note": "閉鎖中の海岸に立ち入らないよう明記"
+        },
+        {
+          "url": "https://tsuricast.jp/chiba/tokyobay/kisarazu/kuzuma-kaigan",
+          "type": "private_fishing_guide",
+          "checked_on": "2026-11-15",
+          "note": "ハゼ・シロギスの紹介。ただし管理者の釣り許可根拠なし"
+        }
+      ],
+      "notes": "釣り場紹介と公式立入制限が衝突。潮干狩り料金は釣りの許可を意味しない。MFL本番未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
