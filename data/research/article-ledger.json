@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 11,
+  "unique_confirmed_articles_in_this_ledger": 12,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -105,6 +105,15 @@
       "published_on": "2021-03-05",
       "place_id": "kisarazu-naiko-park-2026-11-14",
       "checked_on": "2026-11-14",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://tsuricast.jp/chiba/tokyobay/kisarazu/kuzuma-kaigan",
+      "title": "久津間海岸｜ハゼ・シロギスが釣れる釣り場",
+      "published_on": null,
+      "place_id": "kuzuma-beach-shellfish-area-2026-11-15",
+      "checked_on": "2026-11-15",
       "source_type": "private",
       "status": "read"
     }
