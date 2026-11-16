@@ -548,6 +548,64 @@
       ],
       "notes": "釣り場紹介と公式立入制限が衝突。潮干狩り料金は釣りの許可を意味しない。MFL本番未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "obitsugawa-estuary-east-bank-2026-11-16",
+      "name": "小櫃川河口東岸・船溜り周辺",
+      "region": "千葉県木更津市畔戸周辺",
+      "status": "excluded",
+      "review_state": "private_report_boat_basin_fishing_prohibited_no_legal_parking_official_specific_permission_unverified",
+      "verified_on": "2026-11-16",
+      "findings": {
+        "fishing_permission": null,
+        "access": "2022年民間現地記事に船溜り内釣り禁止の看板写真。河川護岸全域の公式禁止とは断定しない",
+        "parking": "民間現地記事で付近に利用可能な駐車場なし・船溜り周辺駐車禁止。別民間サイトの駐車スペースあり記載と矛盾",
+        "parking_hours": null,
+        "parking_price": null,
+        "toilets": "未確認",
+        "fence": "護岸の足場は比較的良いとの2022年民間記事、転落防止柵の有無は未確認",
+        "safety": "船道・漁業活動を妨げない。干潟の干満・軟泥に注意",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "シーバス",
+          "クロダイ",
+          "マゴチ"
+        ],
+        "haze_suitability": "千葉県公式に小櫃川河口域のハゼ釣り紹介。ただし東岸船溜りの釣り許可は未確認",
+        "field_video": "東京湾奥釣り場探検隊記事にYouTube埋め込みサムネイル、直接動画URL未確認",
+        "construction_restrictions": "2026年現行の工事・管理区域境界未確認",
+        "additional_regulation": "木更津地先干潟でがざみ類採捕制限の自治体告知（2025-09-25更新）。魚釣り全般の禁止とは異なる"
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/kisarazu-shi/%E5%B0%8F%E6%AB%83%E5%B7%9D/",
+          "type": "private_field_report",
+          "checked_on": "2026-11-16",
+          "note": "2022-03-25記事。船溜り釣り禁止、駐車禁止、付近駐車場なし"
+        },
+        {
+          "url": "https://chiba.turihiroba.com/turiba/tibaobitugawakakou.html",
+          "type": "private_guide",
+          "checked_on": "2026-11-16",
+          "note": "河口魚種、潮干狩り駐車場の季節制限。2019年航空写真を使用"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/gyoshigen/naisuimen/yuugyo.html",
+          "type": "official",
+          "checked_on": "2026-11-16",
+          "note": "河口域のハゼ・シーバスに言及、特定釣り座の許可ではない"
+        },
+        {
+          "url": "https://www.city.kisarazu.lg.jp/soshiki/keizai/norinsuisan/1/12947.html",
+          "type": "official",
+          "checked_on": "2026-11-16",
+          "note": "がざみ類採捕制限。対象種・範囲・期間の詳細は県委員会指示を別途確認"
+        }
+      ],
+      "notes": "釣り禁止の船溜りを含み、合法的駐車場を確保できないためMFL釣行先から除外。河口全体の釣り禁止とはしない。",
+      "integrated_into_mfl": false
     }
   ]
 }
