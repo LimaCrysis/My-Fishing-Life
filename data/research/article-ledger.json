@@ -116,6 +116,27 @@
       "checked_on": "2026-11-15",
       "source_type": "private",
       "status": "read"
+    },
+    {
+      "id": "obitsugawa-estuary-east-bank-tokyoinnerbay-2022",
+      "url": "https://tokyoinnerbayfishing.net/chiba-ken/kisarazu-shi/%E5%B0%8F%E6%AB%83%E5%B7%9D/",
+      "title": "シーバス・黒鯛の好釣り場「木更津・小櫃川」河口",
+      "site": "東京湾奥釣り場探検隊",
+      "published_on": "2022-03-25",
+      "checked_on": "2026-11-16",
+      "type": "private_field_report",
+      "place_id": "obitsugawa-estuary-east-bank-2026-11-16",
+      "notes": "船溜り内釣り禁止看板・駐車場なしの重要情報。現行公式許可ではない"
+    },
+    {
+      "id": "obitsugawa-estuary-tsurihiroba",
+      "url": "https://chiba.turihiroba.com/turiba/tibaobitugawakakou.html",
+      "title": "小櫃川河口/釣り広場.com",
+      "site": "釣り広場.com",
+      "checked_on": "2026-11-16",
+      "type": "private_guide",
+      "place_id": "obitsugawa-estuary-east-bank-2026-11-16",
+      "notes": "魚種と潮干狩り駐車場の季節制限。東岸船溜りの釣り許可ではない"
     }
   ]
 }
