@@ -606,6 +606,58 @@
       ],
       "notes": "釣り禁止の船溜りを含み、合法的駐車場を確保できないためMFL釣行先から除外。河口全体の釣り禁止とはしない。",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "egawa-beach-clamming-area-2026-11-17",
+      "name": "江川海岸（潮干狩り場）",
+      "region": "千葉県木更津市江川576-6",
+      "status": "excluded",
+      "review_state": "official_offseason_access_closed_private_fishing_prohibition_report_manager_fishing_rule_unverified",
+      "verified_on": "2026-11-17",
+      "findings": {
+        "fishing_permission": "民間釣り場記事では釣り禁止と記載。管理者の釣り禁止原文は未確認",
+        "access": "千葉県公式観光サイトが潮干狩り期間外の海岸入口封鎖、閉鎖中立入禁止を明記",
+        "parking": "潮干狩り利用者用無料約800台（県公式スポット案内）。県公式イベント案内には約880台の記載あり、差異は未解消。釣行用利用不可・未確認",
+        "parking_hours": "潮干狩り営業日・潮見表による。期間外入口封鎖",
+        "parking_price": "無料（潮干狩り利用者向け。釣り目的で利用できる根拠なし）",
+        "toilets": "潮干狩り施設にありとの民間情報。閉鎖期間の利用可否未確認",
+        "fence": "干潟・砂浜。釣り用転落防止柵未確認",
+        "safety": "海岸近くの深い水路が危険と県公式注意。立入禁止区域・閉鎖期間の侵入不可",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [],
+        "haze_suitability": "河口・干潟の一般的な魚種から推測しない。釣行先として対象外",
+        "field_video": null,
+        "construction_restrictions": "2026年潮干狩り期間3月20日〜6月28日。期間外入口閉鎖。工事情報未確認"
+      },
+      "sources": [
+        {
+          "url": "https://maruchiba.jp/spot/detail_10650.html",
+          "type": "official_tourism",
+          "checked_on": "2026-11-17",
+          "note": "入口封鎖、深い水路の危険、駐車場約800台"
+        },
+        {
+          "url": "https://maruchiba.jp/event/detail_10849.html",
+          "type": "official_tourism",
+          "checked_on": "2026-11-17",
+          "note": "2026年営業期間、無料駐車場約880台"
+        },
+        {
+          "url": "https://www.city.kisarazu.lg.jp/kanko_bunka_sports/kankojoho/mokuteki/3/8307.html",
+          "type": "official",
+          "checked_on": "2026-11-17",
+          "note": "2026年江川海岸潮干狩り期間3/20〜6/28"
+        },
+        {
+          "url": "https://www.tokioanglers.com/fishing-spot/chiba/egawa-kaigan-shiohigari/",
+          "type": "private_fishing_guide",
+          "checked_on": "2026-11-17",
+          "note": "2025年記事が釣り禁止と記述。管理者の直接告示ではない"
+        }
+      ],
+      "notes": "久津間海岸とは別管理。釣り禁止の民間記載と公式の期間外閉鎖を区別。2026年11月の釣行先として除外。MFL本番未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
