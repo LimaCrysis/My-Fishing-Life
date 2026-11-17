@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 12,
+  "unique_confirmed_articles_in_this_ledger": 15,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -137,6 +137,17 @@
       "type": "private_guide",
       "place_id": "obitsugawa-estuary-east-bank-2026-11-16",
       "notes": "魚種と潮干狩り駐車場の季節制限。東岸船溜りの釣り許可ではない"
+    },
+    {
+      "id": "egawa-beach-tokioanglers-2025",
+      "url": "https://www.tokioanglers.com/fishing-spot/chiba/egawa-kaigan-shiohigari/",
+      "title": "江川海岸潮干狩場の潮干狩り解説",
+      "site": "TOKIO ANGLERS",
+      "published_on": "2025-06-16",
+      "checked_on": "2026-11-17",
+      "type": "private_fishing_guide",
+      "place_id": "egawa-beach-clamming-area-2026-11-17",
+      "notes": "釣り禁止との民間記載。公式の期間外入口閉鎖と区別"
     }
   ]
 }
