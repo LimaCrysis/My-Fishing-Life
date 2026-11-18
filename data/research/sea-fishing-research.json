@@ -658,6 +658,40 @@
       ],
       "notes": "久津間海岸とは別管理。釣り禁止の民間記載と公式の期間外閉鎖を区別。2026年11月の釣行先として除外。MFL本番未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "kisarazu-nakanoshima-bridge-closure-2026-11-18",
+      "name": "中の島公園（中の島大橋経由）",
+      "region": "千葉県木更津市中の島2",
+      "status": "temporarily_closed",
+      "review_state": "official_bridge_full_closure_2026_11_17_to_2027_02_19",
+      "verified_on": "2026-11-18",
+      "findings": {
+        "fishing_permission": null,
+        "access": "木更津市公式：中の島大橋は2026-11-17〜2027-02-19全面通行止め。夜間・土日祝も通行不可で公園に行けない。工事進捗で変更あり",
+        "parking": "市公式に海浜公園駐車場100台と記載。橋閉鎖中は公園へアクセス不可",
+        "parking_hours": null,
+        "parking_price": null,
+        "toilets": null,
+        "fence": "市公式はフェンス・柵を乗り越えないよう警告",
+        "safety": "海への転落・落下に注意。橋の通行止めを厳守",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [],
+        "haze_suitability": "閉鎖期間中は対象外",
+        "field_video": null,
+        "construction_restrictions": "2026-11-17〜2027-02-19 中の島大橋長寿命化対策工事。期間は前後し得る"
+      },
+      "sources": [
+        {
+          "url": "https://www.city.kisarazu.lg.jp/soshiki/toshiseibi/shigaichiseibi/1/park/2597.html",
+          "type": "official_city",
+          "checked_on": "2026-11-18",
+          "note": "2026-11-06更新の木更津市公式。橋全面通行止めと公園アクセス不能を明記"
+        }
+      ],
+      "notes": "釣り自体の恒久禁止と混同しない。公園への唯一の通常徒歩アクセスが工事閉鎖。再開時に釣り可否を別途検証。MFL本番未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
