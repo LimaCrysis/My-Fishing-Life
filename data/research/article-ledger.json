@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 15,
+  "unique_confirmed_articles_in_this_ledger": 16,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -148,6 +148,18 @@
       "type": "private_fishing_guide",
       "place_id": "egawa-beach-clamming-area-2026-11-17",
       "notes": "釣り禁止との民間記載。公式の期間外入口閉鎖と区別"
+    },
+    {
+      "id": "kisarazu-city-nakanoshima-park-closure-2026",
+      "url": "https://www.city.kisarazu.lg.jp/soshiki/toshiseibi/shigaichiseibi/1/park/2597.html",
+      "title": "中の島公園・中の島大橋通行止めのお知らせ",
+      "site": "木更津市",
+      "published_on": null,
+      "updated_on": "2026-11-06",
+      "checked_on": "2026-11-18",
+      "type": "official_city",
+      "place_id": "kisarazu-nakanoshima-bridge-closure-2026-11-18",
+      "notes": "2026-11-17〜2027-02-19全面通行止め。夜間・土日祝も不可"
     }
   ]
 }
