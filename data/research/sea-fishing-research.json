@@ -692,6 +692,52 @@
       ],
       "notes": "釣り自体の恒久禁止と混同しない。公園への唯一の通常徒歩アクセスが工事閉鎖。再開時に釣り可否を別途検証。MFL本番未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "kisarazu-kaneda-mitate-beach-2026-11-19",
+      "name": "金田みたて海岸潮干狩場（一般海岸との境界未確認）",
+      "region": "千葉県木更津市中島4416",
+      "status": "hold",
+      "review_state": "fishing_permission_and_off_season_access_not_verified",
+      "verified_on": "2026-11-19",
+      "findings": {
+        "fishing_permission": null,
+        "access": "潮干狩り施設の利用条件のみ公式確認。2026年7月5日で潮干狩り営業終了。期間外の立入可否と釣り許可は未確認",
+        "parking": "県公式観光案内：潮干狩り用無料500台。釣り利用・期間外利用は未確認",
+        "parking_hours": "潮干狩り営業は潮見表に依存。釣り目的の駐車可能時間未確認",
+        "parking_price": "潮干狩り利用者向け無料。釣り目的の条件未確認",
+        "toilets": "水洗トイレ・コインシャワーあり（県公式観光、営業期間外利用未確認）",
+        "fence": null,
+        "safety": "干潟の潮位・深み・漁業利用区域に注意。柵・足場の現地状況未確認",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [],
+        "haze_suitability": "河口・干潟環境から推測しない。釣り許可と実釣記録未確認",
+        "field_video": null,
+        "construction_restrictions": "2026年の工事規制は未確認。2026年7月18日〜8月23日に一部日程で浜あそび開催（市公式）、釣り利用許可ではない"
+      },
+      "sources": [
+        {
+          "url": "https://maruchiba.jp/event/detail_10852.html",
+          "type": "official_tourism",
+          "checked_on": "2026-11-19",
+          "note": "2026潮干狩り営業3/20〜7/5、駐車場500台無料、トイレ等"
+        },
+        {
+          "url": "https://www.city.kisarazu.lg.jp/kanko_bunka_sports/kankojoho/mokuteki/3/8307.html",
+          "type": "official_city",
+          "checked_on": "2026-11-19",
+          "note": "木更津市の2026年潮干狩り5海岸の営業期間一覧"
+        },
+        {
+          "url": "https://www.city.kisarazu.lg.jp/soshiki/keizai/norinsuisan/1/14672.html",
+          "type": "official_city",
+          "checked_on": "2026-11-19",
+          "note": "2026年夏季の浜あそび開催日・入浜時間・入浜料。釣り許可ではない"
+        }
+      ],
+      "notes": "金田海岸（北浜町）や牛込海岸と混同しない。潮干狩り用駐車場を通年釣行用と誤認しない。MFL本番未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
