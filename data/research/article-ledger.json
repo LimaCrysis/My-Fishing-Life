@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 16,
+  "unique_confirmed_articles_in_this_ledger": 19,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -160,6 +160,38 @@
       "type": "official_city",
       "place_id": "kisarazu-nakanoshima-bridge-closure-2026-11-18",
       "notes": "2026-11-17〜2027-02-19全面通行止め。夜間・土日祝も不可"
+    },
+    {
+      "id": "kaneda-mitate-2026-official-tourism",
+      "url": "https://maruchiba.jp/event/detail_10852.html",
+      "title": "潮干狩り／金田みたて海岸",
+      "site": "千葉県公式観光サイト",
+      "checked_on": "2026-11-19",
+      "type": "official_tourism",
+      "place_id": "kisarazu-kaneda-mitate-beach-2026-11-19",
+      "notes": "2026年営業期間・駐車場・設備"
+    },
+    {
+      "id": "kisarazu-city-clamming-2026-kaneda",
+      "url": "https://www.city.kisarazu.lg.jp/kanko_bunka_sports/kankojoho/mokuteki/3/8307.html",
+      "title": "潮干狩り",
+      "site": "木更津市",
+      "updated_on": "2026-09-16",
+      "checked_on": "2026-11-19",
+      "type": "official_city",
+      "place_id": "kisarazu-kaneda-mitate-beach-2026-11-19",
+      "notes": "2026年金田みたて海岸の営業期間"
+    },
+    {
+      "id": "kisarazu-city-kaneda-hamaasobi-2026",
+      "url": "https://www.city.kisarazu.lg.jp/soshiki/keizai/norinsuisan/1/14672.html",
+      "title": "金田みたて海岸浜あそびと連携した大会記念リレー放流",
+      "site": "木更津市",
+      "updated_on": "2026-07-14",
+      "checked_on": "2026-11-19",
+      "type": "official_city",
+      "place_id": "kisarazu-kaneda-mitate-beach-2026-11-19",
+      "notes": "夏季浜あそび入浜条件。釣り許可ではない"
     }
   ]
 }
