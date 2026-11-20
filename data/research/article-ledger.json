@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 19,
+  "unique_confirmed_articles_in_this_ledger": 23,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -192,6 +192,42 @@
       "type": "official_city",
       "place_id": "kisarazu-kaneda-mitate-beach-2026-11-19",
       "notes": "夏季浜あそび入浜条件。釣り許可ではない"
+    },
+    {
+      "id": "ushigome-2026-11-20-1",
+      "url": "https://jf-ushigome.or.jp/access/",
+      "title": "牛込海岸潮干狩り場｜アクセス",
+      "checked_on": "2026-11-20",
+      "type": "operator_official",
+      "place_id": "kisarazu-ushigome-beach-2026-11-20",
+      "notes": "漁協公式：無料駐車場約800台、所在地とアクセス。釣り目的の利用は未確認"
+    },
+    {
+      "id": "ushigome-2026-11-20-2",
+      "url": "https://jf-ushigome.or.jp/facility/",
+      "title": "牛込海岸潮干狩り場｜施設・レンタル",
+      "checked_on": "2026-11-20",
+      "type": "operator_official",
+      "place_id": "kisarazu-ushigome-beach-2026-11-20",
+      "notes": "漁協公式：トイレ・足洗い場・更衣室・休憩所。期間外利用未確認"
+    },
+    {
+      "id": "ushigome-2026-11-20-3",
+      "url": "https://maruchiba.jp/event/detail_10848.html",
+      "title": "千葉県公式観光｜牛込海岸潮干狩り",
+      "checked_on": "2026-11-20",
+      "type": "official_tourism",
+      "place_id": "kisarazu-ushigome-beach-2026-11-20",
+      "notes": "県公式観光：2026年3月20日〜7月5日、潮干狩りの営業条件"
+    },
+    {
+      "id": "ushigome-2026-11-20-4",
+      "url": "https://www.city.kisarazu.lg.jp/soshiki/keizai/kankoshinko/1/1/4440.html",
+      "title": "木更津市｜潮干狩り",
+      "checked_on": "2026-11-20",
+      "type": "official_city",
+      "place_id": "kisarazu-ushigome-beach-2026-11-20",
+      "notes": "市公式：2026年の牛込海岸潮干狩り期間"
     }
   ]
 }
