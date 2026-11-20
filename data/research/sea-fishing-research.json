@@ -738,6 +738,58 @@
       ],
       "notes": "金田海岸（北浜町）や牛込海岸と混同しない。潮干狩り用駐車場を通年釣行用と誤認しない。MFL本番未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "kisarazu-ushigome-beach-2026-11-20",
+      "name": "牛込海岸潮干狩り場（一般魚釣りの利用条件未確認）",
+      "region": "千葉県木更津市牛込752",
+      "status": "hold",
+      "review_state": "fishing_permission_and_off_season_access_unverified",
+      "verified_on": "2026-11-20",
+      "findings": {
+        "fishing_permission": null,
+        "access": "漁協運営の潮干狩り場。一般魚釣り・営業期間外の立入可否は未確認",
+        "parking": "漁協公式：潮干狩り利用向け無料約800台。釣り利用は未確認",
+        "parking_hours": "潮干狩りカレンダーに依存。釣行目的・期間外の利用時間未確認",
+        "parking_price": "潮干狩り利用者向け無料。魚釣り目的は未確認",
+        "toilets": "漁協公式で場内トイレあり。期間外利用未確認",
+        "fence": null,
+        "safety": "遠浅干潟の潮位変化、漁業施設・漁業権区域への無断立入を避ける。現地護岸安全柵未確認",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [],
+        "haze_suitability": "魚種実績・合法的な釣り場利用とも未確認のため評価保留",
+        "field_video": null,
+        "construction_restrictions": "2026年工事・個別立入規制未確認。2026年潮干狩り営業は3月20日〜7月5日"
+      },
+      "sources": [
+        {
+          "url": "https://jf-ushigome.or.jp/access/",
+          "type": "operator_official",
+          "checked_on": "2026-11-20",
+          "note": "漁協公式：無料駐車場約800台、所在地とアクセス。釣り目的の利用は未確認"
+        },
+        {
+          "url": "https://jf-ushigome.or.jp/facility/",
+          "type": "operator_official",
+          "checked_on": "2026-11-20",
+          "note": "漁協公式：トイレ・足洗い場・更衣室・休憩所。期間外利用未確認"
+        },
+        {
+          "url": "https://maruchiba.jp/event/detail_10848.html",
+          "type": "official_tourism",
+          "checked_on": "2026-11-20",
+          "note": "県公式観光：2026年3月20日〜7月5日、潮干狩りの営業条件"
+        },
+        {
+          "url": "https://www.city.kisarazu.lg.jp/soshiki/keizai/kankoshinko/1/1/4440.html",
+          "type": "official_city",
+          "checked_on": "2026-11-20",
+          "note": "市公式：2026年の牛込海岸潮干狩り期間"
+        }
+      ],
+      "notes": "金田みたて海岸とは別地点。潮干狩りの営業許可は魚釣り許可ではない。MFL本番未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
