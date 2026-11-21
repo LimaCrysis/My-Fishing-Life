@@ -790,6 +790,60 @@
       ],
       "notes": "金田みたて海岸とは別地点。潮干狩りの営業許可は魚釣り許可ではない。MFL本番未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "kisarazu-kaneda-port-2026-11-21",
+      "name": "金田港（中島）・漁港周辺",
+      "region": "千葉県木更津市中島",
+      "status": "hold",
+      "review_state": "port_access_and_fishing_permission_unverified",
+      "verified_on": "2026-11-21",
+      "findings": {
+        "fishing_permission": null,
+        "access": "西側堤防立入禁止との民間報告。船着場は民間記事自体が禁止状況未確認。公式の釣り可能区画・立入境界未確認",
+        "parking": "木更津市金田第一344台・第二108台の市営駐車場あり。ただし港への徒歩アクセスと釣行適性は未検証。民間記事の港周辺無料スペースは合法性未確認",
+        "parking_hours": "市営第一・第二とも24時間",
+        "parking_price": "市営第一24時間500円、第二24時間400円（いずれも最初の30分無料）",
+        "toilets": "港内は民間記事でなし。市営駐車場周辺のバスターミナルにはトイレがあるが港の釣行用設備とは扱わない",
+        "fence": null,
+        "safety": "西側堤防立入禁止報告、船着場立入可否不明。港湾・漁業作業区域に入らない。テトラ前提の釣行は採用しない",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "カレイ",
+          "アナゴ",
+          "クロダイ",
+          "シーバス",
+          "メバル",
+          "メジナ"
+        ],
+        "haze_suitability": "民間記事に河口側のハゼ実績紹介。ただし合法的な釣り座未確定のため評価保留",
+        "field_video": null,
+        "construction_restrictions": "2026年の工事・港湾個別規制は未確認。西側堤防立入禁止との民間報告。周辺干潟のガザミ類採捕は2026/9/1〜11/30の17時〜翌5時、指定漁業権区域で禁止（魚釣り全般ではない）"
+      },
+      "sources": [
+        {
+          "url": "https://www.jpcmap.com/fishing/map/chiba/tokyowan/horifune-reservoir",
+          "type": "private_fishing_guide",
+          "checked_on": "2026-11-21",
+          "note": "釣り場・禁止区画・魚種の民間情報、公式許可ではない"
+        },
+        {
+          "url": "https://www.city.kisarazu.lg.jp/kurashi/doro_kotsu/jidosha_jitensha/2/6697.html",
+          "type": "official_city",
+          "checked_on": "2026-11-21",
+          "note": "市営駐車場の現行料金・台数・24時間利用"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/kaiku/kaikushiji/gazami-shiji.html",
+          "type": "official_prefecture",
+          "checked_on": "2026-11-21",
+          "note": "2026年ガザミ類の採捕制限"
+        }
+      ],
+      "notes": "金田みたて海岸潮干狩場・牛込海岸とは別地点。公式の釣り可否未確認につきMFL本番未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
