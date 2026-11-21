@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 23,
+  "unique_confirmed_articles_in_this_ledger": 26,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -228,6 +228,36 @@
       "type": "official_city",
       "place_id": "kisarazu-ushigome-beach-2026-11-20",
       "notes": "市公式：2026年の牛込海岸潮干狩り期間"
+    },
+    {
+      "id": "kaneda-port-jpcmap-2026-11-21",
+      "url": "https://www.jpcmap.com/fishing/map/chiba/tokyowan/horifune-reservoir",
+      "title": "金田港（中島）の釣り場・立入禁止情報",
+      "site": "JPCMAP",
+      "checked_on": "2026-11-21",
+      "type": "private_fishing_guide",
+      "place_id": "kisarazu-kaneda-port-2026-11-21",
+      "notes": "西側堤防立入禁止、船着場の禁止状況未確定。駐車スペースの利用権限未確認。ハゼ等の魚種は民間情報"
+    },
+    {
+      "id": "kaneda-city-parking-2026-11-21",
+      "url": "https://www.city.kisarazu.lg.jp/kurashi/doro_kotsu/jidosha_jitensha/2/6697.html",
+      "title": "木更津市金田駐車場第一・第二駐車場の利用",
+      "site": "木更津市",
+      "checked_on": "2026-11-21",
+      "type": "official_city",
+      "place_id": "kisarazu-kaneda-port-2026-11-21",
+      "notes": "第一344台24h500円、第二108台24h400円、いずれも24時間。港からの徒歩経路・距離は未検証"
+    },
+    {
+      "id": "chiba-gazami-order-2026-11-21",
+      "url": "https://www.pref.chiba.lg.jp/kaiku/kaikushiji/gazami-shiji.html",
+      "title": "遊漁者等によるがざみ類の採捕に係る委員会指示",
+      "site": "千葉県",
+      "checked_on": "2026-11-21",
+      "type": "official_prefecture",
+      "place_id": "kisarazu-kaneda-port-2026-11-21",
+      "notes": "2026年9月1日〜11月30日、共同漁業権共2・共3区域で17時〜翌5時のガザミ類4種採捕禁止。魚釣り全般の禁止ではない"
     }
   ]
 }
