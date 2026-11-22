@@ -844,6 +844,108 @@
       ],
       "notes": "金田みたて海岸潮干狩場・牛込海岸とは別地点。公式の釣り可否未確認につきMFL本番未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "futtsu-shitazu-port-2026-11-22",
+      "name": "富津漁港（下洲地区）・下洲漁港",
+      "region": "千葉県富津市富津",
+      "status": "excluded",
+      "review_state": "private_prohibition_reports_official_boundary_unverified",
+      "verified_on": "2026-11-22",
+      "findings": {
+        "fishing_permission": null,
+        "access": "2023年12月工事中立入禁止の現地記事。2024年民間情報は漁協への照会伝聞により全面釣り禁止と報告。管理者の現行禁止区域図は未取得",
+        "parking": "一般釣り客用駐車場未確認",
+        "parking_hours": null,
+        "parking_price": null,
+        "toilets": "漁港内一般用トイレ未確認",
+        "fence": "立入禁止柵・看板の民間報告",
+        "safety": "港湾作業区域・立入禁止柵内・テトラに入らない。路駐前提不可",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "シロギス",
+          "カレイ",
+          "クロダイ",
+          "シーバス"
+        ],
+        "haze_suitability": "過去魚種情報のみ、現行釣行先として不採用",
+        "field_video": "現地記事に動画埋込、動画本体未検証",
+        "construction_restrictions": "2023年12月工事中。2026年県の漁港活用推進計画あり、一般開放を意味しない"
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/futtsu-shi/%E4%B8%8B%E6%B4%B2%E6%BC%81%E6%B8%AF-%EF%BC%86-%E4%B8%8B%E6%B4%B2%E6%B5%B7%E5%B2%B8/",
+          "type": "private_fishing_guide",
+          "checked_on": "2026-11-22"
+        },
+        {
+          "url": "https://www.jpcmap.com/fishing/map/chiba/uchibou/new-futtsu-fishing-port",
+          "type": "private_fishing_guide",
+          "checked_on": "2026-11-22"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/gyokou/kakugyokou/futtsu.html",
+          "type": "official_prefecture",
+          "checked_on": "2026-11-22"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/gyokou/umigyo.html",
+          "type": "official_prefecture",
+          "checked_on": "2026-11-22"
+        }
+      ],
+      "notes": "公式全面禁止原文未確認のため禁止範囲の断定は避け、安全側で除外。砂浜と別管理。MFL未反映",
+      "integrated_into_mfl": false
+    },
+    {
+      "id": "futtsu-shitazu-beach-2026-11-22",
+      "name": "下洲海岸・富津海水浴場",
+      "region": "千葉県富津市富津",
+      "status": "hold",
+      "review_state": "fishing_permission_and_seasonal_access_unverified",
+      "verified_on": "2026-11-22",
+      "findings": {
+        "fishing_permission": null,
+        "access": "市公式は海水浴場として案内。一般魚釣りの許可と漁港境界未確認",
+        "parking": "海水浴場用無料250台、市公式。釣行目的での利用条件未確認",
+        "parking_hours": "釣行目的・期間外の利用時間未確認",
+        "parking_price": "海水浴場用無料。釣行利用は未確認",
+        "toilets": "市公式で公衆トイレあり、期間外未確認",
+        "fence": "砂浜、現地安全条件未検証",
+        "safety": "遠浅・潮位変化・遊泳者・漁港境界・のり養殖漁具に注意",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ",
+          "シロギス",
+          "ヒラメ",
+          "マゴチ"
+        ],
+        "haze_suitability": "民間魚種紹介のみ、釣り許可未確認につき保留",
+        "field_video": "現地記事に動画埋込、動画本体未検証",
+        "construction_restrictions": "2026年海水浴場7月18日〜8月23日、遊泳8:30〜17:00。釣り規制と工事は未確認"
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/futtsu-shi/%E4%B8%8B%E6%B4%B2%E6%BC%81%E6%B8%AF-%EF%BC%86-%E4%B8%8B%E6%B4%B2%E6%B5%B7%E5%B2%B8/",
+          "type": "private_field_report",
+          "checked_on": "2026-11-22"
+        },
+        {
+          "url": "https://www.city.futtsu.lg.jp/0000004530.html",
+          "type": "official_prefecture",
+          "checked_on": "2026-11-22"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/suisan/gyogyou/gaiyou/noriyousyoku.html",
+          "type": "official_prefecture",
+          "checked_on": "2026-11-22"
+        }
+      ],
+      "notes": "海水浴場の営業は釣り許可ではない。漁港と別管理。MFL未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
