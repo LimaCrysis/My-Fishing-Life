@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 26,
+  "unique_confirmed_articles_in_this_ledger": 32,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -258,6 +258,60 @@
       "type": "official_prefecture",
       "place_id": "kisarazu-kaneda-port-2026-11-21",
       "notes": "2026年9月1日〜11月30日、共同漁業権共2・共3区域で17時〜翌5時のガザミ類4種採捕禁止。魚釣り全般の禁止ではない"
+    },
+    {
+      "id": "shitazu-2026-11-22-1",
+      "url": "https://tokyoinnerbayfishing.net/chiba-ken/futtsu-shi/%E4%B8%8B%E6%B4%B2%E6%BC%81%E6%B8%AF-%EF%BC%86-%E4%B8%8B%E6%B4%B2%E6%B5%B7%E5%B2%B8/",
+      "title": "東京湾奥釣り場探検｜下洲漁港＆下洲海岸",
+      "checked_on": "2026-11-22",
+      "type": "private_fishing_guide",
+      "place_id": "futtsu-shitazu-port-2026-11-22",
+      "notes": "2026-11-22照合。一般釣り許可の根拠ではない"
+    },
+    {
+      "id": "shitazu-2026-11-22-2",
+      "url": "https://www.jpcmap.com/fishing/map/chiba/uchibou/new-futtsu-fishing-port",
+      "title": "JPCMAP｜下洲漁港全面禁止報告",
+      "checked_on": "2026-11-22",
+      "type": "private_fishing_guide",
+      "place_id": "futtsu-shitazu-port-2026-11-22",
+      "notes": "2026-11-22照合。一般釣り許可の根拠ではない"
+    },
+    {
+      "id": "shitazu-2026-11-22-3",
+      "url": "https://www.pref.chiba.lg.jp/gyokou/kakugyokou/futtsu.html",
+      "title": "千葉県｜富津漁港下洲地区",
+      "checked_on": "2026-11-22",
+      "type": "official_prefecture",
+      "place_id": "futtsu-shitazu-port-2026-11-22",
+      "notes": "2026-11-22照合。一般釣り許可の根拠ではない"
+    },
+    {
+      "id": "shitazu-2026-11-22-4",
+      "url": "https://www.city.futtsu.lg.jp/0000004530.html",
+      "title": "富津市｜富津海水浴場",
+      "checked_on": "2026-11-22",
+      "type": "official_city",
+      "place_id": "futtsu-shitazu-beach-2026-11-22",
+      "notes": "2026-11-22照合。一般釣り許可の根拠ではない"
+    },
+    {
+      "id": "shitazu-2026-11-22-5",
+      "url": "https://www.pref.chiba.lg.jp/gyokou/umigyo.html",
+      "title": "千葉県｜富津漁港活用推進計画",
+      "checked_on": "2026-11-22",
+      "type": "official_prefecture",
+      "place_id": "futtsu-shitazu-port-2026-11-22",
+      "notes": "2026-11-22照合。一般釣り許可の根拠ではない"
+    },
+    {
+      "id": "shitazu-2026-11-22-6",
+      "url": "https://www.pref.chiba.lg.jp/suisan/gyogyou/gaiyou/noriyousyoku.html",
+      "title": "千葉県｜のり養殖施設注意",
+      "checked_on": "2026-11-22",
+      "type": "official_prefecture",
+      "place_id": "futtsu-shitazu-beach-2026-11-22",
+      "notes": "2026-11-22照合。一般釣り許可の根拠ではない"
     }
   ]
 }
