@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 32,
+  "unique_confirmed_articles_in_this_ledger": 35,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -312,6 +312,33 @@
       "type": "official_prefecture",
       "place_id": "futtsu-shitazu-beach-2026-11-22",
       "notes": "2026-11-22照合。一般釣り許可の根拠ではない"
+    },
+    {
+      "url": "https://outdoordogcampinglife.com/2026/10/23/futtsu-misaki-fishing-parking-kiss-tachiiri/",
+      "title": "富津岬北側サーフ2026年9月実釣・立入注意",
+      "published_on": null,
+      "place_id": "futtsu-cape-north-surf-2026-11-23",
+      "checked_on": "2026-11-23",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://www.pref.chiba.lg.jp/kouen/toshikouen/guidemap/futtsu/index.html",
+      "title": "千葉県・富津公園公式案内",
+      "published_on": null,
+      "place_id": "futtsu-cape-north-surf-2026-11-23",
+      "checked_on": "2026-11-23",
+      "source_type": "official",
+      "status": "read"
+    },
+    {
+      "url": "https://www.pref.chiba.lg.jp/kouen/toshikouen/guidemap/documents/parkguide-futtsu.pdf",
+      "title": "千葉県・富津公園案内図（駐車場551台）",
+      "published_on": null,
+      "place_id": "futtsu-cape-north-surf-2026-11-23",
+      "checked_on": "2026-11-23",
+      "source_type": "official",
+      "status": "read"
     }
   ]
 }
