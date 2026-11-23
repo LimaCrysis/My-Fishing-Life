@@ -946,6 +946,55 @@
       ],
       "notes": "海水浴場の営業は釣り許可ではない。漁港と別管理。MFL未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "futtsu-cape-north-surf-2026-11-23",
+      "name": "富津岬北側サーフ（富津公園北岸）",
+      "region": "千葉県富津市富津",
+      "status": "hold",
+      "review_state": "official_fishing_permission_and_access_boundaries_unverified",
+      "verified_on": "2026-11-23",
+      "findings": {
+        "fishing_permission": null,
+        "access": "県立富津公園の北側砂浜。2026年9月民間実釣報告あり、釣り許可区域の公式確認なし。南側の富津海水浴場・下洲漁港とは別地点",
+        "parking": "県公式公園案内図で普通車551台（障害者用12台含む）、大型21台。民間実釣記事は無料駐車場から徒歩2〜5分と報告",
+        "parking_hours": null,
+        "parking_price": "民間実釣報告では無料、県公式料金未確認",
+        "toilets": "民間実釣記事で近隣トイレ利用。利用時間は未確認",
+        "fence": "砂浜で釣り座の安全柵なし。先端堤防の立入禁止看板・柵の民間報告",
+        "safety": "潮流が速く仕掛けが流れるとの現地報告。先端堤防・テトラ・立入禁止区域には進入しない。ウェーディング非推奨",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "シロギス",
+          "カレイ"
+        ],
+        "haze_suitability": "今回の2026年実釣記事でハゼ実績は確認できず、未評価",
+        "field_video": null,
+        "construction_restrictions": "2026年11月時点の公式立入区域図・工事情報未確認。民間記事で先端部立入禁止の報告"
+      },
+      "sources": [
+        {
+          "url": "https://outdoordogcampinglife.com/2026/10/23/futtsu-misaki-fishing-parking-kiss-tachiiri/",
+          "type": "private_field_report",
+          "checked_on": "2026-11-23",
+          "note": "富津岬北側サーフ2026年9月実釣・立入注意"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/kouen/toshikouen/guidemap/futtsu/index.html",
+          "type": "official_prefecture",
+          "checked_on": "2026-11-23",
+          "note": "千葉県・富津公園公式案内"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/kouen/toshikouen/guidemap/documents/parkguide-futtsu.pdf",
+          "type": "official_prefecture",
+          "checked_on": "2026-11-23",
+          "note": "千葉県・富津公園案内図（駐車場551台）"
+        }
+      ],
+      "notes": "2026年9月民間実釣でシロギス約8匹・カレイ2匹。ただし実釣≠公式釣り許可。公式境界・駐車場開放時間・投げ釣りルール確認までHOLD。MFL未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
