@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 35,
+  "unique_confirmed_articles_in_this_ledger": 38,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -337,6 +337,33 @@
       "published_on": null,
       "place_id": "futtsu-cape-north-surf-2026-11-23",
       "checked_on": "2026-11-23",
+      "source_type": "official",
+      "status": "read"
+    },
+    {
+      "url": "https://tokyoinnerbayfishing.net/chiba-ken/futtsu-shi/%E5%AF%8C%E6%B4%A5%E9%87%91%E8%B0%B7ic%E5%85%A5%E5%8F%A3%E6%B5%B7%E6%B5%9C%E5%85%AC%E5%9C%92/",
+      "title": "富津金谷IC入口海浜公園",
+      "published_on": "2026-10-15",
+      "place_id": "futtsu-kanaya-ic-entrance-park",
+      "checked_on": "2026-11-24",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://www.tokioanglers.com/fishing-spot/chiba/futtsu-kanaya-ic-entrance-coastal-park/",
+      "title": "富津金谷IC入口 海浜公園の釣り場解説",
+      "published_on": "2025-03-20",
+      "place_id": "futtsu-kanaya-ic-entrance-park",
+      "checked_on": "2026-11-24",
+      "source_type": "private",
+      "status": "read"
+    },
+    {
+      "url": "https://www.city.futtsu.lg.jp/0000003136.html",
+      "title": "富津市 金谷海浜公園（別施設の照合）",
+      "published_on": "2014-05-23",
+      "place_id": "futtsu-kanaya-ic-entrance-park",
+      "checked_on": "2026-11-24",
       "source_type": "official",
       "status": "read"
     }
