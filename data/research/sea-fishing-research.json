@@ -995,6 +995,63 @@
       ],
       "notes": "2026年9月民間実釣でシロギス約8匹・カレイ2匹。ただし実釣≠公式釣り許可。公式境界・駐車場開放時間・投げ釣りルール確認までHOLD。MFL未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "futtsu-kanaya-ic-entrance-park",
+      "name": "富津金谷IC入口海浜公園",
+      "region": "千葉県富津市金谷779-1（民間情報）",
+      "status": "hold",
+      "review_state": "official_access_and_facility_identity_unverified",
+      "verified_on": "2026-11-24",
+      "findings": {
+        "fishing_permission": null,
+        "access": "石積み護岸約100m（民間）。市公式の金谷海浜公園（金谷2204-1）とは住所が異なり、設備を転用しない",
+        "parking": "民間記事で約10台無料",
+        "parking_hours": null,
+        "parking_price": "無料との民間報告",
+        "toilets": "駐車場敷地内に公衆トイレとの民間報告",
+        "fence": null,
+        "safety": "ゴロタ・浅場。滑落注意、安全な釣り座未確認",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "ハゼ（種未特定）",
+          "メバル",
+          "カサゴ",
+          "クロダイ",
+          "シーバス",
+          "シロギス",
+          "アジ",
+          "アオリイカ",
+          "アイナメ",
+          "ギンポ"
+        ],
+        "haze_suitability": "民間記事で石の隙間の穴釣り紹介。マハゼ実績は未確認",
+        "field_video": "民間記事に動画紹介あり、本体未検証",
+        "construction_restrictions": null
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/futtsu-shi/%E5%AF%8C%E6%B4%A5%E9%87%91%E8%B0%B7ic%E5%85%A5%E5%8F%A3%E6%B5%B7%E6%B5%9C%E5%85%AC%E5%9C%92/",
+          "type": "private",
+          "checked_on": "2026-11-24",
+          "note": "富津金谷IC入口海浜公園"
+        },
+        {
+          "url": "https://www.tokioanglers.com/fishing-spot/chiba/futtsu-kanaya-ic-entrance-coastal-park/",
+          "type": "private",
+          "checked_on": "2026-11-24",
+          "note": "富津金谷IC入口 海浜公園の釣り場解説"
+        },
+        {
+          "url": "https://www.city.futtsu.lg.jp/0000003136.html",
+          "type": "official",
+          "checked_on": "2026-11-24",
+          "note": "富津市 金谷海浜公園（別施設の照合）"
+        }
+      ],
+      "notes": "管理者・公式釣り可否・駐車時間・安全柵・工事未確認。別施設の公式駐車場17台を流用しない。MFL未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
