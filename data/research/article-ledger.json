@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 38,
+  "unique_confirmed_articles_in_this_ledger": 42,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -365,6 +365,42 @@
       "place_id": "futtsu-kanaya-ic-entrance-park",
       "checked_on": "2026-11-24",
       "source_type": "official",
+      "status": "read"
+    },
+    {
+      "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%AE%89%E6%88%BF%E9%83%A1%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E7%AB%9C%E3%83%B6%E5%B4%8E%E5%A0%A4%E9%98%B2%EF%BC%86%E7%AB%9C%E5%B3%B6%E6%B8%AF/",
+      "title": "東京湾奥釣り場探検隊｜竜ヶ崎堤防＆竜島港",
+      "source_type": "private",
+      "published_on": "2025-10-20",
+      "place_id": "kyonan-ryushima-port-ryugasaki",
+      "checked_on": "2026-11-25",
+      "status": "read"
+    },
+    {
+      "url": "https://chiba.turihiroba.com/turiba/tibaryuujimakou.html",
+      "title": "釣り広場｜龍島港・看板写真掲載",
+      "source_type": "private",
+      "published_on": null,
+      "place_id": "kyonan-ryushima-port-ryugasaki",
+      "checked_on": "2026-11-25",
+      "status": "read"
+    },
+    {
+      "url": "https://uosoku.com/home/kanto/chiba/awa/ryuusima/",
+      "title": "魚速報｜龍島港",
+      "source_type": "private",
+      "published_on": "2018-06-16",
+      "place_id": "kyonan-ryushima-port-ryugasaki",
+      "checked_on": "2026-11-25",
+      "status": "read"
+    },
+    {
+      "url": "https://www.pref.chiba.lg.jp/kakan/kaigan/kaigannriyou.html",
+      "title": "千葉県｜県管理海岸の自由使用（港湾・漁港区域除外）",
+      "source_type": "official",
+      "published_on": null,
+      "place_id": "kyonan-ryushima-port-ryugasaki",
+      "checked_on": "2026-11-25",
       "status": "read"
     }
   ]
