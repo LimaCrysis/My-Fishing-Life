@@ -1052,6 +1052,69 @@
       ],
       "notes": "管理者・公式釣り可否・駐車時間・安全柵・工事未確認。別施設の公式駐車場17台を流用しない。MFL未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "kyonan-ryushima-port-ryugasaki",
+      "name": "竜島港（龍島港）・竜ヶ崎堤防",
+      "region": "千葉県安房郡鋸南町竜島",
+      "status": "hold",
+      "review_state": "official_permission_and_restriction_boundary_unverified",
+      "verified_on": "2026-11-25",
+      "findings": {
+        "fishing_permission": null,
+        "access": "民間複数資料で堤防15時〜翌7時釣り禁止報告。港全体への適用範囲・現行看板未検証",
+        "parking": "堤防手前無料駐車場との民間報告",
+        "parking_hours": null,
+        "parking_price": "無料（民間）",
+        "toilets": "駐車場付近に公衆トイレ（民間）",
+        "fence": null,
+        "safety": "平坦な岸壁の紹介あり。先端・外側テトラは対象外。安全柵未確認",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "シロギス",
+          "カレイ",
+          "メバル",
+          "カサゴ",
+          "クロダイ",
+          "アジ",
+          "イワシ",
+          "アオリイカ",
+          "イナダ",
+          "ソウダガツオ"
+        ],
+        "haze_suitability": "マハゼ実績未確認",
+        "field_video": "起点記事に動画表示あり、本体未検証",
+        "construction_restrictions": null
+      },
+      "sources": [
+        {
+          "url": "https://tokyoinnerbayfishing.net/chiba-ken/%E5%AE%89%E6%88%BF%E9%83%A1%E3%81%AE%E9%87%A3%E3%82%8A%E5%A0%B4/%E7%AB%9C%E3%83%B6%E5%B4%8E%E5%A0%A4%E9%98%B2%EF%BC%86%E7%AB%9C%E5%B3%B6%E6%B8%AF/",
+          "type": "private",
+          "checked_on": "2026-11-25",
+          "note": "東京湾奥釣り場探検隊｜竜ヶ崎堤防＆竜島港"
+        },
+        {
+          "url": "https://chiba.turihiroba.com/turiba/tibaryuujimakou.html",
+          "type": "private",
+          "checked_on": "2026-11-25",
+          "note": "釣り広場｜龍島港・看板写真掲載"
+        },
+        {
+          "url": "https://uosoku.com/home/kanto/chiba/awa/ryuusima/",
+          "type": "private",
+          "checked_on": "2026-11-25",
+          "note": "魚速報｜龍島港"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/kakan/kaigan/kaigannriyou.html",
+          "type": "official",
+          "checked_on": "2026-11-25",
+          "note": "千葉県｜県管理海岸の自由使用（港湾・漁港区域除外）"
+        }
+      ],
+      "notes": "県管理一般海岸の自由使用案内は港湾・漁港区域を除くため本地点の許可根拠にしない。時間規制の公式原文未確認。MFL未反映",
+      "integrated_into_mfl": false
     }
   ]
 }
