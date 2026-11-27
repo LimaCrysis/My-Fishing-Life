@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 42,
+  "unique_confirmed_articles_in_this_ledger": 52,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -401,6 +401,86 @@
       "published_on": null,
       "place_id": "kyonan-ryushima-port-ryugasaki",
       "checked_on": "2026-11-25",
+      "status": "read"
+    },
+    {
+      "url": "https://maruchiba.jp/spot/detail_10368.html",
+      "title": "千葉県公式観光・保田海水浴場",
+      "source_type": "official",
+      "place_id": "kyonan-hota-beach",
+      "checked_on": "2026-11-26",
+      "status": "read"
+    },
+    {
+      "url": "https://www.pref.chiba.lg.jp/shousupo/sports-shisetsu/r5/13sonota.html",
+      "title": "千葉県公立社会体育施設一覧",
+      "source_type": "official",
+      "place_id": "kyonan-hota-beach",
+      "checked_on": "2026-11-26",
+      "status": "read"
+    },
+    {
+      "url": "https://www.kyonantown-tourism.com/%E9%81%8E%E5%8E%BB%E3%81%AE%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9",
+      "title": "鋸南町観光協会",
+      "source_type": "tourism_association",
+      "place_id": "kyonan-hota-beach",
+      "checked_on": "2026-11-26",
+      "status": "read"
+    },
+    {
+      "url": "https://www.gurutto-chiba.co.jp/special-feature/beach/hota",
+      "title": "ぐるっと千葉",
+      "source_type": "private",
+      "place_id": "kyonan-hota-beach",
+      "checked_on": "2026-11-26",
+      "status": "read"
+    },
+    {
+      "url": "https://tsurineo.com/a/kyonan",
+      "title": "釣りネオ・鋸南エリア",
+      "source_type": "private",
+      "place_id": "kyonan-hota-beach",
+      "checked_on": "2026-11-26",
+      "status": "read"
+    },
+    {
+      "url": "https://tsurerun.com/spots/hota-port",
+      "title": "つれるん・保田港",
+      "source_type": "private",
+      "place_id": "kyonan-hota-beach",
+      "checked_on": "2026-11-26",
+      "status": "read"
+    },
+    {
+      "url": "https://maruchiba.jp/spot/detail_10696.html",
+      "title": "千葉県公式観光・勝山海水浴場",
+      "source_type": "official",
+      "place_id": "kyonan-katsuyama-beach",
+      "checked_on": "2026-11-27",
+      "status": "read"
+    },
+    {
+      "url": "https://hatrip-blog.me/ryushima-kaigan-kyonan/",
+      "title": "Hatrip・竜島海岸",
+      "source_type": "private",
+      "place_id": "kyonan-katsuyama-beach",
+      "checked_on": "2026-11-27",
+      "status": "read"
+    },
+    {
+      "url": "https://summer.walkerplus.com/odekake/detail/ar0312s14807/data.html",
+      "title": "Walkerplus・2026年開設情報",
+      "source_type": "private",
+      "place_id": "kyonan-katsuyama-beach",
+      "checked_on": "2026-11-27",
+      "status": "read"
+    },
+    {
+      "url": "https://rurubu.jp/andmore/spot/80010316/beach",
+      "title": "るるぶ・勝山海水浴場",
+      "source_type": "private",
+      "place_id": "kyonan-katsuyama-beach",
+      "checked_on": "2026-11-27",
       "status": "read"
     }
   ]
