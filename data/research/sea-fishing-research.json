@@ -1115,6 +1115,131 @@
       ],
       "notes": "県管理一般海岸の自由使用案内は港湾・漁港区域を除くため本地点の許可根拠にしない。時間規制の公式原文未確認。MFL未反映",
       "integrated_into_mfl": false
+    },
+    {
+      "id": "kyonan-hota-beach",
+      "name": "保田海岸（保田海水浴場）",
+      "region": "千葉県安房郡鋸南町",
+      "status": "hold",
+      "verified_on": "2026-11-26",
+      "review_state": "coastal_management_and_parking_access_unverified",
+      "findings": {
+        "fishing_permission": null,
+        "parking": "100台・無料（前回公式資料）",
+        "parking_hours": null,
+        "parking_year_round": null,
+        "toilets": "あり（勝山は民間、保田は前回公式）",
+        "fence": null,
+        "safety": "砂浜、遊泳者との分離が必要",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "シロギス",
+          "マゴチ"
+        ],
+        "haze_suitability": "未確認",
+        "field_video": null,
+        "construction_restrictions": null
+      },
+      "sources": [
+        {
+          "url": "https://maruchiba.jp/spot/detail_10368.html",
+          "type": "official",
+          "checked_on": "2026-11-26",
+          "note": "千葉県公式観光・保田海水浴場"
+        },
+        {
+          "url": "https://www.pref.chiba.lg.jp/shousupo/sports-shisetsu/r5/13sonota.html",
+          "type": "official",
+          "checked_on": "2026-11-26",
+          "note": "千葉県公立社会体育施設一覧"
+        },
+        {
+          "url": "https://www.kyonantown-tourism.com/%E9%81%8E%E5%8E%BB%E3%81%AE%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9",
+          "type": "tourism_association",
+          "checked_on": "2026-11-26",
+          "note": "鋸南町観光協会"
+        },
+        {
+          "url": "https://www.gurutto-chiba.co.jp/special-feature/beach/hota",
+          "type": "private",
+          "checked_on": "2026-11-26",
+          "note": "ぐるっと千葉"
+        },
+        {
+          "url": "https://tsurineo.com/a/kyonan",
+          "type": "private",
+          "checked_on": "2026-11-26",
+          "note": "釣りネオ・鋸南エリア"
+        },
+        {
+          "url": "https://tsurerun.com/spots/hota-port",
+          "type": "private",
+          "checked_on": "2026-11-26",
+          "note": "つれるん・保田港"
+        }
+      ],
+      "notes": "前回未保存日報から復旧。2026年遊泳期間7/25〜8/16。公式観光資料の日程は2023年度。隣接漁港の規制情報に矛盾。今回再検証していない資料を含む。",
+      "integrated_into_mfl": false
+    },
+    {
+      "id": "kyonan-katsuyama-beach",
+      "name": "勝山海岸（竜島海岸）",
+      "region": "千葉県安房郡鋸南町",
+      "status": "hold",
+      "verified_on": "2026-11-27",
+      "review_state": "coastal_management_and_parking_access_unverified",
+      "findings": {
+        "fishing_permission": null,
+        "parking": "50台（県公式観光）、無料（民間）",
+        "parking_hours": null,
+        "parking_year_round": null,
+        "toilets": "あり（勝山は民間、保田は前回公式）",
+        "fence": null,
+        "safety": "砂浜、遊泳者との分離が必要",
+        "night_fishing_permission": null,
+        "casting_permission": null,
+        "fish_species": [
+          "シロギス"
+        ],
+        "haze_suitability": "未確認",
+        "field_video": null,
+        "construction_restrictions": null
+      },
+      "sources": [
+        {
+          "url": "https://maruchiba.jp/spot/detail_10696.html",
+          "type": "official",
+          "checked_on": "2026-11-27",
+          "note": "千葉県公式観光・勝山海水浴場"
+        },
+        {
+          "url": "https://hatrip-blog.me/ryushima-kaigan-kyonan/",
+          "type": "private",
+          "checked_on": "2026-11-27",
+          "note": "Hatrip・竜島海岸"
+        },
+        {
+          "url": "https://summer.walkerplus.com/odekake/detail/ar0312s14807/data.html",
+          "type": "private",
+          "checked_on": "2026-11-27",
+          "note": "Walkerplus・2026年開設情報"
+        },
+        {
+          "url": "https://rurubu.jp/andmore/spot/80010316/beach",
+          "type": "private",
+          "checked_on": "2026-11-27",
+          "note": "るるぶ・勝山海水浴場"
+        },
+        {
+          "url": "https://tsurineo.com/a/kyonan",
+          "type": "private",
+          "checked_on": "2026-11-27",
+          "note": "釣りネオ・鋸南エリア"
+        }
+      ],
+      "notes": "2026年遊泳期間7/25〜8/16（民間）。県公式は期間外の遊泳自粛を要請。釣り禁止とは別。竜島港とは別地点。",
+      "integrated_into_mfl": false
     }
   ]
 }
