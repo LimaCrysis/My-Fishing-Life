@@ -2,7 +2,7 @@
   "schema_version": 1,
   "description": "東京湾奥釣り場探検等の記事確認台帳。過去全履歴は未移行",
   "legacy_history_imported": false,
-  "unique_confirmed_articles_in_this_ledger": 52,
+  "unique_confirmed_articles_in_this_ledger": 54,
   "site_total_articles": null,
   "site_coverage_percent": null,
   "articles": [
@@ -482,6 +482,24 @@
       "place_id": "kyonan-katsuyama-beach",
       "checked_on": "2026-11-27",
       "status": "read"
+    },
+    {
+      "url": "https://maruchiba.jp/spot/detail_10694.html",
+      "title": "千葉県公式観光・鱚ヶ浦海岸",
+      "source_type": "official",
+      "place_id": "kyonan-kisugaura-beach",
+      "checked_on": "2026-11-28",
+      "status": "read",
+      "note": "道の駅駐車場利用可、普通車72台、大型5台、吉浜517"
+    },
+    {
+      "url": "https://tsurineo.com/p/d5g5p3bn",
+      "title": "釣りネオ・鱚ヶ浦海岸",
+      "source_type": "private",
+      "place_id": "kyonan-kisugaura-beach",
+      "checked_on": "2026-11-28",
+      "status": "read",
+      "note": "シロギス、過去の投げ釣り記事紹介、2026年遊泳期間7/25〜8/16"
     }
   ]
 }
